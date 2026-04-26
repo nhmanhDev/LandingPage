@@ -252,9 +252,14 @@ export default function App() {
             <div className="inline-flex items-center gap-3 px-6 py-3 md:py-4 bg-gradient-to-r from-[#DA251D] to-[#FF4444] rounded-full border border-[#FFCD00] shadow-[0_0_20px_rgba(218,37,29,0.4)] relative">
               <div className="absolute inset-0 bg-[#FFCD00]/20 blur-md rounded-full animate-pulse pointer-events-none" />
               <Star className="w-5 h-5 md:w-6 md:h-6 text-[#FFCD00] fill-[#FFCD00] shrink-0" />
-              <span className="font-bold text-base md:text-xl text-white tracking-wide text-center uppercase drop-shadow-md">
-                🇻🇳 CHÀO MỪNG 51 NĂM GIẢI PHÓNG MIỀN NAM (30/4/1975 - 30/4/2026) 🇻🇳
-              </span>
+              <div className="flex flex-col items-center justify-center gap-1">
+                <span className="font-bold text-base md:text-xl text-white tracking-wide text-center uppercase drop-shadow-md">
+                  🇻🇳 CHÀO MỪNG KỶ NIỆM 51 NĂM NGÀY GIẢI PHÓNG MIỀN NAM, THỐNG NHẤT ĐẤT NƯỚC 🇻🇳
+                </span>
+                <span className="font-bold text-sm md:text-lg text-white/90 tracking-widest text-center uppercase drop-shadow-md">
+                  (30/4/1975 - 30/4/2026)
+                </span>
+              </div>
               <Star className="w-5 h-5 md:w-6 md:h-6 text-[#FFCD00] fill-[#FFCD00] shrink-0" />
             </div>
           </div>
@@ -617,6 +622,24 @@ export default function App() {
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#FFCD00]/20 rounded-full blur-[100px]" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#DA251D]/20 rounded-full blur-[100px]" />
 
+            <style dangerouslySetInnerHTML={{
+              __html: `
+              @keyframes price-blink {
+                0%, 100% { opacity: 1; transform: scale(1.1); }
+                50% { opacity: 0.85; transform: scale(1.15); }
+              }
+              @keyframes saving-glow {
+                0%, 100% { box-shadow: 0 0 10px rgba(255, 205, 0, 0.2); }
+                50% { box-shadow: 0 0 25px rgba(255, 205, 0, 0.5); transform: scale(1.02); }
+              }
+              .animate-price {
+                animation: price-blink 2s infinite ease-in-out;
+                display: inline-block;
+              }
+              .animate-saving {
+                animation: saving-glow 3s infinite ease-in-out;
+              }
+            ` }} />
             {/* Decorative stars */}
             <div className="absolute top-4 left-4">
               <Star className="w-8 h-8 text-[#FFCD00] fill-[#FFCD00] opacity-20" />
@@ -669,21 +692,18 @@ export default function App() {
                     666.000 VNĐ
                   </div>
                   <div className="flex items-center justify-center gap-3 mb-4">
-                    <Star className={`w-10 h-10 fill-current animate-pulse transition-colors ${isDark ? 'text-[#FFCD00]' : 'text-orange-600'}`} />
                     <div>
-                      <div className={`text-6xl md:text-7xl font-black bg-clip-text text-transparent transform scale-110 shadow-sm transition-all duration-300 ${isDark ? 'bg-gradient-to-r from-[#FFCD00] via-[#FFE066] to-[#FFCD00]' : 'bg-gradient-to-r from-orange-600 via-red-600 to-orange-600'}`}>
-                        304K
+                      <div className={`text-6xl md:text-6xl font-black bg-clip-text text-transparent transform scale-110 shadow-sm transition-all duration-300 animate-price ${isDark ? 'bg-gradient-to-r from-[#FFCD00] via-[#FFE066] to-[#FFCD00]' : 'bg-gradient-to-r from-orange-600 via-red-600 to-orange-600'}`}>
+                        304.000
                       </div>
                     </div>
-                    <Star className={`w-10 h-10 fill-current animate-pulse transition-colors ${isDark ? 'text-[#FFCD00]' : 'text-orange-600'}`} />
                   </div>
-                  <div className={`inline-block px-8 py-3 border rounded-full shadow-xl transition-all duration-300 ${isDark ? 'bg-[#FFCD00]/20 border-[#FFCD00]/50 shadow-[#FFCD00]/10' : 'bg-white border-orange-200 shadow-orange-100'}`}>
+                  <div className={`inline-block px-8 py-3 border rounded-full shadow-xl transition-all duration-300 animate-saving ${isDark ? 'bg-[#FFCD00]/20 border-[#FFCD00]/50 shadow-[#FFCD00]/10' : 'bg-white border-orange-200 shadow-orange-100'}`}>
                     <span className={`text-xl font-black ${isDark ? 'text-[#FFCD00]' : 'text-orange-700'}`}>💰 Tiết kiệm 362.000đ (54%)</span>
                   </div>
                 </div>
 
                 <div className={`text-2xl mb-1 font-black ${isDark ? 'text-white/90' : 'text-slate-900'}`}>Thanh toán một lần</div>
-                <div className={`text-lg mb-8 font-bold ${isDark ? 'text-white/60' : 'text-slate-600'}`}>Sở hữu source code vĩnh viễn</div>
 
                 <div className="flex justify-center flex-col px-4 md:px-0 auto-mx">
                   <button
@@ -693,34 +713,47 @@ export default function App() {
                     <Gift className="w-8 h-8" />
                     🚀 THANH TOÁN MÃ QR
                   </button>
-                  <p className={`text-sm mt-4 font-bold ${isDark ? 'text-white/40' : 'text-slate-500'}`}>Nhận trọn bộ mã nguồn ngay lập tức</p>
                 </div>
               </div>
 
-              {/* Right Column: Features Checklist */}
-              <div className="w-full lg:w-[380px] shrink-0 bg-white dark:bg-[#0B1320]/80 backdrop-blur-md border border-slate-200 dark:border-[#FFCD00]/30 rounded-3xl p-6 md:p-8 shadow-xl dark:shadow-inner relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFCD00]/10 rounded-full blur-[40px] pointer-events-none" />
-                <h4 className="text-xl font-bold mb-6 text-slate-900 dark:text-white flex items-center gap-2">
-                  <Star className="w-5 h-5 text-[#FFCD00] fill-[#FFCD00]" />
-                  Bạn sẽ nhận được:
-                </h4>
-                <div className="space-y-4">
-                  {[
-                    'Full source code hệ thống',
-                    'Video hướng dẫn setup A-Z',
-                    'Tài liệu sử dụng chi tiết',
-                    'Group Zalo hỗ trợ kỹ thuật',
-                    'Cập nhật bản mới nhất nếu có',
-                    'Quyền tuỳ chỉnh theo nhu cầu',
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-4 hover:translate-x-1 transition-transform duration-300">
-                      <div className="w-6 h-6 rounded-full bg-[#22C55E]/10 flex items-center justify-center flex-shrink-0 border border-[#22C55E]/20 shadow-[0_0_10px_rgba(34,197,94,0.1)]">
-                        <Check className="w-3.5 h-3.5 text-[#22C55E]" strokeWidth={3} />
-                      </div>
-                      <span className="text-slate-700 dark:text-white/80 font-medium text-base">{item}</span>
-                    </div>
-                  ))}
+              {/* Right Column: Donation & Features */}
+              <div className="w-full lg:w-[380px] shrink-0 flex flex-col gap-6">
+
+                {/* Separate Donation Card */}
+                <div className={`p-5 rounded-3xl border transition-all hover:scale-[1.02] shadow-xl ${isDark ? 'bg-[#0B1320]/80 border-[#FFCD00]/30 shadow-black/20' : 'bg-white border-orange-200 shadow-orange-100/50'}`}>
+                  <p className="text-xs md:text-sm font-bold leading-relaxed uppercase tracking-tight text-center">
+                    Mỗi đơn hàng thành công sẽ <br className="hidden md:block" />
+                    được trích <span className="text-xl font-black text-[#DA251D]">10%</span> ủng hộ <br />
+                    <span className={`${isDark ? 'text-[#FFCD00]' : 'text-orange-800'}`}>Mặt trận tổ quốc Việt Nam</span>
+                  </p>
                 </div>
+
+                {/* Features Card */}
+                <div className="bg-white dark:bg-[#0B1320]/80 backdrop-blur-md border border-slate-200 dark:border-[#FFCD00]/30 rounded-3xl p-6 md:p-8 shadow-xl dark:shadow-inner relative overflow-hidden flex-1">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFCD00]/10 rounded-full blur-[40px] pointer-events-none" />
+                  <h4 className="text-xl font-bold mb-6 text-slate-900 dark:text-white flex items-center gap-2">
+                    <Star className="w-5 h-5 text-[#FFCD00] fill-[#FFCD00]" />
+                    Bạn sẽ nhận được:
+                  </h4>
+                  <div className="space-y-4">
+                    {[
+                      'Cài đặt & Sử dụng vĩnh viễn',
+                      'Video hướng dẫn setup A-Z',
+                      'Tài liệu sử dụng chi tiết',
+                      'Group Zalo hỗ trợ kỹ thuật',
+                      'Cập nhật bản mới nhất nếu có',
+                      'Quyền tuỳ chỉnh theo nhu cầu',
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-4 hover:translate-x-1 transition-transform duration-300">
+                        <div className="w-6 h-6 rounded-full bg-[#22C55E]/10 flex items-center justify-center flex-shrink-0 border border-[#22C55E]/20 shadow-[0_0_10px_rgba(34,197,94,0.1)]">
+                          <Check className="w-3.5 h-3.5 text-[#22C55E]" strokeWidth={3} />
+                        </div>
+                        <span className="text-slate-700 dark:text-white/80 font-medium text-base">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
               </div>
 
             </div>
@@ -729,9 +762,9 @@ export default function App() {
 
         {/* Payment Modal */}
         {isPaymentOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onClick={() => setIsPaymentOpen(false)}>
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-12 bg-black/80 backdrop-blur-sm" onClick={() => setIsPaymentOpen(false)}>
             <div
-              className="bg-[#0B1320] border border-[#FFCD00]/50 rounded-2xl w-full max-w-4xl p-6 md:p-10 relative shadow-2xl animate-in fade-in zoom-in-95"
+              className="bg-[#0B1320] border border-[#FFCD00]/50 rounded-2xl w-[95%] max-w-5xl p-6 md:p-8 relative shadow-2xl animate-in fade-in zoom-in-95"
               onClick={e => e.stopPropagation()}
             >
               <button
@@ -740,37 +773,101 @@ export default function App() {
               >
                 <X className="w-6 h-6" />
               </button>
-              <h3 className="text-2xl font-bold mb-8 text-center text-[#FFCD00]">Thông tin thanh toán</h3>
 
-              <div className="flex flex-col md:flex-row gap-6 items-center text-sm w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-2">
 
-                {/* Left: Info */}
-                <div className="flex-1 w-full flex flex-col justify-center">
-                  <div className="bg-white/5 rounded-3xl border border-white/10 overflow-hidden divide-y divide-white/10 shadow-inner">
-                    <div className="flex items-center p-4">
-                      <span className="text-white/50 w-28 md:w-32 shrink-0 text-sm">Ngân hàng:</span>
-                      <span className="font-semibold text-base text-white whitespace-nowrap">Vietcombank</span>
+                {/* Left Column: Author Info & QR */}
+                <div className="flex flex-col gap-6">
+                  <div className="space-y-4">
+                    <div className="relative pb-2">
+                      <div className="absolute inset-x-0 bottom-0 flex items-center" aria-hidden="true">
+                        <div className="w-full border-t border-white/10"></div>
+                      </div>
+                      <div className="relative flex justify-center py-2">
+                        <span className="bg-[#0B1320] px-4 text-sm font-black text-[#FFCD00] uppercase tracking-[0.2em]">Số tài khoản của tác giả</span>
+                      </div>
                     </div>
-                    <div className="flex items-center p-4 bg-white/[0.02]">
-                      <span className="text-white/50 w-28 md:w-32 shrink-0 text-sm">Số tài khoản:</span>
-                      <span className="font-bold text-[#FFCD00] text-xl tracking-tight hover:underline cursor-pointer whitespace-nowrap" onClick={() => navigator.clipboard.writeText('9392389623')} title="Nhấn để copy">9392389623</span>
-                    </div>
-                    <div className="flex items-center p-4">
-                      <span className="text-white/50 w-28 md:w-32 shrink-0 text-sm">Chủ tài khoản:</span>
-                      <span className="font-semibold text-base text-white whitespace-nowrap">Nguyen Hung Manh</span>
+
+                    <div className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden divide-y divide-white/10 shadow-inner">
+                      <div className="flex items-center p-2.5">
+                        <span className="text-white/50 w-32 shrink-0 text-[10px] uppercase tracking-wider font-semibold">Ngân hàng:</span>
+                        <span className="font-bold text-sm text-white">Vietcombank</span>
+                      </div>
+                      <div className="flex items-center p-3 bg-white/[0.02]">
+                        <span className="text-white/50 w-32 shrink-0 text-[10px] uppercase tracking-wider font-semibold">Số tài khoản:</span>
+                        <span className="font-black text-[#FFCD00] text-lg tracking-tight hover:underline cursor-pointer" onClick={() => navigator.clipboard.writeText('9392389623')} title="Nhấn để copy">9392389623</span>
+                      </div>
+                      <div className="flex items-center p-2.5">
+                        <span className="text-white/50 w-32 shrink-0 text-[10px] uppercase tracking-wider font-semibold">Người nhận:</span>
+                        <span className="font-bold text-sm text-white uppercase">Nguyen Hung Manh</span>
+                      </div>
                     </div>
                   </div>
-                  <p className="text-sm text-center md:text-left text-white/50 mt-5 leading-relaxed">
-                    Sau khi thanh toán, chụp màn hình và liên hệ Zalo: <span className="text-white font-bold">0392389623</span> để nhận source code ngay.
-                  </p>
+
+                  <div className="bg-white/5 rounded-2xl border border-white/10 p-3 flex flex-col items-center">
+                    <div className="w-full max-w-[240px] aspect-[3.5/5] bg-white rounded-2xl border-4 border-white/10 shadow-2xl overflow-hidden mb-2">
+                      <img src="/qr_vietcombank.jpg" alt="QR Vietcombank" className="w-full h-full object-cover object-top" />
+                    </div>
+                    <span className="text-[10px] text-white/40 uppercase tracking-widest font-black">Quét mã thanh toán nhanh</span>
+                  </div>
                 </div>
 
-                {/* Right: QR Code */}
-                <div className="shrink-0 flex flex-col items-center justify-center p-3 bg-white/5 rounded-xl border border-white/5">
-                  <div className="w-72 bg-white rounded-2xl flex items-center justify-center border-4 border-white/20 shadow-inner overflow-hidden mb-3">
-                    <img src="/qr_vietcombank.jpg" alt="QR Vietcombank" className="w-full h-auto object-contain" />
+                {/* Right Column: Donation & Options */}
+                <div className="flex flex-col gap-6">
+                  <div className="space-y-4">
+                    <div className="relative pb-2">
+                      <div className="absolute inset-x-0 bottom-0 flex items-center" aria-hidden="true">
+                        <div className="w-full border-t border-white/10"></div>
+                      </div>
+                      <div className="relative flex justify-center py-2">
+                        <span className="bg-[#0B1320] px-4 text-sm font-black text-[#FFCD00] uppercase tracking-[0.2em]">Cổng ủng hộ Mặt trận Tổ quốc Việt Nam</span>
+                      </div>
+                    </div>
+
+                    <div className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden divide-y divide-white/10 shadow-inner">
+                      <div className="flex items-center p-2.5">
+                        <span className="text-white/50 w-32 shrink-0 text-[10px] uppercase tracking-wider font-semibold">Ngân hàng:</span>
+                        <span className="font-bold text-sm text-white">Vietcombank</span>
+                      </div>
+                      <div className="flex items-center p-3 bg-white/[0.02]">
+                        <span className="text-white/50 w-32 shrink-0 text-[10px] uppercase tracking-wider font-semibold">Số tài khoản:</span>
+                        <span className="font-black text-[#FFCD00] text-lg tracking-tight hover:underline cursor-pointer" onClick={() => navigator.clipboard.writeText('9999992025')} title="Nhấn để copy">9999992025</span>
+                      </div>
+                      <div className="flex items-center p-2.5">
+                        <span className="text-white/50 w-32 shrink-0 text-[10px] uppercase tracking-wider font-semibold">Người nhận:</span>
+                        <span className="font-bold text-sm text-white uppercase leading-tight">MAT TRAN TO QUOC VN - BAN CUU TRO TW</span>
+                      </div>
+                    </div>
                   </div>
-                  <span className="text-xs text-white/40 uppercase tracking-widest font-semibold">Quét mã thanh toán</span>
+
+                  <div className={`p-4 rounded-2xl border ${isDark ? 'bg-white/5 border-white/10' : 'bg-slate-50 border-slate-200'}`}>
+                    <h4 className="text-[#FFCD00] font-black text-[10px] uppercase tracking-widest mb-3 flex items-center gap-2">
+                      <Gift className="w-5 h-5" /> 2 lựa chọn thanh toán ý nghĩa:
+                    </h4>
+
+                    <div className="space-y-6 text-sm leading-relaxed text-white/80">
+                      <div className="flex gap-4">
+                        <div className="shrink-0 w-8 h-8 rounded-full bg-[#38BDF8]/20 flex items-center justify-center font-bold text-[#38BDF8] text-sm">1</div>
+                        <div>
+                          <span className="text-white font-black text-base block mb-2">Lựa chọn 1: Bạn tự tay thực hiện ủng hộ </span>
+                          <p className="mb-2">Anh/chị thực hiện chuyển khoản <span className="text-[#FFCD00] font-black text-lg underline">30.000đ</span> trực tiếp vào STK của <span className="text-white font-bold italic">Mặt trận Tổ quốc Việt Nam</span> (đã cung cấp ở trên).</p>
+                          <p>Sau đó, chuyển phần còn lại <span className="text-[#FFCD00] font-black text-lg underline">274.000đ</span> cho tác giả qua số tài khoản cá nhân bên trái.</p>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-4">
+                        <div className="shrink-0 w-8 h-8 rounded-full bg-[#DA251D]/20 flex items-center justify-center font-bold text-[#DA251D] text-sm">2</div>
+                        <div>
+                          <span className="text-white font-black text-base block mb-1">Lựa chọn 2: Tác giả thay mặt bạn ủng hộ </span>
+                          <p className="mb-0 text-white/80">Anh/chị thực hiện chuyển trọn gói <span className="text-[#FFCD00] font-black text-lg underline">304.000đ</span> cho tác giả qua số tài khoản cá nhân bên trái.</p>
+                        </div>
+                      </div>
+
+                      <div className="pt-2.5 border-t border-white/5 text-center md:text-left">
+                        <p className="text-xs text-white/50">Gửi ảnh giao dịch qua Zalo: <span className="text-[#FFCD00] font-black text-base">0392389623</span> để nhận ngay quyền truy cập hệ thống vĩnh viễn.</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
               </div>
@@ -807,7 +904,7 @@ export default function App() {
                 { name: 'Minh Thư', role: 'Agency Owner', text: 'Tool giúp scale dự án cho khách hàng nhanh chóng mà không cần tuyển thêm nhân sự.' },
               ].concat([
                 { name: 'Anh Tuấn', role: 'Content Creator', text: 'Tool chạy cực mượt, mình tạo được 20 video short mỗi ngày mà không tốn xu nào cho editor.' },
-                { name: 'Minh Hoàng', role: 'Kỹ sư phần mềm', text: 'Source code sạch, dễ customize. Mình đã tích hợp thành công vào hệ thống CMS của công ty.' },
+                { name: 'Minh Hoàng', role: 'Kỹ sư phần mềm', text: 'Hệ thống chuyên nghiệp, dễ cài đặt. Mình đã tích hợp thành công vào hệ thống CMS của công ty.' },
                 { name: 'Thùy Linh', role: 'Marketing Manager', text: 'Tiết kiệm được 80% thời gian làm video quảng cáo. Rất đáng đầu tư cho team mkt.' },
                 { name: 'Quốc Bảo', role: 'Youtuber', text: 'Thích nhất là chạy local, không lo rò rỉ ý tưởng hay bị khóa tài khoản như dùng web SaaS.' },
                 { name: 'Hoàng Yến', role: 'Giáo viên Digital', text: 'Chuyển giáo án thành video cực nhanh. Học sinh rất thích phong cách animation này.' },
@@ -891,11 +988,11 @@ export default function App() {
               },
               {
                 q: 'Sau khi order nhận được gì?',
-                a: 'Bạn nhận full source code, video hướng dẫn setup chi tiết, tài liệu sử dụng, được thêm vào group Zalo hỗ trợ, và nhận update miễn phí.',
+                a: 'Bạn nhận quyền sử dụng hệ thống vĩnh viễn, video hướng dẫn setup chi tiết, tài liệu sử dụng, được thêm vào group Zalo hỗ trợ, và nhận update miễn phí.',
               },
               {
-                q: 'Có được tuỳ chỉnh source không?',
-                a: 'Hoàn toàn có thể! Source code là của bạn, bạn có quyền chỉnh sửa, mở rộng, tích hợp vào hệ thống khác theo nhu cầu.',
+                q: 'Hệ thống có linh hoạt không?',
+                a: 'Hoàn toàn có thể! Hệ thống cho phép bạn tùy chỉnh phong cách, nhạc nền, font chữ và kịch bản AI theo ý muốn cá nhân.',
               },
               {
                 q: 'Tool có tạo video bằng tiếng Anh được không?',
@@ -925,7 +1022,7 @@ export default function App() {
                 <span className={`font-semibold text-lg ${isDark ? 'text-white' : 'text-slate-900'}`}>AI42E Studio</span>
               </div>
               <p className={`max-w-md mb-4 ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
-                Pipeline tự động tạo video AI với HTML animation, voice tiếng Việt, và phụ đề karaoke. Sở hữu source code, chạy local, không giới hạn.
+                Pipeline tự động tạo video AI với HTML animation, voice tiếng Việt, và phụ đề karaoke. Chạy local mạnh mẽ, không giới hạn.
               </p>
               <div className={`inline-flex items-center gap-2 px-4 py-2 border rounded-lg ${isDark ? 'bg-[#DA251D]/20 border-[#FFCD00]/30' : 'bg-white border-slate-200 shadow-sm'}`}>
                 <Star className="w-4 h-4 text-[#FFCD00] fill-[#FFCD00]" />
