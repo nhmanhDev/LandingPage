@@ -134,9 +134,9 @@ export default function App() {
     { name: 'Phạm Minh Quang', time: '5 phút trước' },
     { name: 'Trần Thu Hà', time: '1 phút trước' },
     { name: 'Lương Thế Thành', time: '2 phút trước' },
-    { name: 'Võ Thị Sáu', time: '3 phút trước' },
-    { name: 'Hồ Xuân Hương', time: '4 phút trước' },
-    { name: 'Chu Mạnh Cường', time: '5 phút trước' },
+    { name: 'Nguyễn Xuân Quang', time: '3 phút trước' },
+    { name: 'Hồ Ngọc Mỹ', time: '4 phút trước' },
+    { name: 'Chu Văn Long', time: '5 phút trước' },
   ];
 
   useEffect(() => {
@@ -205,9 +205,9 @@ export default function App() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`text-sm transition-all duration-300 relative py-1 hover:scale-105 ${activeSection === item.id
+                  className={`text-sm transition-all duration-300 relative py-1 hover:scale-110 hover:text-[#38BDF8] ${activeSection === item.id
                     ? 'text-[#38BDF8] font-bold'
-                    : isDark ? 'text-white/60 hover:text-white' : 'text-[#05060A]/60 hover:text-[#05060A]'
+                    : isDark ? 'text-white/60' : 'text-[#05060A]/60'
                     }`}
                 >
                   {item.label}
@@ -222,7 +222,7 @@ export default function App() {
                 onClick={() => scrollToSection('pricing')}
                 className="px-4 py-2 text-sm rounded-lg bg-gradient-to-r from-[#DA251D] to-[#FF4444] hover:opacity-90 transition-all hover:scale-105 relative group shadow-lg shadow-[#DA251D]/20"
               >
-                <span className="flex items-center gap-1 text-white font-bold">
+                <span className="flex items-center gap-1 text-white font-bold transition-colors group-hover:text-[#38BDF8]">
                   <Gift className="w-4 h-4" />
                   Ưu đãi 30/4 - Chỉ 304K
                 </span>
@@ -260,7 +260,7 @@ export default function App() {
           </div>
 
           <div className="max-w-5xl text-center z-10 px-4 mt-4">
-            <h1 className={`text-2xl md:text-4xl font-bold leading-snug md:leading-tight drop-shadow-lg ${isDark ? 'text-white' : 'text-slate-900'}`}>
+            <h1 className={`text-2xl md:text-4xl font-bold leading-snug md:leading-tight drop-shadow-lg transition-colors duration-300 hover:text-[#38BDF8] cursor-default ${isDark ? 'text-white' : 'text-slate-900'}`}>
               AI42E Studio tự động viết kịch bản, tạo video có phụ đề, nhạc nền và hỗ trợ nhiều ngôn ngữ.
             </h1>
           </div>
@@ -517,7 +517,7 @@ export default function App() {
                 Tại sao nên dùng AI42E Studio?
               </p>
               <p className={`mt-4 text-xl md:text-xl ${isDark ? 'text-white/70' : 'text-slate-600'}`}>
-                Sản xuất video chất lượng cao hoàn toàn tự động, chi phí tiệm cận 0đ
+                Sản xuất video chất lượng cao hoàn toàn tự động, chỉ từ 0đ
               </p>
             </div>
           </div>
@@ -934,7 +934,7 @@ export default function App() {
             </div>
 
             <div>
-              <h4 className={`font-bold mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>Sản phẩm</h4>
+              <h4 className={`font-bold mb-4 transition-colors ${isDark ? 'text-[#FFCD00]' : 'text-[#DA251D]'}`}>Sản phẩm</h4>
               <div className="space-y-2">
                 <button onClick={() => scrollToSection('features')} className={`block transition ${isDark ? 'text-white/60 hover:text-[#FFCD00]' : 'text-slate-600 hover:text-[#DA251D]'}`}>Giới thiệu</button>
                 <button onClick={() => scrollToSection('demo')} className={`block transition ${isDark ? 'text-white/60 hover:text-[#FFCD00]' : 'text-slate-600 hover:text-[#DA251D]'}`}>Demo</button>
@@ -947,21 +947,21 @@ export default function App() {
               <h4 className={`font-bold mb-4 ${isDark ? 'text-[#FFCD00]' : 'text-[#DA251D]'}`}>Liên hệ & Hỗ trợ</h4>
               <div className="space-y-3">
                 <div className="flex flex-col gap-3">
-                  <a href="https://zalo.me/0392389623" target="_blank" rel="noreferrer" className={`flex items-center gap-2 transition hover:translate-x-1 duration-200 ${isDark ? 'text-white/70 hover:text-[#0068FF]' : 'text-slate-600 hover:text-[#0068FF]'}`}>
+                  <a href="https://zalo.me/0392389623" target="_blank" rel="noreferrer" className={`flex items-center gap-2 transition hover:translate-x-1 duration-200 ${isDark ? 'text-white/70 hover:text-[#FFCD00]' : 'text-slate-600 hover:text-[#DA251D]'}`}>
                     <MessageCircle className="w-5 h-5 text-[#0068FF]" />
-                    <span className={`font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Zalo: 0392389623</span>
+                    <span className={`font-bold transition-colors`}>Zalo: 0392389623</span>
                   </a>
-                  <a href="mailto:nhmanh.dev@gmail.com" className={`flex items-center gap-2 transition hover:translate-x-1 duration-200 ${isDark ? 'text-white/70 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}>
+                  <a href="mailto:nhmanh.dev@gmail.com" className={`flex items-center gap-2 transition hover:translate-x-1 duration-200 ${isDark ? 'text-white/70 hover:text-[#FFCD00]' : 'text-slate-600 hover:text-[#DA251D]'}`}>
                     <Mail className="w-5 h-5 text-red-500" />
-                    <span className={`${isDark ? 'text-white' : 'text-slate-900'} font-medium`}>Email: nhmanh.dev@gmail.com</span>
+                    <span className={`font-bold transition-colors`}>Email: nhmanh.dev@gmail.com</span>
                   </a>
-                  <a href="https://www.facebook.com/nhmanhAI4E/" target="_blank" rel="noreferrer" className={`flex items-center gap-2 transition hover:translate-x-1 duration-200 ${isDark ? 'text-white/70 hover:text-[#38BDF8]' : 'text-slate-600 hover:text-[#38BDF8]'}`}>
+                  <a href="https://www.facebook.com/nhmanhAI4E/" target="_blank" rel="noreferrer" className={`flex items-center gap-2 transition hover:translate-x-1 duration-200 ${isDark ? 'text-white/70 hover:text-[#FFCD00]' : 'text-slate-600 hover:text-[#DA251D]'}`}>
                     <Facebook className="w-5 h-5 text-[#1877F2]" />
-                    <span className={`font-medium ${isDark ? 'text-white/70' : 'text-slate-600'}`}>Facebook Nguyễn Hùng Mạnh</span>
+                    <span className={`font-bold transition-colors`}>Facebook Nguyễn Hùng Mạnh</span>
                   </a>
-                  <a href="https://github.com/nhmanhDev" target="_blank" rel="noreferrer" className={`flex items-center gap-2 transition hover:translate-x-1 duration-200 ${isDark ? 'text-white/70 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}>
+                  <a href="https://github.com/nhmanhDev" target="_blank" rel="noreferrer" className={`flex items-center gap-2 transition hover:translate-x-1 duration-200 ${isDark ? 'text-white/70 hover:text-[#FFCD00]' : 'text-slate-600 hover:text-[#DA251D]'}`}>
                     <Github className={`w-5 h-5 ${isDark ? 'text-white' : 'text-slate-800'}`} />
-                    <span className={`font-medium ${isDark ? 'text-white/70' : 'text-slate-600'}`}>Github: nhmanhDev</span>
+                    <span className={`font-bold transition-colors`}>Github: nhmanhDev</span>
                   </a>
                 </div>
               </div>
