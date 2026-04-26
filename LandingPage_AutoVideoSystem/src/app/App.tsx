@@ -32,14 +32,26 @@ import {
   Facebook,
   Github,
   MessageCircle,
-  Mail
+  Mail,
+  Sun,
+  Moon,
+  ShoppingBag
 } from 'lucide-react';
 
 export default function App() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState({ days: 5, hours: 12, minutes: 34, seconds: 56 });
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const [activeSection, setActiveSection] = useState('features');
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -101,25 +113,91 @@ export default function App() {
 
     return () => clearInterval(interval);
   }, []);
+  const [currentPurchase, setCurrentPurchase] = useState(0);
+  const [showPurchase, setShowPurchase] = useState(false);
+
+  const fakePurchases = [
+    { name: 'Nguyễn Văn Minh', time: '1 phút trước' },
+    { name: 'Trần Minh Hoàng', time: '2 phút trước' },
+    { name: 'Lê Thuỳ Linh', time: '3 phút trước' },
+    { name: 'Phạm Quốc Bảo', time: '4 phút trước' },
+    { name: 'Hoàng Thị Yến', time: '5 phút trước' },
+    { name: 'Đặng Đức Minh', time: '1 phút trước' },
+    { name: 'Vũ Minh Tuấn', time: '2 phút trước' },
+    { name: 'Bùi Phương Nam', time: '3 phút trước' },
+    { name: 'Lý Thanh Hà', time: '4 phút trước' },
+    { name: 'Trương Ngọc Ánh', time: '5 phút trước' },
+    { name: 'Đỗ Tiến Dũng', time: '1 phút trước' },
+    { name: 'Nguyễn Kiều Trang', time: '2 phút trước' },
+    { name: 'Lê Xuân Trường', time: '3 phút trước' },
+    { name: 'Phan Anh Đào', time: '4 phút trước' },
+    { name: 'Phạm Minh Quang', time: '5 phút trước' },
+    { name: 'Trần Thu Hà', time: '1 phút trước' },
+    { name: 'Lương Thế Thành', time: '2 phút trước' },
+    { name: 'Võ Thị Sáu', time: '3 phút trước' },
+    { name: 'Hồ Xuân Hương', time: '4 phút trước' },
+    { name: 'Chu Mạnh Cường', time: '5 phút trước' },
+  ];
+
+  useEffect(() => {
+    // Show faster initially
+    const timeoutInitial = setTimeout(() => setShowPurchase(true), 2000);
+    const timeoutHideInitial = setTimeout(() => setShowPurchase(false), 8000);
+
+    const showInterval = setInterval(() => {
+      setCurrentPurchase((prev) => (prev + 1) % fakePurchases.length);
+      setShowPurchase(true);
+      setTimeout(() => {
+        setShowPurchase(false);
+      }, 6000);
+    }, 6500);
+
+    return () => {
+      clearTimeout(timeoutInitial);
+      clearTimeout(timeoutHideInitial);
+      clearInterval(showInterval);
+    };
+  }, []);
 
   return (
-    <div className="min-h-screen bg-[#05060A] text-white">
+    <div className={`min-h-screen overflow-x-hidden transition-colors duration-300 selection:bg-[#DA251D] selection:text-white ${isDark ? 'bg-[#05060A] text-white' : 'bg-slate-50 text-slate-900'}`}>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          display: flex;
+          animation: marquee 60s linear infinite;
+        }
+        @keyframes slideInUp {
+          from { transform: translateY(100%) translateX(-20px); opacity: 0; }
+          to { transform: translateY(0) translateX(0); opacity: 1; }
+        }
+        .animate-slide-up {
+          animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+      `}} />
       {/* Sticky Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#05060A]/80 backdrop-blur-xl border-b border-[#DA251D]/20">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#05060A]/80 backdrop-blur-xl border-b border-[#DA251D]/20 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-[#DA251D] to-[#FF4444] rounded-lg flex items-center justify-center relative">
-                <Star className="w-5 h-5 text-[#FFCD00] fill-[#FFCD00]" />
+          <div className="flex items-center justify-between relative">
+            {/* Logo */}
+            <div className="flex-1 flex justify-start">
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <div className="w-8 h-8 bg-gradient-to-br from-[#DA251D] to-[#FF4444] rounded-lg flex items-center justify-center relative">
+                  <Star className="w-5 h-5 text-[#FFCD00] fill-[#FFCD00]" />
+                </div>
+                <span className={`font-semibold text-lg ${isDark ? 'text-white' : 'text-[#05060A]'}`}>AI42E Studio</span>
               </div>
-              <span className="font-semibold text-lg">AI42E Studio</span>
             </div>
 
-            <div className="hidden md:flex items-center gap-6">
+            {/* Centered Menu */}
+            <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-8">
               {[
                 { id: 'features', label: 'Giới thiệu' },
                 { id: 'demo', label: 'Demo' },
-                { id: 'how-it-works', label: 'Cách dùng' },
                 { id: 'use-cases', label: 'Tính năng' },
                 { id: 'pricing', label: 'Giá' },
                 { id: 'faq', label: 'FAQ' }
@@ -127,9 +205,9 @@ export default function App() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`text-sm transition-all duration-300 relative py-1 ${activeSection === item.id
-                    ? 'text-[#FFCD00] font-bold'
-                    : 'text-white/60 hover:text-white'
+                  className={`text-sm transition-all duration-300 relative py-1 hover:scale-105 ${activeSection === item.id
+                    ? 'text-[#38BDF8] font-bold'
+                    : isDark ? 'text-white/60 hover:text-white' : 'text-[#05060A]/60 hover:text-[#05060A]'
                     }`}
                 >
                   {item.label}
@@ -137,15 +215,25 @@ export default function App() {
               ))}
             </div>
 
-            <div className="flex items-center gap-3">
-              <button onClick={() => scrollToSection('demo')} className="hidden md:block px-4 py-2 text-sm rounded-lg border border-white/10 hover:border-white/20 transition">
-                Xem Demo
-              </button>
-              <button onClick={() => scrollToSection('pricing')} className="px-4 py-2 text-sm rounded-lg bg-gradient-to-r from-[#DA251D] to-[#FF4444] hover:opacity-90 transition relative">
-                <span className="flex items-center gap-1">
+            {/* Right Buttons */}
+            <div className="flex-1 flex justify-end items-center gap-2 md:gap-3 flex-shrink-0">
+
+              <button
+                onClick={() => scrollToSection('pricing')}
+                className="px-4 py-2 text-sm rounded-lg bg-gradient-to-r from-[#DA251D] to-[#FF4444] hover:opacity-90 transition-all hover:scale-105 relative group shadow-lg shadow-[#DA251D]/20"
+              >
+                <span className="flex items-center gap-1 text-white font-bold">
                   <Gift className="w-4 h-4" />
                   Ưu đãi 30/4 - Chỉ 304K
                 </span>
+                <div className="absolute inset-0 bg-white/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+              </button>
+              <button
+                onClick={() => setIsDark(!isDark)}
+                className={`p-2 rounded-lg border transition-all duration-300 hover:scale-110 ${isDark ? 'bg-white/5 border-white/10 text-white hover:bg-white/10' : 'bg-black/5 border-black/10 text-[#05060A] hover:bg-black/10'}`}
+                aria-label="Toggle Theme"
+              >
+                {isDark ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-indigo-600" />}
               </button>
             </div>
           </div>
@@ -153,7 +241,7 @@ export default function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-28 pb-8 px-6 relative overflow-hidden" id="features">
+      <section className="pt-28 pb-8 px-6 relative" id="features">
         <div className="absolute inset-0 bg-gradient-to-b from-[#DA251D]/10 via-transparent to-transparent pointer-events-none" />
         <div className="absolute top-40 left-1/4 w-96 h-96 bg-[#FFCD00]/20 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute top-60 right-1/4 w-96 h-96 bg-[#DA251D]/20 rounded-full blur-[120px] pointer-events-none" />
@@ -172,126 +260,31 @@ export default function App() {
           </div>
 
           <div className="max-w-5xl text-center z-10 px-4 mt-4">
-            <h1 className="text-2xl md:text-4xl font-bold text-white leading-snug md:leading-tight drop-shadow-lg">
+            <h1 className={`text-2xl md:text-4xl font-bold leading-snug md:leading-tight drop-shadow-lg ${isDark ? 'text-white' : 'text-slate-900'}`}>
               AI42E Studio tự động viết kịch bản, tạo video có phụ đề, nhạc nền và hỗ trợ nhiều ngôn ngữ.
             </h1>
           </div>
 
           <div className="mt-4 mb-4 text-center z-10">
-            <p className="text-xl md:text-1xl font-medium text-[#A7F3D0]">
-              Có thể tạo hàng chục video mỗi ngày chỉ với <span className="text-[#FFCD00] text-5xl md:text-4xl font-extrabold mx-1 drop-shadow-[0_0_15px_rgba(255,205,0,0.3)]">0 VND</span>
+            <p className={`text-xl md:text-2xl font-bold transition-colors duration-300 ${isDark ? 'text-[#A7F3D0]' : 'text-emerald-800'}`}>
+              Có thể tạo hàng chục video mỗi ngày chỉ với <span className={`text-5xl md:text-5xl font-extrabold mx-1 drop-shadow-[0_0_15px_rgba(255,205,0,0.3)] transition-colors duration-300 ${isDark ? 'text-[#FFCD00]' : 'text-orange-600'}`}>0 VND</span>
             </p>
           </div>
         </div>
       </section>
 
-      {/* Features Bento Grid */}
-      <section className="py-8 md:py-12 px-6 bg-[#080A12]" >
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {/* Large card 1 */}
-            <div className="md:col-span-2 md:row-span-2 bg-gradient-to-br from-[#DA251D]/10 to-[#FFCD00]/10 backdrop-blur-sm border border-[#FFCD00]/20 rounded-2xl p-6 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-[#DA251D]/20 rounded-full blur-[100px]" />
-              <div className="relative">
-                <Code className="w-10 h-10 mb-4 text-[#FFCD00]" />
-                <h3 className="text-2xl mb-3">Scene HTML có animation</h3>
-                <p className="text-white/60 mb-6">
-                  Mỗi cảnh là HTML động với animation CSS/JS, không phải slideshow nhàm chán
-                </p>
-                <div className="bg-black/40 rounded-lg p-4 border border-[#FFCD00]/30 font-mono text-sm text-[#FFCD00]">
-                  <div>{'<div class="scene animated">'}</div>
-                  <div className="ml-4 text-white/50">{'<!-- AI generated -->'}</div>
-                  <div>{'</div>'}</div>
-                </div>
-              </div>
-            </div>
 
-            {/* Small cards */}
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <Sparkles className="w-8 h-8 mb-3 text-[#FFCD00]" />
-              <h3 className="text-lg mb-2">AI viết kịch bản nhiều cảnh</h3>
-              <p className="text-sm text-white/60">
-                Tự động chia thành storyboard logic
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <Mic className="w-8 h-8 mb-3 text-[#DA251D]" />
-              <h3 className="text-lg mb-2">Giọng đọc tiếng Việt tự nhiên</h3>
-              <p className="text-sm text-white/60">
-                AI voice chất lượng cao
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <Type className="w-8 h-8 mb-3 text-[#FFCD00]" />
-              <h3 className="text-lg mb-2">Phụ đề karaoke tự động</h3>
-              <p className="text-sm text-white/60">
-                Sync chính xác từng từ
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <Layout className="w-8 h-8 mb-3 text-[#DA251D]" />
-              <h3 className="text-lg mb-2">Đa tỉ lệ khung hình</h3>
-              <p className="text-sm text-white/60">
-                9:16, 16:9, 1:1, 4:5
-              </p>
-            </div>
-
-            {/* Large card 2 */}
-            <div className="md:col-span-2 bg-gradient-to-br from-[#DA251D]/10 to-[#FFCD00]/10 backdrop-blur-sm border border-[#FFCD00]/20 rounded-2xl p-6 relative overflow-hidden">
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#FFCD00]/20 rounded-full blur-[100px]" />
-              <div className="relative">
-                <div className="flex items-center gap-3 mb-3">
-                  <Eye className="w-8 h-8 text-[#FFCD00]" />
-                  <h3 className="text-xl font-bold text-white leading-tight">Không chỉ render tự động — bạn kiểm soát từng cảnh</h3>
-                </div>
-                <p className="text-white/60 mb-5 text-sm leading-relaxed">
-                  Xem trước từng cảnh, sửa lời dẫn, chỉnh prompt, regenerate HTML hoặc render lại riêng lẻ trước khi xuất video cuối
-                </p>
-                <div className="grid grid-cols-2 gap-3 max-w-sm">
-                  <div className="aspect-video bg-white/5 rounded-lg border border-white/10 flex items-center justify-center text-[10px] text-white/30 uppercase tracking-widest font-medium">
-                    Live preview
-                  </div>
-                  <div className="aspect-video bg-white/5 rounded-lg border border-white/10 flex items-center justify-center text-[10px] text-white/30 uppercase tracking-widest font-medium">
-                    Quick Edit
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <Palette className="w-8 h-8 mb-3 text-[#FFCD00]" />
-              <h3 className="text-lg mb-2">Tạo style video riêng</h3>
-              <p className="text-sm text-white/60">
-                Custom logo, màu sắc, font chữ
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <Music className="w-8 h-8 mb-3 text-[#DA251D]" />
-              <h3 className="text-lg mb-2">Nhạc nền & sound effect</h3>
-              <p className="text-sm text-white/60">
-                Tự động thêm background music
-              </p>
-            </div>
-
-
-          </div>
-        </div>
-      </section>
 
       {/* Demo Section */}
-      <section className="py-12 md:py-16 px-6" id="demo">
+      <section className="pt-4 pb-12 md:pt-6 md:pb-16 px-6" id="demo">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-3xl mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#A7F3D0] to-[#38BDF8]">
-              Video demo
+            <h2 className="text-3xl md:text-4xl mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#A7F3D0] to-[#38BDF8] font-bold leading-tight">
+              Demo
             </h2>
-            <p className="text-xl text-white/60">
+            {/* <p className={`text-xl ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
               Tất cả video dưới đây được tạo tự động từ chủ đề
-            </p>
+            </p> */}
           </div>
 
           <div className="flex flex-wrap justify-center gap-6">
@@ -303,7 +296,7 @@ export default function App() {
             ].map((demo, i) => (
               <div key={i} className="group cursor-pointer w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] max-w-[320px]">
                 <div
-                  className="aspect-[9/16] bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl overflow-hidden relative mb-3 group-hover:border-[#FFCD00]/50 transition shadow-lg"
+                  className={`aspect-[9/16] border rounded-xl overflow-hidden relative mb-3 group-hover:border-[#FFCD00]/50 transition shadow-lg ${isDark ? 'bg-gradient-to-br from-white/5 to-white/[0.02] border-white/10' : 'bg-slate-200 border-slate-300'}`}
                   onMouseEnter={(e) => {
                     const vid = e.currentTarget.querySelector('video');
                     if (vid) vid.play();
@@ -315,8 +308,8 @@ export default function App() {
                 >
                   <video src={demo.src} muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 transition duration-500" />
                   <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/10 transition duration-500">
-                    <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20 group-hover:bg-[#DA251D]/80 group-hover:border-[#FFCD00] transition">
-                      <Play className="w-8 h-8 ml-1 text-white" />
+                    <div className={`w-16 h-16 backdrop-blur-sm rounded-full flex items-center justify-center border group-hover:bg-[#DA251D]/80 group-hover:border-[#FFCD00] transition ${isDark ? 'bg-white/10 border-white/20' : 'bg-white/80 border-slate-300'}`}>
+                      <Play className={`w-8 h-8 ml-1 transition-colors ${isDark ? 'text-white' : 'text-slate-900 group-hover:text-white'}`} />
                     </div>
                   </div>
                   <div className="absolute bottom-3 left-3 right-3">
@@ -342,17 +335,17 @@ export default function App() {
 
 
       {/* How it Works */}
-      <section className="py-12 md:py-16 px-6" id="how-it-works">
+      <section className="pt-4 pb-12 md:pt-6 md:pb-16 px-6" >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-3xl mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#A7F3D0] to-[#38BDF8]">
+            <h2 className="text-3xl md:text-4xl mb-4 text-transparent font-bold bg-clip-text bg-gradient-to-r from-[#A7F3D0] to-[#38BDF8] leading-tight">
               Cách sử dụng hệ thống
             </h2>
 
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <div className="aspect-video bg-[#0B1320] rounded-3xl border-2 border-[#FFCD00]/30 overflow-hidden shadow-2xl shadow-[#FFCD00]/10 flex items-center justify-center relative group">
+            <div className={`aspect-video rounded-3xl border-2 border-[#FFCD00]/30 overflow-hidden shadow-2xl shadow-[#FFCD00]/10 flex items-center justify-center relative group transition-colors ${isDark ? 'bg-[#0B1320]' : 'bg-slate-200'}`}>
               <iframe
                 className="w-full h-full"
                 src="https://www.youtube.com/embed/dQw4w9WgXcQ" // Thay link youtube của anh vào đây
@@ -368,9 +361,9 @@ export default function App() {
                 { label: 'Live', sub: 'Preview scene' },
                 { label: '1 Click', sub: 'Export MP4' },
               ].map((stat, i) => (
-                <div key={i} className="text-center p-4 bg-white/5 rounded-2xl border border-white/10">
+                <div key={i} className="text-center p-4 bg-black/5 dark:bg-white/5 rounded-2xl border border-black/5 dark:border-white/10">
                   <div className="text-[#FFCD00] font-bold text-lg">{stat.label}</div>
-                  <div className="text-white/40 text-xs uppercase tracking-wider mt-1">{stat.sub}</div>
+                  <div className="text-slate-500 dark:text-white/40 text-xs uppercase tracking-wider mt-1">{stat.sub}</div>
                 </div>
               ))}
             </div>
@@ -379,63 +372,132 @@ export default function App() {
       </section>
 
       {/* Tính năng */}
-      <section className="py-12 md:py-16 px-6 bg-[#080A12]" id="use-cases">
+      {/* Features Bento Grid */}
+      <section className={`py-8 md:py-12 px-6 transition-colors duration-300 ${isDark ? 'bg-[#080A12]' : 'bg-slate-50'}`} id="use-cases" >
         <div className="max-w-7xl mx-auto">
-          {/* <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl mb-4">
-              Ai nên dùng AI42E Studio?
-            </h2>
-            <p className="text-xl text-white/60">
-              Phù hợp cho mọi người cần tạo video scale
-            </p>
-          </div> */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {/* Large card 1 */}
+            <div className="md:col-span-2 md:row-span-2 bg-gradient-to-br from-[#DA251D]/10 to-[#FFCD00]/10 backdrop-blur-sm border border-[#FFCD00]/20 rounded-2xl p-6 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#DA251D]/20 rounded-full blur-[100px]" />
+              <div className="relative">
+                <Code className="w-10 h-10 mb-4 text-[#FFCD00]" />
+                <h3 className={`text-2xl mb-3 font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Scene HTML có animation</h3>
+                <p className={`mb-6 italic ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
+                  Mỗi cảnh là HTML động với animation CSS/JS, không phải slideshow nhàm chán
+                </p>
+                <div className={`rounded-lg p-4 border border-[#FFCD00]/30 font-mono text-sm text-[#FFCD00] ${isDark ? 'bg-black/40' : 'bg-slate-900'}`}>
+                  <div>{'<div class="scene animated">'}</div>
+                  <div className="ml-4 text-white/50">{'<!-- AI generated -->'}</div>
+                  <div>{'</div>'}</div>
+                </div>
+              </div>
+            </div>
 
+            {/* Small cards */}
+            <div className="bg-white dark:bg-white/5 backdrop-blur-sm border border-slate-200 dark:border-white/10 rounded-xl p-6 shadow-sm dark:shadow-none">
+              <Sparkles className="w-8 h-8 mb-3 text-[#FFCD00]" />
+              <h3 className="text-lg mb-2 text-slate-900 dark:text-white font-semibold">AI viết kịch bản nhiều cảnh</h3>
+              <p className="text-sm text-slate-600 dark:text-white/60">
+                Tự động chia thành storyboard logic
+              </p>
+            </div>
+
+            <div className={`backdrop-blur-sm border rounded-xl p-6 transition-all duration-300 ${isDark ? 'bg-white/5 border-white/10 shadow-none' : 'bg-white border-slate-200 shadow-sm'}`}>
+              <Mic className="w-8 h-8 mb-3 text-[#DA251D]" />
+              <h3 className={`text-lg mb-2 font-semibold ${isDark ? 'text-white' : 'text-slate-900'}`}>Giọng đọc tiếng Việt tự nhiên</h3>
+              <p className={`text-sm ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
+                AI voice chất lượng cao
+              </p>
+            </div>
+
+            <div className={`backdrop-blur-sm border rounded-xl p-6 transition-all duration-300 ${isDark ? 'bg-white/5 border-white/10 shadow-none' : 'bg-white border-slate-200 shadow-sm'}`}>
+              <Type className="w-8 h-8 mb-3 text-[#FFCD00]" />
+              <h3 className={`text-lg mb-2 font-semibold ${isDark ? 'text-white' : 'text-slate-900'}`}>Phụ đề karaoke tự động</h3>
+              <p className={`text-sm ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
+                Sync chính xác từng từ
+              </p>
+            </div>
+
+            <div className={`backdrop-blur-sm border rounded-xl p-6 transition-all duration-300 ${isDark ? 'bg-white/5 border-white/10 shadow-none' : 'bg-white border-slate-200 shadow-sm'}`}>
+              <Layout className="w-8 h-8 mb-3 text-[#DA251D]" />
+              <h3 className={`text-lg mb-2 font-semibold ${isDark ? 'text-white' : 'text-slate-900'}`}>Đa tỉ lệ khung hình</h3>
+              <p className={`text-sm ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
+                9:16, 16:9, 1:1, 4:5
+              </p>
+            </div>
+
+            {/* Large card 2 */}
+            <div className="md:col-span-2 bg-gradient-to-br from-[#DA251D]/10 to-[#FFCD00]/10 backdrop-blur-sm border border-[#FFCD00]/20 rounded-2xl p-6 relative overflow-hidden" >
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#FFCD00]/20 rounded-full blur-[100px]" />
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-3">
+                  <Eye className="w-8 h-8 text-[#FFCD00]" />
+                  <h3 className={`text-xl font-bold leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>Không chỉ render tự động — bạn kiểm soát từng cảnh</h3>
+                </div>
+                <p className={`mb-5 text-sm leading-relaxed ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
+                  Xem trước từng cảnh, sửa lời dẫn, chỉnh prompt, regenerate HTML hoặc render lại riêng lẻ trước khi xuất video cuối
+                </p>
+                <div className="grid grid-cols-2 gap-3 max-w-sm">
+                  <div className={`aspect-video rounded-lg border flex items-center justify-center text-[10px] uppercase tracking-widest font-medium ${isDark ? 'bg-white/5 border-white/10 text-white/30' : 'bg-slate-900/10 border-slate-200 text-slate-900/30'}`}>
+                    Live preview
+                  </div>
+                  <div className={`aspect-video rounded-lg border flex items-center justify-center text-[10px] uppercase tracking-widest font-medium ${isDark ? 'bg-white/5 border-white/10 text-white/30' : 'bg-slate-900/10 border-slate-200 text-slate-900/30'}`}>
+                    Quick Edit
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={`backdrop-blur-sm border rounded-xl p-6 transition-all duration-300 ${isDark ? 'bg-white/5 border-white/10' : 'bg-white border-slate-200 shadow-sm'}`}>
+              <Palette className="w-8 h-8 mb-3 text-[#FFCD00]" />
+              <h3 className={`text-lg mb-2 font-semibold ${isDark ? 'text-white' : 'text-slate-900'}`}>Tạo style video riêng</h3>
+              <p className={`text-sm ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
+                Custom logo, màu sắc, font chữ
+              </p>
+            </div>
+
+            <div className={`backdrop-blur-sm border rounded-xl p-6 transition-all duration-300 ${isDark ? 'bg-white/5 border-white/10' : 'bg-white border-slate-200 shadow-sm'}`}>
+              <Music className="w-8 h-8 mb-3 text-[#DA251D]" />
+              <h3 className={`text-lg mb-2 font-semibold ${isDark ? 'text-white' : 'text-slate-900'}`}>Nhạc nền & sound effect</h3>
+              <p className={`text-sm ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
+                Tự động thêm background music
+              </p>
+            </div>
+
+
+          </div>
+        </div>
+      </section>
+      <section className={`py-12 md:py-16 px-6 transition-colors duration-300 ${isDark ? 'bg-[#080A12]' : 'bg-slate-50'}`} >
+        <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                icon: Users,
-                title: 'Content Creator',
-                benefit: 'Tạo hàng loạt video Shorts/Reels mỗi ngày',
-                example: 'Biến một bài blog thành 5 video Shorts trong cùng một style',
-              },
-              {
-                icon: Briefcase,
-                title: 'Marketing & Brand',
-                benefit: 'Automation content cho nhiều kênh',
-                example: 'Tạo video quảng cáo sản phẩm với nhiều variant khác nhau',
-              },
-              {
-                icon: GraduationCap,
-                title: 'Giáo dục & chia sẻ kiến thức',
-                benefit: 'Chuyển tài liệu thành video giảng dạy',
-                example: 'Tạo series video bài giảng tự động từ outline',
+                icon: Rocket,
+                title: 'Nhà sáng tạo số',
+                benefit: 'Xây dựng đế chế nội dung cá nhân với tần suất đăng bài vượt trội',
+                example: 'Chỉ từ 1 ý tưởng gốc, tự động hóa chuỗi 30 video Reels/TikTok phủ sóng cả tháng',
               },
               {
                 icon: Terminal,
-                title: 'Developer & Vibe Coder',
-                benefit: 'Customize pipeline theo nhu cầu riêng',
-                example: 'Tích hợp vào workflow automation, extend features',
+                title: 'Giải pháp Công nghệ',
+                benefit: 'Trực quan hóa các tính năng kỹ thuật và quy trình phần mềm phức tạp',
+                example: 'Tự động tạo video giới thiệu tính năng (feature tour) hoặc hướng dẫn sử dụng từ documentation',
               },
               {
-                icon: Rocket,
-                title: 'Freelancer / Agency nhỏ',
-                benefit: 'Nhận nhiều project content mà không cần thuê team',
-                example: 'Scale dịch vụ làm video cho khách hàng với chi phí thấp',
-              },
-              {
-                icon: Building,
-                title: 'Doanh nghiệp / cộng đồng',
-                benefit: 'Tạo content đồng bộ cho internal training hoặc marketing',
-                example: 'Video onboarding nhân viên, product updates tự động',
+                icon: Shield,
+                title: 'Tài chính & Đầu tư',
+                benefit: 'Cập nhật biến động thị trường và phân tích dữ liệu theo thời gian thực',
+                example: 'Tạo hàng loạt video tin tức thị trường, biểu đồ chứng khoán hoặc bản tin tài chính mỗi ngày',
               },
             ].map((useCase, i) => (
-              <div key={i} className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-[#FFCD00]/30 transition">
+              <div key={i} className={`backdrop-blur-sm border rounded-xl p-6 transition-all duration-300 hover:border-[#FFCD00]/30 ${isDark ? 'bg-gradient-to-br from-white/5 to-white/[0.02] border-white/10 shadow-none' : 'bg-white border-slate-200 shadow-sm'}`}>
                 <useCase.icon className="w-10 h-10 mb-4 text-[#FFCD00]" />
-                <h3 className="text-xl mb-2">{useCase.title}</h3>
-                <p className="text-white/60 mb-4">{useCase.benefit}</p>
-                <div className="bg-[#DA251D]/10 border border-[#FFCD00]/20 rounded-lg p-3 text-sm">
-                  <span className="text-white/50">Ví dụ:</span>
-                  <p className="text-white/80 mt-1">{useCase.example}</p>
+                <h3 className={`text-xl mb-2 font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>{useCase.title}</h3>
+                <p className={`mb-4 text-sm ${isDark ? 'text-white/60' : 'text-slate-600'}`}>{useCase.benefit}</p>
+                <div className={`border border-[#FFCD00]/20 rounded-lg p-3 text-sm ${isDark ? 'bg-[#DA251D]/10' : 'bg-[#DA251D]/5'}`}>
+                  <span className={`${isDark ? 'text-white/50' : 'text-slate-500'}`}>Ví dụ:</span>
+                  <p className={`mt-1 italic ${isDark ? 'text-white/80' : 'text-slate-700'}`}>{useCase.example}</p>
                 </div>
               </div>
             ))}
@@ -450,25 +512,25 @@ export default function App() {
             {/* <h2 className="text-3xl md:text-4xl mb-6">
               So với cách làm video truyền thống
             </h2> */}
-            <div className="mx-auto max-w-3xl rounded-3xl border border-[#38BDF8]/20 bg-[#0B1320]/90 p-6 shadow-xl shadow-[#38BDF8]/10">
-              <p className="text-3xl md:text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#A7F3D0] to-[#38BDF8]">
+            <div className={`mx-auto max-w-3xl rounded-3xl border border-[#38BDF8]/20 p-6 shadow-xl shadow-[#38BDF8]/10 transition-colors duration-300 ${isDark ? 'bg-[#0B1320]/90 text-white' : 'bg-white text-slate-900'}`}>
+              <p className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#A7F3D0] to-[#38BDF8] leading-snug py-1">
                 Tại sao nên dùng AI42E Studio?
               </p>
-              <p className="mt-4 text-xl md:text-2xl text-white/70">
+              <p className={`mt-4 text-xl md:text-xl ${isDark ? 'text-white/70' : 'text-slate-600'}`}>
                 Sản xuất video chất lượng cao hoàn toàn tự động, chi phí tiệm cận 0đ
               </p>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
+          <div className={`backdrop-blur-sm border rounded-2xl overflow-hidden transition-colors duration-300 ${isDark ? 'bg-gradient-to-br from-white/5 to-white/[0.02] border-white/10 shadow-none' : 'bg-white border-slate-200 shadow-xl'}`}>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-white/10">
-                    <th className="text-left p-6 text-white/50">Tiêu chí</th>
-                    <th className="p-6 text-center">Thuê editor</th>
-                    <th className="p-6 text-center">Dùng SaaS tạo video</th>
-                    <th className="p-6 text-center bg-gradient-to-br from-[#DA251D]/20 to-[#FFCD00]/20 border-l-2 border-r-2 border-[#FFCD00]/30">
+                  <tr className={`border-b transition-colors ${isDark ? 'border-white/10' : 'border-slate-200'}`}>
+                    <th className={`text-left p-6 ${isDark ? 'text-white/50' : 'text-slate-500'}`}>Tiêu chí</th>
+                    <th className={`p-6 text-center font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Thuê editor</th>
+                    <th className={`p-6 text-center font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Dùng SaaS tạo video</th>
+                    <th className="p-6 text-center bg-gradient-to-br from-[#DA251D]/20 to-[#FFCD00]/20 border-l-2 border-r-2 border-[#FFCD00]/30 transition-colors">
                       <div className="flex items-center justify-center gap-2">
                         <Star className="w-5 h-5 text-[#FFCD00] fill-[#FFCD00]" />
                         <div className="font-bold text-lg text-[#FFCD00]">AI42E Studio</div>
@@ -523,10 +585,10 @@ export default function App() {
                       ai42e: 'Dễ dàng',
                     },
                   ].map((row, i) => (
-                    <tr key={i} className="border-b border-white/5">
-                      <td className="p-6 text-white/70">{row.criteria}</td>
-                      <td className="p-6 text-center text-white/60">{row.editor}</td>
-                      <td className="p-6 text-center text-white/60">{row.saas}</td>
+                    <tr key={i} className="border-b border-slate-100 dark:border-white/5 transition-colors">
+                      <td className="p-6 text-slate-600 dark:text-white/70">{row.criteria}</td>
+                      <td className="p-6 text-center text-slate-500 dark:text-white/60">{row.editor}</td>
+                      <td className="p-6 text-center text-slate-500 dark:text-white/60">{row.saas}</td>
                       <td className="p-6 text-center bg-gradient-to-br from-[#DA251D]/5 to-[#FFCD00]/5 border-l-2 border-r-2 border-[#FFCD00]/10 font-medium text-[#FFCD00]">
                         {row.ai42e}
                       </td>
@@ -540,19 +602,14 @@ export default function App() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-12 md:py-16 px-6 bg-[#080A12]" id="pricing">
+      <section className={`py-12 md:py-16 px-6 transition-colors duration-300 ${isDark ? 'bg-[#080A12]' : 'bg-slate-100'}`} id="pricing">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
-            {/* <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#DA251D] to-[#FF4444] rounded-full border-2 border-[#FFCD00] mb-6 shadow-lg shadow-[#DA251D]/50">
-              <Star className="w-5 h-5 text-[#FFCD00] fill-[#FFCD00]" />
-              <span className="font-bold">Chào mừng Kỷ niệm 51 năm Ngày Giải phóng miền Nam, thống nhất đất nước (30/4/1975 – 30/4/2026)</span>
-              <Star className="w-5 h-5 text-[#FFCD00] fill-[#FFCD00]" />
-            </div> */}
-            <h2 className="text-3xl md:text-4xl mb-4">
+            <h2 className={`text-3xl md:text-4xl mb-4 font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
               Giá đặc biệt chỉ trong dịp lễ 30/4
             </h2>
-            <p className="text-xl text-white/60">
-              Thanh toán một lần, sở hữu vĩnh viễn - Tiết kiệm 362K!
+            <p className={`text-xl md:text-xl font-medium ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
+              Thanh toán một lần, sở hữu vĩnh viễn - <span className="text-[#DA251D] font-bold">Tiết kiệm 362K!</span>
             </p>
           </div>
 
@@ -586,7 +643,7 @@ export default function App() {
 
                   {/* Countdown Timer */}
                   <div className="flex items-center justify-center gap-3">
-                    <Clock className="w-5 h-5 text-[#FFCD00]" />
+                    <Clock className={`w-5 h-5 ${isDark ? 'text-[#FFCD00]' : 'text-orange-700'}`} />
                     <div className="flex items-center gap-2">
                       {[
                         { value: timeLeft.days, label: 'Ngày' },
@@ -595,10 +652,10 @@ export default function App() {
                         { value: timeLeft.seconds, label: 'Giây' }
                       ].map((item, i) => (
                         <div key={i} className="flex items-center gap-2">
-                          {i > 0 && <span className="text-[#FFCD00]">:</span>}
-                          <div className="bg-[#DA251D]/40 border border-[#FFCD00]/30 rounded-lg px-3 py-1 min-w-[60px] text-center shadow-inner">
-                            <div className="text-2xl font-bold text-[#FFCD00]">{String(item.value).padStart(2, '0')}</div>
-                            <div className="text-xs text-white/60">{item.label}</div>
+                          {i > 0 && <span className={`font-bold ${isDark ? 'text-[#FFCD00]' : 'text-orange-700'}`}>:</span>}
+                          <div className={`border rounded-xl px-3 py-2 min-w-[70px] text-center shadow-lg transition-all duration-300 ${isDark ? 'bg-[#DA251D]/40 border-[#FFCD00]/30 shadow-inner' : 'bg-white border-orange-200'}`}>
+                            <div className={`text-2xl font-black ${isDark ? 'text-[#FFCD00]' : 'text-orange-700'}`}>{String(item.value).padStart(2, '0')}</div>
+                            <div className={`text-[10px] uppercase font-bold tracking-wider ${isDark ? 'text-white/60' : 'text-orange-900/60'}`}>{item.label}</div>
                           </div>
                         </div>
                       ))}
@@ -608,42 +665,42 @@ export default function App() {
 
                 {/* Price comparison */}
                 <div className="mb-6">
-                  <div className="text-3xl text-white/40 line-through mb-2">
+                  <div className={`text-3xl line-through mb-2 italic font-medium transition-colors ${isDark ? 'text-white/40' : 'text-slate-500'}`}>
                     666.000 VNĐ
                   </div>
                   <div className="flex items-center justify-center gap-3 mb-4">
-                    <Star className="w-10 h-10 text-[#FFCD00] fill-[#FFCD00] animate-pulse" />
+                    <Star className={`w-10 h-10 fill-current animate-pulse transition-colors ${isDark ? 'text-[#FFCD00]' : 'text-orange-600'}`} />
                     <div>
-                      <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-[#FFCD00] via-[#FFE066] to-[#FFCD00] bg-clip-text text-transparent transform scale-110">
+                      <div className={`text-6xl md:text-7xl font-black bg-clip-text text-transparent transform scale-110 shadow-sm transition-all duration-300 ${isDark ? 'bg-gradient-to-r from-[#FFCD00] via-[#FFE066] to-[#FFCD00]' : 'bg-gradient-to-r from-orange-600 via-red-600 to-orange-600'}`}>
                         304K
                       </div>
                     </div>
-                    <Star className="w-10 h-10 text-[#FFCD00] fill-[#FFCD00] animate-pulse" />
+                    <Star className={`w-10 h-10 fill-current animate-pulse transition-colors ${isDark ? 'text-[#FFCD00]' : 'text-orange-600'}`} />
                   </div>
-                  <div className="inline-block px-6 py-2 bg-[#FFCD00]/20 border border-[#FFCD00]/50 rounded-full shadow-lg shadow-[#FFCD00]/10">
-                    <span className="text-lg font-bold text-[#FFCD00]">💰 Tiết kiệm 362.000đ (54%)</span>
+                  <div className={`inline-block px-8 py-3 border rounded-full shadow-xl transition-all duration-300 ${isDark ? 'bg-[#FFCD00]/20 border-[#FFCD00]/50 shadow-[#FFCD00]/10' : 'bg-white border-orange-200 shadow-orange-100'}`}>
+                    <span className={`text-xl font-black ${isDark ? 'text-[#FFCD00]' : 'text-orange-700'}`}>💰 Tiết kiệm 362.000đ (54%)</span>
                   </div>
                 </div>
 
-                <div className="text-xl text-white/90 mb-1 font-semibold">Thanh toán một lần</div>
-                <div className="text-white/60 mb-6 font-medium">Sở hữu source code vĩnh viễn</div>
+                <div className={`text-2xl mb-1 font-black ${isDark ? 'text-white/90' : 'text-slate-900'}`}>Thanh toán một lần</div>
+                <div className={`text-lg mb-8 font-bold ${isDark ? 'text-white/60' : 'text-slate-600'}`}>Sở hữu source code vĩnh viễn</div>
 
                 <div className="flex justify-center flex-col px-4 md:px-0 auto-mx">
                   <button
                     onClick={() => setIsPaymentOpen(true)}
-                    className="w-full md:w-3/4 mx-auto px-6 py-4 bg-gradient-to-r from-[#DA251D] to-[#FF4444] rounded-2xl text-xl font-bold hover:opacity-90 transition shadow-xl shadow-[#DA251D]/40 border-2 border-[#FFCD00]/50 flex items-center justify-center gap-3 hover:scale-105 active:scale-95 ease-out duration-200"
+                    className="w-full md:w-3/4 mx-auto px-8 py-5 bg-gradient-to-r from-[#DA251D] to-[#FF4444] rounded-2xl text-2xl font-black text-white hover:opacity-90 transition shadow-2xl shadow-[#DA251D]/60 border-2 border-[#FFCD00]/50 flex items-center justify-center gap-3 hover:scale-105 active:scale-95 ease-out duration-200"
                   >
-                    <Gift className="w-6 h-6" />
-                    🎉 Thanh toán mã QR
+                    <Gift className="w-8 h-8" />
+                    🚀 THANH TOÁN MÃ QR
                   </button>
-                  <p className="text-sm text-white/40 mt-3">Nhận trọn bộ mã nguồn ngay lập tức</p>
+                  <p className={`text-sm mt-4 font-bold ${isDark ? 'text-white/40' : 'text-slate-500'}`}>Nhận trọn bộ mã nguồn ngay lập tức</p>
                 </div>
               </div>
 
               {/* Right Column: Features Checklist */}
-              <div className="w-full lg:w-[380px] shrink-0 bg-[#0B1320]/80 backdrop-blur-md border border-[#FFCD00]/30 rounded-3xl p-6 md:p-8 shadow-inner relative overflow-hidden">
+              <div className="w-full lg:w-[380px] shrink-0 bg-white dark:bg-[#0B1320]/80 backdrop-blur-md border border-slate-200 dark:border-[#FFCD00]/30 rounded-3xl p-6 md:p-8 shadow-xl dark:shadow-inner relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFCD00]/10 rounded-full blur-[40px] pointer-events-none" />
-                <h4 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
+                <h4 className="text-xl font-bold mb-6 text-slate-900 dark:text-white flex items-center gap-2">
                   <Star className="w-5 h-5 text-[#FFCD00] fill-[#FFCD00]" />
                   Bạn sẽ nhận được:
                 </h4>
@@ -660,7 +717,7 @@ export default function App() {
                       <div className="w-6 h-6 rounded-full bg-[#22C55E]/10 flex items-center justify-center flex-shrink-0 border border-[#22C55E]/20 shadow-[0_0_10px_rgba(34,197,94,0.1)]">
                         <Check className="w-3.5 h-3.5 text-[#22C55E]" strokeWidth={3} />
                       </div>
-                      <span className="text-white/80 font-medium text-base">{item}</span>
+                      <span className="text-slate-700 dark:text-white/80 font-medium text-base">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -723,68 +780,99 @@ export default function App() {
       </section>
 
       {/* Trust Section */}
-      <section className="py-12 md:py-16 px-6" id="trust">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl mb-4">
-              Được thiết kế cho người muốn tự động hoá thật sự
+      <section className={`py-12 md:py-16 overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#05060A]' : 'bg-slate-50'}`} id="trust">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-10 px-6">
+            <h2 className={`text-3xl md:text-4xl mb-4 font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+              Đánh giá từ người dùng
             </h2>
-            <p className="text-xl text-white/60">
-              Không phụ thuộc SaaS, hoàn toàn kiểm soát
+            <p className={`text-xl ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
+              Hàng trăm nhà sáng tạo đã tối ưu hoá quy trình với AI42E Studio
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-gradient-to-br from-[#DA251D]/10 to-[#FFCD00]/10 backdrop-blur-sm border border-[#FFCD00]/20 rounded-xl p-6 text-center">
-              <Shield className="w-10 h-10 mx-auto mb-4 text-[#FFCD00]" />
-              <h3 className="text-xl mb-3">Chạy trên máy bạn</h3>
-              <p className="text-white/60">
-                Data không lên cloud, bảo mật tuyệt đối
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-[#DA251D]/10 to-[#FFCD00]/10 backdrop-blur-sm border border-[#FFCD00]/20 rounded-xl p-6 text-center">
-              <Code className="w-10 h-10 mx-auto mb-4 text-[#FFCD00]" />
-              <h3 className="text-xl mb-3">Không bị khoá trong SaaS</h3>
-              <p className="text-white/60">
-                Sở hữu code, không lo bị giới hạn hoặc đóng dịch vụ
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-[#DA251D]/10 to-[#FFCD00]/10 backdrop-blur-sm border border-[#FFCD00]/20 rounded-xl p-6 text-center">
-              <Zap className="w-10 h-10 mx-auto mb-4 text-[#FFCD00]" />
-              <h3 className="text-xl mb-3">Có thể mở rộng bằng code hoặc AI coding</h3>
-              <p className="text-white/60">
-                Customize không giới hạn, tích hợp workflow riêng
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl p-6">
-            <div className="text-center mb-6">
-              <h3 className="text-lg text-white/70 mb-4">Technical Stack</h3>
-            </div>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {['Node.js', 'Python', 'FFmpeg', 'Chrome', 'HTML scenes', 'AI APIs'].map((tech, i) => (
-                <div key={i} className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-sm font-mono">
-                  {tech}
+          {/* Infinite Marquee */}
+          <div className="relative flex overflow-x-hidden group">
+            <div className="py-12 flex animate-marquee whitespace-nowrap gap-6">
+              {[
+                { name: 'Anh Tuấn', role: 'Content Creator', text: 'Tool chạy cực mượt, mình tạo được 20 video short mỗi ngày mà không tốn xu nào cho editor.' },
+                { name: 'Minh Hoàng', role: 'Kỹ sư phần mềm', text: 'Source code sạch, dễ customize. Mình đã tích hợp thành công vào hệ thống CMS của công ty.' },
+                { name: 'Thùy Linh', role: 'Marketing Manager', text: 'Tiết kiệm được 80% thời gian làm video quảng cáo. Rất đáng đầu tư cho team mkt.' },
+                { name: 'Quốc Bảo', role: 'Youtuber', text: 'Thích nhất là chạy local, không lo rò rỉ ý tưởng hay bị khóa tài khoản như dùng web SaaS.' },
+                { name: 'Hoàng Yến', role: 'Giáo viên Digital', text: 'Chuyển giáo án thành video cực nhanh. Học sinh rất thích phong cách animation này.' },
+                { name: 'Đức Minh', role: 'Tiktoker', text: 'Render video nhanh, phụ đề karaoke đồng bộ rất chuẩn. 10/10 điểm cho team phát triển.' },
+                { name: 'Tùng Lâm', role: 'Video Editor', text: 'Thay vì edit chân tay 3 tiếng, giờ mình chỉ cần 1 click là xong clip Shorts xịn.' },
+                { name: 'Bích Phương', role: 'KOL / Entrepreneur', text: 'Mình tự làm video review sản phẩm cực chuyên nghiệp mà không cần thuê team quay phim.' },
+                { name: 'Gia Bách', role: 'Affiliate Marketer', text: 'Kênh của mình tăng trưởng 300% nhờ lượng video phủ đều đặn mỗi ngày từ tool.' },
+                { name: 'Minh Thư', role: 'Agency Owner', text: 'Tool giúp scale dự án cho khách hàng nhanh chóng mà không cần tuyển thêm nhân sự.' },
+              ].concat([
+                { name: 'Anh Tuấn', role: 'Content Creator', text: 'Tool chạy cực mượt, mình tạo được 20 video short mỗi ngày mà không tốn xu nào cho editor.' },
+                { name: 'Minh Hoàng', role: 'Kỹ sư phần mềm', text: 'Source code sạch, dễ customize. Mình đã tích hợp thành công vào hệ thống CMS của công ty.' },
+                { name: 'Thùy Linh', role: 'Marketing Manager', text: 'Tiết kiệm được 80% thời gian làm video quảng cáo. Rất đáng đầu tư cho team mkt.' },
+                { name: 'Quốc Bảo', role: 'Youtuber', text: 'Thích nhất là chạy local, không lo rò rỉ ý tưởng hay bị khóa tài khoản như dùng web SaaS.' },
+                { name: 'Hoàng Yến', role: 'Giáo viên Digital', text: 'Chuyển giáo án thành video cực nhanh. Học sinh rất thích phong cách animation này.' },
+                { name: 'Đức Minh', role: 'Tiktoker', text: 'Render video nhanh, phụ đề karaoke đồng bộ rất chuẩn. 10/10 điểm cho team phát triển.' },
+                { name: 'Tùng Lâm', role: 'Video Editor', text: 'Thay vì edit chân tay 3 tiếng, giờ mình chỉ cần 1 click là xong clip Shorts xịn.' },
+                { name: 'Bích Phương', role: 'KOL / Entrepreneur', text: 'Mình tự làm video review sản phẩm cực chuyên nghiệp mà không cần thuê team quay phim.' },
+                { name: 'Gia Bách', role: 'Affiliate Marketer', text: 'Kênh của mình tăng trưởng 300% nhờ lượng video phủ đều đặn mỗi ngày từ tool.' },
+                { name: 'Minh Thư', role: 'Agency Owner', text: 'Tool giúp scale dự án cho khách hàng nhanh chóng mà không cần tuyển thêm nhân sự.' },
+              ]).map((review, i) => (
+                <div key={i} className={`inline-block w-[350px] whitespace-normal backdrop-blur-sm border rounded-2xl p-6 transition-all duration-300 hover:scale-105 ${isDark ? 'bg-gradient-to-br from-white/5 to-white/[0.02] border-white/10 shadow-none' : 'bg-white border-slate-200 shadow-xl shadow-slate-200/50'}`}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#DA251D] to-[#FFCD00] flex items-center justify-center text-white font-bold">
+                      {review.name[0]}
+                    </div>
+                    <div>
+                      <div className={`font-bold text-sm ${isDark ? 'text-white' : 'text-slate-900'}`}>{review.name}</div>
+                      <div className="text-xs text-[#FFCD00] font-medium">{review.role}</div>
+                    </div>
+                    <div className="ml-auto flex gap-0.5">
+                      {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-3 h-3 text-[#FFCD00] fill-[#FFCD00]" />)}
+                    </div>
+                  </div>
+                  <p className={`text-sm italic leading-relaxed ${isDark ? 'text-white/70' : 'text-slate-600'}`}>"{review.text}"</p>
                 </div>
               ))}
+            </div>
+
+            {/* Fading gradients for edges */}
+            <div className={`absolute inset-y-0 left-0 w-32 z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-r from-[#05060A] to-transparent' : 'bg-gradient-to-r from-slate-50 to-transparent'}`} />
+            <div className={`absolute inset-y-0 right-0 w-32 z-10 pointer-events-none transition-colors duration-300 ${isDark ? 'bg-gradient-to-l from-[#05060A] to-transparent' : 'bg-gradient-to-l from-slate-50 to-transparent'}`} />
+          </div>
+
+          <div className="mt-12 px-6">
+            <div className={`backdrop-blur-sm border rounded-3xl p-8 transition-all duration-300 ${isDark ? 'bg-white/5 border-white/10 shadow-none' : 'bg-white border-slate-200 shadow-2xl'}`}>
+              <div className="text-center mb-8">
+                <h3 className={`text-xl font-black mb-2 uppercase tracking-widest ${isDark ? 'text-white/70' : 'text-slate-400'}`}>Technical Stack</h3>
+                <div className="h-1 w-20 bg-[#FFCD00] mx-auto rounded-full" />
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-6">
+                {[
+                  { name: 'Node.js', color: 'text-green-500' },
+                  { name: 'Python', color: 'text-blue-500' },
+                  { name: 'FFmpeg', color: 'text-green-400' },
+                  { name: 'Chrome', color: 'text-red-400' },
+                  { name: 'HTML scenes', color: 'text-orange-500' },
+                  { name: 'AI APIs', color: 'text-purple-500' }
+                ].map((tech, i) => (
+                  <div key={i} className={`flex items-center gap-2 px-6 py-3 border rounded-xl font-mono text-sm font-bold transition-all hover:scale-110 ${isDark ? 'bg-white/5 border-white/10 text-white/80' : 'bg-slate-50 border-slate-200 text-slate-800 shadow-sm'}`}>
+                    <div className={`w-2 h-2 rounded-full bg-current ${tech.color}`} />
+                    {tech.name}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-12 md:py-16 px-6 bg-[#080A12]" id="faq">
+      <section className={`py-12 md:py-16 px-6 transition-colors duration-300 ${isDark ? 'bg-[#080A12]' : 'bg-slate-50'}`} id="faq">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl mb-4">
+            <h2 className={`text-3xl md:text-4xl mb-4 font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
               Câu hỏi thường gặp?
             </h2>
-            {/* <p className="text-xl text-white/60">
-              Tất cả những gì bạn cần biết
-            </p> */}
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -814,47 +902,19 @@ export default function App() {
                 a: 'Có, tool hỗ trợ đa ngôn ngữ. Bạn có thể tạo video tiếng Việt, tiếng Anh hoặc ngôn ngữ khác tùy theo AI API bạn sử dụng.',
               },
             ].map((faq, i) => (
-              <div key={i} className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-2xl p-5 hover:border-[#FFCD00]/20 transition-colors group">
-                <h3 className="text-base font-bold mb-3 text-white group-hover:text-[#FFCD00] transition-colors">{faq.q}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{faq.a}</p>
+              <div key={i} className={`backdrop-blur-sm border rounded-2xl p-5 hover:border-[#FFCD00]/20 transition-colors group ${isDark ? 'bg-gradient-to-br from-white/5 to-white/[0.02] border-white/10 shadow-none' : 'bg-white border-slate-200 shadow-sm'}`}>
+                <h3 className={`text-base font-bold mb-3 transition-colors group-hover:text-[#FFCD00] ${isDark ? 'text-white' : 'text-slate-900'}`}>{faq.q}</h3>
+                <p className={`text-sm leading-relaxed ${isDark ? 'text-white/50' : 'text-slate-600'}`}>{faq.a}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      {/* <section className="py-12 md:py-16 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#DA251D]/10 via-transparent to-transparent pointer-events-none" />
-        <div className="max-w-4xl mx-auto text-center relative">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#DA251D] to-[#FF4444] rounded-full border-2 border-[#FFCD00] mb-6 shadow-lg shadow-[#DA251D]/50 animate-pulse">
-            <Star className="w-5 h-5 text-[#FFCD00] fill-[#FFCD00]" />
-            <span className="font-bold">🇻🇳 Ưu đãi 30/4 - Chỉ còn 304K 🇻🇳</span>
-            <Star className="w-5 h-5 text-[#FFCD00] fill-[#FFCD00]" />
-          </div>
-          <h2 className="text-3xl md:text-4xl mb-6">
-            Sẵn sàng biến ý tưởng thành video hàng loạt?
-          </h2>
-          <p className="text-xl text-white/60 mb-4">
-            Bắt đầu với giá đặc biệt 30/4, nhận source code và tự xây pipeline video AI của riêng bạn
-          </p>
-          <div className="text-2xl mb-8">
-            <span className="text-white/40 line-through mr-3">666K</span>
-            <span className="text-4xl font-bold bg-gradient-to-r from-[#FFCD00] to-[#FFE066] bg-clip-text text-transparent">304K</span>
-          </div>
-          <div className="flex items-center justify-center gap-4">
-            <button onClick={() => scrollToSection('pricing')} className="px-8 py-4 bg-gradient-to-r from-[#DA251D] to-[#FF4444] rounded-xl text-lg font-medium hover:opacity-90 transition shadow-lg shadow-[#DA251D]/50 border-2 border-[#FFCD00]/50">
-              🎉 Đặt mua ngay - 304K
-            </button>
-            <button onClick={() => scrollToSection('demo')} className="px-8 py-4 bg-white/5 border border-[#FFCD00]/30 rounded-xl text-lg hover:bg-white/10 transition">
-              Xem demo
-            </button>
-          </div>
-        </div>
-      </section> */}
+
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-[#FFCD00]/10 bg-[#080A12]">
+      <footer className={`py-12 px-6 border-t transition-colors duration-300 ${isDark ? 'bg-[#080A12] border-[#FFCD00]/10' : 'bg-slate-100 border-slate-200'}`}>
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-6 mb-8">
             <div className="md:col-span-2">
@@ -862,57 +922,78 @@ export default function App() {
                 <div className="w-8 h-8 bg-gradient-to-br from-[#DA251D] to-[#FF4444] rounded-lg flex items-center justify-center">
                   <Star className="w-5 h-5 text-[#FFCD00] fill-[#FFCD00]" />
                 </div>
-                <span className="font-semibold text-lg">AI42E Studio</span>
+                <span className={`font-semibold text-lg ${isDark ? 'text-white' : 'text-slate-900'}`}>AI42E Studio</span>
               </div>
-              <p className="text-white/60 max-w-md mb-4">
+              <p className={`max-w-md mb-4 ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
                 Pipeline tự động tạo video AI với HTML animation, voice tiếng Việt, và phụ đề karaoke. Sở hữu source code, chạy local, không giới hạn.
               </p>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#DA251D]/20 border border-[#FFCD00]/30 rounded-lg">
+              <div className={`inline-flex items-center gap-2 px-4 py-2 border rounded-lg ${isDark ? 'bg-[#DA251D]/20 border-[#FFCD00]/30' : 'bg-white border-slate-200 shadow-sm'}`}>
                 <Star className="w-4 h-4 text-[#FFCD00] fill-[#FFCD00]" />
-                <span className="text-sm text-[#FFCD00]">Khuyến mãi 30/4 - Giá chỉ 304K</span>
+                <span className={`text-sm font-bold ${isDark ? 'text-[#FFCD00]' : 'text-[#DA251D]'}`}>Khuyến mãi 30/4 - Giá chỉ 304K</span>
               </div>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Sản phẩm</h4>
+              <h4 className={`font-bold mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>Sản phẩm</h4>
               <div className="space-y-2">
-                <button onClick={() => scrollToSection('features')} className="block text-white/60 hover:text-[#FFCD00] transition">Giới thiệu</button>
-                <button onClick={() => scrollToSection('demo')} className="block text-white/60 hover:text-[#FFCD00] transition">Demo</button>
-                <button onClick={() => scrollToSection('pricing')} className="block text-white/60 hover:text-[#FFCD00] transition">Giá 30/4</button>
-                <button onClick={() => scrollToSection('faq')} className="block text-white/60 hover:text-[#FFCD00] transition">FAQ</button>
+                <button onClick={() => scrollToSection('features')} className={`block transition ${isDark ? 'text-white/60 hover:text-[#FFCD00]' : 'text-slate-600 hover:text-[#DA251D]'}`}>Giới thiệu</button>
+                <button onClick={() => scrollToSection('demo')} className={`block transition ${isDark ? 'text-white/60 hover:text-[#FFCD00]' : 'text-slate-600 hover:text-[#DA251D]'}`}>Demo</button>
+                <button onClick={() => scrollToSection('pricing')} className={`block transition ${isDark ? 'text-white/60 hover:text-[#FFCD00]' : 'text-slate-600 hover:text-[#DA251D]'}`}>Giá 30/4</button>
+                <button onClick={() => scrollToSection('faq')} className={`block transition ${isDark ? 'text-white/60 hover:text-[#FFCD00]' : 'text-slate-600 hover:text-[#DA251D]'}`}>FAQ</button>
               </div>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4 text-[#FFCD00]">Liên hệ & Hỗ trợ</h4>
-              <div className="space-y-3 text-white/70">
+              <h4 className={`font-bold mb-4 ${isDark ? 'text-[#FFCD00]' : 'text-[#DA251D]'}`}>Liên hệ & Hỗ trợ</h4>
+              <div className="space-y-3">
                 <div className="flex flex-col gap-3">
-                  <a href="https://zalo.me/0392389623" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#0068FF] transition">
-                    <MessageCircle className="w-5 h-5" />
-                    <span className="font-semibold text-white">Zalo: 0392389623</span>
+                  <a href="https://zalo.me/0392389623" target="_blank" rel="noreferrer" className={`flex items-center gap-2 transition hover:translate-x-1 duration-200 ${isDark ? 'text-white/70 hover:text-[#0068FF]' : 'text-slate-600 hover:text-[#0068FF]'}`}>
+                    <MessageCircle className="w-5 h-5 text-[#0068FF]" />
+                    <span className={`font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Zalo: 0392389623</span>
                   </a>
-                  <a href="mailto:nhmanh.dev@gmail.com" className="flex items-center gap-2 hover:text-white transition">
-                    <Mail className="w-5 h-5" />
-                    <span className="text-white">Email: nhmanh.dev@gmail.com</span>
+                  <a href="mailto:nhmanh.dev@gmail.com" className={`flex items-center gap-2 transition hover:translate-x-1 duration-200 ${isDark ? 'text-white/70 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}>
+                    <Mail className="w-5 h-5 text-red-500" />
+                    <span className={`${isDark ? 'text-white' : 'text-slate-900'} font-medium`}>Email: nhmanh.dev@gmail.com</span>
                   </a>
-                  <a href="https://www.facebook.com/nhmanhAI4E/" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#38BDF8] transition">
-                    <Facebook className="w-5 h-5" />
-                    <span>Facebook Nguyễn Hùng Mạnh</span>
+                  <a href="https://www.facebook.com/nhmanhAI4E/" target="_blank" rel="noreferrer" className={`flex items-center gap-2 transition hover:translate-x-1 duration-200 ${isDark ? 'text-white/70 hover:text-[#38BDF8]' : 'text-slate-600 hover:text-[#38BDF8]'}`}>
+                    <Facebook className="w-5 h-5 text-[#1877F2]" />
+                    <span className={`font-medium ${isDark ? 'text-white/70' : 'text-slate-600'}`}>Facebook Nguyễn Hùng Mạnh</span>
                   </a>
-                  <a href="https://github.com/nhmanhDev" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-white transition">
-                    <Github className="w-5 h-5" />
-                    <span>Github: nhmanhDev</span>
+                  <a href="https://github.com/nhmanhDev" target="_blank" rel="noreferrer" className={`flex items-center gap-2 transition hover:translate-x-1 duration-200 ${isDark ? 'text-white/70 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}>
+                    <Github className={`w-5 h-5 ${isDark ? 'text-white' : 'text-slate-800'}`} />
+                    <span className={`font-medium ${isDark ? 'text-white/70' : 'text-slate-600'}`}>Github: nhmanhDev</span>
                   </a>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="pt-8 border-t border-[#FFCD00]/10 text-center text-white/50 text-sm">
+          <div className={`pt-8 border-t text-center text-sm transition-colors duration-300 ${isDark ? 'border-white/10 text-white/50' : 'border-slate-200 text-slate-500'}`}>
             <p>© 2026 AI42E Studio. All rights reserved. 🇻🇳</p>
           </div>
         </div>
       </footer>
+
+      {/* FOMO Purchase Notification */}
+      <div className={`fixed bottom-6 left-6 z-[100] transition-all duration-700 pointer-events-none transform ${showPurchase ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-12 opacity-0 scale-95'}`}>
+        <div className={`flex items-center gap-4 p-4 rounded-2xl border-2 shadow-2xl backdrop-blur-xl transition-colors duration-300 pointer-events-auto ${isDark ? 'bg-[#0B1320]/90 border-[#FFCD00]/20 shadow-black' : 'bg-white/90 border-slate-200 shadow-slate-200/50'}`}>
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#DA251D] to-[#FF4444] flex items-center justify-center shrink-0 relative overflow-hidden">
+            <ShoppingBag className="w-6 h-6 text-white relative z-10" />
+            <div className="absolute inset-0 bg-white/20 animate-pulse" />
+          </div>
+          <div className="flex flex-col pr-2">
+            <div className={`text-sm font-extrabold ${isDark ? 'text-white' : 'text-slate-900'}`}>
+              {fakePurchases[currentPurchase].name}
+            </div>
+            <div className={`text-xs ${isDark ? 'text-white/60' : 'text-slate-500'}`}>
+              vừa mua <span className="text-[#DA251D] font-black italic">AI42E Studio</span>
+            </div>
+            <div className={`text-[10px] mt-1 font-bold ${isDark ? 'text-[#FFCD00]' : 'text-orange-600'}`}>
+              ⚡ {fakePurchases[currentPurchase].time}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
