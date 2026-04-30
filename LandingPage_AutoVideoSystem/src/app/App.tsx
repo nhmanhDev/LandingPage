@@ -40,7 +40,9 @@ import {
 
 export default function App() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
-  const [timeLeft, setTimeLeft] = useState({ days: 5, hours: 12, minutes: 34, seconds: 56 });
+  const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 3, seconds: 41 });
+  const [viewers, setViewers] = useState(15);
+  const [registrations, setRegistrations] = useState(66);
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const [activeSection, setActiveSection] = useState('features');
@@ -87,7 +89,7 @@ export default function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeLeft(prev => {
-        let { days, hours, minutes, seconds } = prev;
+        let { hours, minutes, seconds } = prev;
 
         seconds--;
         if (seconds < 0) {
@@ -99,19 +101,29 @@ export default function App() {
           hours--;
         }
         if (hours < 0) {
-          hours = 23;
-          days--;
-        }
-        if (days < 0) {
+          // Reset or stop? For FOMO, usually we reset or just stop at 0.
+          // Let's stop at 0 for now.
           clearInterval(interval);
           return prev;
         }
 
-        return { days, hours, minutes, seconds };
+        return { hours, minutes, seconds };
       });
     }, 1000);
 
-    return () => clearInterval(interval);
+    // Dynamic viewers counter
+    const viewerInterval = setInterval(() => {
+      setViewers(prev => {
+        const change = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+        const newVal = prev + change;
+        return newVal > 10 ? newVal : 11; // Keep at least 11 viewers
+      });
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(viewerInterval);
+    };
   }, []);
   const [currentPurchase, setCurrentPurchase] = useState(0);
   const [showPurchase, setShowPurchase] = useState(false);
@@ -294,39 +306,23 @@ export default function App() {
 
           <div className="flex flex-wrap justify-center gap-6">
             {[
-              { title: 'Tin tức AI', duration: '60s', ratio: '9:16', src: '/videos/demo-1.mp4' },
-              { title: 'Giáo dục', duration: '45s', ratio: '9:16', src: '/videos/demo-2.mp4' },
-              { title: 'Crypto / Finance', duration: '90s', ratio: '16:9', src: '/videos/demo-3.mp4' },
-
+              { title: 'Tài Chính', src: 'https://www.youtube.com/embed/YB2h9sK8cU4?rel=0&modestbranding=1&autohide=1&showinfo=0&vq=hd1080', type: 'youtube' },
+              { title: 'Bất Động Sản', src: 'https://www.youtube.com/embed/0wVXfZwXTbo?rel=0&modestbranding=1&autohide=1&showinfo=0&vq=hd1080', type: 'youtube' },
+              { title: 'Công nghệ', src: 'https://www.youtube.com/embed/4e0riKMcDDE?rel=0&modestbranding=1&autohide=1&showinfo=0&vq=hd1080', type: 'youtube' },
+              { title: 'Tin tức thế giới', src: 'https://www.youtube.com/embed/jtXhVTQWivI?rel=0&modestbranding=1&autohide=1&showinfo=0&vq=hd1080', type: 'youtube' },
+              { title: 'Giáo dục', src: 'https://www.youtube.com/embed/DY-SVqKn_Yw?rel=0&modestbranding=1&autohide=1&showinfo=0&vq=hd1080', type: 'youtube' },
             ].map((demo, i) => (
-              <div key={i} className="group cursor-pointer w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] max-w-[320px]">
+              <div key={i} className="group cursor-pointer w-full sm:w-[calc(50%-12px)] lg:w-[calc(20%-20px)] max-w-[320px]">
                 <div
                   className={`aspect-[9/16] border rounded-xl overflow-hidden relative mb-3 group-hover:border-[#FFCD00]/50 transition shadow-lg ${isDark ? 'bg-gradient-to-br from-white/5 to-white/[0.02] border-white/10' : 'bg-slate-200 border-slate-300'}`}
-                  onMouseEnter={(e) => {
-                    const vid = e.currentTarget.querySelector('video');
-                    if (vid) vid.play();
-                  }}
-                  onMouseLeave={(e) => {
-                    const vid = e.currentTarget.querySelector('video');
-                    if (vid) { vid.pause(); vid.currentTime = 0; }
-                  }}
                 >
-                  <video src={demo.src} muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 transition duration-500" />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/10 transition duration-500">
-                    <div className={`w-16 h-16 backdrop-blur-sm rounded-full flex items-center justify-center border group-hover:bg-[#DA251D]/80 group-hover:border-[#FFCD00] transition ${isDark ? 'bg-white/10 border-white/20' : 'bg-white/80 border-slate-300'}`}>
-                      <Play className={`w-8 h-8 ml-1 transition-colors ${isDark ? 'text-white' : 'text-slate-900 group-hover:text-white'}`} />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-1 bg-black/60 backdrop-blur-sm rounded text-[10px] uppercase font-bold border border-white/20">
-                        {demo.duration}
-                      </span>
-                      <span className="px-2 py-1 bg-black/60 backdrop-blur-sm rounded text-[10px] uppercase font-bold border border-white/20">
-                        {demo.ratio}
-                      </span>
-                    </div>
-                  </div>
+                  <iframe
+                    src={demo.src}
+                    className="absolute inset-0 w-full h-full object-cover opacity-100 transition duration-500"
+                    allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title={demo.title}
+                  />
                 </div>
                 <div className="px-1 text-center">
                   <h3 className="font-bold text-lg mb-0.5 text-white">{demo.title}</h3>
@@ -664,24 +660,50 @@ export default function App() {
                     <span className="text-sm font-semibold text-[#FFCD00]">Ưu đãi lớn nhân dịp 30/4</span>
                   </div>
 
-                  {/* Countdown Timer */}
-                  <div className="flex items-center justify-center gap-3">
-                    <Clock className={`w-5 h-5 ${isDark ? 'text-[#FFCD00]' : 'text-orange-700'}`} />
-                    <div className="flex items-center gap-2">
-                      {[
-                        { value: timeLeft.days, label: 'Ngày' },
-                        { value: timeLeft.hours, label: 'Giờ' },
-                        { value: timeLeft.minutes, label: 'Phút' },
-                        { value: timeLeft.seconds, label: 'Giây' }
-                      ].map((item, i) => (
-                        <div key={i} className="flex items-center gap-2">
-                          {i > 0 && <span className={`font-bold ${isDark ? 'text-[#FFCD00]' : 'text-orange-700'}`}>:</span>}
-                          <div className={`border rounded-xl px-3 py-2 min-w-[70px] text-center shadow-lg transition-all duration-300 ${isDark ? 'bg-[#DA251D]/40 border-[#FFCD00]/30 shadow-inner' : 'bg-white border-orange-200'}`}>
-                            <div className={`text-2xl font-black ${isDark ? 'text-[#FFCD00]' : 'text-orange-700'}`}>{String(item.value).padStart(2, '0')}</div>
-                            <div className={`text-[10px] uppercase font-bold tracking-wider ${isDark ? 'text-white/60' : 'text-orange-900/60'}`}>{item.label}</div>
-                          </div>
+                  <div className="flex flex-col gap-6">
+                    <div className="flex flex-wrap items-center justify-center gap-4">
+                      {/* Countdown Timer Block */}
+                      <div className={`flex items-center gap-3 px-4 py-2 rounded-2xl border ${isDark ? 'bg-[#DA251D]/10 border-[#DA251D]/30' : 'bg-red-50 border-red-100'}`}>
+                        <Clock className={`w-5 h-5 ${isDark ? 'text-[#FFCD00]' : 'text-[#DA251D]'}`} />
+                        <span className={`text-sm font-bold ${isDark ? 'text-white/80' : 'text-slate-700'}`}>Ưu đãi kết thúc:</span>
+                        <div className="flex items-center gap-1">
+                          {[
+                            { value: timeLeft.hours },
+                            { value: timeLeft.minutes },
+                            { value: timeLeft.seconds }
+                          ].map((item, i) => (
+                            <div key={i} className="flex items-center gap-1">
+                              {i > 0 && <span className={`font-bold ${isDark ? 'text-[#FFCD00]' : 'text-[#DA251D]'}`}>:</span>}
+                              <span className={`text-lg font-black min-w-[24px] ${isDark ? 'text-[#FFCD00]' : 'text-[#DA251D]'}`}>
+                                {String(item.value).padStart(2, '0')}
+                              </span>
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      </div>
+
+                      {/* Viewers Block */}
+                      <div className={`flex items-center gap-3 px-4 py-2 rounded-2xl border ${isDark ? 'bg-white/5 border-white/10' : 'bg-slate-50 border-slate-200'}`}>
+                        <Eye className="w-5 h-5 text-cyan-400" />
+                        <span className={`text-sm font-bold ${isDark ? 'text-white/90' : 'text-slate-800'}`}>
+                          <span className="text-cyan-400">{viewers}</span> người đang xem
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Progress Bar */}
+                    <div className="max-w-md mx-auto w-full px-4">
+                      <div className="relative h-2 w-full bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+                        <div
+                          className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#DA251D] to-[#FF4444] transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(218,37,29,0.5)]"
+                          style={{ width: `${registrations}%` }}
+                        />
+                      </div>
+                      <div className="flex justify-end mt-2">
+                        <span className={`text-xs font-bold ${isDark ? 'text-white/40' : 'text-slate-500'}`}>
+                          Đã đăng ký: <span className={isDark ? 'text-white/60' : 'text-slate-700'}>{registrations}/100</span> suất
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1083,7 +1105,7 @@ export default function App() {
               {fakePurchases[currentPurchase].name}
             </div>
             <div className={`text-xs ${isDark ? 'text-white/60' : 'text-slate-500'}`}>
-              vừa mua <span className="text-[#DA251D] font-black italic">AI42E Studio</span>
+              vừa thanh toán <span className="text-[#DA251D] font-black italic">304.000 VNĐ</span>
             </div>
             <div className={`text-[10px] mt-1 font-bold ${isDark ? 'text-[#FFCD00]' : 'text-orange-600'}`}>
               ⚡ {fakePurchases[currentPurchase].time}
