@@ -349,7 +349,7 @@ export default function App() {
             <div className={`aspect-video rounded-3xl border-2 border-[#FFCD00]/30 overflow-hidden shadow-2xl shadow-[#FFCD00]/10 flex items-center justify-center relative group transition-colors ${isDark ? 'bg-[#0B1320]' : 'bg-slate-200'}`}>
               <iframe
                 className="w-full h-full"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ" // Thay link youtube của anh vào đây
+                src="https://www.youtube.com/embed/PJsXF5wNr94?rel=0&modestbranding=1&autohide=1&showinfo=0&vq=hd1080"
                 title="Hướng dẫn sử dụng AI42E Video Automation"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -610,7 +610,7 @@ export default function App() {
               Giá đặc biệt chỉ trong dịp lễ 30/4
             </h2>
             <p className={`text-xl md:text-xl font-medium ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
-              Thanh toán một lần, sở hữu vĩnh viễn - <span className="text-[#DA251D] font-bold">Tiết kiệm 362K!</span>
+              Nhận hàng vào ngày 1/5, sở hữu vĩnh viễn - <span className="text-[#DA251D] font-bold">Tiết kiệm 362K!</span>
             </p>
           </div>
 
@@ -725,7 +725,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className={`text-2xl mb-1 font-black ${isDark ? 'text-white/90' : 'text-slate-900'}`}>Thanh toán một lần</div>
+                <div className={`text-2xl mb-1 font-black ${isDark ? 'text-white/90' : 'text-slate-900'}`}>Nhận hàng vào ngày 1/5</div>
 
                 <div className="flex justify-center flex-col px-4 md:px-0 auto-mx">
                   <button
@@ -733,7 +733,7 @@ export default function App() {
                     className="w-full md:w-3/4 mx-auto px-8 py-5 bg-gradient-to-r from-[#DA251D] to-[#FF4444] rounded-2xl text-2xl font-black text-white hover:opacity-90 transition shadow-2xl shadow-[#DA251D]/60 border-2 border-[#FFCD00]/50 flex items-center justify-center gap-3 hover:scale-105 active:scale-95 ease-out duration-200"
                   >
                     <Gift className="w-8 h-8" />
-                    🚀 THANH TOÁN MÃ QR
+                    🚀 ĐẶT TRƯỚC QUA MÃ QR
                   </button>
                 </div>
               </div>
@@ -830,7 +830,11 @@ export default function App() {
                     <div className="w-full max-w-[240px] aspect-[3.5/5] bg-white rounded-2xl border-4 border-white/10 shadow-2xl overflow-hidden mb-2">
                       <img src="/qr_vietcombank.jpg" alt="QR Vietcombank" className="w-full h-full object-cover object-top" />
                     </div>
-                    <span className="text-[10px] text-white/40 uppercase tracking-widest font-black">Quét mã thanh toán nhanh</span>
+                    <span className="text-[10px] text-white/40 uppercase tracking-widest font-black">Quét mã đặt trước nhanh</span>
+                    <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#DA251D]/30 to-[#FF4444]/30 border border-[#DA251D]/50 rounded-xl w-full justify-center shadow-inner">
+                      <Clock className="w-5 h-5 text-[#FFCD00]" />
+                      <span className="text-sm font-black text-[#FFCD00] uppercase tracking-wide">Nhận hàng: 1/5/2026</span>
+                    </div>
                   </div>
                 </div>
 
@@ -886,7 +890,7 @@ export default function App() {
                       </div>
 
                       <div className="pt-2.5 border-t border-white/5 text-center md:text-left">
-                        <p className="text-xs text-white/50">Gửi ảnh giao dịch qua Zalo: <span className="text-[#FFCD00] font-black text-base">0392389623</span> để nhận ngay quyền truy cập hệ thống vĩnh viễn.</p>
+                        <p className="text-xs text-white/50">Gửi ảnh giao dịch qua Zalo: <span className="text-[#FFCD00] font-black text-base">0392389623</span> để hoàn tất đặt trước và giữ ưu đãi.</p>
                       </div>
                     </div>
                   </div>
