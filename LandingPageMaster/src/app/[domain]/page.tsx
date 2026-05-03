@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation';
 import { BlogService } from '@/lib/services/blogService';
 import Link from 'next/link';
 
+export const runtime = 'edge';
+
 export default async function DomainPage({ params }: { params: Promise<{ domain: string }> }) {
   const { domain } = await params;
   
