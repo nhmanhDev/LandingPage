@@ -832,10 +832,10 @@ export default function App() {
                     <div className="w-full max-w-[240px] aspect-[3.5/5] bg-white rounded-2xl border-4 border-white/10 shadow-2xl overflow-hidden mb-2">
                       <img src="/qr_vietcombank.jpg" alt="QR Vietcombank" className="w-full h-full object-cover object-top" />
                     </div>
-                    <span className="text-[10px] text-white/40 uppercase tracking-widest font-black">Quét mã đặt trước nhanh</span>
-                    <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#DA251D]/30 to-[#FF4444]/30 border border-[#DA251D]/50 rounded-xl w-full justify-center shadow-inner">
-                      <Clock className="w-5 h-5 text-[#FFCD00]" />
-                      <span className="text-sm font-black text-[#FFCD00] uppercase tracking-wide">Nhận hàng: 1/5/2026</span>
+                    <span className="text-[10px] text-white/40 uppercase tracking-widest font-black">Quét mã thanh toán nhanh</span>
+                    <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#22C55E]/20 to-[#16A34A]/20 border border-[#22C55E]/40 rounded-xl w-full justify-center shadow-inner">
+                      <Zap className="w-5 h-5 text-[#22C55E]" />
+                      <span className="text-sm font-black text-[#22C55E] uppercase tracking-wide">Kích hoạt vĩnh viễn</span>
                     </div>
                   </div>
                 </div>
@@ -892,7 +892,7 @@ export default function App() {
                       </div>
 
                       <div className="pt-2.5 border-t border-white/5 text-center md:text-left">
-                        <p className="text-xs text-white/50">Gửi ảnh giao dịch qua Zalo: <span className="text-[#FFCD00] font-black text-base">0392389623</span> để hoàn tất đặt trước và giữ ưu đãi.</p>
+                        <p className="text-xs text-white/50">Gửi ảnh giao dịch qua Zalo: <span className="text-[#FFCD00] font-black text-base">0392389623</span> để hoàn tất mua hàng và giữ ưu đãi.</p>
                       </div>
                     </div>
                   </div>
