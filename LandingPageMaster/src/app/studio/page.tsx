@@ -612,7 +612,7 @@ export default function App() {
               Giá đặc biệt chỉ trong dịp lễ 30/4
             </h2>
             <p className={`text-xl md:text-xl font-medium ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
-              Nhận hàng vào ngày 1/5, sở hữu vĩnh viễn - <span className="text-[#DA251D] font-bold">Tiết kiệm 362K!</span>
+              Mua ngay, sở hữu vĩnh viễn - <span className="text-[#DA251D] font-bold">Tiết kiệm 362K!</span>
             </p>
           </div>
 
@@ -727,7 +727,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className={`text-2xl mb-1 font-black ${isDark ? 'text-white/90' : 'text-slate-900'}`}>Nhận hàng vào ngày 1/5</div>
+                <div className={`text-2xl mb-1 font-black ${isDark ? 'text-white/90' : 'text-slate-900'}`}>Sở hữu vĩnh viễn</div>
 
                 <div className="flex justify-center flex-col px-4 md:px-0 auto-mx">
                   <button
@@ -735,7 +735,7 @@ export default function App() {
                     className="w-full md:w-3/4 mx-auto px-8 py-5 bg-gradient-to-r from-[#DA251D] to-[#FF4444] rounded-2xl text-2xl font-black text-white hover:opacity-90 transition shadow-2xl shadow-[#DA251D]/60 border-2 border-[#FFCD00]/50 flex items-center justify-center gap-3 hover:scale-105 active:scale-95 ease-out duration-200"
                   >
                     <Gift className="w-8 h-8" />
-                    🚀 ĐẶT TRƯỚC QUA MÃ QR
+                    🚀 MUA NGAY QUA MÃ QR
                   </button>
                 </div>
               </div>
