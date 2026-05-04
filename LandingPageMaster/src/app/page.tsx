@@ -5,6 +5,12 @@ import { Ecosystem } from "@/components/Ecosystem";
 import { Projects } from "@/components/Projects";
 import { Vision } from "@/components/Vision";
 import { Contact } from "@/components/Contact";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "AI FOR EVERYONE AND EVERYTHING",
+  description: "Personal Portfolio & Ecosystem of nhmanhDev",
+};
 
 export default function Home() {
   return (

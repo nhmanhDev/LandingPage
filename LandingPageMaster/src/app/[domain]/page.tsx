@@ -2,7 +2,18 @@ import { notFound } from 'next/navigation';
 import { BlogService } from '@/lib/services/blogService';
 import Link from 'next/link';
 
+import { Metadata } from 'next';
+
 export const runtime = 'edge';
+
+export async function generateMetadata({ params }: { params: Promise<{ domain: string }> }): Promise<Metadata> {
+  const { domain } = await params;
+  const capitalizedDomain = domain.charAt(0).toUpperCase() + domain.slice(1);
+  return {
+    title: `${capitalizedDomain} - AI42E Ecosystem`,
+    description: `Welcome to the ${domain} branch of AI42E.`,
+  };
+}
 
 export default async function DomainPage({ params }: { params: Promise<{ domain: string }> }) {
   const { domain } = await params;
