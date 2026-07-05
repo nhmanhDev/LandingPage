@@ -96,7 +96,7 @@ function ProjectCard({ project, index, inView }: { project: typeof projects[0]; 
       initial={{ opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.65, delay: 0.07 * index, ease: [0.16, 1, 0.3, 1] }}
-      className={`group relative p-6 rounded-2xl border border-white/8 bg-white/2 hover:bg-white/4 transition-all duration-400 cursor-pointer ${project.borderGlow}`}
+      className={`group relative p-6 rounded-2xl border border-slate-200 dark:border-white/8 bg-slate-100/30 hover:bg-slate-100/60 dark:bg-white/2 dark:hover:bg-white/4 transition-all duration-400 cursor-pointer ${project.borderGlow}`}
     >
       {/* Top row */}
       <div className="flex items-start justify-between mb-4">
@@ -104,18 +104,18 @@ function ProjectCard({ project, index, inView }: { project: typeof projects[0]; 
           <div className="flex items-center gap-2 mb-2">
             <Circle size={6} className={`${project.accent} fill-current`} />
             <span
-              className="text-white/35 text-xs"
+              className="text-slate-400 dark:text-white/35 text-xs"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {project.category}
             </span>
           </div>
           <h3
-            className="text-white/90"
+            className="text-slate-850 dark:text-white/90"
             style={{
               fontFamily: "'Space Grotesk', sans-serif",
               fontSize: "1.1rem",
-              fontWeight: 600,
+              fontWeight: 605,
               letterSpacing: "-0.01em",
             }}
           >
@@ -125,14 +125,14 @@ function ProjectCard({ project, index, inView }: { project: typeof projects[0]; 
         <motion.div
           animate={{ opacity: 0, x: 4 }}
           whileHover={{ opacity: 1, x: 0 }}
-          className="text-white/40 group-hover:text-white/70 transition-all duration-200 mt-1"
+          className="text-slate-400 dark:text-white/40 group-hover:text-slate-850 dark:group-hover:text-white/70 transition-all duration-200 mt-1"
         >
           <ArrowUpRight size={18} />
         </motion.div>
       </div>
 
       <p
-        className="text-white/40 mb-5"
+        className="text-slate-600 dark:text-white/40 mb-5"
         style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.85rem", lineHeight: 1.7 }}
       >
         {project.description}
@@ -142,19 +142,19 @@ function ProjectCard({ project, index, inView }: { project: typeof projects[0]; 
       <div className="mb-4">
         <div className="flex items-center justify-between mb-2">
           <span
-            className="text-white/30 text-xs"
+            className="text-slate-450 dark:text-white/30 text-xs"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             {project.phase}
           </span>
           <span
-            className="text-white/50 text-xs"
+            className="text-slate-700 dark:text-white/50 text-xs"
             style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600 }}
           >
             {project.progress}%
           </span>
         </div>
-        <div className="h-1 w-full rounded-full bg-white/6">
+        <div className="h-1 w-full rounded-full bg-slate-200 dark:bg-white/6">
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: `${project.progress}%` } : {}}
@@ -185,7 +185,7 @@ export function Projects() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="projects" className="relative bg-[#070710] py-32 px-6">
+    <section id="projects" className="relative bg-background py-32 px-6">
       {/* Ambient */}
       <div className="absolute top-20 right-0 w-[350px] h-[350px] rounded-full bg-emerald-600/5 blur-[100px] pointer-events-none" />
 
@@ -197,9 +197,9 @@ export function Projects() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-3 mb-6"
         >
-          <div className="h-px w-8 bg-white/20" />
+          <div className="h-px w-8 bg-slate-200 dark:bg-white/20" />
           <span
-            className="text-white/35 text-xs tracking-widest uppercase"
+            className="text-slate-450 dark:text-white/35 text-xs tracking-widest uppercase"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Current Projects
@@ -217,18 +217,18 @@ export function Projects() {
             letterSpacing: "-0.025em",
             lineHeight: 1.15,
           }}
-          className="text-white mb-4"
+          className="text-slate-900 dark:text-white mb-4"
         >
           What's being built
           <br />
-          <span className="text-white/25">right now.</span>
+          <span className="text-slate-400 dark:text-white/25">right now.</span>
         </motion.h2>
 
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-white/40 mb-14 max-w-lg"
+          className="text-slate-500 dark:text-white/40 mb-14 max-w-lg"
           style={{ fontFamily: "'Inter', sans-serif", fontSize: "1rem", lineHeight: 1.7 }}
         >
           Active experiments, live products, and systems in motion. Everything is interconnected.

@@ -1,48 +1,48 @@
 "use client";
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
-import { Twitter, Youtube, Mail, ExternalLink, Github, MessageCircle } from "lucide-react";
+import { Facebook, Linkedin, Mail, ExternalLink, Github, MessageCircle } from "lucide-react";
 
 const socials = [
   {
-    label: "Twitter / X",
-    handle: "@nguyenhungmanh",
-    icon: Twitter,
-    href: "#",
-    color: "hover:border-sky-500/40 hover:text-sky-400",
-    iconColor: "text-sky-400",
-  },
-  {
-    label: "YouTube",
-    handle: "Nguyễn Hùng Mạnh",
-    icon: Youtube,
-    href: "#",
-    color: "hover:border-red-500/40 hover:text-red-400",
-    iconColor: "text-red-400",
+    label: "Facebook",
+    handle: "nhmanhAI4E",
+    icon: Facebook,
+    href: "https://www.facebook.com/nhmanhAI4E/",
+    color: "hover:border-blue-500/40 hover:text-blue-500",
+    iconColor: "text-blue-500",
   },
   {
     label: "GitHub",
-    handle: "nguyenhungmanh",
+    handle: "nhmanhDev",
     icon: Github,
-    href: "#",
-    color: "hover:border-white/30 hover:text-white/80",
-    iconColor: "text-white/50",
+    href: "https://github.com/nhmanhDev",
+    color: "hover:border-slate-400 dark:hover:border-white/30 hover:text-slate-900 dark:hover:text-white/80",
+    iconColor: "text-slate-400 dark:text-white/50",
+  },
+  {
+    label: "LinkedIn",
+    handle: "nhmanh-ai4e-1208",
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/nhmanh-ai4e1208/",
+    color: "hover:border-sky-600/40 hover:text-sky-600",
+    iconColor: "text-sky-600",
   },
   {
     label: "Telegram",
-    handle: "@nguyenhungmanh",
+    handle: "@AI42E_TradingSystem",
     icon: MessageCircle,
-    href: "#",
-    color: "hover:border-blue-500/40 hover:text-blue-400",
-    iconColor: "text-blue-400",
+    href: "https://t.me/AI42E_TradingSystem",
+    color: "hover:border-cyan-500/40 hover:text-cyan-500",
+    iconColor: "text-cyan-500",
   },
   {
     label: "Email",
-    handle: "hello@hungmanh.io",
+    handle: "nhmanh.dev@gmail.com",
     icon: Mail,
-    href: "mailto:hello@hungmanh.io",
-    color: "hover:border-violet-500/40 hover:text-violet-400",
-    iconColor: "text-violet-400",
+    href: "mailto:nhmanh.dev@gmail.com",
+    color: "hover:border-violet-500/40 hover:text-violet-500",
+    iconColor: "text-violet-500",
   },
 ];
 
@@ -51,6 +51,7 @@ const footerLinks = [
   { label: "Ecosystem", href: "#ecosystem" },
   { label: "Projects", href: "#projects" },
   { label: "Vision", href: "#vision" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export function Contact() {
@@ -65,7 +66,7 @@ export function Contact() {
   };
 
   return (
-    <footer id="contact" className="relative bg-[#070710] pt-32 pb-12 px-6 border-t border-white/5">
+    <footer id="contact" className="relative bg-background pt-32 pb-12 px-6 border-t border-slate-200/50 dark:border-white/5">
       {/* Ambient */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-violet-600/6 blur-[100px] pointer-events-none" />
 
@@ -78,21 +79,21 @@ export function Contact() {
             transition={{ duration: 0.6 }}
             className="flex items-center justify-center gap-3 mb-8"
           >
-            <div className="h-px w-8 bg-white/20" />
+            <div className="h-px w-8 bg-slate-200 dark:bg-white/20" />
             <span
-              className="text-white/35 text-xs tracking-widest uppercase"
+              className="text-slate-400 dark:text-white/35 text-xs tracking-widest uppercase"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Connect
             </span>
-            <div className="h-px w-8 bg-white/20" />
+            <div className="h-px w-8 bg-slate-200 dark:bg-white/20" />
           </motion.div>
 
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-white mb-4"
+            className="text-slate-900 dark:text-white mb-4"
             style={{
               fontFamily: "'Space Grotesk', sans-serif",
               fontSize: "clamp(2rem, 4vw, 3.5rem)",
@@ -112,7 +113,7 @@ export function Contact() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-white/40 max-w-md mx-auto mb-12"
+            className="text-slate-500 dark:text-white/40 max-w-md mx-auto mb-12"
             style={{ fontFamily: "'Inter', sans-serif", fontSize: "1rem", lineHeight: 1.7 }}
           >
             Open to collabs, consulting, partnerships, and interesting experiments.
@@ -132,18 +133,18 @@ export function Contact() {
                 href={s.href}
                 target={s.href.startsWith("http") ? "_blank" : undefined}
                 rel="noopener noreferrer"
-                className={`flex items-center gap-3 px-5 py-3 rounded-2xl border border-white/8 bg-white/2 text-white/50 transition-all duration-300 group ${s.color}`}
+                className={`flex items-center gap-3 px-5 py-3 rounded-2xl border border-slate-200 dark:border-white/8 bg-slate-100/50 dark:bg-white/2 text-slate-500 dark:text-white/50 transition-all duration-300 group ${s.color}`}
               >
                 <s.icon size={16} className={`${s.iconColor} transition-colors`} />
                 <div className="text-left">
                   <div
-                    className="text-xs text-white/25"
+                    className="text-xs text-slate-400 dark:text-white/25"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     {s.label}
                   </div>
                   <div
-                    className="text-sm text-white/70 group-hover:text-white transition-colors"
+                    className="text-sm text-slate-700 dark:text-white/70 group-hover:text-slate-950 dark:group-hover:text-white transition-colors"
                     style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
                   >
                     {s.handle}
@@ -156,13 +157,13 @@ export function Contact() {
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-white/5 mb-10" />
+        <div className="h-px bg-slate-200 dark:bg-white/5 mb-10" />
 
         {/* Footer bottom */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-50 to-violet-600 flex items-center justify-center">
               <span
                 className="text-white text-xs font-bold"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
@@ -171,7 +172,7 @@ export function Contact() {
               </span>
             </div>
             <span
-              className="text-white/40 text-sm"
+              className="text-slate-500 dark:text-white/40 text-sm"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               Nguyễn Hùng Mạnh
@@ -184,7 +185,7 @@ export function Contact() {
               <button
                 key={link.label}
                 onClick={() => handleNav(link.href)}
-                className="text-white/30 hover:text-white/60 transition-colors text-sm cursor-pointer"
+                className="text-slate-400 hover:text-slate-700 dark:text-white/30 dark:hover:text-white/60 transition-colors text-sm cursor-pointer"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 {link.label}
@@ -194,7 +195,7 @@ export function Contact() {
 
           {/* Copyright */}
           <p
-            className="text-white/20 text-xs"
+            className="text-slate-400 dark:text-white/20 text-xs"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             © 2026 · Built with intention.

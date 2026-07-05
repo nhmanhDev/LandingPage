@@ -43,7 +43,7 @@ export function About() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="relative bg-[#070710] py-32 px-6">
+    <section id="about" className="relative bg-background py-32 px-6">
       {/* Ambient */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-violet-600/6 blur-[100px] pointer-events-none" />
 
@@ -55,9 +55,9 @@ export function About() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-3 mb-6"
         >
-          <div className="h-px w-8 bg-white/20" />
+          <div className="h-px w-8 bg-slate-200 dark:bg-white/20" />
           <span
-            className="text-white/35 text-xs tracking-widest uppercase"
+            className="text-slate-400 dark:text-white/35 text-xs tracking-widest uppercase"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Identity
@@ -72,7 +72,7 @@ export function About() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <h2
-              className="text-white mb-6"
+              className="text-slate-900 dark:text-white mb-6"
               style={{
                 fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "clamp(2rem, 4vw, 3rem)",
@@ -89,7 +89,7 @@ export function About() {
             </h2>
 
             <div
-              className="space-y-4 text-white/50"
+              className="space-y-4 text-slate-600 dark:text-white/50"
               style={{
                 fontFamily: "'Inter', sans-serif",
                 fontSize: "1rem",
@@ -107,7 +107,7 @@ export function About() {
                 dung multi-platform chạy như cỗ máy.
               </p>
               <p>
-                Triết lý của tôi đơn giản: <span className="text-white/80 italic">build systems, not just products.</span>{" "}
+                Triết lý của tôi đơn giản: <span className="text-slate-800 dark:text-white/80 italic">build systems, not just products.</span>{" "}
                 Automation is leverage. AI is the infrastructure of the future.
                 Content is compounding capital.
               </p>
@@ -119,7 +119,7 @@ export function About() {
                 (tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 rounded-full border border-white/10 text-white/40 text-xs"
+                    className="px-3 py-1 rounded-full border border-slate-200 dark:border-white/10 text-slate-500 dark:text-white/40 text-xs"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     {tag}
@@ -137,13 +137,13 @@ export function About() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.15 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className={`relative p-5 rounded-2xl bg-gradient-to-br ${t.color} border ${t.border} group hover:border-white/20 transition-all duration-300`}
+                className={`relative p-5 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-gradient-to-br ${t.color} group hover:border-slate-300 dark:hover:border-white/20 transition-all duration-300`}
               >
-                <div className={`w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center mb-4 ${t.iconColor}`}>
+                <div className={`w-9 h-9 rounded-xl bg-slate-200/50 dark:bg-white/5 flex items-center justify-center mb-4 ${t.iconColor}`}>
                   <t.icon size={18} />
                 </div>
                 <h3
-                  className="text-white/90 mb-2"
+                  className="text-slate-800 dark:text-white/90 mb-2"
                   style={{
                     fontFamily: "'Space Grotesk', sans-serif",
                     fontSize: "0.95rem",
@@ -153,7 +153,7 @@ export function About() {
                   {t.label}
                 </h3>
                 <p
-                  className="text-white/40"
+                  className="text-slate-500 dark:text-white/40"
                   style={{
                     fontFamily: "'Inter', sans-serif",
                     fontSize: "0.82rem",

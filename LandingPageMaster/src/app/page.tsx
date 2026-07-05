@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#070710", color: "#fff" }}>
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <Navbar />
       <main>
         <Hero />

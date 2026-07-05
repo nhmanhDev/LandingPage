@@ -112,19 +112,19 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#070710]">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-background">
       {/* Ambient glows */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-blue-600/10 blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-violet-600/10 blur-[120px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-indigo-500/8 blur-[80px]" />
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-blue-600/10 dark:bg-blue-600/10 blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-violet-600/10 dark:bg-violet-600/10 blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-indigo-500/8 dark:bg-indigo-500/8 blur-[80px]" />
       </div>
 
       {/* Network animation */}
       <NetworkCanvas />
 
       {/* Radial fade overlay at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#070710] to-transparent pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
 
       {/* Content */}
       <div className="relative z-20 text-center max-w-5xl mx-auto px-6">
@@ -135,9 +135,9 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/25 bg-blue-500/8 mb-10"
         >
-          <Sparkles size={13} className="text-blue-400" />
+          <Sparkles size={13} className="text-blue-500 dark:text-blue-400" />
           <span
-            className="text-blue-300/80 text-xs tracking-widest uppercase"
+            className="text-blue-600 dark:text-blue-300/80 text-xs tracking-widest uppercase"
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
             Digital Builder · AI Systems · Creator Ecosystem
@@ -151,7 +151,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
         >
           <h1
-            className="text-white mb-0"
+            className="text-slate-900 dark:text-white mb-0"
             style={{
               fontFamily: "'Space Grotesk', sans-serif",
               fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
@@ -169,7 +169,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-6 mx-auto max-w-2xl text-white/45"
+          className="mt-6 mx-auto max-w-2xl text-slate-500 dark:text-white/45"
           style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: "clamp(1rem, 2vw, 1.2rem)",
@@ -198,7 +198,7 @@ export function Hero() {
           </button>
           <button
             onClick={() => handleNav("#projects")}
-            className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 text-white/70 hover:border-white/30 hover:text-white text-sm transition-all duration-200 cursor-pointer"
+            className="flex items-center gap-2 px-6 py-3 rounded-full border border-slate-200 dark:border-white/15 text-slate-600 dark:text-white/70 hover:border-slate-400 dark:hover:border-white/30 hover:text-slate-900 dark:hover:text-white text-sm transition-all duration-200 cursor-pointer"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             View Projects
@@ -219,16 +219,16 @@ export function Hero() {
           ].map((stat) => (
             <div
               key={stat.label}
-              className="flex flex-col items-center gap-1 px-6 py-3 rounded-2xl bg-white/3 border border-white/7 backdrop-blur-sm"
+              className="flex flex-col items-center gap-1 px-6 py-3 rounded-2xl bg-slate-100/50 dark:bg-white/3 border border-slate-200 dark:border-white/7 backdrop-blur-sm"
             >
               <span
-                className="text-white text-2xl font-semibold"
+                className="text-slate-900 dark:text-white text-2xl font-semibold"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 {stat.value}
               </span>
               <span
-                className="text-white/35 text-xs tracking-wide"
+                className="text-slate-500 dark:text-white/35 text-xs tracking-wide"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 {stat.label}
@@ -245,9 +245,9 @@ export function Hero() {
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
       >
-        <div className="w-px h-10 bg-gradient-to-b from-white/25 to-transparent" />
+        <div className="w-px h-10 bg-gradient-to-b from-slate-300 dark:from-white/25 to-transparent" />
         <span
-          className="text-white/25 text-xs tracking-widest uppercase"
+          className="text-slate-400 dark:text-white/25 text-xs tracking-widest uppercase"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           Scroll

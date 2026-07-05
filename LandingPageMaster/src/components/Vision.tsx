@@ -30,7 +30,7 @@ export function Vision() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="vision" className="relative bg-[#070710] py-32 px-6 overflow-hidden">
+    <section id="vision" className="relative bg-background py-32 px-6 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-violet-600/7 blur-[130px]" />
@@ -54,9 +54,9 @@ export function Vision() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-3 mb-6"
         >
-          <div className="h-px w-8 bg-white/20" />
+          <div className="h-px w-8 bg-slate-200 dark:bg-white/20" />
           <span
-            className="text-white/35 text-xs tracking-widest uppercase"
+            className="text-slate-400 dark:text-white/35 text-xs tracking-widest uppercase"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Vision & Philosophy
@@ -71,7 +71,7 @@ export function Vision() {
           className="mb-24"
         >
           <p
-            className="text-white/80 max-w-4xl"
+            className="text-slate-800 dark:text-white/80 max-w-4xl"
             style={{
               fontFamily: "'Space Grotesk', sans-serif",
               fontSize: "clamp(1.6rem, 3.5vw, 2.8rem)",
@@ -81,15 +81,15 @@ export function Vision() {
             }}
           >
             "The future belongs to builders who treat{" "}
-            <span className="text-white">intelligence as a resource</span>,{" "}
+            <span className="text-slate-900 dark:text-white">intelligence as a resource</span>,{" "}
             <span className="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
               automation as leverage
             </span>
             , and{" "}
-            <span className="text-white">digital systems as businesses</span> that never sleep."
+            <span className="text-slate-900 dark:text-white">digital systems as businesses</span> that never sleep."
           </p>
           <p
-            className="mt-6 text-white/25 text-sm"
+            className="mt-6 text-slate-400 dark:text-white/25 text-sm"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             — Nguyễn Hùng Mạnh
@@ -97,18 +97,18 @@ export function Vision() {
         </motion.div>
 
         {/* Principles */}
-        <div className="grid md:grid-cols-2 gap-px bg-white/5 rounded-2xl overflow-hidden">
+        <div className="grid md:grid-cols-2 gap-px bg-slate-200 dark:bg-white/5 rounded-2xl overflow-hidden">
           {principles.map((p, i) => (
             <motion.div
               key={p.number}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.65, delay: 0.15 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="p-8 bg-[#070710] hover:bg-white/[0.02] transition-colors duration-300 group"
+              className="p-8 bg-slate-50 dark:bg-[#070710] hover:bg-slate-100/50 dark:hover:bg-white/[0.02] transition-colors duration-300 group"
             >
               <div className="flex items-start gap-6">
                 <span
-                  className="text-white/10 shrink-0 mt-1 group-hover:text-white/20 transition-colors"
+                  className="text-slate-300/40 dark:text-white/10 shrink-0 mt-1 group-hover:text-slate-400 dark:group-hover:text-white/20 transition-colors"
                   style={{
                     fontFamily: "'Space Grotesk', sans-serif",
                     fontSize: "2.5rem",
@@ -121,7 +121,7 @@ export function Vision() {
                 </span>
                 <div>
                   <h3
-                    className="text-white/80 mb-3 group-hover:text-white transition-colors"
+                    className="text-slate-800 dark:text-white/80 mb-3 group-hover:text-slate-950 dark:group-hover:text-white transition-colors"
                     style={{
                       fontFamily: "'Space Grotesk', sans-serif",
                       fontSize: "1.1rem",
@@ -132,7 +132,7 @@ export function Vision() {
                     {p.title}
                   </h3>
                   <p
-                    className="text-white/35"
+                    className="text-slate-500 dark:text-white/35"
                     style={{
                       fontFamily: "'Inter', sans-serif",
                       fontSize: "0.875rem",
@@ -152,11 +152,11 @@ export function Vision() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.6 }}
-          className="mt-20 flex flex-col sm:flex-row items-center justify-between gap-6 p-8 rounded-2xl border border-white/8 bg-gradient-to-r from-blue-600/8 to-violet-600/8"
+          className="mt-20 flex flex-col sm:flex-row items-center justify-between gap-6 p-8 rounded-2xl border border-slate-200 dark:border-white/8 bg-gradient-to-r from-blue-50 to-violet-50 dark:from-blue-600/8 dark:to-violet-600/8"
         >
           <div>
             <h4
-              className="text-white/90 mb-1"
+              className="text-slate-850 dark:text-white/90 mb-1"
               style={{
                 fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "1.2rem",
@@ -166,7 +166,7 @@ export function Vision() {
               Interested in collaborating?
             </h4>
             <p
-              className="text-white/40 text-sm"
+              className="text-slate-500 dark:text-white/40 text-sm"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Open to partnerships, consulting, and interesting projects.

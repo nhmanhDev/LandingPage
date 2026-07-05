@@ -155,7 +155,7 @@ function EcosystemCard({ card, index, inView }: { card: typeof cards[0]; index: 
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={`
-        relative group rounded-2xl border border-white/8 bg-gradient-to-br ${card.accent} p-6 
+        relative group rounded-2xl border border-slate-200 dark:border-white/8 bg-slate-100/30 hover:bg-slate-100/70 dark:bg-gradient-to-br ${card.accent} p-6 
         transition-all duration-400 cursor-pointer overflow-hidden
         ${card.border} ${card.glow}
         ${card.size === "lg" ? "col-span-2" : "col-span-1"}
@@ -177,7 +177,7 @@ function EcosystemCard({ card, index, inView }: { card: typeof cards[0]; index: 
         <div className="flex items-center gap-1.5">
           <div className={`w-1.5 h-1.5 rounded-full ${card.statusColor} animate-pulse`} />
           <span
-            className="text-white/30 text-xs"
+            className="text-slate-400 dark:text-white/30 text-xs"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             {card.status}
@@ -190,7 +190,7 @@ function EcosystemCard({ card, index, inView }: { card: typeof cards[0]; index: 
         <div className="flex items-start justify-between gap-4">
           <div>
             <h3
-              className="text-white/90 mb-1"
+              className="text-slate-800 dark:text-white/90 mb-1"
               style={{
                 fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: card.size === "lg" ? "1.25rem" : "1.05rem",
@@ -201,7 +201,7 @@ function EcosystemCard({ card, index, inView }: { card: typeof cards[0]; index: 
               {card.title}
             </h3>
             <p
-              className="text-white/35 text-xs mb-3"
+              className="text-slate-400 dark:text-white/35 text-xs mb-3"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {card.subtitle}
@@ -217,7 +217,7 @@ function EcosystemCard({ card, index, inView }: { card: typeof cards[0]; index: 
         </div>
 
         <p
-          className="text-white/40 mb-4"
+          className="text-slate-600 dark:text-white/40 mb-4"
           style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: "0.83rem",
@@ -232,7 +232,7 @@ function EcosystemCard({ card, index, inView }: { card: typeof cards[0]; index: 
           {card.tags.map((tag) => (
             <span
               key={tag}
-              className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/8 text-white/35 text-xs"
+              className="px-2.5 py-0.5 rounded-full bg-slate-200/50 dark:bg-white/5 border border-slate-300/50 dark:border-white/8 text-slate-500 dark:text-white/35 text-xs"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {tag}
@@ -249,7 +249,7 @@ export function Ecosystem() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="ecosystem" className="relative bg-[#070710] py-32 px-6">
+    <section id="ecosystem" className="relative bg-background py-32 px-6">
       {/* Ambient glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-blue-600/5 blur-[120px] pointer-events-none" />
 
@@ -262,14 +262,14 @@ export function Ecosystem() {
             transition={{ duration: 0.6 }}
             className="flex items-center justify-center gap-3 mb-6"
           >
-            <div className="h-px w-8 bg-white/20" />
+            <div className="h-px w-8 bg-slate-200 dark:bg-white/20" />
             <span
-              className="text-white/35 text-xs tracking-widest uppercase"
+              className="text-slate-400 dark:text-white/35 text-xs tracking-widest uppercase"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Ecosystem
             </span>
-            <div className="h-px w-8 bg-white/20" />
+            <div className="h-px w-8 bg-slate-200 dark:bg-white/20" />
           </motion.div>
 
           <motion.h2
@@ -283,7 +283,7 @@ export function Ecosystem() {
               letterSpacing: "-0.025em",
               lineHeight: 1.15,
             }}
-            className="text-white mb-4"
+            className="text-slate-900 dark:text-white mb-4"
           >
             Eight digital worlds.
             <br />
@@ -296,7 +296,7 @@ export function Ecosystem() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-white/40 max-w-lg mx-auto"
+            className="text-slate-500 dark:text-white/40 max-w-lg mx-auto"
             style={{ fontFamily: "'Inter', sans-serif", fontSize: "1rem", lineHeight: 1.7 }}
           >
             Each card is a gateway into a different domain. Hover to explore.
