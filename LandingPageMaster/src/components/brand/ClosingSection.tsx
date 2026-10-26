@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react";
 import logo from "@/app/android-chrome-192x192.png";
 import Magnet from "@/components/react-bits/Magnet";
 import OrbitImages from "@/components/react-bits/OrbitImages";
-import { GlowBackdrop } from "./GlowBackdrop";
 import { useBrand } from "./LocaleProvider";
 import { useMotionPaused } from "./MotionContext";
 import { Reveal } from "./Reveal";
@@ -29,7 +28,6 @@ export function ClosingSection() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <div className="night relative overflow-hidden rounded-[32px]">
-            <GlowBackdrop />
             <div className="relative z-10 grid items-center gap-6 p-6 sm:p-12 md:grid-cols-[1.05fr_1fr]">
               <div>
                 <SectionTitle text={c.closing.title} className="t-title" />

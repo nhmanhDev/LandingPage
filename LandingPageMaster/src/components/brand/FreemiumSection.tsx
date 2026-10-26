@@ -1,6 +1,5 @@
 "use client";
 
-import { GlowBackdrop } from "./GlowBackdrop";
 import { useBrand } from "./LocaleProvider";
 import { Reveal } from "./Reveal";
 import { SectionTitle } from "./SectionTitle";
@@ -13,7 +12,6 @@ export function FreemiumSection() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <div className="night relative overflow-hidden rounded-[32px] p-6 sm:p-12">
-            <GlowBackdrop />
             <div className="relative z-10 max-w-2xl">
               <SectionTitle text={c.freemium.title} />
               <p className="t-body mt-3 text-[rgba(242,242,240,0.72)]">{c.freemium.sub}</p>

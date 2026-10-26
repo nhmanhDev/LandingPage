@@ -6,7 +6,7 @@ Trang `/` giới thiệu thương hiệu AI42E và các sản phẩm của hệ 
 AI42E là nền tảng giúp nhiều người tiếp cận AI dễ dàng, với nhiều sản phẩm trong cùng một hệ sinh thái. Nhiều thứ miễn phí để bắt đầu, dùng nâng cao thì mới trả phí. Slogan: AI FOR EVERYONE AND EVERYTHING.
 
 ## Cấu trúc trang
-Hero (bức tường ảnh sản phẩm nghiêng 3D, thẻ tiêu đề ở giữa) → Sản phẩm (6 thẻ dạng bento, mỗi thẻ một vùng sáng riêng) → Miễn phí/Nâng cấp (khối tối, nền gradient hạt WebGL) → Câu hỏi thường gặp → Khối kêu gọi tối (vòng quỹ đạo sản phẩm quanh logo) → Footer (thẻ có cột liên kết, kênh chính thức, chữ AI42E khổng lồ mờ). Thanh menu là các nút viên thuốc nổi trên bức tường, có đổi ngôn ngữ và sáng/tối.
+Hero (bức tường ảnh sản phẩm nghiêng 3D, thẻ tiêu đề ở giữa) → Sản phẩm (6 thẻ dạng bento, mỗi thẻ một vùng sáng riêng) → Chi phí (khối tối, nền gradient CSS) → Câu hỏi thường gặp → Khối kêu gọi tối (vòng quỹ đạo sản phẩm quanh logo) → Footer (thẻ có cột liên kết, kênh chính thức, chữ AI42E khổng lồ mờ). Thanh menu là các nút viên thuốc nổi trên bức tường, có đổi ngôn ngữ và sáng/tối.
 
 ## Hệ thiết kế (nhỏ có chủ đích, học từ baked.design)
 Mọi thứ nằm ở khối `.brand-landing` cuối `src/app/globals.css`. Đừng thêm ngoài danh sách này.
@@ -19,15 +19,15 @@ Mọi thứ nằm ở khối `.brand-landing` cuối `src/app/globals.css`. Đ�
 | Màu nền | Sáng: nền `#f2f2f0`, mặt `#fff`, chip `#e8e8e5`. Tối: nền `#111`, mặt `#1b1b1a`, chip `#262624`. |
 | Hình khối | Nút luôn là viên thuốc cao 40px (`.pill`, biến thể `-solid`, `-surface`, `-glass`). Mặt phẳng bo 22–28px. |
 | Màu sắc | Đến từ **tư liệu sản phẩm** (minh họa game, ảnh chụp sản phẩm) và các **vùng sáng** (`.aurora`, bảng màu `au-*` theo từng sản phẩm, có bản sáng và tối). Chữ và nút luôn đơn sắc. Ngoại lệ: chấm trạng thái nhỏ (xanh = đang chạy, vàng = bảo trì). |
-| Chuyển động | Một nút "Tạm dừng chuyển động" ở hero dừng **mọi** chuyển động (bức tường, vùng sáng, ánh lấp lánh, quỹ đạo, nền WebGL). Tự tắt khi người dùng bật giảm chuyển động. Nền WebGL (Grainient) chỉ nạp trên màn hình lớn có chuột và khi đang nằm trong khung nhìn; thiết bị khác dùng vùng sáng CSS. Chuyển động chỉ dùng transform/opacity. |
+| Chuyển động | Một nút "Tạm dừng chuyển động" ở hero dừng **mọi** chuyển động (bức tường, vùng sáng, ánh lấp lánh, quỹ đạo). Tự tắt khi người dùng bật giảm chuyển động. Chuyển động chỉ dùng transform/opacity. **Không dùng WebGL**: một lớp WebGL (Grainient) từng phủ màu xám nhạt lên khối tối trên máy thật, trong khi Chrome không GPU dùng để test vẽ ra khác, nên không thể kiểm chứng bằng test tự động. |
 
 Bài test `design (…)` trong `scripts/ui-test/ui.mjs` kiểm tự động: đúng một font, mọi cỡ chữ nằm trong thang 5 cỡ, tối đa 2 độ đậm.
 
 ## Giọng văn
-Viết như một thương hiệu nói với khách hàng, không như ghi chú nội bộ: xưng "bạn", câu ngắn, nói lợi ích trước, mỗi tiêu đề là một ý trọn vẹn và song song (VD "Miễn phí để bắt đầu. Trả phí khi bạn cần nhiều hơn."). Không dịch word-for-word từ tiếng Anh, không dùng từ kỹ thuật khi khách không cần. Thông tin phải thật: trạng thái, ngày, không ghi giá chưa chốt, Trading luôn kèm "Không phải lời khuyên đầu tư" ngay trong dòng mô tả. Mọi chữ nằm ở `content.ts`, viết cả hai ngôn ngữ cùng lúc.
+Viết như một người thật nói chuyện với khách, không như khẩu hiệu ghép: xưng "bạn", dùng câu hoàn chỉnh thay vì các mệnh đề cụt ngăn bằng dấu chấm, dùng chữ đời thường ("Đa số dùng miễn phí, chỉ tính phí khi bạn cần nhiều hơn" chứ không phải "Miễn phí để bắt đầu. Trả phí khi bạn cần nhiều hơn."). Tránh chữ trừu tượng (hệ sinh thái, tính năng chuyên sâu, minh bạch). Không dịch word-for-word từ tiếng Anh. Thông tin phải thật: trạng thái, ngày, không ghi giá chưa chốt, Trading luôn kèm "Không phải lời khuyên đầu tư" ngay trong dòng mô tả. Mọi chữ nằm ở `content.ts`, viết cả hai ngôn ngữ cùng lúc.
 
 ## Thư viện bên thứ ba
-`Grainient`, `Magnet`, `OrbitImages`, `SpotlightCard` lấy từ [React Bits](https://reactbits.dev) (MIT + Commons Clause), để nguyên bản gốc ở `src/components/react-bits/` kèm giấy phép và ghi chú. `BlurText` của React Bits **không dùng** vì nó nhân đôi câu chữ ẩn và tách mỗi từ một dòng khi sao chép; `SectionTitle.tsx` làm hiệu ứng tương tự với một câu thật.
+`Magnet`, `OrbitImages`, `SpotlightCard` lấy từ [React Bits](https://reactbits.dev) (MIT + Commons Clause), để nguyên bản gốc ở `src/components/react-bits/` kèm giấy phép và ghi chú. `BlurText` của React Bits **không dùng** vì nó nhân đôi câu chữ ẩn và tách mỗi từ một dòng khi sao chép; `SectionTitle.tsx` làm hiệu ứng tương tự với một câu thật.
 
 ## Nơi sửa
 | Cần sửa | File |
