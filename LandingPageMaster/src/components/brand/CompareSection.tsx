@@ -2,6 +2,7 @@
 
 import { ArrowRight, Check, X } from "lucide-react";
 import { useBrand } from "./LocaleProvider";
+import { Bezel } from "./Bezel";
 import { Reveal } from "./Reveal";
 import { SectionHead } from "./SectionHead";
 
@@ -10,13 +11,14 @@ export function CompareSection() {
   const { c } = useBrand();
   const k = c.compare;
   return (
-    <section className="py-14 sm:py-20">
+    <section className="py-14 sm:py-[4.5rem] lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead eyebrow={k.eyebrow} title={k.title} tone={k.tone} sub={k.sub} />
 
-        <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-2">
+        <div className="mx-auto mt-8 grid max-w-5xl gap-6 sm:mt-16 md:grid-cols-2">
           <Reveal className="h-full">
-            <div className="h-full rounded-3xl bg-[var(--b-chip)] p-6 shadow-[var(--sh-soft)] sm:p-9">
+            <Bezel coreClassName="!bg-[var(--b-chip)] !shadow-[var(--sh-soft)]">
+            <div className="h-full p-6 sm:p-9">
               <h3 className="t-heading text-[var(--b-muted)]">{k.withoutTitle}</h3>
               <ul className="mt-5 space-y-4">
                 {k.without.map((item) => (
@@ -27,9 +29,11 @@ export function CompareSection() {
                 ))}
               </ul>
             </div>
+            </Bezel>
           </Reveal>
           <Reveal delay={0.08} className="h-full">
-            <div className="h-full rounded-3xl bg-[var(--b-surface)] p-6 shadow-[var(--sh-card)] ring-1 ring-[var(--b-brand)]/30 sm:p-9">
+            <Bezel>
+            <div className="h-full p-6 sm:p-9">
               <h3 className="t-heading">{k.withTitle}</h3>
               <ul className="mt-5 space-y-4">
                 {k.with.map((item) => (
@@ -39,12 +43,13 @@ export function CompareSection() {
                   </li>
                 ))}
               </ul>
-              <p className="t-body brand-text mt-6 rounded-2xl bg-[var(--b-lav)] px-4 py-3 font-medium">{k.result}</p>
+              <p className="t-body chip-pos mt-6 px-4 py-3">{k.result}</p>
             </div>
+            </Bezel>
           </Reveal>
         </div>
 
-        <Reveal className="mt-14 flex flex-col items-center gap-3">
+        <Reveal className="mt-10 flex flex-col items-center gap-3 sm:mt-14">
           <a href="#products" className="pill pill-accent pill-cta">
             {c.closing.cta}
             <ArrowRight size={16} aria-hidden="true" />

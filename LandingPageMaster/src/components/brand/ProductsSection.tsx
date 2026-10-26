@@ -3,6 +3,7 @@
 import { useTheme } from "next-themes";
 import { ArrowUpRight } from "lucide-react";
 import SpotlightCard from "@/components/react-bits/SpotlightCard";
+import { Bezel } from "./Bezel";
 import type { Product, ProductStatus } from "@/lib/brand/content";
 import { useBrand } from "./LocaleProvider";
 import { ProductVisual } from "./ProductVisual";
@@ -58,10 +59,11 @@ function Card({ product, statusLabel }: { product: Product; statusLabel: string 
 
   const inner = "group flex h-full flex-col text-left";
   return (
+    <Bezel className="transition-transform duration-300 hover:-translate-y-1" coreClassName="!shadow-[var(--sh-soft)] hover:!shadow-[var(--sh-card)] transition-shadow duration-300">
     <SpotlightCard
       theme={mounted && resolvedTheme === "dark" ? "dark" : "light"}
-      className="!rounded-3xl !p-3 h-full transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:!shadow-[var(--sh-card)]"
-      style={{ ["--spotlight-card-surface" as string]: "var(--b-surface)", ["--spotlight-card-shadow" as string]: "var(--sh-soft)" }}
+      className="!rounded-3xl !p-3 h-full"
+      style={{ ["--spotlight-card-surface" as string]: "var(--b-surface)", ["--spotlight-card-shadow" as string]: "none" }}
       intensity={0.22}
       spotlightSize={300}
     >
@@ -73,6 +75,7 @@ function Card({ product, statusLabel }: { product: Product; statusLabel: string 
         <div className={inner}>{body}</div>
       )}
     </SpotlightCard>
+    </Bezel>
   );
 }
 
@@ -80,11 +83,11 @@ export function ProductsSection() {
   const { c } = useBrand();
   const items = ORDER.map((id) => c.products.items.find((item) => item.id === id)).filter((item): item is Product => Boolean(item));
   return (
-    <section id="products" className="scroll-mt-24 py-14 sm:py-20">
+    <section id="products" className="scroll-mt-24 py-14 sm:py-[4.5rem] lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead eyebrow={c.products.eyebrow} title={c.products.title} sub={c.products.sub} />
 
-        <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-12">
+        <ul className="mt-8 grid gap-4 sm:mt-16 sm:grid-cols-2 lg:grid-cols-12">
           {items.map((product, index) => (
             <li key={product.id} className={SPAN[product.id]}>
               <Reveal delay={Math.min(index, 3) * 0.06} className="h-full">

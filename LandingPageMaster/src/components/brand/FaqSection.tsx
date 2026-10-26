@@ -8,10 +8,10 @@ import { SectionHead } from "./SectionHead";
 export function FaqSection() {
   const { c } = useBrand();
   return (
-    <section id="faq" className="scroll-mt-24 py-14 sm:py-20">
+    <section id="faq" className="scroll-mt-24 py-14 sm:py-[4.5rem] lg:py-20">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <SectionHead eyebrow={c.faq.eyebrow} title={c.faq.title} />
-        <Reveal delay={0.06} className="mt-14">
+        <Reveal delay={0.06} className="mt-8 sm:mt-16">
           <Accordion type="single" collapsible className="space-y-3">
             {c.faq.items.map((item, index) => (
               <AccordionItem key={item.q} value={`faq-${index}`} className="rounded-2xl border-0 bg-[var(--b-surface)] px-6 shadow-[var(--sh-soft)]">
