@@ -179,57 +179,145 @@
 }
 
 
-/* AI42E brand landing ("/"). Scoped so blog, studio and admin routes keep their own look. */
+/*
+ * AI42E brand landing ("/"). Scoped to .brand-landing so blog, studio and admin keep their own look.
+ *
+ * Design system, kept deliberately small (learned from baked.design):
+ *   - ONE typeface: Inter. No second family, no italics.
+ *   - FIVE type sizes: display, title, heading, body, small. Nothing else.
+ *   - THREE ink colours: ink, muted, and the page colour when it sits on ink. No accent colour in the chrome.
+ *   - Colour comes from the product material (game art, product screenshots), not from the interface.
+ *   - Shape: pills for controls, 22-28px radius for surfaces. Nothing in between.
+ */
 .brand-landing {
-  --b-bg: #faf5ec;
-  --b-surface: #fffdf8;
-  --b-chip: #f0e9db;
-  --b-chip-hover: #e8dfce;
-  --b-ink: #1c1830;
-  --b-muted: #655f79;
-  --b-line: #e8dfd0;
-  --b-primary: #4f46e5;
-  --b-sky: #0369a1;
-  --b-green: #065f46;
-  --b-amber: #b45309;
+  --b-bg: #f2f2f0;
+  --b-surface: #ffffff;
+  --b-chip: #e8e8e5;
+  --b-chip-hover: #dcdcd8;
+  --b-ink: #111111;
+  --b-muted: rgba(17, 17, 17, 0.66);
+  --b-line: rgba(17, 17, 17, 0.12);
   background: var(--b-bg);
   color: var(--b-ink);
+  font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  letter-spacing: -0.006em;
 }
 
 .dark .brand-landing {
-  --b-bg: #0f0d1a;
-  --b-surface: #17142a;
-  --b-chip: #1f1b36;
-  --b-chip-hover: #2a2547;
-  --b-ink: #f4f0ff;
-  --b-muted: #a8a1c4;
-  --b-line: #2a2545;
-  --b-primary: #9b95ff;
-  --b-sky: #38bdf8;
-  --b-green: #34d399;
-  --b-amber: #fbbf24;
+  --b-bg: #111111;
+  --b-surface: #1b1b1a;
+  --b-chip: #262624;
+  --b-chip-hover: #32322f;
+  --b-ink: #f2f2f0;
+  --b-muted: rgba(242, 242, 240, 0.68);
+  --b-line: rgba(242, 242, 240, 0.14);
 }
 
-.brand-landing a:focus-visible,
-.brand-landing button:focus-visible {
-  outline: 2px solid var(--b-primary);
-  outline-offset: 3px;
+body:has(.brand-landing) {
+  background: #f2f2f0;
 }
-
+.dark body:has(.brand-landing) {
+  background: #111111;
+}
 html:has(.brand-landing) {
   scroll-behavior: smooth;
 }
 
-body:has(.brand-landing) {
-  background: #faf5ec;
+/* The five sizes. */
+.brand-landing .t-display { font-size: clamp(2.25rem, 6.2vw, 3.5rem); line-height: 1.04; font-weight: 500; letter-spacing: -0.035em; }
+.brand-landing .t-title   { font-size: clamp(1.75rem, 3.4vw, 2.25rem); line-height: 1.1; font-weight: 500; letter-spacing: -0.025em; }
+.brand-landing .t-heading { font-size: 1.125rem; line-height: 1.3; font-weight: 500; letter-spacing: -0.015em; }
+.brand-landing .t-body    { font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: -0.006em; }
+.brand-landing .t-small   { font-size: 13px; line-height: 18px; font-weight: 400; letter-spacing: 0; }
+
+/* Controls: always a pill, always 40px tall. */
+/* display lives in :where() so Tailwind's hidden / sm:inline-flex can still override it */
+:where(.brand-landing .pill) { display: inline-flex; }
+.brand-landing .pill {
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--b-chip);
+  color: var(--b-ink);
+  font-size: 15px;
+  line-height: 22px;
+  letter-spacing: -0.006em;
+  white-space: nowrap;
+  transition: background-color 0.2s, opacity 0.2s, transform 0.2s;
+}
+.brand-landing .pill:hover { background: var(--b-chip-hover); }
+.brand-landing .pill-solid { background: var(--b-ink); color: var(--b-bg); }
+.brand-landing .pill-solid:hover { background: var(--b-ink); opacity: 0.86; }
+.brand-landing .pill-surface { background: var(--b-surface); }
+.brand-landing .pill-surface:hover { background: var(--b-chip); }
+.brand-landing .pill-glass {
+  background: color-mix(in srgb, var(--b-bg) 84%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.brand-landing .pill-glass:hover { background: var(--b-chip-hover); }
+
+.brand-landing a:focus-visible,
+.brand-landing button:focus-visible {
+  outline: 2px solid var(--b-ink);
+  outline-offset: 3px;
 }
 
-.dark body:has(.brand-landing) {
-  background: #0f0d1a;
+/* The wall behind the hero: one transform on one element, columns drift by CSS alone. */
+.brand-landing .wall {
+  position: absolute;
+  inset: -16% -10%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 18px;
+  align-items: start;
+  transform: perspective(1400px) translate3d(var(--px, 0px), var(--py, 0px), 0)
+    rotateX(calc(7deg + var(--rx, 0deg))) rotateY(var(--ry, 0deg)) rotateZ(-4deg) scale(1.06);
+  will-change: transform;
 }
-
+.brand-landing .wall-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: wall-drift 15s ease-in-out infinite alternate;
+}
+.brand-landing .wall-col:nth-child(even) {
+  margin-top: -70px;
+  animation-duration: 19s;
+  animation-direction: alternate-reverse;
+}
+.brand-landing .wall-tile {
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--b-chip);
+  box-shadow: 0 14px 34px -16px rgba(0, 0, 0, 0.4);
+}
+.brand-landing .wall-tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.brand-landing [data-wall-paused="true"] .wall-col,
+.brand-landing [data-wall-off="true"] .wall-col {
+  animation-play-state: paused;
+}
+@keyframes wall-drift {
+  from { transform: translateY(-20px); }
+  to   { transform: translateY(20px); }
+}
+@media (max-width: 767px) {
+  .brand-landing .wall { inset: -10% -16%; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .brand-landing .wall-col { gap: 12px; }
+  .brand-landing .wall-col:nth-child(n + 4) { display: none; }
+  .brand-landing .wall-col:nth-child(even) { margin-top: -40px; }
+}
 @media (prefers-reduced-motion: reduce) {
-  html:has(.brand-landing) {
-    scroll-behavior: auto;
-  }
+  html:has(.brand-landing) { scroll-behavior: auto; }
+  .brand-landing .wall-col { animation: none; }
 }

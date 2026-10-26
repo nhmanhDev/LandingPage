@@ -45,26 +45,6 @@ async function open(viewport, opts = {}) {
   return { ctx, page, errors, failed };
 }
 
-const canvasInk = (page) =>
-  page.evaluate(() => {
-    const c = document.querySelector("canvas");
-    if (!c) return -1;
-    const g = c.getContext("2d");
-    const d = g.getImageData(0, 0, c.width, c.height).data;
-    let n = 0;
-    for (let i = 3; i < d.length; i += 4) if (d[i] > 0) n++;
-    return n;
-  });
-const canvasHash = (page) =>
-  page.evaluate(() => {
-    const c = document.querySelector("canvas");
-    const g = c.getContext("2d");
-    const d = g.getImageData(0, 0, c.width, c.height).data;
-    let h = 0;
-    for (let i = 0; i < d.length; i += 97) h = (h * 31 + d[i + 3] + d[i]) | 0;
-    return h;
-  });
-
 // ---------- Desktop, light ----------
 {
   const { ctx, page, errors, failed } = await open({ width: 1440, height: 900 }, { colorScheme: "light" });
@@ -75,16 +55,32 @@ const canvasHash = (page) =>
   check("desktop: single h1", (await page.locator("h1").count()) === 1);
   check("desktop: h1 contains 'AI cho mọi người'", (await page.locator("h1").innerText()).includes("AI cho mọi người"));
   check("desktop: 6 product cards", (await page.locator("#products > div > ul > li").count()) === 6);
-  check("desktop: ribbon canvas has pixels", (await canvasInk(page)) > 1000, String(await canvasInk(page)));
+  check("desktop: wall renders tiles", (await page.locator(".wall-tile").count()) >= 20, String(await page.locator(".wall-tile").count()));
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   check("desktop: no horizontal overflow", overflow <= 0, `overflow ${overflow}px`);
   await page.screenshot({ path: path.join(shots, "desktop-light-top.png") });
 
-  // motion: ribbon animates
-  const h1 = await canvasHash(page);
+  // motion: pointer eases the wall, pause stops it
+  const wallTransform = () => page.$eval(".wall", (e) => getComputedStyle(e).transform);
+  await page.mouse.move(200, 200);
   await page.waitForTimeout(700);
-  const h2 = await canvasHash(page);
-  check("desktop: ribbon animates", h1 !== h2);
+  const t1 = await wallTransform();
+  await page.mouse.move(1200, 700, { steps: 8 });
+  await page.waitForTimeout(900);
+  const t2 = await wallTransform();
+  check("desktop: pointer moves the wall", t1 !== t2);
+  await page.click('main button[aria-pressed]');
+  await page.waitForTimeout(300);
+  const pausedAttr = await page.$eval("[data-wall-paused]", (e) => e.getAttribute("data-wall-paused"));
+  const playState = await page.$eval(".wall-col", (e) => getComputedStyle(e).animationPlayState);
+  check("desktop: pause button stops the drift", pausedAttr === "true" && playState === "paused", `${pausedAttr}/${playState}`);
+  await page.mouse.move(300, 300, { steps: 4 });
+  await page.waitForTimeout(500);
+  const t3 = await wallTransform();
+  await page.mouse.move(1300, 800, { steps: 4 });
+  await page.waitForTimeout(500);
+  check("desktop: paused wall ignores the pointer", t3 === (await wallTransform()));
+  await page.click('main button[aria-pressed]');
 
   // anchors
   const anchors = await page.$$eval('a[href^="#"]', (as) => [...new Set(as.map((a) => a.getAttribute("href")))]);
@@ -114,7 +110,7 @@ const canvasHash = (page) =>
   const after = await page.evaluate(() => document.documentElement.classList.contains("dark"));
   check("desktop: theme toggle flips class", before !== after, `${before} -> ${after}`);
   await page.waitForTimeout(500);
-  check("desktop: ribbon redraws in dark", (await canvasInk(page)) > 1000);
+  check("desktop: wall still rendered in dark", (await page.locator(".wall-tile").count()) >= 20);
   await page.screenshot({ path: path.join(shots, "desktop-dark-top.png") });
 
   // language toggle + persistence
@@ -150,7 +146,49 @@ for (const scheme of ["light", "dark"]) {
   await ctx.close();
 }
 
-// ---------- Mobile ----------
+// ---------- Design system (the "why does this look random" guard) ----------
+for (const scheme of ["light", "dark"]) {
+  const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: scheme });
+  await page.evaluate(async () => {
+    for (let y = 0; y < document.body.scrollHeight; y += 300) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 250)); }
+    window.scrollTo(0, 0);
+  });
+  const ds = await page.evaluate(() => {
+    const fam = new Set(), size = new Set(), color = new Set(), weight = new Set();
+    const root = document.querySelector(".brand-landing");
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (!node.textContent.trim()) continue;
+      const el = node.parentElement;
+      if (!el || el.closest(".wall")) continue;
+      const cs = getComputedStyle(el);
+      if (cs.display === "none" || cs.visibility === "hidden") continue;
+      fam.add(cs.fontFamily.split(",")[0].replace(/["']/g, "").trim());
+      size.add(cs.fontSize);
+      weight.add(cs.fontWeight);
+      color.add(cs.color.replace(/, 0\.\d+\)/, ")").replace(/rgba?\(([^)]*)\)/, "$1"));
+    }
+    return { fam: [...fam], size: [...size].sort((a, b) => parseFloat(a) - parseFloat(b)), weight: [...weight], color: [...color] };
+  });
+  check(`design (${scheme}): exactly one typeface`, ds.fam.length === 1, ds.fam.join(" | "));
+  const SCALE = ["13px", "15px", "18px", "36px", "56px"];
+  const strays = ds.size.filter((size) => !SCALE.includes(size));
+  check(`design (${scheme}): font sizes stay on the 5-step scale`, strays.length === 0, `used ${ds.size.join(" ")}; stray ${strays.join(" ")}`);
+  check(`design (${scheme}): at most 2 font weights`, ds.weight.length <= 2, ds.weight.join(" "));
+  check(`design (${scheme}): at most 4 text colours`, ds.color.length <= 4, ds.color.join(" | "));
+  await ctx.close();
+}
+{
+  const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: "light" });
+  const cards = await page.$$eval("#products > div > ul > li", (lis) => lis.map((li) => ({ name: li.querySelector("h3")?.textContent, link: Boolean(li.querySelector("a[href]")) })));
+  const dl = cards.find((c) => c.name === "DownloadAnything");
+  check("links: DownloadAnything has no link while its domain is down", dl && dl.link === false);
+  const live = cards.filter((c) => c.link).map((c) => c.name).sort().join(",");
+  check("links: only AI42E Studio and AI42E Game are linked", live === "AI42E Game,AI42E Studio", live);
+  await ctx.close();
+}
+
 for (const [label, vp] of [
   ["mobile-390", { width: 390, height: 844 }],
   ["mobile-360", { width: 360, height: 740 }],
@@ -183,11 +221,10 @@ for (const [label, vp] of [
 // ---------- Reduced motion ----------
 {
   const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: "light", reducedMotion: "reduce" });
-  check("reduced-motion: ribbon still drawn", (await canvasInk(page)) > 1000);
-  const a = await canvasHash(page);
-  await page.waitForTimeout(800);
-  const b = await canvasHash(page);
-  check("reduced-motion: ribbon is static", a === b);
+  check("reduced-motion: wall still rendered", (await page.locator(".wall-tile").count()) >= 20);
+  const anim = await page.$eval(".wall-col", (e) => getComputedStyle(e).animationName);
+  check("reduced-motion: no drift animation", anim === "none", anim);
+  check("reduced-motion: pause control is disabled and pressed", (await page.$eval("main button[aria-pressed]", (e) => e.disabled && e.getAttribute("aria-pressed") === "true")));
   const opacity = await page.$eval("h1", (e) => getComputedStyle(e).opacity);
   check("reduced-motion: content visible", opacity === "1", `h1 opacity ${opacity}`);
   await ctx.close();

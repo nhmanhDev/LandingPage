@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Serif, Space_Grotesk } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext", "vietnamese"],
   variable: "--font-inter",
   display: 'swap',
 });
@@ -12,14 +12,6 @@ const inter = Inter({
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
-  display: 'swap',
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin", "latin-ext"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-serif",
   display: 'swap',
 });
 
@@ -45,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="vi"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${instrumentSerif.variable} antialiased`}
+      className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col font-sans" spellCheck={false}>

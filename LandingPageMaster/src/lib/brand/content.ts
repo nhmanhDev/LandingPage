@@ -1,6 +1,6 @@
 export type Locale = "vi" | "en";
 
-export type ProductStatus = "free" | "freemium" | "soon" | "research";
+export type ProductStatus = "free" | "freemium" | "soon" | "research" | "maintenance";
 
 export type ProductIcon =
   | "studio"
@@ -17,6 +17,7 @@ export interface Product {
   tagline: string;
   bullets: string[];
   status: ProductStatus;
+  thumb?: "studio-hero" | "play-family";
   href?: string;
   cta?: string;
 }
@@ -47,7 +48,16 @@ export interface Content {
   faq: { title: string; items: { q: string; a: string }[] };
   contact: { title: string; sub: string };
   footer: { slogan: string; portfolio: string; rights: string };
-  ui: { theme: string; language: string; skip: string };
+  wall: { free: string; brand: string; tools: string };
+  ui: {
+    theme: string;
+    language: string;
+    skip: string;
+    pause: string;
+    play: string;
+    hint: string;
+    hintTouch: string;
+  };
 }
 
 export const SOCIALS = [
@@ -71,7 +81,7 @@ const vi: Content = {
     eyebrow: "Nền tảng AI cho mọi người",
     titleLine1: "AI cho mọi người,",
     titleLine2: "cho mọi việc.",
-    sub: "AI42E gom các công cụ AI dễ dùng vào một nơi: tạo video, tải nội dung, chơi game và nhiều thứ khác. Bắt đầu miễn phí, không cần biết kỹ thuật.",
+    sub: "AI42E gom các công cụ AI dễ dùng vào một nơi: tạo video, chơi game và nhiều thứ khác. Bắt đầu miễn phí, không cần biết kỹ thuật.",
     ctaPrimary: "Khám phá sản phẩm",
     ctaSecondary: "Xem AI42E Studio",
     note: "Nhiều thứ miễn phí. Dùng nâng cao thì mới trả phí.",
@@ -84,6 +94,7 @@ const vi: Content = {
       freemium: "Miễn phí giai đoạn đầu",
       soon: "Sắp ra mắt",
       research: "Đang nghiên cứu",
+      maintenance: "Đang bảo trì",
     },
     items: [
       {
@@ -97,6 +108,7 @@ const vi: Content = {
           "Ứng dụng máy tính, ra mắt 01/11/2026",
         ],
         status: "freemium",
+        thumb: "studio-hero",
         href: "https://studio.ai42e.com",
         cta: "Xem AI42E Studio",
       },
@@ -120,11 +132,9 @@ const vi: Content = {
         bullets: [
           "YouTube, TikTok, Instagram, Facebook, X, Pinterest, Douyin",
           "Có trợ lý AI bắt nội dung ở những trang khó",
-          "Dùng ngay trên web",
+          "Tạm thời chưa truy cập được",
         ],
-        status: "free",
-        href: "https://downloader.ai42e.com",
-        cta: "Mở DownloadAnything",
+        status: "maintenance",
       },
       {
         id: "game",
@@ -137,6 +147,7 @@ const vi: Content = {
           "Truth or Dare, bầu cua, ô ăn quan, câu đố và hơn thế",
         ],
         status: "free",
+        thumb: "play-family",
         href: "https://play.ai42e.com",
         cta: "Chơi ngay",
       },
@@ -197,7 +208,7 @@ const vi: Content = {
       },
       {
         q: "Sản phẩm nào dùng được ngay?",
-        a: "DownloadAnything và AI42E Game dùng được ngay trên web. AI42E Studio ra mắt ngày 01/11/2026. Voice Studio và OneForAll sắp ra mắt.",
+        a: "AI42E Game dùng được ngay trên web. AI42E Studio ra mắt ngày 01/11/2026 và đã có bản xem trước trên web. DownloadAnything đang bảo trì. Voice Studio và OneForAll sắp ra mắt.",
       },
       {
         q: "Kênh liên hệ chính thức ở đâu?",
@@ -214,7 +225,16 @@ const vi: Content = {
     portfolio: "Hồ sơ cá nhân của Mạnh",
     rights: "AI42E. Mọi quyền được bảo lưu.",
   },
-  ui: { theme: "Đổi giao diện sáng/tối", language: "Đổi ngôn ngữ", skip: "Bỏ qua điều hướng" },
+  wall: { free: "Nhiều thứ miễn phí", brand: "AI42E", tools: "Tạo. Chơi. Khám phá." },
+  ui: {
+    theme: "Đổi giao diện sáng/tối",
+    language: "Đổi ngôn ngữ",
+    skip: "Bỏ qua điều hướng",
+    pause: "Tạm dừng chuyển động",
+    play: "Bật chuyển động",
+    hint: "Di chuột để nhìn quanh",
+    hintTouch: "Vuốt để nhìn quanh",
+  },
 };
 
 const en: Content = {
@@ -228,7 +248,7 @@ const en: Content = {
     eyebrow: "The AI platform for everyone",
     titleLine1: "AI for everyone,",
     titleLine2: "for everything.",
-    sub: "AI42E brings easy-to-use AI tools together in one place: make videos, download content, play games and more. Start free, no technical skills needed.",
+    sub: "AI42E brings easy-to-use AI tools together in one place: make videos, play games and more. Start free, no technical skills needed.",
     ctaPrimary: "Explore products",
     ctaSecondary: "See AI42E Studio",
     note: "A lot is free. You only pay when you go advanced.",
@@ -241,6 +261,7 @@ const en: Content = {
       freemium: "Free in the early period",
       soon: "Coming soon",
       research: "In research",
+      maintenance: "Under maintenance",
     },
     items: [
       {
@@ -254,6 +275,7 @@ const en: Content = {
           "Desktop app, launching 1 Nov 2026",
         ],
         status: "freemium",
+        thumb: "studio-hero",
         href: "https://studio.ai42e.com",
         cta: "See AI42E Studio",
       },
@@ -277,11 +299,9 @@ const en: Content = {
         bullets: [
           "YouTube, TikTok, Instagram, Facebook, X, Pinterest, Douyin",
           "An AI assistant that catches media on tricky sites",
-          "Works right on the web",
+          "Temporarily unavailable",
         ],
-        status: "free",
-        href: "https://downloader.ai42e.com",
-        cta: "Open DownloadAnything",
+        status: "maintenance",
       },
       {
         id: "game",
@@ -294,6 +314,7 @@ const en: Content = {
           "Truth or Dare, Bau Cua, O An Quan, quizzes and more",
         ],
         status: "free",
+        thumb: "play-family",
         href: "https://play.ai42e.com",
         cta: "Play now",
       },
@@ -354,7 +375,7 @@ const en: Content = {
       },
       {
         q: "Which products can I use now?",
-        a: "DownloadAnything and AI42E Game work right now on the web. AI42E Studio launches on 1 Nov 2026. Voice Studio and OneForAll are coming soon.",
+        a: "AI42E Game works right now on the web. AI42E Studio launches on 1 Nov 2026 and has a web preview. DownloadAnything is under maintenance. Voice Studio and OneForAll are coming soon.",
       },
       {
         q: "Where are the official contact channels?",
@@ -371,7 +392,16 @@ const en: Content = {
     portfolio: "Manh's personal portfolio",
     rights: "AI42E. All rights reserved.",
   },
-  ui: { theme: "Toggle light/dark theme", language: "Change language", skip: "Skip navigation" },
+  wall: { free: "A lot is free", brand: "AI42E", tools: "Make. Play. Explore." },
+  ui: {
+    theme: "Toggle light/dark theme",
+    language: "Change language",
+    skip: "Skip navigation",
+    pause: "Pause motion",
+    play: "Play motion",
+    hint: "Move to look around",
+    hintTouch: "Swipe to look around",
+  },
 };
 
 export const CONTENT: Record<Locale, Content> = { vi, en };

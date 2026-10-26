@@ -15,7 +15,7 @@ function SkipLink() {
   return (
     <a
       href="#products"
-      className="sr-only rounded-full bg-[var(--b-ink)] px-4 py-2 text-sm text-[var(--b-bg)] focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50"
+      className="t-body sr-only rounded-full bg-[var(--b-ink)] px-4 py-2 text-[var(--b-bg)] focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50"
     >
       {c.ui.skip}
     </a>

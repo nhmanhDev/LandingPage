@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { ArrowUpRight, AudioLines, Boxes, CandlestickChart, Clapperboard, Download, Gamepad2 } from "lucide-react";
 import type { Product, ProductIcon, ProductStatus } from "@/lib/brand/content";
+import { IMAGE_SIZE } from "@/lib/brand/tiles";
 import { useBrand } from "./LocaleProvider";
 import { Reveal } from "./Reveal";
 
@@ -14,64 +16,65 @@ const ICONS: Record<ProductIcon, React.ComponentType<{ size?: number; "aria-hidd
   trading: CandlestickChart,
 };
 
-const ACCENT: Record<ProductIcon, string> = {
-  studio: "var(--b-primary)",
-  voice: "var(--b-sky)",
-  download: "var(--b-green)",
-  game: "var(--b-amber)",
-  oneforall: "var(--b-primary)",
-  trading: "var(--b-sky)",
+// The only colour in the UI chrome: a small dot that says whether the product is live.
+const DOT: Record<ProductStatus, string> = {
+  free: "bg-[#1a9b5a]",
+  freemium: "bg-[#1a9b5a]",
+  soon: "bg-[var(--b-muted)]",
+  research: "bg-[var(--b-muted)]",
+  maintenance: "bg-[#d98a00]",
 };
 
-const BADGE: Record<ProductStatus, string> = {
-  free: "bg-[var(--b-green)]/14 text-[var(--b-green)]",
-  freemium: "bg-[var(--b-primary)]/14 text-[var(--b-primary)]",
-  soon: "bg-[var(--b-chip)] text-[var(--b-muted)]",
-  research: "bg-[var(--b-chip)] text-[var(--b-muted)]",
-};
-
-function Card({ product, statusLabel, openLabel }: { product: Product; statusLabel: string; openLabel: string }) {
+function Thumb({ product }: { product: Product }) {
   const Icon = ICONS[product.icon];
+  if (product.thumb) {
+    const { w, h } = IMAGE_SIZE[product.thumb];
+    return (
+      <div className="overflow-hidden rounded-xl bg-[var(--b-chip)]" style={{ aspectRatio: "4 / 3" }}>
+        <Image src={`/brand/tiles/${product.thumb}.webp`} alt="" width={w} height={h} unoptimized loading="lazy" className="h-full w-full object-cover" />
+      </div>
+    );
+  }
+  return (
+    <div className="grid place-items-center rounded-xl bg-[var(--b-chip)] text-[var(--b-muted)]" style={{ aspectRatio: "16 / 7" }}>
+      <Icon size={26} aria-hidden />
+    </div>
+  );
+}
+
+function Card({ product, statusLabel }: { product: Product; statusLabel: string }) {
   const live = Boolean(product.href);
   const body = (
     <>
-      <div className="flex items-start justify-between gap-3">
-        <span
-          className="grid h-11 w-11 place-items-center rounded-xl"
-          style={{ color: ACCENT[product.icon], background: `color-mix(in srgb, ${ACCENT[product.icon]} 13%, transparent)` }}
-        >
-          <Icon size={22} aria-hidden />
+      <Thumb product={product} />
+      <div className="mt-4 flex items-center justify-between gap-3">
+        <h3 className="t-heading">{product.name}</h3>
+        <span className="t-small inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[var(--b-chip)] px-2.5 py-1 text-[var(--b-muted)]">
+          <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
+          {statusLabel}
         </span>
-        <span className={`rounded-full px-3 py-1 text-xs font-medium ${BADGE[product.status]}`}>{statusLabel}</span>
       </div>
-      <h3 className="mt-5 font-[family-name:var(--font-space-grotesk)] text-xl font-semibold tracking-tight">{product.name}</h3>
-      <p className="mt-1.5 text-[15px] leading-relaxed text-[var(--b-muted)]">{product.tagline}</p>
-      <ul className="mt-4 space-y-2 text-sm text-[var(--b-muted)]">
+      <p className="t-body mt-2 text-[var(--b-muted)]">{product.tagline}</p>
+      <ul className="t-small mt-3 space-y-1.5 text-[var(--b-muted)]">
         {product.bullets.map((bullet) => (
-          <li key={bullet} className="flex gap-2.5">
-            <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full" style={{ background: ACCENT[product.icon] }} aria-hidden="true" />
+          <li key={bullet} className="flex gap-2">
+            <span aria-hidden="true">–</span>
             <span>{bullet}</span>
           </li>
         ))}
       </ul>
       {live ? (
-        <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium" style={{ color: ACCENT[product.icon] }}>
-          {product.cta ?? openLabel}
+        <span className="t-body mt-5 inline-flex items-center gap-1 font-medium">
+          {product.cta}
           <ArrowUpRight size={16} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </span>
       ) : null}
     </>
   );
 
-  const base =
-    "group flex h-full flex-col rounded-3xl border border-[var(--b-line)] bg-[var(--b-surface)] p-6 text-left transition-[transform,box-shadow] duration-300";
+  const base = "group flex h-full flex-col rounded-[22px] bg-[var(--b-surface)] p-4 text-left transition-transform duration-300";
   return live ? (
-    <a
-      href={product.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`${base} hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(40,30,90,0.28)]`}
-    >
+    <a href={product.href} target="_blank" rel="noopener noreferrer" className={`${base} hover:-translate-y-1`}>
       {body}
     </a>
   ) : (
@@ -82,18 +85,18 @@ function Card({ product, statusLabel, openLabel }: { product: Product; statusLab
 export function ProductsSection() {
   const { c } = useBrand();
   return (
-    <section id="products" className="scroll-mt-20 py-14 sm:py-20">
+    <section id="products" className="scroll-mt-4 py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <h2 className="font-[family-name:var(--font-serif)] text-4xl leading-tight tracking-[-0.015em] sm:text-5xl">{c.products.title}</h2>
-          <p className="mt-4 text-base text-[var(--b-muted)] sm:text-lg">{c.products.sub}</p>
+        <Reveal className="max-w-xl">
+          <h2 className="t-title">{c.products.title}</h2>
+          <p className="t-body mt-3 text-[var(--b-muted)]">{c.products.sub}</p>
         </Reveal>
 
-        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {c.products.items.map((product, index) => (
             <li key={product.id}>
-              <Reveal delay={Math.min(index, 2) * 0.07} className="h-full">
-                <Card product={product} statusLabel={c.products.status[product.status]} openLabel={c.nav.open} />
+              <Reveal delay={Math.min(index, 2) * 0.06} className="h-full">
+                <Card product={product} statusLabel={c.products.status[product.status]} />
               </Reveal>
             </li>
           ))}
