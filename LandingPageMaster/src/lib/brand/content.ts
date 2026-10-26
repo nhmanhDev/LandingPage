@@ -34,20 +34,49 @@ export interface Content {
     ctaSecondary: string;
     note: string;
   };
+  showcase: {
+    eyebrow: string;
+    title: string;
+    tone?: string;
+    tabs: {
+      id: "studio" | "game";
+      label: string;
+      eyebrow: string;
+      title: string;
+      text: string;
+      bullets: string[];
+      cta: string;
+      href: string;
+    }[];
+  };
   products: {
+    eyebrow: string;
     title: string;
     sub: string;
     status: Record<ProductStatus, string>;
     items: Product[];
   };
+  compare: {
+    eyebrow: string;
+    title: string;
+    tone?: string;
+    sub: string;
+    withoutTitle: string;
+    withTitle: string;
+    without: string[];
+    with: string[];
+    result: string;
+  };
   freemium: {
+    eyebrow: string;
     title: string;
     sub: string;
     columns: { title: string; text: string }[];
   };
-  faq: { title: string; items: { q: string; a: string }[] };
+  founder: { eyebrow: string; title: string; paragraphs: string[]; signature: string };
+  faq: { eyebrow: string; title: string; items: { q: string; a: string }[] };
   contact: { title: string; sub: string };
-  closing: { title: string; sub: string; cta: string; cta2: string };
+  closing: { title: string; sub: string; cta: string; cta2: string; trust: string };
   footer: {
     slogan: string;
     portfolio: string;
@@ -63,10 +92,6 @@ export interface Content {
     theme: string;
     language: string;
     skip: string;
-    pause: string;
-    play: string;
-    hint: string;
-    hintTouch: string;
   };
 }
 
@@ -96,7 +121,39 @@ const vi: Content = {
     ctaSecondary: "Thử AI42E Studio",
     note: "Bạn có thể dùng miễn phí. Cần dùng nhiều hơn thì mới phải trả phí.",
   },
+  showcase: {
+    eyebrow: "Bạn làm được gì với AI42E",
+    title: "Mở lên là",
+    tone: "làm được ngay",
+    tabs: [
+      {
+        id: "studio",
+        label: "Làm video",
+        eyebrow: "AI42E Studio",
+        title: "Biến ý tưởng thành video hoàn chỉnh",
+        text: "Bạn chỉ cần nghĩ ra ý tưởng. AI42E Studio lo phần còn lại: viết kịch bản, dựng hình, lồng tiếng và xuất ra file MP4.",
+        bullets: [
+          "Viết kịch bản, dựng hình và lồng tiếng tự động",
+          "Tải và dịch video từ nhiều nền tảng",
+          "Ứng dụng máy tính, ra mắt 01/11/2026",
+        ],
+        cta: "Xem AI42E Studio",
+        href: "https://studio.ai42e.com",
+      },
+      {
+        id: "game",
+        label: "Chơi cùng bạn bè",
+        eyebrow: "AI42E Game",
+        title: "Chơi cùng người thương, không cần cài gì",
+        text: "11 trò chơi cho hai người hoặc cả nhóm: Truth or Dare, bầu cua, ô ăn quan, đố vui và nhiều hơn nữa. Cả nhà chơi chung trên một chiếc điện thoại.",
+        bullets: ["Chơi ngay trên trình duyệt", "Không cần tài khoản", "Miễn phí"],
+        cta: "Chơi ngay",
+        href: "https://play.ai42e.com",
+      },
+    ],
+  },
   products: {
+    eyebrow: "Tất cả sản phẩm",
     title: "Hôm nay bạn muốn làm gì?",
     sub: "Chọn một sản phẩm, mở lên là dùng được ngay, không phải học thêm gì.",
     status: {
@@ -187,7 +244,27 @@ const vi: Content = {
       },
     ],
   },
+  compare: {
+    eyebrow: "Vì sao chọn AI42E",
+    title: "Dùng AI đâu cần",
+    tone: "phức tạp thế",
+    sub: "Nhiều người muốn thử AI nhưng ngại chuyện cài đặt, kỹ thuật và tiền bạc. AI42E làm ngược lại.",
+    withoutTitle: "Cách làm thông thường",
+    withTitle: "Với AI42E",
+    without: [
+      "Tìm từng công cụ riêng, mỗi nơi một kiểu",
+      "Phải học cách dùng rồi mới làm được",
+      "Phải trả tiền trước khi biết có hợp hay không",
+    ],
+    with: [
+      "Công cụ AI gom về một chỗ",
+      "Mở lên là dùng, không cần biết kỹ thuật",
+      "Dùng thử miễn phí, thích thì mới trả phí",
+    ],
+    result: "Đỡ mất công, đỡ mất tiền, dùng được ngay.",
+  },
   freemium: {
+    eyebrow: "Chi phí",
     title: "Dùng có mất tiền không?",
     sub: "Phần lớn là miễn phí. Bạn chỉ trả tiền khi cần dùng nhiều hơn, và luôn biết giá trước khi trả.",
     columns: [
@@ -205,7 +282,18 @@ const vi: Content = {
       },
     ],
   },
+  founder: {
+    eyebrow: "Lời từ người làm ra AI42E",
+    title: "Vì sao có AI42E?",
+    paragraphs: [
+      "AI đang thay đổi cách chúng ta làm việc, nhưng phần lớn công cụ vẫn khó dùng với người không rành kỹ thuật.",
+      "Mình muốn làm một nơi mà ai cũng thử được AI: dễ dùng, và có nhiều thứ miễn phí. Khi bạn dùng nhiều hơn, khoản phí giúp mình duy trì hệ thống và làm thêm sản phẩm mới.",
+      "Nếu bạn có ý kiến gì, cứ nhắn cho mình qua các kênh ở cuối trang nhé.",
+    ],
+    signature: "Mạnh, người làm ra AI42E",
+  },
   faq: {
+    eyebrow: "Hỏi đáp",
     title: "Có thể bạn đang thắc mắc",
     items: [
       {
@@ -235,6 +323,7 @@ const vi: Content = {
     sub: "Chọn một sản phẩm đang chạy và dùng thử miễn phí, hoặc theo dõi AI42E để biết khi có sản phẩm mới.",
     cta: "Xem các sản phẩm",
     cta2: "Thử AI42E Studio",
+    trust: "Miễn phí để bắt đầu · Không cần biết kỹ thuật",
   },
   footer: {
     slogan: "AI FOR EVERYONE AND EVERYTHING",
@@ -251,10 +340,6 @@ const vi: Content = {
     theme: "Đổi giao diện sáng/tối",
     language: "Đổi ngôn ngữ",
     skip: "Chuyển đến nội dung chính",
-    pause: "Tạm dừng chuyển động",
-    play: "Bật chuyển động",
-    hint: "Di chuột để nhìn quanh",
-    hintTouch: "Vuốt để nhìn quanh",
   },
 };
 
@@ -274,7 +359,39 @@ const en: Content = {
     ctaSecondary: "Try AI42E Studio",
     note: "You can use it for free. You only pay when you need more.",
   },
+  showcase: {
+    eyebrow: "What you can do with AI42E",
+    title: "Open it and",
+    tone: "get going",
+    tabs: [
+      {
+        id: "studio",
+        label: "Make videos",
+        eyebrow: "AI42E Studio",
+        title: "Turn an idea into a finished video",
+        text: "You only need the idea. AI42E Studio handles the rest: writing the script, building the scenes, adding the voice-over and exporting an MP4.",
+        bullets: [
+          "Script, visuals and voice-over, automated",
+          "Download and translate videos from many platforms",
+          "Desktop app, launching 1 Nov 2026",
+        ],
+        cta: "See AI42E Studio",
+        href: "https://studio.ai42e.com",
+      },
+      {
+        id: "game",
+        label: "Play with friends",
+        eyebrow: "AI42E Game",
+        title: "Play with your favourite people, nothing to install",
+        text: "11 games for two or for a group: Truth or Dare, Bau Cua, O An Quan, quizzes and more. Everyone plays together on a single phone.",
+        bullets: ["Plays right in the browser", "No account needed", "Free"],
+        cta: "Play now",
+        href: "https://play.ai42e.com",
+      },
+    ],
+  },
   products: {
+    eyebrow: "All products",
     title: "What do you want to do today?",
     sub: "Pick a product and start right away, with nothing new to learn.",
     status: {
@@ -365,7 +482,27 @@ const en: Content = {
       },
     ],
   },
+  compare: {
+    eyebrow: "Why AI42E",
+    title: "Using AI should not be",
+    tone: "this complicated",
+    sub: "Plenty of people want to try AI but worry about setup, technical skills and cost. AI42E does the opposite.",
+    withoutTitle: "The usual way",
+    withTitle: "With AI42E",
+    without: [
+      "Hunt for separate tools, each one different",
+      "Learn how to use them before you can do anything",
+      "Pay first, find out later if it suits you",
+    ],
+    with: [
+      "AI tools brought together in one place",
+      "Open and use, no technical skills needed",
+      "Try for free, pay only if you like it",
+    ],
+    result: "Less hassle, less cost, ready to use.",
+  },
   freemium: {
+    eyebrow: "Pricing",
     title: "Does it cost anything?",
     sub: "Most of it is free. You only pay when you need more, and you always see the price first.",
     columns: [
@@ -383,7 +520,18 @@ const en: Content = {
       },
     ],
   },
+  founder: {
+    eyebrow: "A word from the maker",
+    title: "Why AI42E exists",
+    paragraphs: [
+      "AI is changing how we work, but most tools are still hard to use if you are not technical.",
+      "I wanted a place where anyone can try AI: easy to use, with plenty of free things. When you use more, the fees help me keep the system running and build new products.",
+      "If you have thoughts, just message me through the channels at the bottom of the page.",
+    ],
+    signature: "Manh, maker of AI42E",
+  },
   faq: {
+    eyebrow: "FAQ",
     title: "You might be wondering",
     items: [
       {
@@ -413,6 +561,7 @@ const en: Content = {
     sub: "Pick a product that is live and try it for free, or follow AI42E to hear about new launches.",
     cta: "See the products",
     cta2: "Try AI42E Studio",
+    trust: "Free to start · No technical skills needed",
   },
   footer: {
     slogan: "AI FOR EVERYONE AND EVERYTHING",
@@ -429,10 +578,6 @@ const en: Content = {
     theme: "Toggle light/dark theme",
     language: "Change language",
     skip: "Skip to main content",
-    pause: "Pause motion",
-    play: "Play motion",
-    hint: "Move to look around",
-    hintTouch: "Swipe to look around",
   },
 };
 

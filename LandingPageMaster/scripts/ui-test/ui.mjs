@@ -60,7 +60,7 @@ async function open(viewport, opts = {}) {
   check("desktop: no horizontal overflow", overflow <= 0, `overflow ${overflow}px`);
   await page.screenshot({ path: path.join(shots, "desktop-light-top.png") });
 
-  // motion: pointer eases the wall, pause stops it
+  // motion: the pointer eases the wall
   const wallTransform = () => page.$eval(".wall", (e) => getComputedStyle(e).transform);
   await page.mouse.move(200, 200);
   await page.waitForTimeout(700);
@@ -69,18 +69,6 @@ async function open(viewport, opts = {}) {
   await page.waitForTimeout(900);
   const t2 = await wallTransform();
   check("desktop: pointer moves the wall", t1 !== t2);
-  await page.click('main button[aria-pressed]');
-  await page.waitForTimeout(300);
-  const pausedAttr = await page.$eval("[data-wall-paused]", (e) => e.getAttribute("data-wall-paused"));
-  const playState = await page.$eval(".wall-col", (e) => getComputedStyle(e).animationPlayState);
-  check("desktop: pause button stops the drift", pausedAttr === "true" && playState === "paused", `${pausedAttr}/${playState}`);
-  await page.mouse.move(300, 300, { steps: 4 });
-  await page.waitForTimeout(500);
-  const t3 = await wallTransform();
-  await page.mouse.move(1300, 800, { steps: 4 });
-  await page.waitForTimeout(500);
-  check("desktop: paused wall ignores the pointer", t3 === (await wallTransform()));
-  await page.click('main button[aria-pressed]');
 
   // anchors
   const anchors = await page.$$eval('a[href^="#"]', (as) => [...new Set(as.map((a) => a.getAttribute("href")))]);
@@ -88,9 +76,10 @@ async function open(viewport, opts = {}) {
   for (const a of anchors) if (a !== "#top" && !(await page.$(a))) missing.push(a);
   check("desktop: every anchor target exists", missing.length === 0, missing.join(","));
   await page.click('nav a[href="#pricing"]');
-  await page.waitForTimeout(900);
+  await page.waitForTimeout(1800);
   const pricingTop = await page.$eval("#pricing", (e) => Math.round(e.getBoundingClientRect().top));
-  check("desktop: nav anchor lands below sticky header", pricingTop >= 0 && pricingTop <= 120, `top=${pricingTop}`);
+  const headerH = await page.$eval("header", (e) => Math.round(e.getBoundingClientRect().height));
+  check("desktop: nav anchor lands just below the sticky header", pricingTop >= headerH - 4 && pricingTop <= headerH + 60, `top=${pricingTop}, header=${headerH}`);
 
   // external links hygiene
   const bad = await page.$$eval('a[target="_blank"]', (as) => as.filter((a) => !/noopener/.test(a.rel)).map((a) => a.href));
@@ -174,6 +163,26 @@ for (const scheme of ["light", "dark"]) {
   await m.ctx.close();
 }
 
+// ---------- Story sections: tabs, comparison, founder note ----------
+{
+  const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: "light" });
+  const tabs = await page.locator('[role="tab"]').count();
+  check("showcase: two tabs (video, game)", tabs === 2, String(tabs));
+  const before = await page.locator('[role="tabpanel"] h3').innerText();
+  await page.click('[role="tab"]:nth-of-type(2)');
+  await page.waitForTimeout(300);
+  const after = await page.locator('[role="tabpanel"] h3').innerText();
+  check("showcase: switching the tab changes the content", before !== after, `${before} -> ${after}`);
+  check("showcase: selected tab is marked", (await page.getAttribute('[role="tab"]:nth-of-type(2)', "aria-selected")) === "true");
+  const eyebrows = await page.locator(".eyebrow").count();
+  check("sections: every section has its small label", eyebrows >= 6, String(eyebrows));
+  const compare = await page.locator("#products ~ section").first().innerText();
+  check("compare: has the without/with columns", /Cách làm thông thường/.test(compare) && /Với AI42E/.test(compare));
+  const h2count = await page.locator("main h2").count();
+  check("page: a real story, at least 7 headed sections", h2count >= 7, String(h2count));
+  await ctx.close();
+}
+
 // ---------- Design system (the "why does this look random" guard) ----------
 for (const scheme of ["light", "dark"]) {
   const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: scheme });
@@ -199,11 +208,11 @@ for (const scheme of ["light", "dark"]) {
     }
     return { fam: [...fam], size: [...size].sort((a, b) => parseFloat(a) - parseFloat(b)), weight: [...weight], color: [...color] };
   });
-  check(`design (${scheme}): exactly one typeface`, ds.fam.length === 1, ds.fam.join(" | "));
-  const SCALE = ["13px", "15px", "18px", "36px", "56px"];
+  check(`design (${scheme}): exactly two typefaces (Fraunces headlines, Inter text)`, ds.fam.length === 2 && ds.fam.includes("Inter") && ds.fam.some((f) => /Fraunces/.test(f)), ds.fam.join(" | "));
+  const SCALE = ["13px", "15px", "18px", "28px", "40px", "56px"];
   const strays = ds.size.filter((size) => !SCALE.includes(size));
-  check(`design (${scheme}): font sizes stay on the 5-step scale`, strays.length === 0, `used ${ds.size.join(" ")}; stray ${strays.join(" ")}`);
-  check(`design (${scheme}): at most 2 font weights`, ds.weight.length <= 2, ds.weight.join(" "));
+  check(`design (${scheme}): font sizes stay on the 6-step scale`, strays.length === 0, `used ${ds.size.join(" ")}; stray ${strays.join(" ")}`);
+  check(`design (${scheme}): at most 3 font weights`, ds.weight.length <= 3, ds.weight.join(" "));
   check(`design (${scheme}): at most 5 text colours`, ds.color.length <= 5, ds.color.join(" | "));
   await ctx.close();
 }
@@ -252,7 +261,6 @@ for (const [label, vp] of [
   check("reduced-motion: wall still rendered", (await page.locator(".wall-tile").count()) >= 20);
   const anim = await page.$eval(".wall-col", (e) => getComputedStyle(e).animationName);
   check("reduced-motion: no drift animation", anim === "none", anim);
-  check("reduced-motion: pause control is disabled and pressed", (await page.$eval("main button[aria-pressed]", (e) => e.disabled && e.getAttribute("aria-pressed") === "true")));
   const opacity = await page.$eval("h1", (e) => getComputedStyle(e).opacity);
   check("reduced-motion: content visible", opacity === "1", `h1 opacity ${opacity}`);
   await ctx.close();
@@ -316,6 +324,7 @@ const CHANNELS = '#contact a[href*="youtube.com"], #contact a[href*="facebook.co
   const visible = await page.$$eval(CHANNELS, (as) => as.map((a) => { const r = a.getBoundingClientRect(); return r.width > 0 && r.height > 0; }));
   check("footer: 5 official channels are visible", visible.length === 5 && visible.every(Boolean), String(visible.length));
   const text = await page.evaluate(() => document.querySelector(".brand-landing").innerText);
+  check("copy: no motion-control or mouse-hint text shown to visitors", !/Tạm dừng chuyển động|Di chuột để nhìn quanh|Pause motion|Move to look around/.test(text));
   check("copy: no placeholder leaks", !/undefined|\[object|NaN|TODO|lorem/i.test(text));
   const headings = await page.$$eval("h1, h2", (hs) => hs.map((h) => h.innerText));
   const broken = headings.filter((t) => /\n/.test(t.trim()) && !t.includes("người,"));

@@ -6,21 +6,21 @@ Trang `/` giới thiệu thương hiệu AI42E và các sản phẩm của hệ 
 AI42E là nền tảng giúp nhiều người tiếp cận AI dễ dàng, với nhiều sản phẩm trong cùng một hệ sinh thái. Nhiều thứ miễn phí để bắt đầu, dùng nâng cao thì mới trả phí. Slogan: AI FOR EVERYONE AND EVERYTHING.
 
 ## Cấu trúc trang
-Hero (nằm dưới header; bức tường ảnh sản phẩm nghiêng 3D, thẻ tiêu đề ở giữa) → Sản phẩm (6 thẻ dạng bento, mỗi thẻ một vùng sáng riêng) → Chi phí (khối tối, nền gradient CSS) → Câu hỏi thường gặp → Khối kêu gọi tối (vòng quỹ đạo sản phẩm quanh logo) → Footer (thẻ có cột liên kết, kênh chính thức, chữ AI42E khổng lồ mờ). Header học từ adkit.so: thanh cố định có viền dưới, logo chữ đậm bên trái, menu giữa ("Sản phẩm" xổ xuống liệt kê 6 sản phẩm kèm mô tả và trạng thái), bên phải đổi ngôn ngữ, sáng/tối và một nút cam; ngay dưới là dải "Sản phẩm:" để vào thẳng từng sản phẩm. Điện thoại có nút menu.
+Thứ tự "câu chuyện" (học từ adkit.so): Hero (nằm dưới header; bức tường ảnh sản phẩm nghiêng 3D, thẻ tiêu đề ở giữa) → Bạn làm được gì (hai tab Làm video / Chơi cùng bạn bè, hình sản phẩm lớn) → Tất cả sản phẩm (6 thẻ bento) → Vì sao chọn AI42E (so sánh "thông thường / với AI42E") → Chi phí (khối vùng sáng, 3 thẻ kính) → Lời từ người làm ra AI42E → Hỏi đáp → Kêu gọi cuối (vòng quỹ đạo sản phẩm quanh logo) → Footer (như play.ai42e.com: 5 thẻ mạng xã hội). Mọi khối đổi theo giao diện sáng/tối; mỗi khối có nhãn nhỏ + tiêu đề (có thể hai tông, học từ HeyRetro). Header: xem dưới.
 
 ## Hệ thiết kế (nhỏ có chủ đích, học từ baked.design)
 Mọi thứ nằm ở khối `.brand-landing` cuối `src/app/globals.css`. Đừng thêm ngoài danh sách này.
 
 | Thành phần | Quy định |
 | :--- | :--- |
-| Font | **Chỉ Inter** (nạp đủ `latin`, `latin-ext`, `vietnamese`). Không font thứ hai, không chữ nghiêng. |
-| Cỡ chữ | **5 cỡ**: `t-display` 36–56px, `t-title` 28–36px, `t-heading` 18px, `t-body` 15px, `t-small` 13px. Độ đậm chỉ 400 và 500. |
+| Font | **Hai font**: Fraunces (chữ có chân đậm) cho tiêu đề `t-display`, `t-title`, `t-subtitle`; Inter cho mọi chữ còn lại. Cả hai nạp đủ bộ `latin`, `latin-ext`, `vietnamese`. Không chữ nghiêng. |
+| Cỡ chữ | **6 cỡ**: `t-display` 36–56px, `t-title` 28–40px, `t-subtitle` 28px (Fraunces); `t-heading` 18px, `t-body` 15px, `t-small` 13px (Inter). Độ đậm 400, 500, 700. Nhãn nhỏ phía trên mỗi tiêu đề là `.eyebrow` (13px, tím). |
 | Màu chữ | `--b-ink` (chàm đậm `#17123a`), `--b-muted` (ink 68%), `--b-brand` (tím `#5a3df0`, chỉ để nhấn: dòng tiêu đề thứ hai, link trên thẻ). Chữ trên nền ink dùng màu nền trang. |
 | Màu nền | Một họ tím lavender. Sáng: nền `#f7f5ff`, mặt `#fff`, chip `#ece8ff`. Tối: nền `#0d0b1f`, mặt `#16132e`, chip `#221e44`. |
 | Màu nhấn | **Một** màu cam `#ff7a45`, chỉ cho nút chính (`.pill-accent`, chữ chàm đậm để đạt AA). Không dùng cam cho thứ khác. |
 | Hình khối | Nút luôn là viên thuốc cao 40px (`.pill`, biến thể `-solid`, `-surface`, `-glass`). Mặt phẳng bo 22–28px. |
 | Màu sắc khác | Tư liệu sản phẩm (minh họa game, ảnh chụp) và các **vùng sáng** (`.aurora`, `au-*`) **cùng một họ tím–xanh dương**: các sản phẩm khác nhau bằng hình minh họa, không bằng màu. Chấm trạng thái nhỏ (xanh = đang chạy, vàng = bảo trì). Không dùng thêm hue nào khác. |
-| Chuyển động | Một nút "Tạm dừng chuyển động" ở hero dừng **mọi** chuyển động (bức tường, vùng sáng, ánh lấp lánh, quỹ đạo). Tự tắt khi người dùng bật giảm chuyển động. Chuyển động chỉ dùng transform/opacity. **Không dùng WebGL**: một lớp WebGL (Grainient) từng phủ màu xám nhạt lên khối tối trên máy thật, trong khi Chrome không GPU dùng để test vẽ ra khác, nên không thể kiểm chứng bằng test tự động. |
+| Chuyển động | Bức tường (con trỏ làm nghiêng, các cột tự trôi), vùng sáng, ánh lấp lánh, vòng quỹ đạo, tiêu đề hiện dần. **Không có nút điều khiển cho khách** (Mạnh quyết 2026-10-26); tự tắt khi người dùng bật giảm chuyển động. Chỉ dùng transform/opacity. **Không dùng WebGL**: một lớp WebGL (Grainient) từng phủ màu xám nhạt lên khối tối trên máy thật trong khi Chrome không GPU dùng để test vẽ khác đi, nên không kiểm chứng được bằng test tự động. |
 
 Bài test `design (…)` trong `scripts/ui-test/ui.mjs` kiểm tự động: đúng một font, mọi cỡ chữ nằm trong thang 5 cỡ, tối đa 2 độ đậm.
 
@@ -38,6 +38,8 @@ Viết như một người thật nói chuyện với khách, không như khẩu
 | Hiệu ứng bức tường (con trỏ, dừng) | `src/components/brand/Wall.tsx`, CSS `.wall*` |
 | Vùng sáng từng sản phẩm, hình minh họa trên thẻ | `src/components/brand/ProductVisual.tsx`, CSS `.aurora`, `.au-*` |
 | Khối kêu gọi, footer | `ClosingSection.tsx`, `BrandFooter.tsx` |
+| Khối tab, so sánh, lời người làm | `ShowcaseSection.tsx`, `CompareSection.tsx`, `FounderSection.tsx` |
+| Nhãn + tiêu đề mọi khối | `SectionHead.tsx`, `SectionTitle.tsx` |
 | Bố cục từng mục | `src/components/brand/*Section.tsx`, `BrandHero.tsx`, `BrandNavbar.tsx` |
 
 Thêm hoặc đổi trạng thái sản phẩm: sửa `products.items` ở cả `vi` và `en`. Chỉ đặt `href` khi sản phẩm đã chạy thật (test `links:` kiểm DownloadAnything không có link khi domain còn 404).

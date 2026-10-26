@@ -1,0 +1,57 @@
+"use client";
+
+import { ArrowRight, Check, X } from "lucide-react";
+import { useBrand } from "./LocaleProvider";
+import { Reveal } from "./Reveal";
+import { SectionHead } from "./SectionHead";
+
+/** "Without / with": the honest before-and-after, no invented numbers or quotes. */
+export function CompareSection() {
+  const { c } = useBrand();
+  const k = c.compare;
+  return (
+    <section className="py-16 sm:py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <SectionHead eyebrow={k.eyebrow} title={k.title} tone={k.tone} sub={k.sub} />
+
+        <div className="mx-auto mt-12 grid max-w-4xl gap-4 md:grid-cols-2">
+          <Reveal className="h-full">
+            <div className="h-full rounded-[28px] bg-[var(--b-chip)] p-6 sm:p-8">
+              <h3 className="t-heading text-[var(--b-muted)]">{k.withoutTitle}</h3>
+              <ul className="mt-5 space-y-4">
+                {k.without.map((item) => (
+                  <li key={item} className="t-body flex items-start gap-3 text-[var(--b-muted)]">
+                    <X size={18} aria-hidden="true" className="mt-0.5 shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+          <Reveal delay={0.08} className="h-full">
+            <div className="h-full rounded-[28px] bg-[var(--b-surface)] p-6 shadow-[0_24px_60px_-28px_rgba(90,61,240,0.45)] ring-1 ring-[var(--b-brand)] sm:p-8">
+              <h3 className="t-heading">{k.withTitle}</h3>
+              <ul className="mt-5 space-y-4">
+                {k.with.map((item) => (
+                  <li key={item} className="t-body flex items-start gap-3">
+                    <Check size={18} strokeWidth={2.6} aria-hidden="true" className="mt-0.5 shrink-0 text-[var(--b-brand)]" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="t-body brand-text mt-6 rounded-2xl bg-[var(--b-chip)] px-4 py-3 font-medium">{k.result}</p>
+            </div>
+          </Reveal>
+        </div>
+
+        <Reveal className="mt-10 flex flex-col items-center gap-3">
+          <a href="#products" className="pill pill-accent">
+            {c.closing.cta}
+            <ArrowRight size={16} aria-hidden="true" />
+          </a>
+          <p className="t-small text-[var(--b-muted)]">{c.closing.trust}</p>
+        </Reveal>
+      </div>
+    </section>
+  );
+}

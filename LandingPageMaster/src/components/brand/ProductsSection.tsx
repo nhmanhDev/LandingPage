@@ -7,7 +7,7 @@ import type { Product, ProductStatus } from "@/lib/brand/content";
 import { useBrand } from "./LocaleProvider";
 import { ProductVisual } from "./ProductVisual";
 import { Reveal } from "./Reveal";
-import { SectionTitle } from "./SectionTitle";
+import { SectionHead } from "./SectionHead";
 import { useMounted } from "./useMounted";
 
 // The only colour in the UI chrome: a small dot that says whether the product is live.
@@ -80,12 +80,9 @@ export function ProductsSection() {
   const { c } = useBrand();
   const items = ORDER.map((id) => c.products.items.find((item) => item.id === id)).filter((item): item is Product => Boolean(item));
   return (
-    <section id="products" className="scroll-mt-28 py-16 sm:py-24">
+    <section id="products" className="scroll-mt-32 py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <Reveal className="max-w-xl">
-          <SectionTitle text={c.products.title} />
-          <p className="t-body mt-3 text-[var(--b-muted)]">{c.products.sub}</p>
-        </Reveal>
+        <SectionHead eyebrow={c.products.eyebrow} title={c.products.title} sub={c.products.sub} />
 
         <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-12">
           {items.map((product, index) => (

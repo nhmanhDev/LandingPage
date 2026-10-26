@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Fraunces, Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+
+const fraunces = Fraunces({
+  subsets: ["latin", "latin-ext", "vietnamese"],
+  weight: ["600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 const inter = Inter({
   subsets: ["latin", "latin-ext", "vietnamese"],
@@ -37,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="vi"
-      className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
+      className={`${inter.variable} ${spaceGrotesk.variable} ${fraunces.variable} antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col font-sans" spellCheck={false}>

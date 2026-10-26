@@ -1,16 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import { MotionConfig } from "motion/react";
 import { BrandFooter } from "./BrandFooter";
 import { BrandHero } from "./BrandHero";
 import { BrandNavbar } from "./BrandNavbar";
 import { ClosingSection } from "./ClosingSection";
+import { CompareSection } from "./CompareSection";
 import { FaqSection } from "./FaqSection";
+import { FounderSection } from "./FounderSection";
 import { FreemiumSection } from "./FreemiumSection";
 import { LocaleProvider, useBrand } from "./LocaleProvider";
-import { MotionPausedProvider } from "./MotionContext";
 import { ProductsSection } from "./ProductsSection";
+import { ShowcaseSection } from "./ShowcaseSection";
 
 function SkipLink() {
   const { c } = useBrand();
@@ -24,29 +25,30 @@ function SkipLink() {
   );
 }
 
+/** The story, top to bottom: claim, what you can do, everything on offer, why it is easier, cost, the maker, doubts, invitation. */
 export function BrandPage() {
-  const [paused, setPaused] = useState(false);
   return (
     <LocaleProvider>
-      <MotionPausedProvider value={paused}>
       <MotionConfig reducedMotion="user">
         <noscript>
           <style>{'.brand-landing [style*="opacity"]{opacity:1!important;transform:none!important}'}</style>
         </noscript>
-        <div className="brand-landing min-h-screen overflow-x-clip" data-paused={paused}>
+        <div className="brand-landing min-h-screen overflow-x-clip">
           <SkipLink />
           <BrandNavbar />
           <main>
-            <BrandHero userPaused={paused} onTogglePause={() => setPaused((value) => !value)} />
+            <BrandHero />
+            <ShowcaseSection />
             <ProductsSection />
+            <CompareSection />
             <FreemiumSection />
+            <FounderSection />
             <FaqSection />
             <ClosingSection />
           </main>
           <BrandFooter />
         </div>
       </MotionConfig>
-      </MotionPausedProvider>
     </LocaleProvider>
   );
 }

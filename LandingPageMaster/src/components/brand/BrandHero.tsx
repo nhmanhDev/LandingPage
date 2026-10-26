@@ -1,9 +1,9 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
-import { ArrowRight, Pause, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import { useBrand } from "./LocaleProvider";
+import { useReducedMotion } from "./useReducedMotion";
 import { Wall } from "./Wall";
 
 const rise = (delay: number) => ({
@@ -12,27 +12,18 @@ const rise = (delay: number) => ({
   transition: { duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
 
-const REDUCED_QUERY = "(prefers-reduced-motion: reduce)";
-const subscribeReduced = (listener: () => void) => {
-  const query = window.matchMedia(REDUCED_QUERY);
-  query.addEventListener("change", listener);
-  return () => query.removeEventListener("change", listener);
-};
-const getReduced = () => window.matchMedia(REDUCED_QUERY).matches;
-
-export function BrandHero({ userPaused, onTogglePause }: { userPaused: boolean; onTogglePause: () => void }) {
+export function BrandHero() {
   const { c } = useBrand();
-  const reduced = useSyncExternalStore(subscribeReduced, getReduced, () => false);
-  const paused = userPaused || reduced;
+  const reduced = useReducedMotion();
 
   return (
     <section id="top" className="relative min-h-[calc(100svh-7rem)] overflow-hidden">
-      <Wall paused={paused} text={c.wall} />
+      <Wall paused={reduced} text={c.wall} />
 
-      <div className="pointer-events-none relative z-10 grid min-h-[calc(100svh-7rem)] place-items-center px-4 pb-24 pt-10">
-        <div className="pointer-events-auto w-full max-w-[34rem] rounded-[28px] bg-[var(--b-surface)] p-7 text-center shadow-[0_30px_80px_-30px_rgba(0,0,0,0.35)] sm:p-10">
+      <div className="pointer-events-none relative z-10 grid min-h-[calc(100svh-7rem)] place-items-center px-4 py-14">
+        <div className="pointer-events-auto w-full max-w-[40rem] rounded-[28px] bg-[var(--b-surface)] p-7 text-center shadow-[0_30px_80px_-30px_rgba(23,18,58,0.4)] sm:p-10">
           <motion.p {...rise(0)} className="t-small mx-auto mb-5 inline-flex items-center gap-2 rounded-full bg-[var(--b-chip)] px-3.5 py-1.5 text-[var(--b-muted)]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--b-ink)]" aria-hidden="true" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--b-brand)]" aria-hidden="true" />
             {c.hero.eyebrow}
           </motion.p>
 
@@ -42,7 +33,7 @@ export function BrandHero({ userPaused, onTogglePause }: { userPaused: boolean; 
             <span className="brand-text">{c.hero.titleLine2}</span>
           </motion.h1>
 
-          <motion.p {...rise(0.1)} className="t-body mx-auto mt-5 max-w-[26rem] text-[var(--b-muted)]">
+          <motion.p {...rise(0.1)} className="t-body mx-auto mt-5 max-w-[27rem] text-[var(--b-muted)]">
             {c.hero.sub}
           </motion.p>
 
@@ -60,20 +51,6 @@ export function BrandHero({ userPaused, onTogglePause }: { userPaused: boolean; 
             {c.hero.note}
           </motion.p>
         </div>
-      </div>
-
-      <div className="pointer-events-none absolute inset-x-0 bottom-5 z-10 flex items-center justify-center gap-2 px-4">
-        <button
-          type="button"
-          onClick={onTogglePause}
-          aria-pressed={paused}
-          disabled={reduced}
-          className="pill pointer-events-auto"
-        >
-          {paused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}
-          {paused ? c.ui.play : c.ui.pause}
-        </button>
-        <span className="pill pointer-events-none hidden sm:inline-flex">{c.ui.hint}</span>
       </div>
     </section>
   );
