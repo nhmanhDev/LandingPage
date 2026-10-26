@@ -176,13 +176,15 @@ const vi: Content = {
         id: "voice",
         icon: "voice",
         name: "Voice Studio",
-        tagline: "Biến chữ thành giọng đọc nghe tự nhiên, kèm dịch và nhân bản giọng nói.",
+        tagline: "Biến chữ thành giọng đọc nghe tự nhiên, kèm dịch và nhân bản giọng nói. Ứng dụng cho Windows.",
         bullets: [
           "Đọc văn bản bằng giọng AI",
           "Dịch và nhân bản giọng nói",
-          "Ứng dụng máy tính",
+          "Ứng dụng máy tính, tải về cho Windows",
         ],
-        status: "soon",
+        status: "free",
+        href: "https://github.com/nhmanhDev/voice-studio-releases/releases/latest",
+        cta: "Tải cho Windows",
       },
       {
         id: "trading",
@@ -260,7 +262,7 @@ const vi: Content = {
       },
       {
         q: "Bây giờ tôi dùng được những gì?",
-        a: "AI42E Game dùng được ngay trên web. AI42E Studio sẽ ra mắt ngày 01/11/2026 và hiện đã có bản xem trước. DownloadAnything đang bảo trì, còn Voice Studio và OneForAll sắp ra mắt.",
+        a: "AI42E Game dùng được ngay trên web, còn Voice Studio tải về dùng trên Windows. AI42E Studio sẽ ra mắt ngày 01/11/2026 và hiện đã có bản xem trước. DownloadAnything đang bảo trì, còn OneForAll sắp ra mắt.",
       },
       {
         q: "Làm sao biết đâu là kênh chính thức của AI42E?",
@@ -383,13 +385,15 @@ const en: Content = {
         id: "voice",
         icon: "voice",
         name: "Voice Studio",
-        tagline: "Turn text into natural-sounding speech, with voice translation and cloning.",
+        tagline: "Turn text into natural-sounding speech, with voice translation and cloning. A Windows app.",
         bullets: [
           "Read text aloud with AI voices",
           "Translate and clone voices",
-          "Desktop app",
+          "Desktop app, download for Windows",
         ],
-        status: "soon",
+        status: "free",
+        href: "https://github.com/nhmanhDev/voice-studio-releases/releases/latest",
+        cta: "Download for Windows",
       },
       {
         id: "trading",
@@ -467,7 +471,7 @@ const en: Content = {
       },
       {
         q: "What can I use right now?",
-        a: "AI42E Game works right now on the web. AI42E Studio launches on 1 Nov 2026 and already has a web preview. DownloadAnything is under maintenance, and Voice Studio and OneForAll are coming soon.",
+        a: "AI42E Game works right now on the web, and Voice Studio can be downloaded for Windows. AI42E Studio launches on 1 Nov 2026 and already has a web preview. DownloadAnything is under maintenance, and OneForAll is coming soon.",
       },
       {
         q: "How do I know which channels are official?",

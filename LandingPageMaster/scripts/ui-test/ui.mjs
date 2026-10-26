@@ -216,7 +216,7 @@ for (const scheme of ["light", "dark"]) {
   const dl = cards.find((c) => c.name === "DownloadAnything");
   check("links: DownloadAnything has no link while its domain is down", dl && dl.link === false);
   const live = cards.filter((c) => c.link).map((c) => c.name).sort().join(",");
-  check("links: only AI42E Studio and AI42E Game are linked", live === "AI42E Game,AI42E Studio", live);
+  check("links: only the live products are linked (Studio, Game, Voice Studio)", live === "AI42E Game,AI42E Studio,Voice Studio", live);
   await ctx.close();
 }
 
