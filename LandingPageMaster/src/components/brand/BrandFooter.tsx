@@ -19,7 +19,7 @@ export function BrandFooter() {
   const { c } = useBrand();
   return (
     <footer id="contact" className="mt-8 scroll-mt-32 border-t border-[var(--b-line)] pb-8 pt-14">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center gap-4" aria-hidden="true">
           <span className="h-px w-16 bg-[var(--b-line)]" />
           <span className="t-small font-medium tracking-[0.14em] text-[var(--b-muted)]">{c.contact.title.toUpperCase()}</span>
@@ -36,7 +36,7 @@ export function BrandFooter() {
                 <a
                   href={social.href}
                   {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="group flex h-full flex-col gap-2 rounded-2xl bg-[var(--b-surface)] p-4 ring-1 ring-[var(--b-line)] transition-all duration-300 hover:-translate-y-1 hover:ring-[var(--b-brand)]"
+                  className="group flex h-full flex-col gap-2 rounded-2xl bg-[var(--b-surface)] p-4 shadow-[var(--sh-soft)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--sh-card)]"
                 >
                   <span className="t-small flex items-center gap-2 text-[var(--b-muted)]">
                     <span style={{ color }}>

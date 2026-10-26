@@ -15,11 +15,11 @@ export function ShowcaseSection() {
   const product = c.products.items.find((item) => item.id === tab.id);
 
   return (
-    <section id="features" className="scroll-mt-32 py-16 sm:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section id="features" className="scroll-mt-32 py-14 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead eyebrow={c.showcase.eyebrow} title={c.showcase.title} tone={c.showcase.tone} />
 
-        <Reveal className="mt-10">
+        <Reveal className="mt-12">
           <div role="tablist" aria-label={c.showcase.eyebrow} className="mx-auto flex max-w-md rounded-full bg-[var(--b-chip)] p-1">
             {c.showcase.tabs.map((item) => (
               <button
@@ -45,7 +45,7 @@ export function ShowcaseSection() {
           role="tabpanel"
           id={`panel-${tab.id}`}
           aria-labelledby={`tab-${tab.id}`}
-          className="mt-10 grid items-center gap-8 rounded-[32px] bg-[var(--b-surface)] p-4 ring-1 ring-[var(--b-line)] sm:p-6 md:grid-cols-[1fr_1.15fr] md:gap-12 md:p-10"
+          className="mt-14 grid items-center gap-8 rounded-[32px] bg-gradient-to-b from-[var(--b-surface)] to-[var(--b-chip)] p-4 shadow-[var(--sh-card)] sm:p-6 md:grid-cols-[1fr_1.15fr] md:gap-12 md:p-10"
         >
           <div>
             <p className="eyebrow">{tab.eyebrow}</p>
@@ -61,7 +61,7 @@ export function ShowcaseSection() {
                 </li>
               ))}
             </ul>
-            <a href={tab.href} target="_blank" rel="noopener noreferrer" className="pill pill-accent mt-7">
+            <a href={tab.href} target="_blank" rel="noopener noreferrer" className="pill pill-accent pill-cta mt-7">
               {tab.cta}
               <ArrowRight size={16} aria-hidden="true" />
             </a>

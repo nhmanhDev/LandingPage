@@ -209,7 +209,7 @@ for (const scheme of ["light", "dark"]) {
     return { fam: [...fam], size: [...size].sort((a, b) => parseFloat(a) - parseFloat(b)), weight: [...weight], color: [...color] };
   });
   check(`design (${scheme}): exactly two typefaces (Fraunces headlines, Inter text)`, ds.fam.length === 2 && ds.fam.includes("Inter") && ds.fam.some((f) => /Fraunces/.test(f)), ds.fam.join(" | "));
-  const SCALE = ["13px", "15px", "18px", "28px", "40px", "56px"];
+  const SCALE = ["13px", "15px", "18px", "28px", "48px", "56px"];
   const strays = ds.size.filter((size) => !SCALE.includes(size));
   check(`design (${scheme}): font sizes stay on the 6-step scale`, strays.length === 0, `used ${ds.size.join(" ")}; stray ${strays.join(" ")}`);
   check(`design (${scheme}): at most 3 font weights`, ds.weight.length <= 3, ds.weight.join(" "));

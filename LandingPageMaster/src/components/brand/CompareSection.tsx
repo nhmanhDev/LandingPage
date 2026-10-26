@@ -10,13 +10,13 @@ export function CompareSection() {
   const { c } = useBrand();
   const k = c.compare;
   return (
-    <section className="py-16 sm:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="py-14 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead eyebrow={k.eyebrow} title={k.title} tone={k.tone} sub={k.sub} />
 
-        <div className="mx-auto mt-12 grid max-w-4xl gap-4 md:grid-cols-2">
+        <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-2">
           <Reveal className="h-full">
-            <div className="h-full rounded-[28px] bg-[var(--b-chip)] p-6 sm:p-8">
+            <div className="h-full rounded-3xl bg-[var(--b-chip)] p-6 shadow-[var(--sh-soft)] sm:p-9">
               <h3 className="t-heading text-[var(--b-muted)]">{k.withoutTitle}</h3>
               <ul className="mt-5 space-y-4">
                 {k.without.map((item) => (
@@ -29,7 +29,7 @@ export function CompareSection() {
             </div>
           </Reveal>
           <Reveal delay={0.08} className="h-full">
-            <div className="h-full rounded-[28px] bg-[var(--b-surface)] p-6 shadow-[0_24px_60px_-28px_rgba(90,61,240,0.45)] ring-1 ring-[var(--b-brand)] sm:p-8">
+            <div className="h-full rounded-3xl bg-[var(--b-surface)] p-6 shadow-[var(--sh-card)] ring-1 ring-[var(--b-brand)]/30 sm:p-9">
               <h3 className="t-heading">{k.withTitle}</h3>
               <ul className="mt-5 space-y-4">
                 {k.with.map((item) => (
@@ -44,8 +44,8 @@ export function CompareSection() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-10 flex flex-col items-center gap-3">
-          <a href="#products" className="pill pill-accent">
+        <Reveal className="mt-14 flex flex-col items-center gap-3">
+          <a href="#products" className="pill pill-accent pill-cta">
             {c.closing.cta}
             <ArrowRight size={16} aria-hidden="true" />
           </a>

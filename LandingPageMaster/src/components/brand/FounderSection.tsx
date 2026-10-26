@@ -11,11 +11,11 @@ export function FounderSection() {
   const { c } = useBrand();
   const f = c.founder;
   return (
-    <section className="py-16 sm:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="band my-6 py-14 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead eyebrow={f.eyebrow} title={f.title} />
-        <Reveal className="mx-auto mt-10 max-w-2xl">
-          <figure className="rounded-[28px] bg-[var(--b-surface)] p-6 ring-1 ring-[var(--b-line)] sm:p-9">
+        <Reveal className="mx-auto mt-12 max-w-2xl">
+          <figure className="rounded-3xl bg-[var(--b-surface)] p-6 shadow-[var(--sh-card)] sm:p-10">
             <div className="space-y-4">
               {f.paragraphs.map((text) => (
                 <p key={text} className="t-body">

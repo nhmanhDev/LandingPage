@@ -60,8 +60,8 @@ function Card({ product, statusLabel }: { product: Product; statusLabel: string 
   return (
     <SpotlightCard
       theme={mounted && resolvedTheme === "dark" ? "dark" : "light"}
-      className="!rounded-[28px] !p-3 h-full transition-transform duration-300 hover:-translate-y-1"
-      style={{ ["--spotlight-card-surface" as string]: "var(--b-surface)" }}
+      className="!rounded-3xl !p-3 h-full transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:!shadow-[var(--sh-card)]"
+      style={{ ["--spotlight-card-surface" as string]: "var(--b-surface)", ["--spotlight-card-shadow" as string]: "var(--sh-soft)" }}
       intensity={0.22}
       spotlightSize={300}
     >
@@ -80,11 +80,11 @@ export function ProductsSection() {
   const { c } = useBrand();
   const items = ORDER.map((id) => c.products.items.find((item) => item.id === id)).filter((item): item is Product => Boolean(item));
   return (
-    <section id="products" className="scroll-mt-32 py-16 sm:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section id="products" className="scroll-mt-32 py-14 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead eyebrow={c.products.eyebrow} title={c.products.title} sub={c.products.sub} />
 
-        <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-12">
+        <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-12">
           {items.map((product, index) => (
             <li key={product.id} className={SPAN[product.id]}>
               <Reveal delay={Math.min(index, 3) * 0.06} className="h-full">

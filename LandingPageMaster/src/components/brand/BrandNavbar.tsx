@@ -127,7 +127,7 @@ export function BrandNavbar() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--b-line)] bg-[color-mix(in_srgb,var(--b-bg)_82%,transparent)] backdrop-blur-md">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6" aria-label="Main">
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8" aria-label="Main">
         <a href="#top" className="flex min-h-10 items-center gap-2.5" aria-label="AI42E">
           <Image src={logo} alt="" width={30} height={30} className="rounded-lg" priority />
           <span className="t-heading">AI42E</span>

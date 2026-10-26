@@ -29,17 +29,17 @@ export function ClosingSection() {
   const mounted = useMounted();
   const pathColor = mounted && resolvedTheme === "dark" ? "rgba(243,241,255,0.28)" : "rgba(23,18,58,0.22)";
   return (
-    <section className="py-8 sm:py-12">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="py-10 sm:py-14">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="aurora au-panel relative rounded-[32px]">
+          <div className="aurora au-panel relative rounded-[32px] shadow-[var(--sh-card)]">
             <div className="relative z-10 grid items-center gap-6 p-6 sm:p-12 md:grid-cols-[1.05fr_1fr]">
               <div>
                 <SectionTitle text={c.closing.title} className="t-title" />
                 <p className="t-body mt-3 max-w-md text-[var(--b-muted)]">{c.closing.sub}</p>
                 <div className="mt-7 flex flex-wrap items-center gap-2.5">
                   <Magnet padding={50} magnetStrength={5} maxOffset={14}>
-                    <a href="#products" className="pill pill-accent">
+                    <a href="#products" className="pill pill-accent pill-cta">
                       {c.closing.cta}
                       <ArrowRight size={16} aria-hidden="true" />
                     </a>
