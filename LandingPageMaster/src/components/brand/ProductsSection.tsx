@@ -47,7 +47,7 @@ function Card({ product, statusLabel }: { product: Product; statusLabel: string 
         </div>
         <p className="t-body mt-1.5 text-[var(--b-muted)]">{product.tagline}</p>
         {live ? (
-          <span className="t-body mt-3 inline-flex items-center gap-1 font-medium">
+          <span className="t-body brand-text mt-3 inline-flex items-center gap-1 font-medium">
             {product.cta}
             <ArrowUpRight size={16} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </span>
@@ -80,7 +80,7 @@ export function ProductsSection() {
   const { c } = useBrand();
   const items = ORDER.map((id) => c.products.items.find((item) => item.id === id)).filter((item): item is Product => Boolean(item));
   return (
-    <section id="products" className="scroll-mt-4 py-16 sm:py-24">
+    <section id="products" className="scroll-mt-28 py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal className="max-w-xl">
           <SectionTitle text={c.products.title} />

@@ -185,18 +185,21 @@
  * Design system, kept deliberately small (learned from baked.design):
  *   - ONE typeface: Inter. No second family, no italics.
  *   - FIVE type sizes: display, title, heading, body, small. Nothing else.
- *   - THREE ink colours: ink, muted, and the page colour when it sits on ink. No accent colour in the chrome.
- *   - Colour comes from the product material (game art, product screenshots), not from the interface.
+ *   - ONE brand family: violet (text emphasis, glow fields, links) on a lavender-white page, with deep indigo ink.
+ *   - ONE accent, orange, used only on the primary call-to-action. Nothing else is orange.
+ *   - Product material (game art, screenshots) is the only other colour.
  *   - Shape: pills for controls, 22-28px radius for surfaces. Nothing in between.
  */
 .brand-landing {
-  --b-bg: #f2f2f0;
+  --b-bg: #f7f5ff;
   --b-surface: #ffffff;
-  --b-chip: #e8e8e5;
-  --b-chip-hover: #dcdcd8;
-  --b-ink: #111111;
-  --b-muted: rgba(17, 17, 17, 0.66);
-  --b-line: rgba(17, 17, 17, 0.12);
+  --b-chip: #ece8ff;
+  --b-chip-hover: #ddd6ff;
+  --b-ink: #17123a;
+  --b-muted: rgba(23, 18, 58, 0.68);
+  --b-line: rgba(23, 18, 58, 0.1);
+  --b-brand: #5a3df0;
+  --b-accent: #ff7a45;
   background: var(--b-bg);
   color: var(--b-ink);
   font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
@@ -206,20 +209,22 @@
 }
 
 .dark .brand-landing {
-  --b-bg: #111111;
-  --b-surface: #1b1b1a;
-  --b-chip: #262624;
-  --b-chip-hover: #32322f;
-  --b-ink: #f2f2f0;
-  --b-muted: rgba(242, 242, 240, 0.68);
-  --b-line: rgba(242, 242, 240, 0.14);
+  --b-bg: #0d0b1f;
+  --b-surface: #16132e;
+  --b-chip: #221e44;
+  --b-chip-hover: #2e2958;
+  --b-ink: #f3f1ff;
+  --b-muted: rgba(243, 241, 255, 0.68);
+  --b-line: rgba(243, 241, 255, 0.12);
+  --b-brand: #a08fff;
+  --b-accent: #ff7a45;
 }
 
 body:has(.brand-landing) {
-  background: #f2f2f0;
+  background: #f7f5ff;
 }
 .dark body:has(.brand-landing) {
-  background: #111111;
+  background: #0d0b1f;
 }
 html:has(.brand-landing) {
   scroll-behavior: smooth;
@@ -233,8 +238,11 @@ html:has(.brand-landing) {
 .brand-landing .t-small   { font-size: 13px; line-height: 18px; font-weight: 400; letter-spacing: 0; }
 
 /* Controls: always a pill, always 40px tall. */
-/* display lives in :where() so Tailwind's hidden / sm:inline-flex can still override it */
-:where(.brand-landing .pill) { display: inline-flex; }
+/* display sits in the components layer so Tailwind utilities (hidden, md:hidden, sm:inline-flex) can override it */
+@layer components {
+  .brand-landing .pill,
+  .brand-landing .nav-link { display: inline-flex; }
+}
 .brand-landing .pill {
   align-items: center;
   justify-content: center;
@@ -366,35 +374,35 @@ html:has(.brand-landing) {
 }
 .brand-landing .aurora.is-dim::before { filter: saturate(0.3); }
 
-/* Palettes. Light: pastel and luminous. Dark: the same hues, deep. */
-.brand-landing .au-studio    { --au-base: #e8eaff; --au1: #8b93ff; --au2: #7ee7f5; --au3: #e4f7a1; }
-.brand-landing .au-game      { --au-base: #fff1e6; --au1: #ff9aa8; --au2: #ffd27a; --au3: #ffe3c2; }
-.brand-landing .au-oneforall { --au-base: #f3eaff; --au1: #b79bff; --au2: #f5a8ff; --au3: #9fd3ff; }
-.brand-landing .au-voice     { --au-base: #e6f6ff; --au1: #7cc8ff; --au2: #6ee7d0; --au3: #b5b8ff; }
-.brand-landing .au-download  { --au-base: #e8f8ee; --au1: #86e7ad; --au2: #d6f28a; --au3: #8ed6f5; }
-.brand-landing .au-trading   { --au-base: #fff4dc; --au1: #ffc45c; --au2: #ff9f80; --au3: #d4d4e8; }
-.dark .brand-landing .au-studio    { --au-base: #12122a; --au1: #4338ca; --au2: #0e7490; --au3: #4d7c0f; }
-.dark .brand-landing .au-game      { --au-base: #26140f; --au1: #be3f52; --au2: #b7791f; --au3: #7c3f22; }
-.dark .brand-landing .au-oneforall { --au-base: #1c1230; --au1: #6d44d8; --au2: #a21caf; --au3: #1d6fb8; }
-.dark .brand-landing .au-voice     { --au-base: #0d1c2a; --au1: #0a79b8; --au2: #0f766e; --au3: #4338ca; }
-.dark .brand-landing .au-download  { --au-base: #0f2218; --au1: #15803d; --au2: #4d7c0f; --au3: #0e7490; }
-.dark .brand-landing .au-trading   { --au-base: #261c0b; --au1: #b45309; --au2: #be123c; --au3: #3f3f5c; }
+/* Palettes: one family. Light = lavender and luminous; dark = the same hues, deep. */
+.brand-landing .au-studio    { --au-base: #efecff; --au1: #9b82ff; --au2: #7fb2ff; --au3: #d9c8ff; }
+.brand-landing .au-game      { --au-base: #f1eeff; --au1: #b79bff; --au2: #8fc1ff; --au3: #ffd0e8; }
+.brand-landing .au-oneforall { --au-base: #eeeaff; --au1: #a58bff; --au2: #c8a8ff; --au3: #86c9ff; }
+.brand-landing .au-voice     { --au-base: #ecefff; --au1: #7fb2ff; --au2: #9be3ff; --au3: #b9a6ff; }
+.brand-landing .au-download  { --au-base: #edf0ff; --au1: #8fb4ff; --au2: #b9a6ff; --au3: #a5e8f5; }
+.brand-landing .au-trading   { --au-base: #f1edff; --au1: #b9a6ff; --au2: #ffb89a; --au3: #8fb4ff; }
+.dark .brand-landing .au-studio    { --au-base: #131030; --au1: #4a34d8; --au2: #2457c5; --au3: #6a44c8; }
+.dark .brand-landing .au-game      { --au-base: #15112f; --au1: #5a3fc4; --au2: #2c5fb8; --au3: #7a3a86; }
+.dark .brand-landing .au-oneforall { --au-base: #140f30; --au1: #5d3fd8; --au2: #7a46c8; --au3: #1f5fae; }
+.dark .brand-landing .au-voice     { --au-base: #0f1330; --au1: #2457c5; --au2: #1b7a99; --au3: #4a34d8; }
+.dark .brand-landing .au-download  { --au-base: #101330; --au1: #2c4fb0; --au2: #4a34d8; --au3: #1b7a8a; }
+.dark .brand-landing .au-trading   { --au-base: #17112f; --au1: #5a3fc4; --au2: #b3501f; --au3: #2c4fb0; }
 
 /* The dark panel for the pricing idea: dark in both themes on purpose. */
 .brand-landing .night {
-  --au-base: #0b0b10;
-  --au1: rgba(99, 102, 241, 0.55);
-  --au2: rgba(34, 211, 238, 0.34);
-  --au3: rgba(244, 114, 182, 0.34);
+  --au-base: #0c0a1f;
+  --au1: rgba(110, 84, 255, 0.55);
+  --au2: rgba(60, 120, 255, 0.38);
+  --au3: rgba(255, 122, 69, 0.26);
   position: relative;
   isolation: isolate;
   background: var(--au-base);
-  color: #f2f2f0;
+  color: #f3f1ff;
 }
-.dark .brand-landing .night { box-shadow: inset 0 0 0 1px rgba(242, 242, 240, 0.12); }
+.dark .brand-landing .night { box-shadow: inset 0 0 0 1px rgba(243, 241, 255, 0.12); }
 .brand-landing .glass-night {
   background: rgba(255, 255, 255, 0.06);
-  box-shadow: inset 0 0 0 1px rgba(242, 242, 240, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(243, 241, 255, 0.14);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
@@ -443,7 +451,28 @@ html:has(.brand-landing) {
 }
 
 /* Buttons that live on the dark panels, the same in both themes. */
-.brand-landing .pill-light { background: #f2f2f0; color: #111111; }
+.brand-landing .pill-light { background: #f3f1ff; color: #111111; }
 .brand-landing .pill-light:hover { background: #ffffff; }
-.brand-landing .pill-ghost-night { background: rgba(242, 242, 240, 0.12); color: #f2f2f0; }
-.brand-landing .pill-ghost-night:hover { background: rgba(242, 242, 240, 0.2); }
+.brand-landing .pill-ghost-night { background: rgba(243, 241, 255, 0.12); color: #f3f1ff; }
+.brand-landing .pill-ghost-night:hover { background: rgba(243, 241, 255, 0.2); }
+
+/* The single accent: primary call-to-action. Dark ink text keeps AA contrast on the bright orange. */
+.brand-landing .pill-accent { background: var(--b-accent); color: #17123a; font-weight: 500; }
+.brand-landing .pill-accent:hover { background: var(--b-accent); filter: brightness(1.06); }
+.brand-landing .brand-text { color: var(--b-brand); }
+.brand-landing .nav-link {
+  height: 40px;
+  min-width: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 999px;
+  padding: 0 14px;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 500;
+  color: var(--b-muted);
+  transition: background-color 0.2s, color 0.2s;
+}
+.brand-landing .nav-link:hover,
+.brand-landing .nav-link[aria-expanded="true"] { background: var(--b-chip); color: var(--b-ink); }

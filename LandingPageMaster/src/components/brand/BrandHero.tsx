@@ -26,10 +26,10 @@ export function BrandHero({ userPaused, onTogglePause }: { userPaused: boolean; 
   const paused = userPaused || reduced;
 
   return (
-    <section id="top" className="relative min-h-[100svh] overflow-hidden">
+    <section id="top" className="relative min-h-[calc(100svh-7rem)] overflow-hidden">
       <Wall paused={paused} text={c.wall} />
 
-      <div className="pointer-events-none relative z-10 grid min-h-[100svh] place-items-center px-4 pb-24 pt-24">
+      <div className="pointer-events-none relative z-10 grid min-h-[calc(100svh-7rem)] place-items-center px-4 pb-24 pt-10">
         <div className="pointer-events-auto w-full max-w-[34rem] rounded-[28px] bg-[var(--b-surface)] p-7 text-center shadow-[0_30px_80px_-30px_rgba(0,0,0,0.35)] sm:p-10">
           <motion.p {...rise(0)} className="t-small mx-auto mb-5 inline-flex items-center gap-2 rounded-full bg-[var(--b-chip)] px-3.5 py-1.5 text-[var(--b-muted)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--b-ink)]" aria-hidden="true" />
@@ -39,7 +39,7 @@ export function BrandHero({ userPaused, onTogglePause }: { userPaused: boolean; 
           <motion.h1 {...rise(0.05)} className="t-display">
             {c.hero.titleLine1}
             <br />
-            {c.hero.titleLine2}
+            <span className="brand-text">{c.hero.titleLine2}</span>
           </motion.h1>
 
           <motion.p {...rise(0.1)} className="t-body mx-auto mt-5 max-w-[26rem] text-[var(--b-muted)]">
@@ -47,7 +47,7 @@ export function BrandHero({ userPaused, onTogglePause }: { userPaused: boolean; 
           </motion.p>
 
           <motion.div {...rise(0.15)} className="mt-7 flex flex-col items-center justify-center gap-2.5 sm:flex-row">
-            <a href="#products" className="pill pill-solid">
+            <a href="#products" className="pill pill-accent">
               {c.hero.ctaPrimary}
               <ArrowRight size={16} aria-hidden="true" />
             </a>

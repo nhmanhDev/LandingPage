@@ -8,7 +8,7 @@ import { SectionTitle } from "./SectionTitle";
 export function FaqSection() {
   const { c } = useBrand();
   return (
-    <section id="faq" className="scroll-mt-4 py-16 sm:py-24">
+    <section id="faq" className="scroll-mt-28 py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid gap-8 md:grid-cols-[1fr_2fr] md:gap-12">
           <Reveal>

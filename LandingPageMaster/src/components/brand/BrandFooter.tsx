@@ -15,7 +15,7 @@ export function BrandFooter() {
 
   return (
     <footer className="px-3 pb-3 pt-8 sm:px-5 sm:pb-5">
-      <div id="contact" className="relative mx-auto max-w-6xl scroll-mt-4 overflow-hidden rounded-[32px] bg-[var(--b-surface)] px-6 pt-10 sm:px-12 sm:pt-14">
+      <div id="contact" className="relative mx-auto max-w-6xl scroll-mt-28 overflow-hidden rounded-[32px] bg-[var(--b-surface)] px-6 pt-10 sm:px-12 sm:pt-14">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <a href="#top" className="inline-flex items-center gap-2">

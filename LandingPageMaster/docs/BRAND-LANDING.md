@@ -6,7 +6,7 @@ Trang `/` giới thiệu thương hiệu AI42E và các sản phẩm của hệ 
 AI42E là nền tảng giúp nhiều người tiếp cận AI dễ dàng, với nhiều sản phẩm trong cùng một hệ sinh thái. Nhiều thứ miễn phí để bắt đầu, dùng nâng cao thì mới trả phí. Slogan: AI FOR EVERYONE AND EVERYTHING.
 
 ## Cấu trúc trang
-Hero (bức tường ảnh sản phẩm nghiêng 3D, thẻ tiêu đề ở giữa) → Sản phẩm (6 thẻ dạng bento, mỗi thẻ một vùng sáng riêng) → Chi phí (khối tối, nền gradient CSS) → Câu hỏi thường gặp → Khối kêu gọi tối (vòng quỹ đạo sản phẩm quanh logo) → Footer (thẻ có cột liên kết, kênh chính thức, chữ AI42E khổng lồ mờ). Thanh menu là các nút viên thuốc nổi trên bức tường, có đổi ngôn ngữ và sáng/tối.
+Hero (nằm dưới header; bức tường ảnh sản phẩm nghiêng 3D, thẻ tiêu đề ở giữa) → Sản phẩm (6 thẻ dạng bento, mỗi thẻ một vùng sáng riêng) → Chi phí (khối tối, nền gradient CSS) → Câu hỏi thường gặp → Khối kêu gọi tối (vòng quỹ đạo sản phẩm quanh logo) → Footer (thẻ có cột liên kết, kênh chính thức, chữ AI42E khổng lồ mờ). Header học từ adkit.so: thanh cố định có viền dưới, logo chữ đậm bên trái, menu giữa ("Sản phẩm" xổ xuống liệt kê 6 sản phẩm kèm mô tả và trạng thái), bên phải đổi ngôn ngữ, sáng/tối và một nút cam; ngay dưới là dải "Sản phẩm:" để vào thẳng từng sản phẩm. Điện thoại có nút menu.
 
 ## Hệ thiết kế (nhỏ có chủ đích, học từ baked.design)
 Mọi thứ nằm ở khối `.brand-landing` cuối `src/app/globals.css`. Đừng thêm ngoài danh sách này.
@@ -15,10 +15,11 @@ Mọi thứ nằm ở khối `.brand-landing` cuối `src/app/globals.css`. Đ�
 | :--- | :--- |
 | Font | **Chỉ Inter** (nạp đủ `latin`, `latin-ext`, `vietnamese`). Không font thứ hai, không chữ nghiêng. |
 | Cỡ chữ | **5 cỡ**: `t-display` 36–56px, `t-title` 28–36px, `t-heading` 18px, `t-body` 15px, `t-small` 13px. Độ đậm chỉ 400 và 500. |
-| Màu chữ | `--b-ink` và `--b-muted` (ink 66%). Chữ trên nền ink dùng màu nền trang. Không màu nhấn trong giao diện. |
-| Màu nền | Sáng: nền `#f2f2f0`, mặt `#fff`, chip `#e8e8e5`. Tối: nền `#111`, mặt `#1b1b1a`, chip `#262624`. |
+| Màu chữ | `--b-ink` (chàm đậm `#17123a`), `--b-muted` (ink 68%), `--b-brand` (tím `#5a3df0`, chỉ để nhấn: dòng tiêu đề thứ hai, link trên thẻ). Chữ trên nền ink dùng màu nền trang. |
+| Màu nền | Một họ tím lavender. Sáng: nền `#f7f5ff`, mặt `#fff`, chip `#ece8ff`. Tối: nền `#0d0b1f`, mặt `#16132e`, chip `#221e44`. |
+| Màu nhấn | **Một** màu cam `#ff7a45`, chỉ cho nút chính (`.pill-accent`, chữ chàm đậm để đạt AA). Không dùng cam cho thứ khác. |
 | Hình khối | Nút luôn là viên thuốc cao 40px (`.pill`, biến thể `-solid`, `-surface`, `-glass`). Mặt phẳng bo 22–28px. |
-| Màu sắc | Đến từ **tư liệu sản phẩm** (minh họa game, ảnh chụp sản phẩm) và các **vùng sáng** (`.aurora`, bảng màu `au-*` theo từng sản phẩm, có bản sáng và tối). Chữ và nút luôn đơn sắc. Ngoại lệ: chấm trạng thái nhỏ (xanh = đang chạy, vàng = bảo trì). |
+| Màu sắc khác | Tư liệu sản phẩm (minh họa game, ảnh chụp) và các **vùng sáng** (`.aurora`, `au-*`) **cùng một họ tím–xanh dương**: các sản phẩm khác nhau bằng hình minh họa, không bằng màu. Chấm trạng thái nhỏ (xanh = đang chạy, vàng = bảo trì). Không dùng thêm hue nào khác. |
 | Chuyển động | Một nút "Tạm dừng chuyển động" ở hero dừng **mọi** chuyển động (bức tường, vùng sáng, ánh lấp lánh, quỹ đạo). Tự tắt khi người dùng bật giảm chuyển động. Chuyển động chỉ dùng transform/opacity. **Không dùng WebGL**: một lớp WebGL (Grainient) từng phủ màu xám nhạt lên khối tối trên máy thật, trong khi Chrome không GPU dùng để test vẽ ra khác, nên không thể kiểm chứng bằng test tự động. |
 
 Bài test `design (…)` trong `scripts/ui-test/ui.mjs` kiểm tự động: đúng một font, mọi cỡ chữ nằm trong thang 5 cỡ, tối đa 2 độ đậm.

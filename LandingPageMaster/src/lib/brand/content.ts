@@ -24,7 +24,7 @@ export interface Product {
 
 export interface Content {
   meta: { title: string; description: string };
-  nav: { products: string; pricing: string; faq: string; contact: string; open: string };
+  nav: { products: string; pricing: string; faq: string; contact: string; open: string; strip: string; menu: string };
   hero: {
     eyebrow: string;
     titleLine1: string;
@@ -82,23 +82,23 @@ export const PORTFOLIO_URL = "https://portfolio.ai42e.com";
 
 const vi: Content = {
   meta: {
-    title: "AI42E | AI cho mọi người, cho mọi việc",
+    title: "AI42E | Công cụ AI dễ dùng cho mọi người",
     description:
-      "AI42E gom những công cụ AI dễ dùng về một chỗ: làm video, chơi game và nhiều thứ nữa. Dùng miễn phí để bắt đầu, cần thêm thì nâng cấp.",
+      "Làm video bằng AI, chơi game cùng bạn bè và nhiều công cụ khác, đơn giản đến mức ai cũng dùng được. Miễn phí để bắt đầu.",
   },
-  nav: { products: "Sản phẩm", pricing: "Chi phí", faq: "Hỏi đáp", contact: "Liên hệ", open: "Mở" },
+  nav: { products: "Sản phẩm", pricing: "Chi phí", faq: "Hỏi đáp", contact: "Liên hệ", open: "Mở", strip: "Sản phẩm:", menu: "Mở menu" },
   hero: {
-    eyebrow: "AI dành cho tất cả mọi người",
+    eyebrow: "Dễ dùng, không cần biết kỹ thuật",
     titleLine1: "AI cho mọi người,",
     titleLine2: "cho mọi việc.",
-    sub: "Làm video, chơi game và nhiều thứ nữa. AI42E gom những công cụ AI dễ dùng về một chỗ, để ai cũng dùng được mà không cần biết kỹ thuật.",
+    sub: "Làm video bằng AI, chơi game cùng bạn bè và nhiều công cụ khác đang đến. Mở ra là dùng được, không cần biết gì về kỹ thuật.",
     ctaPrimary: "Xem các sản phẩm",
     ctaSecondary: "Thử AI42E Studio",
-    note: "Phần lớn dùng miễn phí. Bạn chỉ trả phí khi cần tính năng nâng cao.",
+    note: "Bạn có thể dùng miễn phí. Cần dùng nhiều hơn thì mới phải trả phí.",
   },
   products: {
-    title: "Sản phẩm của AI42E",
-    sub: "Mỗi sản phẩm lo một việc cụ thể. Bạn cần gì thì mở cái đó.",
+    title: "Hôm nay bạn muốn làm gì?",
+    sub: "Chọn một sản phẩm, mở lên là dùng được ngay, không phải học thêm gì.",
     status: {
       free: "Miễn phí",
       freemium: "Miễn phí giai đoạn đầu",
@@ -111,7 +111,7 @@ const vi: Content = {
         id: "studio",
         icon: "studio",
         name: "AI42E Studio",
-        tagline: "Làm video bằng AI: viết kịch bản, dựng hình, lồng tiếng rồi xuất ra file MP4, tất cả trong một ứng dụng.",
+        tagline: "Viết kịch bản, dựng hình, lồng tiếng và xuất file MP4: một ứng dụng làm hết cho bạn.",
         bullets: [
           "Viết kịch bản, dựng hình và lồng tiếng tự động",
           "Tải và dịch video từ nhiều nền tảng",
@@ -165,7 +165,7 @@ const vi: Content = {
         id: "voice",
         icon: "voice",
         name: "Voice Studio",
-        tagline: "Biến chữ thành giọng đọc nghe tự nhiên, dịch và nhân bản giọng nói.",
+        tagline: "Biến chữ thành giọng đọc nghe tự nhiên, kèm dịch và nhân bản giọng nói.",
         bullets: [
           "Đọc văn bản bằng giọng AI",
           "Dịch và nhân bản giọng nói",
@@ -188,33 +188,33 @@ const vi: Content = {
     ],
   },
   freemium: {
-    title: "Đa số dùng miễn phí, chỉ tính phí khi bạn cần nhiều hơn",
-    sub: "AI42E muốn ai cũng được thử AI, còn khoản phí chỉ để giữ cho mọi thứ chạy ổn định.",
+    title: "Dùng có mất tiền không?",
+    sub: "Phần lớn là miễn phí. Bạn chỉ trả tiền khi cần dùng nhiều hơn, và luôn biết giá trước khi trả.",
     columns: [
       {
-        title: "Thử trước, không mất gì",
-        text: "Nhiều công cụ dùng được ngay mà không cần biết kỹ thuật. Bạn cứ thử xem có hợp với mình không.",
+        title: "Cứ thử trước",
+        text: "Nhiều công cụ dùng được ngay, không cần biết kỹ thuật. Thấy hợp thì dùng tiếp, không hợp thì thôi.",
       },
       {
         title: "Cần nhiều hơn thì nâng cấp",
-        text: "Khi bạn dùng nhiều hoặc cần tính năng nâng cao, sẽ có gói trả phí. Giá luôn được ghi rõ trước khi bạn thanh toán.",
+        text: "Nếu bạn dùng nhiều hoặc cần tính năng nâng cao, sẽ có gói trả phí. Giá luôn được ghi rõ trước khi bạn thanh toán.",
       },
       {
-        title: "Vì sao phải trả phí",
-        text: "Máy chủ, dịch vụ AI và việc bảo trì đều tốn tiền thật. Khoản phí giúp AI42E tiếp tục hoạt động và có thêm sản phẩm mới.",
+        title: "Phí dùng để làm gì",
+        text: "Chạy máy chủ và các dịch vụ AI tốn tiền thật. Khoản phí giúp AI42E duy trì ổn định và làm thêm sản phẩm mới.",
       },
     ],
   },
   faq: {
-    title: "Câu hỏi thường gặp",
+    title: "Có thể bạn đang thắc mắc",
     items: [
       {
         q: "AI42E là gì?",
-        a: "AI42E là nơi gom những công cụ AI dễ dùng, để ai cũng có thể dùng AI trong công việc và giải trí hằng ngày. Khẩu hiệu của chúng tôi là AI for everyone and everything.",
+        a: "AI42E gom những công cụ AI dễ dùng về một chỗ, để ai cũng có thể dùng AI trong công việc và giải trí hằng ngày. Khẩu hiệu của chúng tôi là AI for everyone and everything.",
       },
       {
-        q: "Dùng AI42E có mất tiền không?",
-        a: "Phần lớn là miễn phí để bạn bắt đầu. Nếu cần tính năng nâng cao thì mới phải trả phí, và giá luôn được ghi rõ trong từng sản phẩm.",
+        q: "Tôi có cần biết kỹ thuật để dùng không?",
+        a: "Không. Mỗi sản phẩm đều được làm để người bình thường dùng được, bạn không cần biết lập trình hay hiểu AI hoạt động thế nào.",
       },
       {
         q: "Bây giờ tôi dùng được những gì?",
@@ -231,7 +231,7 @@ const vi: Content = {
     sub: "Đây là những kênh chính thức duy nhất của AI42E.",
   },
   closing: {
-    title: "Thử AI cùng AI42E nhé?",
+    title: "Thử một sản phẩm xem sao?",
     sub: "Chọn một sản phẩm đang chạy và dùng thử miễn phí, hoặc theo dõi AI42E để biết khi có sản phẩm mới.",
     cta: "Xem các sản phẩm",
     cta2: "Thử AI42E Studio",
@@ -240,7 +240,7 @@ const vi: Content = {
     slogan: "AI FOR EVERYONE AND EVERYTHING",
     portfolio: "Hồ sơ cá nhân của Mạnh",
     rights: "AI42E. Bảo lưu mọi quyền.",
-    about: "AI42E gom những công cụ AI dễ dùng về một chỗ, để ai cũng dùng được AI.",
+    about: "Những công cụ AI dễ dùng, gom về một chỗ, dành cho mọi người.",
     colProducts: "Sản phẩm",
     colExplore: "Khám phá",
     colContact: "Liên hệ",
@@ -260,23 +260,23 @@ const vi: Content = {
 
 const en: Content = {
   meta: {
-    title: "AI42E | AI for everyone, for everything",
+    title: "AI42E | Easy AI tools for everyone",
     description:
-      "AI42E brings easy-to-use AI tools together in one place: make videos, play games and more. Start free, upgrade only when you need more.",
+      "Make videos with AI, play games with friends and more, all simple enough for anyone to use. Free to start.",
   },
-  nav: { products: "Products", pricing: "Pricing", faq: "FAQ", contact: "Contact", open: "Open" },
+  nav: { products: "Products", pricing: "Pricing", faq: "FAQ", contact: "Contact", open: "Open", strip: "Products:", menu: "Open menu" },
   hero: {
-    eyebrow: "AI for everyone",
+    eyebrow: "Easy to use, no technical skills needed",
     titleLine1: "AI for everyone,",
     titleLine2: "for everything.",
-    sub: "Make videos, play games and more. AI42E brings easy-to-use AI tools together in one place, so anyone can use them without technical know-how.",
+    sub: "Make videos with AI, play games with friends and more tools on the way. Open it and it works, no technical know-how needed.",
     ctaPrimary: "See the products",
     ctaSecondary: "Try AI42E Studio",
-    note: "Most things are free. You only pay when you need advanced features.",
+    note: "You can use it for free. You only pay when you need more.",
   },
   products: {
-    title: "AI42E products",
-    sub: "Each product does one job. Open the one you need.",
+    title: "What do you want to do today?",
+    sub: "Pick a product and start right away, with nothing new to learn.",
     status: {
       free: "Free",
       freemium: "Free in the early period",
@@ -289,7 +289,7 @@ const en: Content = {
         id: "studio",
         icon: "studio",
         name: "AI42E Studio",
-        tagline: "Make videos with AI: write the script, build the scenes, add the voice-over and export an MP4, all in one app.",
+        tagline: "Write the script, build the scenes, add the voice-over and export an MP4: one app does it all.",
         bullets: [
           "Script, visuals and voice-over, automated",
           "Download and translate videos from many platforms",
@@ -343,7 +343,7 @@ const en: Content = {
         id: "voice",
         icon: "voice",
         name: "Voice Studio",
-        tagline: "Turn text into natural-sounding speech, and translate or clone voices.",
+        tagline: "Turn text into natural-sounding speech, with voice translation and cloning.",
         bullets: [
           "Read text aloud with AI voices",
           "Translate and clone voices",
@@ -366,33 +366,33 @@ const en: Content = {
     ],
   },
   freemium: {
-    title: "Most of it is free, and you only pay when you need more",
-    sub: "AI42E wants everyone to be able to try AI. The fees simply keep everything running smoothly.",
+    title: "Does it cost anything?",
+    sub: "Most of it is free. You only pay when you need more, and you always see the price first.",
     columns: [
       {
-        title: "Try it first, risk nothing",
-        text: "Many tools work right away, with no technical know-how. Just try them and see if they fit.",
+        title: "Just try it first",
+        text: "Many tools work right away, with no technical know-how. If it fits, keep going. If not, no harm done.",
       },
       {
         title: "Upgrade when you need more",
         text: "If you use a lot or need advanced features, there is a paid plan. The price is always shown before you pay.",
       },
       {
-        title: "Why there is a fee",
-        text: "Servers, AI services and upkeep all cost real money. The fees let AI42E keep running and build new products.",
+        title: "What the fees are for",
+        text: "Running servers and AI services costs real money. The fees keep AI42E stable and let us build new products.",
       },
     ],
   },
   faq: {
-    title: "Frequently asked questions",
+    title: "You might be wondering",
     items: [
       {
         q: "What is AI42E?",
-        a: "AI42E brings easy-to-use AI tools together so anyone can use AI for work and play every day. Our motto is AI for everyone and everything.",
+        a: "AI42E brings easy-to-use AI tools together in one place, so anyone can use AI for work and play every day. Our motto is AI for everyone and everything.",
       },
       {
-        q: "Does AI42E cost money?",
-        a: "Most of it is free so you can get started. Only advanced features are paid, and the price is always shown inside each product.",
+        q: "Do I need technical skills?",
+        a: "No. Every product is built for ordinary people. You do not need to code or understand how AI works.",
       },
       {
         q: "What can I use right now?",
@@ -409,7 +409,7 @@ const en: Content = {
     sub: "These are the only official AI42E channels.",
   },
   closing: {
-    title: "Try AI with AI42E?",
+    title: "Want to try one?",
     sub: "Pick a product that is live and try it for free, or follow AI42E to hear about new launches.",
     cta: "See the products",
     cta2: "Try AI42E Studio",
@@ -418,7 +418,7 @@ const en: Content = {
     slogan: "AI FOR EVERYONE AND EVERYTHING",
     portfolio: "Manh's personal portfolio",
     rights: "AI42E. All rights reserved.",
-    about: "AI42E brings easy-to-use AI tools together in one place, so anyone can use AI.",
+    about: "Easy-to-use AI tools, brought together in one place, for everyone.",
     colProducts: "Products",
     colExplore: "Explore",
     colContact: "Contact",

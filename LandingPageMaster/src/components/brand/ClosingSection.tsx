@@ -31,10 +31,10 @@ export function ClosingSection() {
             <div className="relative z-10 grid items-center gap-6 p-6 sm:p-12 md:grid-cols-[1.05fr_1fr]">
               <div>
                 <SectionTitle text={c.closing.title} className="t-title" />
-                <p className="t-body mt-3 max-w-md text-[rgba(242,242,240,0.78)]">{c.closing.sub}</p>
+                <p className="t-body mt-3 max-w-md text-[rgba(243,241,255,0.78)]">{c.closing.sub}</p>
                 <div className="mt-7 flex flex-wrap items-center gap-2.5">
                   <Magnet padding={50} magnetStrength={5} maxOffset={14}>
-                    <a href="#products" className="pill pill-light">
+                    <a href="#products" className="pill pill-accent">
                       {c.closing.cta}
                       <ArrowRight size={16} aria-hidden="true" />
                     </a>
@@ -59,7 +59,7 @@ export function ClosingSection() {
                   paused={paused}
                   responsive
                   showPath
-                  pathColor="rgba(242,242,240,0.22)"
+                  pathColor="rgba(243,241,255,0.22)"
                   pathDash={4}
                   width="100%"
                   height="100%"

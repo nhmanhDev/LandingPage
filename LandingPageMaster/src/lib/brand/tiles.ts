@@ -43,5 +43,5 @@ export const WALL_COLUMNS: Tile[][] = [
   [img("game-baucua", 1.3), img("studio-phone", -1.4), img("game-memory", 0.9), img("game-vua", -1.1)],
   [img("play-family", -1.5), img("game-riddle", 1.6), txt("brand", -0.9, 1), img("game-guess", 1.2)],
   [img("game-puzzle", 1.1), img("game-party", -1.7), img("game-math", 1.3), img("game-dare", -0.9)],
-  [img("game-dare", 1.5), img("studio-hero", -1.3), img("game-oanquan", 1.0), img("game-truth", -1.6)],
+  [img("game-dare", 1.5), img("game-history", -1.3), img("game-oanquan", 1.0), img("game-truth", -1.6)],
 ];

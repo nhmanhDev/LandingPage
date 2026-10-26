@@ -146,6 +146,34 @@ for (const scheme of ["light", "dark"]) {
   await ctx.close();
 }
 
+// ---------- Header: products drop-down, product strip, mobile menu ----------
+{
+  const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: "light" });
+  const strip = await page.$$eval("header a[href*='ai42e.com']", (as) => as.filter((a) => a.getBoundingClientRect().width > 0).map((a) => a.href));
+  check("header: product strip links Studio and Game", strip.some((h) => h.includes("studio.ai42e.com")) && strip.some((h) => h.includes("play.ai42e.com")), strip.join(","));
+  await page.click('header nav button[aria-haspopup]');
+  await page.waitForTimeout(250);
+  const items = await page.locator('[role="menuitem"]').count();
+  check("header: products drop-down lists all 6 products", items === 6, String(items));
+  await page.keyboard.press("Escape");
+  await page.waitForTimeout(200);
+  check("header: Escape closes the drop-down", (await page.locator('[role="menuitem"]').count()) === 0);
+  const burger = await page.$eval('button[aria-label="Mở menu"]', (e) => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0; });
+  check("header: the phone menu button is hidden on desktop", burger === false);
+  const sticky = await page.$eval("header", (e) => getComputedStyle(e).position);
+  check("header: stays on screen while scrolling", sticky === "sticky");
+  await ctx.close();
+  const m = await open({ width: 390, height: 844 }, { colorScheme: "light", hasTouch: true, isMobile: true });
+  await m.page.click('button[aria-label="Mở menu"]');
+  await m.page.waitForTimeout(250);
+  const links = await m.page.locator("#mobile-menu a").count();
+  check("header (mobile): menu opens with the section links and the CTA", links >= 5, String(links));
+  await m.page.click('#mobile-menu a[href="#faq"]');
+  await m.page.waitForTimeout(300);
+  check("header (mobile): choosing a link closes the menu", (await m.page.locator("#mobile-menu").count()) === 0);
+  await m.ctx.close();
+}
+
 // ---------- Design system (the "why does this look random" guard) ----------
 for (const scheme of ["light", "dark"]) {
   const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: scheme });
@@ -176,7 +204,7 @@ for (const scheme of ["light", "dark"]) {
   const strays = ds.size.filter((size) => !SCALE.includes(size));
   check(`design (${scheme}): font sizes stay on the 5-step scale`, strays.length === 0, `used ${ds.size.join(" ")}; stray ${strays.join(" ")}`);
   check(`design (${scheme}): at most 2 font weights`, ds.weight.length <= 2, ds.weight.join(" "));
-  check(`design (${scheme}): at most 4 text colours`, ds.color.length <= 4, ds.color.join(" | "));
+  check(`design (${scheme}): at most 5 text colours`, ds.color.length <= 5, ds.color.join(" | "));
   await ctx.close();
 }
 {
