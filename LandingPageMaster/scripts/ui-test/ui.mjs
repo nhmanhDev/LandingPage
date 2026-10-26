@@ -163,6 +163,22 @@ for (const scheme of ["light", "dark"]) {
   await m.ctx.close();
 }
 
+// ---------- The brand page does not push a single product ----------
+{
+  const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: "light" });
+  const visibleStudio = (sel) => page.$$eval(sel, (as) => as.filter((a) => a.getBoundingClientRect().width > 0).length);
+  check("cta: header has no AI42E Studio button", (await visibleStudio("header a[href*='studio.ai42e.com']")) === 0);
+  check("cta: hero has no AI42E Studio button", (await visibleStudio("#top a[href*='studio.ai42e.com']")) === 0);
+  check("cta: closing block has no AI42E Studio button", (await visibleStudio("main > section:last-of-type a[href*='studio.ai42e.com']")) === 0);
+  const headerCta = await page.$eval("header a.pill-accent", (a) => a.getAttribute("href"));
+  check("cta: the header button scrolls to the products", headerCta === "#products", headerCta);
+  const heroButtons = await page.locator("#top a.pill").count();
+  check("cta: the hero has a single button", heroButtons === 1, String(heroButtons));
+  const studioLinks = await page.locator("#products a[href*='studio.ai42e.com']").count();
+  check("cta: Studio is still linked from its own product card", studioLinks === 1, String(studioLinks));
+  await ctx.close();
+}
+
 // ---------- Story sections: comparison, founder note ----------
 {
   const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: "light" });

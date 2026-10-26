@@ -44,7 +44,7 @@ export function ClosingSection() {
                       <ArrowRight size={16} aria-hidden="true" />
                     </a>
                   </Magnet>
-                  <a href="https://studio.ai42e.com" className="pill pill-surface">
+                  <a href="#contact" className="pill pill-surface">
                     {c.closing.cta2}
                   </a>
                 </div>

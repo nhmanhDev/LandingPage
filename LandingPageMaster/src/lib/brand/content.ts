@@ -24,14 +24,13 @@ export interface Product {
 
 export interface Content {
   meta: { title: string; description: string };
-  nav: { products: string; pricing: string; faq: string; contact: string; open: string; menu: string };
+  nav: { products: string; pricing: string; faq: string; contact: string; open: string; menu: string; cta: string };
   hero: {
     eyebrow: string;
     titleLine1: string;
     titleLine2: string;
     sub: string;
     ctaPrimary: string;
-    ctaSecondary: string;
     note: string;
   };
   products: {
@@ -96,14 +95,13 @@ const vi: Content = {
     description:
       "Làm video bằng AI, chơi game cùng bạn bè và nhiều công cụ khác, đơn giản đến mức ai cũng dùng được. Miễn phí để bắt đầu.",
   },
-  nav: { products: "Sản phẩm", pricing: "Chi phí", faq: "Hỏi đáp", contact: "Liên hệ", open: "Mở", menu: "Mở menu" },
+  nav: { products: "Sản phẩm", pricing: "Chi phí", faq: "Hỏi đáp", contact: "Liên hệ", open: "Mở", menu: "Mở menu", cta: "Xem sản phẩm" },
   hero: {
     eyebrow: "Dễ dùng, không cần biết kỹ thuật",
     titleLine1: "AI cho mọi người,",
     titleLine2: "cho mọi việc.",
     sub: "Làm video bằng AI, chơi game cùng bạn bè và nhiều công cụ khác đang đến. Mở ra là dùng được, không cần biết gì về kỹ thuật.",
     ctaPrimary: "Xem các sản phẩm",
-    ctaSecondary: "Thử AI42E Studio",
     note: "Bạn có thể dùng miễn phí. Cần dùng nhiều hơn thì mới phải trả phí.",
   },
   products: {
@@ -278,7 +276,7 @@ const vi: Content = {
     title: "Thử một sản phẩm xem sao?",
     sub: "Chọn một sản phẩm đang chạy và dùng thử miễn phí, hoặc theo dõi AI42E để biết khi có sản phẩm mới.",
     cta: "Xem các sản phẩm",
-    cta2: "Thử AI42E Studio",
+    cta2: "Theo dõi AI42E",
     trust: "Miễn phí để bắt đầu · Không cần biết kỹ thuật",
   },
   footer: {
@@ -305,14 +303,13 @@ const en: Content = {
     description:
       "Make videos with AI, play games with friends and more, all simple enough for anyone to use. Free to start.",
   },
-  nav: { products: "Products", pricing: "Pricing", faq: "FAQ", contact: "Contact", open: "Open", menu: "Open menu" },
+  nav: { products: "Products", pricing: "Pricing", faq: "FAQ", contact: "Contact", open: "Open", menu: "Open menu", cta: "See products" },
   hero: {
     eyebrow: "Easy to use, no technical skills needed",
     titleLine1: "AI for everyone,",
     titleLine2: "for everything.",
     sub: "Make videos with AI, play games with friends and more tools on the way. Open it and it works, no technical know-how needed.",
     ctaPrimary: "See the products",
-    ctaSecondary: "Try AI42E Studio",
     note: "You can use it for free. You only pay when you need more.",
   },
   products: {
@@ -487,7 +484,7 @@ const en: Content = {
     title: "Want to try one?",
     sub: "Pick a product that is live and try it for free, or follow AI42E to hear about new launches.",
     cta: "See the products",
-    cta2: "Try AI42E Studio",
+    cta2: "Follow AI42E",
     trust: "Free to start · No technical skills needed",
   },
   footer: {

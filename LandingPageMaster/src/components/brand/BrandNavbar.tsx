@@ -151,8 +151,8 @@ export function BrandNavbar() {
           <button type="button" onClick={() => setTheme(isDark ? "light" : "dark")} aria-label={c.ui.theme} className="nav-link !px-3">
             {isDark ? <Sun size={17} aria-hidden="true" /> : <Moon size={17} aria-hidden="true" />}
           </button>
-          <a href="https://studio.ai42e.com" className="pill pill-accent ml-1 hidden sm:inline-flex">
-            {c.hero.ctaSecondary}
+          <a href="#products" className="pill pill-accent ml-1 hidden sm:inline-flex">
+            {c.nav.cta}
           </a>
           <button
             type="button"
@@ -183,8 +183,8 @@ export function BrandNavbar() {
               </li>
             ))}
             <li className="pt-1">
-              <a href="https://studio.ai42e.com" className="pill pill-accent w-full">
-                {c.hero.ctaSecondary}
+              <a href="#products" className="pill pill-accent w-full" onClick={() => setMobileOpen(false)}>
+                {c.nav.cta}
               </a>
             </li>
           </ul>

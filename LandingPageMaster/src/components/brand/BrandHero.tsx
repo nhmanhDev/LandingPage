@@ -42,9 +42,6 @@ export function BrandHero() {
               {c.hero.ctaPrimary}
               <ArrowRight size={16} aria-hidden="true" />
             </a>
-            <a href="https://studio.ai42e.com" className="pill">
-              {c.hero.ctaSecondary}
-            </a>
           </motion.div>
 
           <motion.p {...rise(0.2)} className="t-small mt-5 text-[var(--b-muted)]">
