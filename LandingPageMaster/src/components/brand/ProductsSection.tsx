@@ -1,20 +1,14 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowUpRight, AudioLines, Boxes, CandlestickChart, Clapperboard, Download, Gamepad2 } from "lucide-react";
-import type { Product, ProductIcon, ProductStatus } from "@/lib/brand/content";
-import { IMAGE_SIZE } from "@/lib/brand/tiles";
+import { useTheme } from "next-themes";
+import { ArrowUpRight } from "lucide-react";
+import SpotlightCard from "@/components/react-bits/SpotlightCard";
+import type { Product, ProductStatus } from "@/lib/brand/content";
 import { useBrand } from "./LocaleProvider";
+import { ProductVisual } from "./ProductVisual";
 import { Reveal } from "./Reveal";
-
-const ICONS: Record<ProductIcon, React.ComponentType<{ size?: number; "aria-hidden"?: boolean }>> = {
-  studio: Clapperboard,
-  voice: AudioLines,
-  download: Download,
-  game: Gamepad2,
-  oneforall: Boxes,
-  trading: CandlestickChart,
-};
+import { SectionTitle } from "./SectionTitle";
+import { useMounted } from "./useMounted";
 
 // The only colour in the UI chrome: a small dot that says whether the product is live.
 const DOT: Record<ProductStatus, string> = {
@@ -25,77 +19,78 @@ const DOT: Record<ProductStatus, string> = {
   maintenance: "bg-[#d98a00]",
 };
 
-function Thumb({ product }: { product: Product }) {
-  const Icon = ICONS[product.icon];
-  if (product.thumb) {
-    const { w, h } = IMAGE_SIZE[product.thumb];
-    return (
-      <div className="overflow-hidden rounded-xl bg-[var(--b-chip)]" style={{ aspectRatio: "4 / 3" }}>
-        <Image src={`/brand/tiles/${product.thumb}.webp`} alt="" width={w} height={h} unoptimized loading="lazy" className="h-full w-full object-cover" />
-      </div>
-    );
-  }
-  return (
-    <div className="grid place-items-center rounded-xl bg-[var(--b-chip)] text-[var(--b-muted)]" style={{ aspectRatio: "16 / 7" }}>
-      <Icon size={26} aria-hidden />
-    </div>
-  );
-}
+// Bento layout on large screens: two big cards, three medium, one wide.
+const ORDER = ["studio", "game", "oneforall", "voice", "download", "trading"];
+const SPAN: Record<string, string> = {
+  studio: "sm:col-span-2 lg:col-span-7",
+  game: "lg:col-span-5",
+  oneforall: "lg:col-span-4",
+  voice: "lg:col-span-4",
+  download: "lg:col-span-4",
+  trading: "sm:col-span-2 lg:col-span-12",
+};
 
 function Card({ product, statusLabel }: { product: Product; statusLabel: string }) {
   const live = Boolean(product.href);
+  const { resolvedTheme } = useTheme();
+  const mounted = useMounted();
   const body = (
     <>
-      <Thumb product={product} />
-      <div className="mt-4 flex items-center justify-between gap-3">
-        <h3 className="t-heading">{product.name}</h3>
-        <span className="t-small inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[var(--b-chip)] px-2.5 py-1 text-[var(--b-muted)]">
-          <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
-          {statusLabel}
-        </span>
+      <ProductVisual product={product} />
+      <div className="px-2 pb-2 pt-4">
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="t-heading">{product.name}</h3>
+          <span className="t-small inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[var(--b-chip)] px-2.5 py-1 text-[var(--b-muted)]">
+            <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
+            {statusLabel}
+          </span>
+        </div>
+        <p className="t-body mt-1.5 text-[var(--b-muted)]">{product.tagline}</p>
+        {live ? (
+          <span className="t-body mt-3 inline-flex items-center gap-1 font-medium">
+            {product.cta}
+            <ArrowUpRight size={16} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </span>
+        ) : null}
       </div>
-      <p className="t-body mt-2 text-[var(--b-muted)]">{product.tagline}</p>
-      <ul className="t-small mt-3 space-y-1.5 text-[var(--b-muted)]">
-        {product.bullets.map((bullet) => (
-          <li key={bullet} className="flex gap-2">
-            <span aria-hidden="true">–</span>
-            <span>{bullet}</span>
-          </li>
-        ))}
-      </ul>
-      {live ? (
-        <span className="t-body mt-5 inline-flex items-center gap-1 font-medium">
-          {product.cta}
-          <ArrowUpRight size={16} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-        </span>
-      ) : null}
     </>
   );
 
-  const base = "group flex h-full flex-col rounded-[22px] bg-[var(--b-surface)] p-4 text-left transition-transform duration-300";
-  return live ? (
-    <a href={product.href} target="_blank" rel="noopener noreferrer" className={`${base} hover:-translate-y-1`}>
-      {body}
-    </a>
-  ) : (
-    <div className={base}>{body}</div>
+  const inner = "group flex h-full flex-col text-left";
+  return (
+    <SpotlightCard
+      theme={mounted && resolvedTheme === "dark" ? "dark" : "light"}
+      className="!rounded-[28px] !p-3 h-full transition-transform duration-300 hover:-translate-y-1"
+      style={{ ["--spotlight-card-surface" as string]: "var(--b-surface)" }}
+      intensity={0.22}
+      spotlightSize={300}
+    >
+      {live ? (
+        <a href={product.href} target="_blank" rel="noopener noreferrer" className={inner}>
+          {body}
+        </a>
+      ) : (
+        <div className={inner}>{body}</div>
+      )}
+    </SpotlightCard>
   );
 }
 
 export function ProductsSection() {
   const { c } = useBrand();
+  const items = ORDER.map((id) => c.products.items.find((item) => item.id === id)).filter((item): item is Product => Boolean(item));
   return (
     <section id="products" className="scroll-mt-4 py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal className="max-w-xl">
-          <h2 className="t-title">{c.products.title}</h2>
+          <SectionTitle text={c.products.title} />
           <p className="t-body mt-3 text-[var(--b-muted)]">{c.products.sub}</p>
         </Reveal>
 
-        <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {c.products.items.map((product, index) => (
-            <li key={product.id}>
-              <Reveal delay={Math.min(index, 2) * 0.06} className="h-full">
+        <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-12">
+          {items.map((product, index) => (
+            <li key={product.id} className={SPAN[product.id]}>
+              <Reveal delay={Math.min(index, 3) * 0.06} className="h-full">
                 <Card product={product} statusLabel={c.products.status[product.status]} />
               </Reveal>
             </li>

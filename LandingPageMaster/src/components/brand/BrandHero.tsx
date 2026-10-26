@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 import { ArrowRight, Pause, Play } from "lucide-react";
 import { motion } from "motion/react";
 import { useBrand } from "./LocaleProvider";
@@ -20,10 +20,9 @@ const subscribeReduced = (listener: () => void) => {
 };
 const getReduced = () => window.matchMedia(REDUCED_QUERY).matches;
 
-export function BrandHero() {
+export function BrandHero({ userPaused, onTogglePause }: { userPaused: boolean; onTogglePause: () => void }) {
   const { c } = useBrand();
   const reduced = useSyncExternalStore(subscribeReduced, getReduced, () => false);
-  const [userPaused, setUserPaused] = useState(false);
   const paused = userPaused || reduced;
 
   return (
@@ -66,7 +65,7 @@ export function BrandHero() {
       <div className="pointer-events-none absolute inset-x-0 bottom-5 z-10 flex items-center justify-center gap-2 px-4">
         <button
           type="button"
-          onClick={() => setUserPaused((value) => !value)}
+          onClick={onTogglePause}
           aria-pressed={paused}
           disabled={reduced}
           className="pill pointer-events-auto"

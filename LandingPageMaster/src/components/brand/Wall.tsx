@@ -16,7 +16,7 @@ const TEXT_TONE: Record<string, string> = {
   tools: "bg-[var(--b-chip)] text-[var(--b-ink)]",
 };
 
-function WallTile({ tile, text }: { tile: Tile; text: Content["wall"] }) {
+function WallTile({ tile, text, eager }: { tile: Tile; text: Content["wall"]; eager: boolean }) {
   const style = { transform: `rotate(${tile.tilt}deg)` };
   if (tile.kind === "text") {
     return (
@@ -31,7 +31,7 @@ function WallTile({ tile, text }: { tile: Tile; text: Content["wall"] }) {
   const { w, h } = IMAGE_SIZE[tile.key];
   return (
     <div className="wall-tile" style={{ ...style, aspectRatio: `${w} / ${h}` }}>
-      <Image src={`/brand/tiles/${tile.key}.webp`} alt="" width={w} height={h} unoptimized loading="lazy" draggable={false} />
+      <Image src={`/brand/tiles/${tile.key}.webp`} alt="" width={w} height={h} unoptimized loading={eager ? "eager" : "lazy"} draggable={false} />
     </div>
   );
 }
@@ -116,7 +116,7 @@ export function Wall({ paused, text }: WallProps) {
         {WALL_COLUMNS.map((column, index) => (
           <div key={index} className="wall-col">
             {[...column, ...column].map((tile, i) => (
-              <WallTile key={`${index}-${i}`} tile={tile} text={text} />
+              <WallTile key={`${index}-${i}`} tile={tile} text={text} eager={i < 3} />
             ))}
           </div>
         ))}

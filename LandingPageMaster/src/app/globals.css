@@ -321,3 +321,129 @@ html:has(.brand-landing) {
   html:has(.brand-landing) { scroll-behavior: auto; }
   .brand-landing .wall-col { animation: none; }
 }
+
+/*
+ * Glow fields ("lung linh"). Colour in this design lives here and in the product art, never in the chrome.
+ * Each field is a base colour, three soft blobs that drift by transform only, and a layer of twinkling dots.
+ */
+.brand-landing .aurora {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--au-base);
+}
+.brand-landing .aurora::before,
+.brand-landing .night::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  z-index: -1;
+  background:
+    radial-gradient(42% 46% at 20% 26%, var(--au1) 0%, transparent 70%),
+    radial-gradient(38% 42% at 80% 22%, var(--au2) 0%, transparent 70%),
+    radial-gradient(46% 50% at 60% 84%, var(--au3) 0%, transparent 70%);
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+.brand-landing .aurora::after,
+.brand-landing .night::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 12% 20%, rgba(255, 255, 255, 0.95) 0 1.2px, transparent 2.4px),
+    radial-gradient(circle at 27% 72%, rgba(255, 255, 255, 0.9) 0 1px, transparent 2.2px),
+    radial-gradient(circle at 41% 14%, rgba(255, 255, 255, 0.9) 0 1.4px, transparent 2.6px),
+    radial-gradient(circle at 55% 58%, rgba(255, 255, 255, 0.85) 0 1px, transparent 2px),
+    radial-gradient(circle at 68% 24%, rgba(255, 255, 255, 0.95) 0 1.3px, transparent 2.4px),
+    radial-gradient(circle at 79% 78%, rgba(255, 255, 255, 0.9) 0 1.1px, transparent 2.3px),
+    radial-gradient(circle at 90% 40%, rgba(255, 255, 255, 0.95) 0 1.4px, transparent 2.6px),
+    radial-gradient(circle at 6% 62%, rgba(255, 255, 255, 0.85) 0 1px, transparent 2px),
+    radial-gradient(circle at 48% 90%, rgba(255, 255, 255, 0.9) 0 1.2px, transparent 2.4px),
+    radial-gradient(circle at 95% 88%, rgba(255, 255, 255, 0.85) 0 1px, transparent 2px);
+  animation: twinkle 4.5s ease-in-out infinite alternate;
+}
+.brand-landing .aurora.is-dim::before { filter: saturate(0.3); }
+
+/* Palettes. Light: pastel and luminous. Dark: the same hues, deep. */
+.brand-landing .au-studio    { --au-base: #e8eaff; --au1: #8b93ff; --au2: #7ee7f5; --au3: #e4f7a1; }
+.brand-landing .au-game      { --au-base: #fff1e6; --au1: #ff9aa8; --au2: #ffd27a; --au3: #ffe3c2; }
+.brand-landing .au-oneforall { --au-base: #f3eaff; --au1: #b79bff; --au2: #f5a8ff; --au3: #9fd3ff; }
+.brand-landing .au-voice     { --au-base: #e6f6ff; --au1: #7cc8ff; --au2: #6ee7d0; --au3: #b5b8ff; }
+.brand-landing .au-download  { --au-base: #e8f8ee; --au1: #86e7ad; --au2: #d6f28a; --au3: #8ed6f5; }
+.brand-landing .au-trading   { --au-base: #fff4dc; --au1: #ffc45c; --au2: #ff9f80; --au3: #d4d4e8; }
+.dark .brand-landing .au-studio    { --au-base: #12122a; --au1: #4338ca; --au2: #0e7490; --au3: #4d7c0f; }
+.dark .brand-landing .au-game      { --au-base: #26140f; --au1: #be3f52; --au2: #b7791f; --au3: #7c3f22; }
+.dark .brand-landing .au-oneforall { --au-base: #1c1230; --au1: #6d44d8; --au2: #a21caf; --au3: #1d6fb8; }
+.dark .brand-landing .au-voice     { --au-base: #0d1c2a; --au1: #0a79b8; --au2: #0f766e; --au3: #4338ca; }
+.dark .brand-landing .au-download  { --au-base: #0f2218; --au1: #15803d; --au2: #4d7c0f; --au3: #0e7490; }
+.dark .brand-landing .au-trading   { --au-base: #261c0b; --au1: #b45309; --au2: #be123c; --au3: #3f3f5c; }
+
+/* The dark panel for the pricing idea: dark in both themes on purpose. */
+.brand-landing .night {
+  --au-base: #0b0b10;
+  --au1: rgba(99, 102, 241, 0.55);
+  --au2: rgba(34, 211, 238, 0.34);
+  --au3: rgba(244, 114, 182, 0.34);
+  position: relative;
+  isolation: isolate;
+  background: var(--au-base);
+  color: #f2f2f0;
+}
+.dark .brand-landing .night { box-shadow: inset 0 0 0 1px rgba(242, 242, 240, 0.12); }
+.brand-landing .glass-night {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(242, 242, 240, 0.14);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.brand-landing .glass {
+  background: color-mix(in srgb, var(--b-surface) 58%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--b-surface) 70%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* Floating product material, voice bars, download ripples. All transform/opacity only. */
+.brand-landing .float {
+  transform: rotate(var(--r, 0deg));
+  animation: float-y 7s ease-in-out infinite alternate;
+}
+.brand-landing .bar { transform-origin: center; animation: bar-pulse 1.7s ease-in-out infinite alternate; }
+.brand-landing .ripple { animation: ripple 3.6s ease-out infinite; }
+.brand-landing .is-dim .ripple { animation: none; opacity: 0.4; }
+
+@keyframes aurora-drift {
+  from { transform: translate3d(-4%, -3%, 0) scale(1); }
+  to   { transform: translate3d(4%, 3%, 0) scale(1.08); }
+}
+@keyframes twinkle { from { opacity: 0.25; } to { opacity: 0.95; } }
+@keyframes float-y {
+  from { transform: translateY(-7px) rotate(var(--r, 0deg)); }
+  to   { transform: translateY(7px) rotate(var(--r, 0deg)); }
+}
+@keyframes bar-pulse { from { transform: scaleY(0.35); } to { transform: scaleY(1); } }
+@keyframes ripple {
+  from { transform: scale(0.82); opacity: 0.7; }
+  to   { transform: scale(1.14); opacity: 0; }
+}
+
+/* One switch for all motion: the pause button in the hero. */
+.brand-landing[data-paused="true"] :is(.aurora, .night)::before,
+.brand-landing[data-paused="true"] :is(.aurora, .night)::after,
+.brand-landing[data-paused="true"] :is(.float, .bar, .ripple) {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-landing :is(.aurora, .night)::before,
+  .brand-landing :is(.aurora, .night)::after,
+  .brand-landing :is(.float, .bar, .ripple) { animation: none; }
+  .brand-landing :is(.aurora, .night)::after { opacity: 0.6; }
+}
+
+/* Buttons that live on the dark panels, the same in both themes. */
+.brand-landing .pill-light { background: #f2f2f0; color: #111111; }
+.brand-landing .pill-light:hover { background: #ffffff; }
+.brand-landing .pill-ghost-night { background: rgba(242, 242, 240, 0.12); color: #f2f2f0; }
+.brand-landing .pill-ghost-night:hover { background: rgba(242, 242, 240, 0.2); }

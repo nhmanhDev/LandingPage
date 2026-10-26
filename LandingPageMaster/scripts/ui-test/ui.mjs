@@ -161,7 +161,7 @@ for (const scheme of ["light", "dark"]) {
       const node = walker.currentNode;
       if (!node.textContent.trim()) continue;
       const el = node.parentElement;
-      if (!el || el.closest(".wall")) continue;
+      if (!el || el.closest(".wall, [data-decor]")) continue;
       const cs = getComputedStyle(el);
       if (cs.display === "none" || cs.visibility === "hidden") continue;
       fam.add(cs.fontFamily.split(",")[0].replace(/["']/g, "").trim());
@@ -279,19 +279,27 @@ for (const [label, vp] of [
 }
 
 
-// ---------- Reveal + no-JS fallback ----------
+// ---------- Footer channels, copy sanity, no-JS fallback ----------
+const CHANNELS = '#contact a[href*="youtube.com"], #contact a[href*="facebook.com"], #contact a[href*="t.me/"], #contact a[href*="github.com/nhmanhDev"], #contact a[href^="mailto:"]';
 {
   const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: "light" });
   await page.evaluate(() => document.querySelector("#contact").scrollIntoView());
-  await page.waitForTimeout(1200);
-  const op = await page.$$eval("#contact ul > li a", (as) => as.map((a) => { let n = a, o = 1; while (n && n !== document.body) { o *= parseFloat(getComputedStyle(n).opacity); n = n.parentElement; } return o; }));
-  check("reveal: 5 contact cards visible after scrolling to them", op.length === 5 && op.every((o) => o > 0.99), JSON.stringify(op));
+  await page.waitForTimeout(800);
+  const visible = await page.$$eval(CHANNELS, (as) => as.map((a) => { const r = a.getBoundingClientRect(); return r.width > 0 && r.height > 0; }));
+  check("footer: 5 official channels are visible", visible.length === 5 && visible.every(Boolean), String(visible.length));
+  const text = await page.evaluate(() => document.querySelector(".brand-landing").innerText);
+  check("copy: no placeholder leaks", !/undefined|\[object|NaN|TODO|lorem/i.test(text));
+  const headings = await page.$$eval("h1, h2", (hs) => hs.map((h) => h.innerText));
+  const broken = headings.filter((t) => /\n/.test(t.trim()) && !t.includes("người,"));
+  check("copy: section headings copy as one line (no word-per-line)", broken.length === 0, JSON.stringify(broken).slice(0, 200));
   await ctx.close();
   const ctx2 = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false, locale: "vi-VN" });
   const p2 = await ctx2.newPage();
   await p2.goto(BASE, { waitUntil: "load" });
-  const vis = await p2.$$eval("h1, #products > div > ul > li, #contact > div > ul > li", (els) => els.map((e) => { let n = e, o = 1; while (n && n !== document.body) { o *= parseFloat(getComputedStyle(n).opacity); n = n.parentElement; } return o; }));
-  check("no-JS: hero, product cards and contact are visible", vis.length === 12 && vis.every((o) => o > 0.99), `${vis.length} nodes, min opacity ${Math.min(...vis)}`);
+  const vis = await p2.$$eval("h1, #products > div > ul > li", (els) => els.map((e) => { let n = e, o = 1; while (n && n !== document.body) { o *= parseFloat(getComputedStyle(n).opacity); n = n.parentElement; } return o; }));
+  check("no-JS: hero and product cards are visible", vis.length === 7 && vis.every((o) => o > 0.99), `${vis.length} nodes, min opacity ${Math.min(...vis)}`);
+  const channels = await p2.$$(CHANNELS);
+  check("no-JS: footer channels are present", channels.length === 5, String(channels.length));
   await ctx2.close();
 }
 

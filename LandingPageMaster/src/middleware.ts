@@ -23,7 +23,8 @@ export default function middleware(req: NextRequest) {
   const hostname = req.headers.get('host') || 'ai42e.com';
 
   // Define allowed domains (including localhost for dev)
-  const isMaster = hostname === 'ai42e.com' || hostname === 'localhost:3000';
+  const isLocal = /^(localhost|127\.0\.0\.1)(:\d+)?$/.test(hostname);
+  const isMaster = hostname === 'ai42e.com' || isLocal;
   
   // If it's the master domain or localhost, let it pass to the default routes
   if (isMaster) {

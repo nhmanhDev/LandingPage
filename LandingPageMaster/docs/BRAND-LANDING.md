@@ -6,7 +6,7 @@ Trang `/` giới thiệu thương hiệu AI42E và các sản phẩm của hệ 
 AI42E là nền tảng giúp nhiều người tiếp cận AI dễ dàng, với nhiều sản phẩm trong cùng một hệ sinh thái. Nhiều thứ miễn phí để bắt đầu, dùng nâng cao thì mới trả phí. Slogan: AI FOR EVERYONE AND EVERYTHING.
 
 ## Cấu trúc trang
-Hero (bức tường ảnh sản phẩm nghiêng 3D, thẻ tiêu đề ở giữa) → Sản phẩm (6 thẻ) → Freemium (3 ý) → Hỏi đáp → Liên hệ chính thức → Footer. Thanh menu là các nút viên thuốc nổi trên bức tường, có đổi ngôn ngữ và sáng/tối.
+Hero (bức tường ảnh sản phẩm nghiêng 3D, thẻ tiêu đề ở giữa) → Sản phẩm (6 thẻ dạng bento, mỗi thẻ một vùng sáng riêng) → Miễn phí/Nâng cấp (khối tối, nền gradient hạt WebGL) → Câu hỏi thường gặp → Khối kêu gọi tối (vòng quỹ đạo sản phẩm quanh logo) → Footer (thẻ có cột liên kết, kênh chính thức, chữ AI42E khổng lồ mờ). Thanh menu là các nút viên thuốc nổi trên bức tường, có đổi ngôn ngữ và sáng/tối.
 
 ## Hệ thiết kế (nhỏ có chủ đích, học từ baked.design)
 Mọi thứ nằm ở khối `.brand-landing` cuối `src/app/globals.css`. Đừng thêm ngoài danh sách này.
@@ -18,10 +18,16 @@ Mọi thứ nằm ở khối `.brand-landing` cuối `src/app/globals.css`. Đ�
 | Màu chữ | `--b-ink` và `--b-muted` (ink 66%). Chữ trên nền ink dùng màu nền trang. Không màu nhấn trong giao diện. |
 | Màu nền | Sáng: nền `#f2f2f0`, mặt `#fff`, chip `#e8e8e5`. Tối: nền `#111`, mặt `#1b1b1a`, chip `#262624`. |
 | Hình khối | Nút luôn là viên thuốc cao 40px (`.pill`, biến thể `-solid`, `-surface`, `-glass`). Mặt phẳng bo 22–28px. |
-| Màu sắc | Đến từ **tư liệu sản phẩm** (minh họa game, ảnh chụp sản phẩm), không đến từ giao diện. Ngoại lệ duy nhất: chấm trạng thái nhỏ (xanh = đang chạy, vàng = bảo trì). |
-| Chuyển động | Bức tường: con trỏ làm nghiêng nhẹ, các cột tự trôi bằng CSS. Có nút "Tạm dừng chuyển động"; tự tắt khi người dùng bật giảm chuyển động và khi cuộn khỏi màn hình. Phần còn lại chỉ hiện dần khi cuộn. |
+| Màu sắc | Đến từ **tư liệu sản phẩm** (minh họa game, ảnh chụp sản phẩm) và các **vùng sáng** (`.aurora`, bảng màu `au-*` theo từng sản phẩm, có bản sáng và tối). Chữ và nút luôn đơn sắc. Ngoại lệ: chấm trạng thái nhỏ (xanh = đang chạy, vàng = bảo trì). |
+| Chuyển động | Một nút "Tạm dừng chuyển động" ở hero dừng **mọi** chuyển động (bức tường, vùng sáng, ánh lấp lánh, quỹ đạo, nền WebGL). Tự tắt khi người dùng bật giảm chuyển động. Nền WebGL (Grainient) chỉ nạp trên màn hình lớn có chuột và khi đang nằm trong khung nhìn; thiết bị khác dùng vùng sáng CSS. Chuyển động chỉ dùng transform/opacity. |
 
 Bài test `design (…)` trong `scripts/ui-test/ui.mjs` kiểm tự động: đúng một font, mọi cỡ chữ nằm trong thang 5 cỡ, tối đa 2 độ đậm.
+
+## Giọng văn
+Viết như một thương hiệu nói với khách hàng, không như ghi chú nội bộ: xưng "bạn", câu ngắn, nói lợi ích trước, mỗi tiêu đề là một ý trọn vẹn và song song (VD "Miễn phí để bắt đầu. Trả phí khi bạn cần nhiều hơn."). Không dịch word-for-word từ tiếng Anh, không dùng từ kỹ thuật khi khách không cần. Thông tin phải thật: trạng thái, ngày, không ghi giá chưa chốt, Trading luôn kèm "Không phải lời khuyên đầu tư" ngay trong dòng mô tả. Mọi chữ nằm ở `content.ts`, viết cả hai ngôn ngữ cùng lúc.
+
+## Thư viện bên thứ ba
+`Grainient`, `Magnet`, `OrbitImages`, `SpotlightCard` lấy từ [React Bits](https://reactbits.dev) (MIT + Commons Clause), để nguyên bản gốc ở `src/components/react-bits/` kèm giấy phép và ghi chú. `BlurText` của React Bits **không dùng** vì nó nhân đôi câu chữ ẩn và tách mỗi từ một dòng khi sao chép; `SectionTitle.tsx` làm hiệu ứng tương tự với một câu thật.
 
 ## Nơi sửa
 | Cần sửa | File |
@@ -29,6 +35,8 @@ Bài test `design (…)` trong `scripts/ui-test/ui.mjs` kiểm tự động: đ�
 | Mọi chữ, sản phẩm, trạng thái, link mạng xã hội (tiếng Việt và Anh) | `src/lib/brand/content.ts` |
 | Bức tường: chọn ảnh, cột, độ nghiêng | `src/lib/brand/tiles.ts`, ảnh ở `public/brand/tiles/` |
 | Hiệu ứng bức tường (con trỏ, dừng) | `src/components/brand/Wall.tsx`, CSS `.wall*` |
+| Vùng sáng từng sản phẩm, hình minh họa trên thẻ | `src/components/brand/ProductVisual.tsx`, CSS `.aurora`, `.au-*` |
+| Khối kêu gọi, footer | `ClosingSection.tsx`, `BrandFooter.tsx` |
 | Bố cục từng mục | `src/components/brand/*Section.tsx`, `BrandHero.tsx`, `BrandNavbar.tsx` |
 
 Thêm hoặc đổi trạng thái sản phẩm: sửa `products.items` ở cả `vi` và `en`. Chỉ đặt `href` khi sản phẩm đã chạy thật (test `links:` kiểm DownloadAnything không có link khi domain còn 404).
@@ -48,5 +56,5 @@ npm run build && npx next start -p 3100
 npm i --no-save playwright-core axe-core
 node scripts/ui-test/ui.mjs
 ```
-Bộ test (Chrome thật qua Playwright) kiểm: không lỗi console, không tràn ngang ở 360/390/768/1440px, vùng chạm ≥ 40px, anchor, đổi theme và ngôn ngữ (có lưu), bức tường (con trỏ, nút dừng, giảm chuyển động), hệ thiết kế (font, cỡ chữ, độ đậm), link sản phẩm, bàn phím và vòng focus, axe WCAG AA (sáng và tối), nội dung vẫn hiện khi tắt JavaScript, LCP.
+Bộ test (Chrome thật qua Playwright) kiểm: không lỗi console, không tràn ngang ở 360/390/768/1440px, vùng chạm ≥ 40px, anchor, đổi theme và ngôn ngữ (có lưu), bức tường (con trỏ, nút dừng, giảm chuyển động), hệ thiết kế (font, cỡ chữ, độ đậm), câu chữ (không rò placeholder, tiêu đề sao chép thành một câu), link sản phẩm, kênh chính thức ở footer, bàn phím và vòng focus, axe WCAG AA (sáng và tối), nội dung vẫn hiện khi tắt JavaScript, LCP.
 `middleware.ts` chỉ coi `ai42e.com` và `localhost:3000` là domain chính, nên test ánh xạ `ai42e.com` về cổng chạy.
