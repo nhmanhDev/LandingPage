@@ -80,7 +80,7 @@ export function ProductsSection() {
   const { c } = useBrand();
   const items = ORDER.map((id) => c.products.items.find((item) => item.id === id)).filter((item): item is Product => Boolean(item));
   return (
-    <section id="products" className="scroll-mt-32 py-14 sm:py-20">
+    <section id="products" className="scroll-mt-24 py-14 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead eyebrow={c.products.eyebrow} title={c.products.title} sub={c.products.sub} />
 

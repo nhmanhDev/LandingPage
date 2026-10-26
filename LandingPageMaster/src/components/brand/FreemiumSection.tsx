@@ -8,7 +8,7 @@ import { SectionTitle } from "./SectionTitle";
 export function FreemiumSection() {
   const { c } = useBrand();
   return (
-    <section id="pricing" className="scroll-mt-32 py-10 sm:py-14">
+    <section id="pricing" className="scroll-mt-24 py-10 sm:py-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="aurora au-panel relative rounded-[32px] p-6 sm:p-12">

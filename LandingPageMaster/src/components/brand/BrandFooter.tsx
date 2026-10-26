@@ -18,7 +18,7 @@ const ICONS: Record<string, { Icon: React.ComponentType<{ size?: number; "aria-h
 export function BrandFooter() {
   const { c } = useBrand();
   return (
-    <footer id="contact" className="mt-8 scroll-mt-32 border-t border-[var(--b-line)] pb-8 pt-14">
+    <footer id="contact" className="mt-8 scroll-mt-24 border-t border-[var(--b-line)] pb-8 pt-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center gap-4" aria-hidden="true">
           <span className="h-px w-16 bg-[var(--b-line)]" />

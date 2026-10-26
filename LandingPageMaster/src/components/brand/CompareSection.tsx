@@ -39,7 +39,7 @@ export function CompareSection() {
                   </li>
                 ))}
               </ul>
-              <p className="t-body brand-text mt-6 rounded-2xl bg-[var(--b-chip)] px-4 py-3 font-medium">{k.result}</p>
+              <p className="t-body brand-text mt-6 rounded-2xl bg-[var(--b-lav)] px-4 py-3 font-medium">{k.result}</p>
             </div>
           </Reveal>
         </div>

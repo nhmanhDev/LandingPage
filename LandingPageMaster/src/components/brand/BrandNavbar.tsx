@@ -167,33 +167,6 @@ export function BrandNavbar() {
         </div>
       </nav>
 
-      {/* "Also available" strip: every product one tap away, like AdKit's row under the bar. */}
-      <div className="hidden border-t border-[var(--b-line)] md:block">
-        <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 py-1.5 sm:px-6">
-          <span className="t-small mr-1 shrink-0 text-[var(--b-muted)]">{c.nav.strip}</span>
-          {products.map((product) => {
-            const Icon = ICONS[product.id];
-            const body = (
-              <>
-                <Icon size={16} aria-hidden />
-                <span className="font-medium">{product.name}</span>
-                <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
-              </>
-            );
-            const cls = "t-small inline-flex h-10 shrink-0 items-center gap-1.5 rounded-full px-3 transition-colors hover:bg-[var(--b-chip)]";
-            return product.href ? (
-              <a key={product.id} href={product.href} target="_blank" rel="noopener noreferrer" className={cls}>
-                {body}
-              </a>
-            ) : (
-              <a key={product.id} href="#products" className={`${cls} text-[var(--b-muted)]`}>
-                {body}
-              </a>
-            );
-          })}
-        </div>
-      </div>
-
       {mobileOpen ? (
         <div id="mobile-menu" className="border-t border-[var(--b-line)] bg-[var(--b-bg)] md:hidden">
           <ul className="mx-auto max-w-6xl space-y-1 px-4 py-3 sm:px-6">

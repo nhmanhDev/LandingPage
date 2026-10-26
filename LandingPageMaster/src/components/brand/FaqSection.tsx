@@ -8,7 +8,7 @@ import { SectionHead } from "./SectionHead";
 export function FaqSection() {
   const { c } = useBrand();
   return (
-    <section id="faq" className="scroll-mt-32 py-14 sm:py-20">
+    <section id="faq" className="scroll-mt-24 py-14 sm:py-20">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <SectionHead eyebrow={c.faq.eyebrow} title={c.faq.title} />
         <Reveal delay={0.06} className="mt-14">

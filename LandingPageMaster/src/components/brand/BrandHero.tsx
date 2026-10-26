@@ -17,10 +17,10 @@ export function BrandHero() {
   const reduced = useReducedMotion();
 
   return (
-    <section id="top" className="relative min-h-[calc(100svh-7rem)] overflow-hidden">
+    <section id="top" className="relative min-h-[calc(100svh-4rem)] overflow-hidden">
       <Wall paused={reduced} text={c.wall} />
 
-      <div className="pointer-events-none relative z-10 grid min-h-[calc(100svh-7rem)] place-items-center px-4 py-14">
+      <div className="pointer-events-none relative z-10 grid min-h-[calc(100svh-4rem)] place-items-center px-4 py-14">
         <div className="pointer-events-auto w-full max-w-[40rem] rounded-[28px] bg-[var(--b-surface)] p-7 text-center shadow-[0_30px_80px_-30px_rgba(23,18,58,0.4)] sm:p-10">
           <motion.p {...rise(0)} className="t-small mx-auto mb-5 inline-flex items-center gap-2 rounded-full bg-[var(--b-chip)] px-3.5 py-1.5 text-[var(--b-muted)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--b-brand)]" aria-hidden="true" />

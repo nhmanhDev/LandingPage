@@ -24,7 +24,7 @@ export interface Product {
 
 export interface Content {
   meta: { title: string; description: string };
-  nav: { products: string; pricing: string; faq: string; contact: string; open: string; strip: string; menu: string };
+  nav: { products: string; pricing: string; faq: string; contact: string; open: string; menu: string };
   hero: {
     eyebrow: string;
     titleLine1: string;
@@ -33,21 +33,6 @@ export interface Content {
     ctaPrimary: string;
     ctaSecondary: string;
     note: string;
-  };
-  showcase: {
-    eyebrow: string;
-    title: string;
-    tone?: string;
-    tabs: {
-      id: "studio" | "game";
-      label: string;
-      eyebrow: string;
-      title: string;
-      text: string;
-      bullets: string[];
-      cta: string;
-      href: string;
-    }[];
   };
   products: {
     eyebrow: string;
@@ -111,7 +96,7 @@ const vi: Content = {
     description:
       "Làm video bằng AI, chơi game cùng bạn bè và nhiều công cụ khác, đơn giản đến mức ai cũng dùng được. Miễn phí để bắt đầu.",
   },
-  nav: { products: "Sản phẩm", pricing: "Chi phí", faq: "Hỏi đáp", contact: "Liên hệ", open: "Mở", strip: "Sản phẩm:", menu: "Mở menu" },
+  nav: { products: "Sản phẩm", pricing: "Chi phí", faq: "Hỏi đáp", contact: "Liên hệ", open: "Mở", menu: "Mở menu" },
   hero: {
     eyebrow: "Dễ dùng, không cần biết kỹ thuật",
     titleLine1: "AI cho mọi người,",
@@ -120,37 +105,6 @@ const vi: Content = {
     ctaPrimary: "Xem các sản phẩm",
     ctaSecondary: "Thử AI42E Studio",
     note: "Bạn có thể dùng miễn phí. Cần dùng nhiều hơn thì mới phải trả phí.",
-  },
-  showcase: {
-    eyebrow: "Bạn làm được gì với AI42E",
-    title: "Mở lên là",
-    tone: "làm được ngay",
-    tabs: [
-      {
-        id: "studio",
-        label: "Làm video",
-        eyebrow: "AI42E Studio",
-        title: "Biến ý tưởng thành video hoàn chỉnh",
-        text: "Bạn chỉ cần nghĩ ra ý tưởng. AI42E Studio lo phần còn lại: viết kịch bản, dựng hình, lồng tiếng và xuất ra file MP4.",
-        bullets: [
-          "Viết kịch bản, dựng hình và lồng tiếng tự động",
-          "Tải và dịch video từ nhiều nền tảng",
-          "Ứng dụng máy tính, ra mắt 01/11/2026",
-        ],
-        cta: "Xem AI42E Studio",
-        href: "https://studio.ai42e.com",
-      },
-      {
-        id: "game",
-        label: "Chơi cùng bạn bè",
-        eyebrow: "AI42E Game",
-        title: "Chơi cùng người thương, không cần cài gì",
-        text: "11 trò chơi cho hai người hoặc cả nhóm: Truth or Dare, bầu cua, ô ăn quan, đố vui và nhiều hơn nữa. Cả nhà chơi chung trên một chiếc điện thoại.",
-        bullets: ["Chơi ngay trên trình duyệt", "Không cần tài khoản", "Miễn phí"],
-        cta: "Chơi ngay",
-        href: "https://play.ai42e.com",
-      },
-    ],
   },
   products: {
     eyebrow: "Tất cả sản phẩm",
@@ -349,7 +303,7 @@ const en: Content = {
     description:
       "Make videos with AI, play games with friends and more, all simple enough for anyone to use. Free to start.",
   },
-  nav: { products: "Products", pricing: "Pricing", faq: "FAQ", contact: "Contact", open: "Open", strip: "Products:", menu: "Open menu" },
+  nav: { products: "Products", pricing: "Pricing", faq: "FAQ", contact: "Contact", open: "Open", menu: "Open menu" },
   hero: {
     eyebrow: "Easy to use, no technical skills needed",
     titleLine1: "AI for everyone,",
@@ -358,37 +312,6 @@ const en: Content = {
     ctaPrimary: "See the products",
     ctaSecondary: "Try AI42E Studio",
     note: "You can use it for free. You only pay when you need more.",
-  },
-  showcase: {
-    eyebrow: "What you can do with AI42E",
-    title: "Open it and",
-    tone: "get going",
-    tabs: [
-      {
-        id: "studio",
-        label: "Make videos",
-        eyebrow: "AI42E Studio",
-        title: "Turn an idea into a finished video",
-        text: "You only need the idea. AI42E Studio handles the rest: writing the script, building the scenes, adding the voice-over and exporting an MP4.",
-        bullets: [
-          "Script, visuals and voice-over, automated",
-          "Download and translate videos from many platforms",
-          "Desktop app, launching 1 Nov 2026",
-        ],
-        cta: "See AI42E Studio",
-        href: "https://studio.ai42e.com",
-      },
-      {
-        id: "game",
-        label: "Play with friends",
-        eyebrow: "AI42E Game",
-        title: "Play with your favourite people, nothing to install",
-        text: "11 games for two or for a group: Truth or Dare, Bau Cua, O An Quan, quizzes and more. Everyone plays together on a single phone.",
-        bullets: ["Plays right in the browser", "No account needed", "Free"],
-        cta: "Play now",
-        href: "https://play.ai42e.com",
-      },
-    ],
   },
   products: {
     eyebrow: "All products",

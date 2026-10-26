@@ -11,7 +11,6 @@ import { FounderSection } from "./FounderSection";
 import { FreemiumSection } from "./FreemiumSection";
 import { LocaleProvider, useBrand } from "./LocaleProvider";
 import { ProductsSection } from "./ProductsSection";
-import { ShowcaseSection } from "./ShowcaseSection";
 
 function SkipLink() {
   const { c } = useBrand();
@@ -25,7 +24,7 @@ function SkipLink() {
   );
 }
 
-/** The story, top to bottom: claim, what you can do, everything on offer, why it is easier, cost, the maker, doubts, invitation. */
+/** The story, top to bottom: claim, everything on offer, why it is easier, cost, the maker, doubts, invitation. */
 export function BrandPage() {
   return (
     <LocaleProvider>
@@ -38,7 +37,6 @@ export function BrandPage() {
           <BrandNavbar />
           <main>
             <BrandHero />
-            <ShowcaseSection />
             <ProductsSection />
             <CompareSection />
             <FreemiumSection />

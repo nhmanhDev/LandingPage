@@ -6,7 +6,7 @@ Trang `/` giới thiệu thương hiệu AI42E và các sản phẩm của hệ 
 AI42E là nền tảng giúp nhiều người tiếp cận AI dễ dàng, với nhiều sản phẩm trong cùng một hệ sinh thái. Nhiều thứ miễn phí để bắt đầu, dùng nâng cao thì mới trả phí. Slogan: AI FOR EVERYONE AND EVERYTHING.
 
 ## Cấu trúc trang
-Thứ tự "câu chuyện" (học từ adkit.so): Hero (nằm dưới header; bức tường ảnh sản phẩm nghiêng 3D, thẻ tiêu đề ở giữa) → Bạn làm được gì (hai tab Làm video / Chơi cùng bạn bè, hình sản phẩm lớn) → Tất cả sản phẩm (6 thẻ bento) → Vì sao chọn AI42E (so sánh "thông thường / với AI42E") → Chi phí (khối vùng sáng, 3 thẻ kính) → Lời từ người làm ra AI42E → Hỏi đáp → Kêu gọi cuối (vòng quỹ đạo sản phẩm quanh logo) → Footer (như play.ai42e.com: 5 thẻ mạng xã hội). Mọi khối đổi theo giao diện sáng/tối; mỗi khối có nhãn nhỏ + tiêu đề (có thể hai tông, học từ HeyRetro). Header: xem dưới.
+Thứ tự "câu chuyện" (học từ adkit.so): Hero (nằm dưới header; bức tường ảnh sản phẩm nghiêng 3D, thẻ tiêu đề ở giữa) → Tất cả sản phẩm (6 thẻ bento) → Vì sao chọn AI42E (so sánh "thông thường / với AI42E") → Chi phí (khối vùng sáng, 3 thẻ kính) → Lời từ người làm ra AI42E → Hỏi đáp → Kêu gọi cuối (vòng quỹ đạo sản phẩm quanh logo) → Footer (như play.ai42e.com: 5 thẻ mạng xã hội). Mọi khối đổi theo giao diện sáng/tối; mỗi khối có nhãn nhỏ + tiêu đề (có thể hai tông, học từ HeyRetro). Header: xem dưới.
 
 ## Hệ thiết kế (nhỏ có chủ đích, học từ baked.design)
 Mọi thứ nằm ở khối `.brand-landing` cuối `src/app/globals.css`. Đừng thêm ngoài danh sách này.
@@ -15,8 +15,8 @@ Mọi thứ nằm ở khối `.brand-landing` cuối `src/app/globals.css`. Đ�
 | :--- | :--- |
 | Font | **Hai font**: Fraunces (chữ có chân đậm) cho tiêu đề `t-display`, `t-title`, `t-subtitle`; Inter cho mọi chữ còn lại. Cả hai nạp đủ bộ `latin`, `latin-ext`, `vietnamese`. Không chữ nghiêng. |
 | Cỡ chữ | **6 cỡ**: `t-display` 36–56px, `t-title` 32–48px (ép chữ -0.025em), `t-subtitle` 28px (Fraunces); `t-heading` 18px, `t-body` 15px, `t-small` 13px (Inter). Độ đậm 400, 500, 700. Nhãn nhỏ phía trên mỗi tiêu đề là `.eyebrow` (13px, tím). |
-| Màu chữ | `--b-ink` (chàm đậm `#17123a`), `--b-muted` (ink 68%), `--b-brand` (tím `#5a3df0`, chỉ để nhấn: dòng tiêu đề thứ hai, link trên thẻ). Chữ trên nền ink dùng màu nền trang. |
-| Màu nền | Một họ tím lavender. Sáng: nền `#f7f5ff`, mặt `#fff`, chip `#ece8ff`. Tối: nền `#0d0b1f`, mặt `#16132e`, chip `#221e44`. |
+| Màu chữ | `--b-ink` (xám than `#1f2430`, chữ thường), `--b-heading` (tím đậm `#2a1a66`, mọi tiêu đề chữ có chân), `--b-muted` (ink 66%), `--b-brand` (tím `#5a3df0`, chỉ để nhấn). |
+| Màu nền | **Trung tính** (đo từ adkit.so và HeyRetro: trên 80% là trắng/xám, dưới 2% là màu). Sáng: nền trắng ấm `#faf9f7`, thẻ trắng `#fff` tách bằng bóng, chip xám ấm `#f1efec`; lavender `#efeaff` chỉ dùng cho dải nền, chip nhấn và vùng sáng. Tối: nền `#0d0b1f`, mặt `#16132e`, chip `#221e44`. |
 | Màu nhấn | **Một** màu cam `#ff7a45`, chỉ cho nút chính (`.pill-accent`, chữ chàm đậm để đạt AA). Không dùng cam cho thứ khác. |
 | Nhịp và bóng đổ (đo từ adkit.so) | Khung nội dung rộng **1280px**, mỗi khối cách nhau **80px**; nhãn nhỏ cách tiêu đề 12px, dòng mô tả `t-lead` (18/28px) cách tiêu đề 24px, nội dung cách đầu khối 56px. Thẻ nổi (`--sh-card`): viền 1px mờ + bóng `0 25px 50px -12px`. Thẻ thường (`--sh-soft`): bóng `0 1px 3px`. Nền trang: lưới ô vuông 32px, nét 5%. Dải nền lavender (`.band`) trải hết chiều ngang ở khối lời người làm. Nút kêu gọi lớn (`.pill-cta`): cao 44px, chữ 18px đậm, gradient cam. |
 | Hình khối | Nút luôn là viên thuốc cao 40px (`.pill`, biến thể `-solid`, `-surface`, `-glass`). Mặt phẳng bo 22–28px. |
@@ -39,7 +39,7 @@ Viết như một người thật nói chuyện với khách, không như khẩu
 | Hiệu ứng bức tường (con trỏ, dừng) | `src/components/brand/Wall.tsx`, CSS `.wall*` |
 | Vùng sáng từng sản phẩm, hình minh họa trên thẻ | `src/components/brand/ProductVisual.tsx`, CSS `.aurora`, `.au-*` |
 | Khối kêu gọi, footer | `ClosingSection.tsx`, `BrandFooter.tsx` |
-| Khối tab, so sánh, lời người làm | `ShowcaseSection.tsx`, `CompareSection.tsx`, `FounderSection.tsx` |
+| Khối so sánh, lời người làm | `CompareSection.tsx`, `FounderSection.tsx` |
 | Nhãn + tiêu đề mọi khối | `SectionHead.tsx`, `SectionTitle.tsx` |
 | Bố cục từng mục | `src/components/brand/*Section.tsx`, `BrandHero.tsx`, `BrandNavbar.tsx` |
 

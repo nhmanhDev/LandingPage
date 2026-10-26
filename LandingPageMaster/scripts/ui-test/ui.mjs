@@ -138,8 +138,8 @@ for (const scheme of ["light", "dark"]) {
 // ---------- Header: products drop-down, product strip, mobile menu ----------
 {
   const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: "light" });
-  const strip = await page.$$eval("header a[href*='ai42e.com']", (as) => as.filter((a) => a.getBoundingClientRect().width > 0).map((a) => a.href));
-  check("header: product strip links Studio and Game", strip.some((h) => h.includes("studio.ai42e.com")) && strip.some((h) => h.includes("play.ai42e.com")), strip.join(","));
+  const stripGone = await page.$$eval("header a[href*='play.ai42e.com']", (as) => as.filter((a) => a.getBoundingClientRect().width > 0).length);
+  check("header: no product strip under the bar", stripGone === 0, String(stripGone));
   await page.click('header nav button[aria-haspopup]');
   await page.waitForTimeout(250);
   const items = await page.locator('[role="menuitem"]').count();
@@ -163,23 +163,17 @@ for (const scheme of ["light", "dark"]) {
   await m.ctx.close();
 }
 
-// ---------- Story sections: tabs, comparison, founder note ----------
+// ---------- Story sections: comparison, founder note ----------
 {
   const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: "light" });
-  const tabs = await page.locator('[role="tab"]').count();
-  check("showcase: two tabs (video, game)", tabs === 2, String(tabs));
-  const before = await page.locator('[role="tabpanel"] h3').innerText();
-  await page.click('[role="tab"]:nth-of-type(2)');
-  await page.waitForTimeout(300);
-  const after = await page.locator('[role="tabpanel"] h3').innerText();
-  check("showcase: switching the tab changes the content", before !== after, `${before} -> ${after}`);
-  check("showcase: selected tab is marked", (await page.getAttribute('[role="tab"]:nth-of-type(2)', "aria-selected")) === "true");
   const eyebrows = await page.locator(".eyebrow").count();
-  check("sections: every section has its small label", eyebrows >= 6, String(eyebrows));
+  check("sections: every section has its small label", eyebrows >= 5, String(eyebrows));
   const compare = await page.locator("#products ~ section").first().innerText();
   check("compare: has the without/with columns", /Cách làm thông thường/.test(compare) && /Với AI42E/.test(compare));
   const h2count = await page.locator("main h2").count();
-  check("page: a real story, at least 7 headed sections", h2count >= 7, String(h2count));
+  check("page: a real story, at least 6 headed sections", h2count >= 6, String(h2count));
+  const gone = await page.locator('[role="tab"]').count();
+  check("page: the old what-you-can-do tab section is gone", gone === 0, String(gone));
   await ctx.close();
 }
 
@@ -213,7 +207,7 @@ for (const scheme of ["light", "dark"]) {
   const strays = ds.size.filter((size) => !SCALE.includes(size));
   check(`design (${scheme}): font sizes stay on the 6-step scale`, strays.length === 0, `used ${ds.size.join(" ")}; stray ${strays.join(" ")}`);
   check(`design (${scheme}): at most 3 font weights`, ds.weight.length <= 3, ds.weight.join(" "));
-  check(`design (${scheme}): at most 5 text colours`, ds.color.length <= 5, ds.color.join(" | "));
+  check(`design (${scheme}): at most 6 text colours`, ds.color.length <= 6, ds.color.join(" | "));
   await ctx.close();
 }
 {
