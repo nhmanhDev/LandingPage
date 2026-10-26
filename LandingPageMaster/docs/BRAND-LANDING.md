@@ -48,7 +48,7 @@ Viết như một người thật nói chuyện với khách, không như khẩu
 | Nhãn + tiêu đề mọi khối | `SectionHead.tsx`, `SectionTitle.tsx` |
 | Bố cục từng mục | `src/components/brand/*Section.tsx`, `BrandHero.tsx`, `BrandNavbar.tsx` |
 
-Thêm hoặc đổi trạng thái sản phẩm: sửa `products.items` ở cả `vi` và `en`. Chỉ đặt `href` khi sản phẩm đã chạy thật (test `links:` kiểm DownloadAnything không có link khi domain còn 404).
+Thêm hoặc đổi trạng thái sản phẩm: sửa `products.items` ở cả `vi` và `en`. Chỉ đặt `href` khi sản phẩm đã chạy thật; test `links:` kiểm đúng 4 sản phẩm đang chạy có link (Studio, Game, Voice Studio, DownloadAnything).
 
 ## Ảnh bức tường
 Ảnh webp rộng ≤ 520px, tổng khoảng 450KB, tải lười. Nguồn: bìa 13 game lấy từ `public/illustrations/` của repo `flash-play-games` (tư liệu của AI42E Game), và ảnh chụp màn hình `play.ai42e.com`, `studio.ai42e.com` cắt bằng sharp rồi nén. Muốn đổi ảnh: nén tương tự, thêm khóa vào `ImageKey`/`IMAGE_SIZE` trong `tiles.ts`. Chỉ dùng tư liệu thật của sản phẩm AI42E.

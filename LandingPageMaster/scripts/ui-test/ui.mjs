@@ -230,9 +230,9 @@ for (const scheme of ["light", "dark"]) {
   const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: "light" });
   const cards = await page.$$eval("#products > div > ul > li", (lis) => lis.map((li) => ({ name: li.querySelector("h3")?.textContent, link: Boolean(li.querySelector("a[href]")) })));
   const dl = cards.find((c) => c.name === "DownloadAnything");
-  check("links: DownloadAnything has no link while its domain is down", dl && dl.link === false);
+  check("links: DownloadAnything is shown as a normal live product", dl && dl.link === true);
   const live = cards.filter((c) => c.link).map((c) => c.name).sort().join(",");
-  check("links: only the live products are linked (Studio, Game, Voice Studio)", live === "AI42E Game,AI42E Studio,Voice Studio", live);
+  check("links: the four live products are linked (Studio, Game, Voice Studio, DownloadAnything)", live === "AI42E Game,AI42E Studio,DownloadAnything,Voice Studio", live);
   await ctx.close();
 }
 

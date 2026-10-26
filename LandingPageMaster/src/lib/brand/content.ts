@@ -147,13 +147,15 @@ const vi: Content = {
         id: "download",
         icon: "download",
         name: "DownloadAnything",
-        tagline: "Tải video, nhạc và ảnh từ YouTube, TikTok, Facebook và nhiều nơi khác. Hiện đang bảo trì.",
+        tagline: "Tải video, nhạc và ảnh từ YouTube, TikTok, Facebook và nhiều nơi khác.",
         bullets: [
           "YouTube, TikTok, Instagram, Facebook, X, Pinterest, Douyin",
           "Trợ lý AI giúp lấy nội dung ở những trang khó",
-          "Tạm thời chưa truy cập được",
+          "Dùng ngay trên web",
         ],
-        status: "maintenance",
+        status: "free",
+        href: "https://downloader.ai42e.com",
+        cta: "Mở DownloadAnything",
       },
       {
         id: "game",
@@ -181,8 +183,8 @@ const vi: Content = {
           "Ứng dụng máy tính, tải về cho Windows",
         ],
         status: "free",
-        href: "https://github.com/nhmanhDev/voice-studio-releases/releases/latest",
-        cta: "Tải cho Windows",
+        href: "https://voice.ai42e.com",
+        cta: "Xem Voice Studio",
       },
       {
         id: "trading",
@@ -260,7 +262,7 @@ const vi: Content = {
       },
       {
         q: "Bây giờ tôi dùng được những gì?",
-        a: "AI42E Game dùng được ngay trên web, còn Voice Studio tải về dùng trên Windows. AI42E Studio sẽ ra mắt ngày 01/11/2026 và hiện đã có bản xem trước. DownloadAnything đang bảo trì, còn OneForAll sắp ra mắt.",
+        a: "AI42E Game và DownloadAnything dùng được ngay trên web, còn Voice Studio tải về dùng trên Windows. AI42E Studio sẽ ra mắt ngày 01/11/2026 và hiện đã có bản xem trước. OneForAll sắp ra mắt.",
       },
       {
         q: "Làm sao biết đâu là kênh chính thức của AI42E?",
@@ -355,13 +357,15 @@ const en: Content = {
         id: "download",
         icon: "download",
         name: "DownloadAnything",
-        tagline: "Download video, music and images from YouTube, TikTok, Facebook and more. Currently under maintenance.",
+        tagline: "Download video, music and images from YouTube, TikTok, Facebook and more.",
         bullets: [
           "YouTube, TikTok, Instagram, Facebook, X, Pinterest, Douyin",
           "An AI assistant that captures media on tricky sites",
-          "Temporarily unavailable",
+          "Works right on the web",
         ],
-        status: "maintenance",
+        status: "free",
+        href: "https://downloader.ai42e.com",
+        cta: "Open DownloadAnything",
       },
       {
         id: "game",
@@ -389,8 +393,8 @@ const en: Content = {
           "Desktop app, download for Windows",
         ],
         status: "free",
-        href: "https://github.com/nhmanhDev/voice-studio-releases/releases/latest",
-        cta: "Download for Windows",
+        href: "https://voice.ai42e.com",
+        cta: "See Voice Studio",
       },
       {
         id: "trading",
@@ -468,7 +472,7 @@ const en: Content = {
       },
       {
         q: "What can I use right now?",
-        a: "AI42E Game works right now on the web, and Voice Studio can be downloaded for Windows. AI42E Studio launches on 1 Nov 2026 and already has a web preview. DownloadAnything is under maintenance, and OneForAll is coming soon.",
+        a: "AI42E Game and DownloadAnything work right now on the web, and Voice Studio can be downloaded for Windows. AI42E Studio launches on 1 Nov 2026 and already has a web preview. OneForAll is coming soon.",
       },
       {
         q: "How do I know which channels are official?",
