@@ -177,3 +177,59 @@
     line-height: 1.5;
   }
 }
+
+
+/* AI42E brand landing ("/"). Scoped so blog, studio and admin routes keep their own look. */
+.brand-landing {
+  --b-bg: #faf5ec;
+  --b-surface: #fffdf8;
+  --b-chip: #f0e9db;
+  --b-chip-hover: #e8dfce;
+  --b-ink: #1c1830;
+  --b-muted: #655f79;
+  --b-line: #e8dfd0;
+  --b-primary: #4f46e5;
+  --b-sky: #0369a1;
+  --b-green: #065f46;
+  --b-amber: #b45309;
+  background: var(--b-bg);
+  color: var(--b-ink);
+}
+
+.dark .brand-landing {
+  --b-bg: #0f0d1a;
+  --b-surface: #17142a;
+  --b-chip: #1f1b36;
+  --b-chip-hover: #2a2547;
+  --b-ink: #f4f0ff;
+  --b-muted: #a8a1c4;
+  --b-line: #2a2545;
+  --b-primary: #9b95ff;
+  --b-sky: #38bdf8;
+  --b-green: #34d399;
+  --b-amber: #fbbf24;
+}
+
+.brand-landing a:focus-visible,
+.brand-landing button:focus-visible {
+  outline: 2px solid var(--b-primary);
+  outline-offset: 3px;
+}
+
+html:has(.brand-landing) {
+  scroll-behavior: smooth;
+}
+
+body:has(.brand-landing) {
+  background: #faf5ec;
+}
+
+.dark body:has(.brand-landing) {
+  background: #0f0d1a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.brand-landing) {
+    scroll-behavior: auto;
+  }
+}

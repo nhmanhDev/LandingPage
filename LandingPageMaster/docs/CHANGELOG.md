@@ -1,0 +1,7 @@
+# CHANGELOG.md
+
+| Lỗi / Vấn đề | Nguyên nhân | Giải pháp |
+| :--- | :--- | :--- |
+| Trang `ai42e.com` vẫn là portfolio cá nhân, không giới thiệu thương hiệu và sản phẩm AI42E (2026-10-26) | Portfolio chuyển sang `portfolio.ai42e.com` (GitHub Pages), còn `ai42e.com` được xác định là landing thương hiệu. Các bản làm lại trước đó (Handhold, Aymo, Motionsites) đều làm theo "giống một trang mẫu" mà không có brief cố định nên bị làm lại nhiều lần. | Dựng lại `/` theo brief nêu ở `docs/BRAND-LANDING.md`: hero có dải hạt canvas, 6 thẻ sản phẩm (nhãn Miễn phí / Sắp ra mắt / Đang nghiên cứu), mục freemium, hỏi đáp, kênh liên hệ chính thức. Một hiệu ứng nổi bật duy nhất, không three.js. Giao diện sáng/tối, tiếng Việt và Anh, tôn trọng `prefers-reduced-motion`. Code mới nằm trọn trong `src/components/brand/` và `src/lib/brand/`; các component portfolio cũ giữ nguyên, chưa dùng. |
+| Nội dung dưới hero tàng hình khi JavaScript không chạy | Hiệu ứng hiện dần (motion) đặt `opacity: 0` ngay trong HTML dựng sẵn. | Thêm `<noscript>` ép `opacity: 1` cho phần tử có style opacity; test "no-JS" trong `scripts/ui-test/ui.mjs`. |
+| Chạy local ở cổng khác 3000 ra 404 (đã có sẵn, chưa sửa) | `src/middleware.ts` chỉ coi `ai42e.com` và `localhost:3000` là domain chính, các host khác bị rewrite sang `/<subdomain>`. | Chưa đổi middleware. Bộ test ánh xạ `ai42e.com` về `127.0.0.1:PORT` trong Chrome để chạy đúng điều kiện production. |
