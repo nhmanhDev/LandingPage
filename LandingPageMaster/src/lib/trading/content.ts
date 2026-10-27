@@ -1,6 +1,6 @@
 import type { Locale } from "@/lib/brand/content";
 
-// Copy for invest.ai42e.com. Draft written 2026-10-27, waiting for Mạnh to review wording.
+// Copy for invest.ai42e.com (and mmo.ai42e.com home). Written 2026-10-27; Mạnh approved it for now the same day ("tạm thế đi"), still open to edits.
 // Facts come from the READMEs of the four trading repos and the vault note "AI42E Trading System"; no performance figures on purpose.
 
 export interface TradingCard {
