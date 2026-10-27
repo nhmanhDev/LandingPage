@@ -1,29 +1,5 @@
-import { Navbar } from "@/components/Navbar";
-import { Hero } from "@/components/Hero";
-import { About } from "@/components/About";
-import { Ecosystem } from "@/components/Ecosystem";
-import { Projects } from "@/components/Projects";
-import { Vision } from "@/components/Vision";
-import { Contact } from "@/components/Contact";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "AI FOR EVERYONE AND EVERYTHING",
-  description: "Personal Portfolio & Ecosystem of nhmanhDev",
-};
+import { BrandPage } from "@/components/brand/BrandPage";
 
 export default function Home() {
-  return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Ecosystem />
-        <Projects />
-        <Vision />
-        <Contact />
-      </main>
-    </div>
-  );
+  return <BrandPage />;
 }
