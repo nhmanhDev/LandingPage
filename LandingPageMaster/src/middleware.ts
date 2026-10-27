@@ -38,7 +38,13 @@ export default function middleware(req: NextRequest) {
 
   // Extract the subdomain (e.g. "ai" from "ai.ai42e.com")
   const subdomain = hostname.split('.')[0];
-  
+
+  // mmo.ai42e.com and invest.ai42e.com are the same Trading line: until mmo has a page of its own, its home shows the Trading page.
+  // Other paths on mmo (e.g. /blog) keep their old route.
+  if (subdomain === 'mmo' && url.pathname === '/') {
+    return NextResponse.rewrite(new URL('/invest', req.url));
+  }
+
   // Rewrite the request to the specific subdomain folder
   // Example: ai.ai42e.com/blog -> /ai/blog
   return NextResponse.rewrite(new URL(`/${subdomain}${url.pathname}`, req.url));
