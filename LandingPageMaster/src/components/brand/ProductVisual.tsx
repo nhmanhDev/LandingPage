@@ -127,12 +127,12 @@ const HEIGHT: Record<string, string> = {
 };
 
 /** The picture on top of a product card: a slow-moving glow field with that product's own material floating in it. */
-export function ProductVisual({ product }: { product: Product }) {
+export function ProductVisual({ product, flush = false }: { product: Product; flush?: boolean }) {
   const Motif = MOTIFS[product.id];
   const dim = product.status === "maintenance";
   return (
     <div
-      className={`aurora au-${product.id} ${dim ? "is-dim" : ""} grid place-items-center rounded-[22px] text-[var(--b-ink)] ${HEIGHT[product.id]}`}
+      className={`aurora au-${product.id} ${dim ? "is-dim" : ""} grid place-items-center ${flush ? "rounded-t-[28px]" : "rounded-[22px]"} text-[var(--b-ink)] ${HEIGHT[product.id]}`}
       aria-hidden="true"
     >
       <Motif />

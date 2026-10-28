@@ -1,15 +1,11 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { ArrowUpRight } from "lucide-react";
-import SpotlightCard from "@/components/react-bits/SpotlightCard";
-import { Bezel } from "./Bezel";
 import type { Product, ProductStatus } from "@/lib/brand/content";
 import { useBrand } from "./LocaleProvider";
 import { ProductVisual } from "./ProductVisual";
 import { Reveal } from "./Reveal";
 import { SectionHead } from "./SectionHead";
-import { useMounted } from "./useMounted";
 
 // The only colour in the UI chrome: a small dot that says whether the product is live.
 const DOT: Record<ProductStatus, string> = {
@@ -31,51 +27,44 @@ const SPAN: Record<string, string> = {
   trading: "sm:col-span-2 lg:col-span-12",
 };
 
+/**
+ * One sand card (pattern measured on slite.com): status label, serif name, one line, an outlined pill,
+ * and the product picture bleeding off the bottom edge. The wide card puts the picture beside the copy.
+ */
 function Card({ product, statusLabel }: { product: Product; statusLabel: string }) {
   const live = Boolean(product.href);
-  const { resolvedTheme } = useTheme();
-  const mounted = useMounted();
+  const wide = product.id === "trading";
   const body = (
     <>
-      <ProductVisual product={product} />
-      <div className="px-2 pb-2 pt-4">
-        <div className="flex items-center justify-between gap-3">
-          <h3 className="t-heading">{product.name}</h3>
-          <span className="t-small inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[var(--b-chip)] px-2.5 py-1 text-[var(--b-muted)]">
+      <div className="card-copy">
+        <div className="flex items-start justify-between gap-3">
+          <span className="t-small inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-[var(--b-muted)]">
             <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
             {statusLabel}
           </span>
+          {live ? (
+            <span className="card-arrow" aria-hidden="true">
+              <ArrowUpRight size={18} />
+            </span>
+          ) : null}
         </div>
-        <p className="t-body mt-1.5 text-[var(--b-muted)]">{product.tagline}</p>
-        {live ? (
-          <span className="t-body brand-text mt-3 inline-flex items-center gap-1 font-medium">
-            {product.cta}
-            <ArrowUpRight size={16} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </span>
-        ) : null}
+        <h3 className="t-subtitle mt-6">{product.name}</h3>
+        <p className="t-body mt-2 max-w-[30rem] text-[var(--b-muted)]">{product.tagline}</p>
+        {live ? <span className="pill pill-outline mt-6">{product.cta}</span> : null}
+      </div>
+      <div className="card-visual">
+        <ProductVisual product={product} flush />
       </div>
     </>
   );
 
-  const inner = "group flex h-full flex-col text-left";
-  return (
-    <Bezel className="transition-transform duration-300 hover:-translate-y-1" coreClassName="!shadow-[var(--sh-soft)] hover:!shadow-[var(--sh-card)] transition-shadow duration-300">
-    <SpotlightCard
-      theme={mounted && resolvedTheme === "dark" ? "dark" : "light"}
-      className="!rounded-3xl !p-3 h-full"
-      style={{ ["--spotlight-card-surface" as string]: "var(--b-surface)", ["--spotlight-card-shadow" as string]: "none" }}
-      intensity={0.22}
-      spotlightSize={300}
-    >
-      {live ? (
-        <a href={product.href} target="_blank" rel="noopener noreferrer" className={inner}>
-          {body}
-        </a>
-      ) : (
-        <div className={inner}>{body}</div>
-      )}
-    </SpotlightCard>
-    </Bezel>
+  const className = `sand-card group${wide ? " sand-card-wide" : ""}`;
+  return live ? (
+    <a href={product.href} target="_blank" rel="noopener noreferrer" className={className}>
+      {body}
+    </a>
+  ) : (
+    <div className={className}>{body}</div>
   );
 }
 
@@ -83,11 +72,11 @@ export function ProductsSection() {
   const { c } = useBrand();
   const items = ORDER.map((id) => c.products.items.find((item) => item.id === id)).filter((item): item is Product => Boolean(item));
   return (
-    <section id="products" className="scroll-mt-24 py-14 sm:py-[4.5rem] lg:py-20">
+    <section id="products" className="relative z-10 -mt-14 scroll-mt-24 pb-14 sm:pb-[4.5rem] lg:pb-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead eyebrow={c.products.eyebrow} title={c.products.title} sub={c.products.sub} />
 
-        <ul className="mt-8 grid gap-4 sm:mt-16 sm:grid-cols-2 lg:grid-cols-12">
+        <ul className="mt-10 grid gap-5 sm:mt-16 sm:grid-cols-2 lg:grid-cols-12">
           {items.map((product, index) => (
             <li key={product.id} className={SPAN[product.id]}>
               <Reveal delay={Math.min(index, 3) * 0.06} className="h-full">

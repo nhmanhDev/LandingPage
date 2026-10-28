@@ -17,11 +17,13 @@ export function BrandHero() {
   const reduced = useReducedMotion();
 
   return (
-    <section id="top" className="relative min-h-[calc(100svh-4rem)] overflow-hidden">
+    <section id="top" className="relative min-h-[calc(100svh-9rem)] overflow-hidden">
       <Wall paused={reduced} text={c.wall} />
+      {/* The wall melts into the page so the next section grows out of it instead of starting at a hard edge. */}
+      <div className="hero-fade pointer-events-none absolute inset-x-0 bottom-0 z-[5]" aria-hidden="true" />
 
-      <div className="pointer-events-none relative z-10 grid min-h-[calc(100svh-4rem)] place-items-center px-4 py-14">
-        <div className="pointer-events-auto w-full max-w-[40rem] rounded-[28px] bg-[var(--b-surface)] p-7 text-center shadow-[0_30px_80px_-30px_rgba(23,18,58,0.4)] sm:p-10">
+      <div className="pointer-events-none relative z-10 grid min-h-[calc(100svh-9rem)] place-items-center px-4 pb-24 pt-12 sm:pb-28">
+        <div className="pointer-events-auto w-full max-w-[40rem] rounded-[28px] bg-[var(--b-surface)] p-7 text-center shadow-[0_30px_80px_-30px_rgba(107,93,70,0.45)] sm:p-10">
           <motion.p {...rise(0)} className="t-small mx-auto mb-5 inline-flex items-center gap-2 rounded-full bg-[var(--b-chip)] px-3.5 py-1.5 text-[var(--b-muted)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--b-brand)]" aria-hidden="true" />
             {c.hero.eyebrow}
