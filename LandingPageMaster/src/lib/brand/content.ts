@@ -95,7 +95,7 @@ const vi: Content = {
     description:
       "Làm video bằng AI, chơi game cùng bạn bè và nhiều công cụ khác, đơn giản đến mức ai cũng dùng được. Miễn phí để bắt đầu.",
   },
-  nav: { products: "Sản phẩm", pricing: "Chi phí", faq: "Hỏi đáp", contact: "Liên hệ", open: "Mở", menu: "Mở menu", cta: "Xem sản phẩm" },
+  nav: { products: "Sản phẩm", pricing: "Chi phí", faq: "Hỏi đáp", contact: "Liên hệ", open: "Mở", menu: "Mở menu", cta: "Trải nghiệm ngay" },
   hero: {
     eyebrow: "Hệ sinh thái AI cho mọi người",
     titleLine1: "AI cho mọi người,",
@@ -305,7 +305,7 @@ const en: Content = {
     description:
       "Make videos with AI, play games with friends and more, all simple enough for anyone to use. Free to start.",
   },
-  nav: { products: "Products", pricing: "Pricing", faq: "FAQ", contact: "Contact", open: "Open", menu: "Open menu", cta: "See products" },
+  nav: { products: "Products", pricing: "Pricing", faq: "FAQ", contact: "Contact", open: "Open", menu: "Open menu", cta: "Try now" },
   hero: {
     eyebrow: "AI ecosystem for everyone",
     titleLine1: "AI for everyone,",

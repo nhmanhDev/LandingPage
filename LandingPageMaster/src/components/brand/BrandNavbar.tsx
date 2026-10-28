@@ -58,31 +58,67 @@ function ProductsMenu({ products, label, statusLabels }: { products: Product[]; 
   }, [open]);
 
   return (
-    <li ref={rootRef} className="relative" onMouseEnter={() => { openedByHover.current = true; setOpen(true); }} onMouseLeave={() => { openedByHover.current = false; setOpen(false); }}>
-      <button type="button" className="nav-link" aria-expanded={open} aria-haspopup="true" onClick={() => {
+    <li
+      ref={rootRef}
+      className="relative"
+      onMouseEnter={() => {
+        openedByHover.current = true;
+        setOpen(true);
+      }}
+      onMouseLeave={() => {
+        openedByHover.current = false;
+        setOpen(false);
+      }}
+    >
+      <button
+        type="button"
+        className="nav-link"
+        aria-expanded={open}
+        aria-haspopup="true"
+        onClick={() => {
           if (openedByHover.current) {
             openedByHover.current = false;
             setOpen(true);
           } else {
             setOpen((value) => !value);
           }
-        }}>
+        }}
+      >
         {label}
-        <ChevronDown size={16} aria-hidden="true" className={`transition-transform ${open ? "rotate-180" : ""}`} />
+        <ChevronDown
+          size={15}
+          aria-hidden="true"
+          className={`transition-transform duration-200 ease-out ${open ? "rotate-180 text-[var(--b-brand)]" : ""}`}
+        />
       </button>
-      {open ? (
-        <div className="absolute left-1/2 top-full z-50 w-[36rem] -translate-x-1/2 pt-2" role="menu">
-          <ul className="grid grid-cols-2 gap-1 rounded-3xl bg-[var(--b-surface)] p-2 shadow-[0_24px_60px_-20px_rgba(23,18,58,0.35)] ring-1 ring-[var(--b-line)]">
+
+      {/* Dropdown Container with Smooth Animation & Safe Hover Bridge */}
+      <div
+        className={`products-dropdown absolute left-1/2 top-full z-50 w-[38rem] -translate-x-1/2 pt-2 ${
+          open ? "is-open" : ""
+        }`}
+        role="menu"
+        aria-hidden={!open}
+      >
+        <div className="rounded-[28px] border border-[var(--b-line)] bg-[var(--b-surface)]/95 p-2.5 shadow-[0_20px_50px_rgba(45,47,52,0.12)] backdrop-blur-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.45)]">
+          <ul className="grid grid-cols-2 gap-1.5">
             {products.map((product) => {
               const Icon = ICONS[product.id];
               const inner = (
                 <>
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[var(--b-chip)] text-[var(--b-brand)]">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[var(--b-chip)] text-[var(--b-brand)] transition-transform duration-150 group-hover:scale-105 group-hover:bg-[var(--b-surface)]">
                     <Icon size={20} aria-hidden />
                   </span>
-                  <span className="min-w-0">
-                    <span className="t-body block font-medium">{product.name}</span>
-                    <span className="t-small mt-0.5 line-clamp-2 block text-[var(--b-muted)]">{product.tagline}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="t-body flex items-center justify-between font-medium transition-colors group-hover:text-[var(--b-brand)]">
+                      <span>{product.name}</span>
+                      <span className="text-xs text-[var(--b-muted)] opacity-0 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0.5">
+                        ↗
+                      </span>
+                    </span>
+                    <span className="t-small mt-0.5 line-clamp-2 block text-[var(--b-muted)]">
+                      {product.tagline}
+                    </span>
                     <span className="t-small mt-1.5 flex items-center gap-1.5 text-[var(--b-muted)]">
                       <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
                       {statusLabels[product.status]}
@@ -90,15 +126,28 @@ function ProductsMenu({ products, label, statusLabels }: { products: Product[]; 
                   </span>
                 </>
               );
-              const cls = "flex items-start gap-3 rounded-2xl p-3 text-left transition-colors hover:bg-[var(--b-chip)]";
+              const cls =
+                "group flex items-start gap-3 rounded-2xl p-3 text-left transition-all duration-150 hover:bg-[var(--b-chip)]";
               return (
                 <li key={product.id} role="none">
                   {product.href ? (
-                    <a role="menuitem" href={product.href} target="_blank" rel="noopener noreferrer" className={cls} onClick={() => setOpen(false)}>
+                    <a
+                      role="menuitem"
+                      href={product.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cls}
+                      onClick={() => setOpen(false)}
+                    >
                       {inner}
                     </a>
                   ) : (
-                    <a role="menuitem" href="#products" className={cls} onClick={() => setOpen(false)}>
+                    <a
+                      role="menuitem"
+                      href="#products"
+                      className={cls}
+                      onClick={() => setOpen(false)}
+                    >
                       {inner}
                     </a>
                   )}
@@ -107,7 +156,7 @@ function ProductsMenu({ products, label, statusLabels }: { products: Product[]; 
             })}
           </ul>
         </div>
-      ) : null}
+      </div>
     </li>
   );
 }
@@ -122,7 +171,6 @@ export function BrandNavbar() {
   const links = [
     { href: "#pricing", label: c.nav.pricing },
     { href: "#faq", label: c.nav.faq },
-    { href: "#contact", label: c.nav.contact },
   ];
 
   return (
@@ -133,6 +181,7 @@ export function BrandNavbar() {
           <span className="t-heading">AI42E</span>
         </a>
 
+        {/* Center Navigation Menu */}
         <ul className="hidden items-center gap-0.5 md:flex">
           <ProductsMenu products={products} label={c.nav.products} statusLabels={c.products.status} />
           {links.map((link) => (
@@ -144,16 +193,36 @@ export function BrandNavbar() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-1.5">
-          <button type="button" onClick={() => setLocale(locale === "vi" ? "en" : "vi")} aria-label={c.ui.language} className="nav-link !px-3">
+        {/* Right Actions & Utility Bar */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <button
+            type="button"
+            onClick={() => setLocale(locale === "vi" ? "en" : "vi")}
+            aria-label={c.ui.language}
+            className="nav-link !px-2.5 sm:!px-3 text-xs sm:text-sm font-medium"
+          >
             {locale === "vi" ? "VI" : "EN"}
           </button>
-          <button type="button" onClick={() => setTheme(isDark ? "light" : "dark")} aria-label={c.ui.theme} className="nav-link !px-3">
+          <button
+            type="button"
+            onClick={() => setTheme(isDark ? "light" : "dark")}
+            aria-label={c.ui.theme}
+            className="nav-link !px-2.5 sm:!px-3"
+          >
             {isDark ? <Sun size={17} aria-hidden="true" /> : <Moon size={17} aria-hidden="true" />}
           </button>
-          <a href="#products" className="pill pill-accent ml-1 hidden sm:inline-flex">
+
+          {/* Secondary Action Button: Liên hệ */}
+          <a href="#contact" className="pill pill-outline ml-1 hidden sm:inline-flex">
+            {c.nav.contact}
+          </a>
+
+          {/* Primary CTA Button: Trải nghiệm ngay */}
+          <a href="#products" className="pill pill-accent hidden md:inline-flex">
             {c.nav.cta}
           </a>
+
+          {/* Mobile Menu Toggle */}
           <button
             type="button"
             className="nav-link !px-3 md:hidden"
@@ -182,8 +251,11 @@ export function BrandNavbar() {
                 </a>
               </li>
             ))}
-            <li className="pt-1">
-              <a href="#products" className="pill pill-accent w-full" onClick={() => setMobileOpen(false)}>
+            <li className="pt-2 flex flex-col gap-2">
+              <a href="#contact" className="pill pill-outline w-full justify-center" onClick={() => setMobileOpen(false)}>
+                {c.nav.contact}
+              </a>
+              <a href="#products" className="pill pill-accent w-full justify-center" onClick={() => setMobileOpen(false)}>
                 {c.nav.cta}
               </a>
             </li>

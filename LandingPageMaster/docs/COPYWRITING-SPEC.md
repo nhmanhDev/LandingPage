@@ -8,11 +8,13 @@ Tài liệu tập hợp toàn bộ câu chữ trên trang từ trên xuống dư
 
 - **Logo:** `AI42E`
 - **Menu:**
-  - `Sản phẩm`
+  - `Sản phẩm` (Menu mở rộng 6 sản phẩm)
   - `Chi phí`
   - `Hỏi đáp`
-  - `Liên hệ`
-- **Nút CTA:** `Xem sản phẩm`
+- **Cụm nút hành động (Actions):**
+  - Đổi ngôn ngữ (`VI / EN`) & Giao diện (Sáng / Tối)
+  - Nút phụ (Secondary): `Liên hệ`
+  - Nút chính (Primary CTA): `Trải nghiệm ngay`
 
 ---
 
