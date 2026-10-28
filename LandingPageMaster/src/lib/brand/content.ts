@@ -97,17 +97,17 @@ const vi: Content = {
   },
   nav: { products: "Sản phẩm", pricing: "Chi phí", faq: "Hỏi đáp", contact: "Liên hệ", open: "Mở", menu: "Mở menu", cta: "Xem sản phẩm" },
   hero: {
-    eyebrow: "Dễ dùng, không cần biết kỹ thuật",
+    eyebrow: "Hệ sinh thái AI cho mọi người",
     titleLine1: "AI cho mọi người,",
     titleLine2: "cho mọi việc.",
-    sub: "Làm video bằng AI, chơi game cùng bạn bè và nhiều công cụ khác đang đến. Mở ra là dùng được, không cần biết gì về kỹ thuật.",
+    sub: "Một bộ công cụ AI trọn vẹn cho sáng tạo, công việc và giải trí. Mở trình duyệt là dùng được ngay — không cần cài đặt, không cần biết kỹ thuật.",
     ctaPrimary: "Xem các sản phẩm",
-    note: "Bạn có thể dùng miễn phí. Cần dùng nhiều hơn thì mới phải trả phí.",
+    note: "Bắt đầu miễn phí hoàn toàn · Không yêu cầu thẻ tín dụng",
   },
   products: {
-    eyebrow: "Tất cả sản phẩm",
-    title: "Hôm nay bạn muốn làm gì?",
-    sub: "Chọn một sản phẩm, mở lên là dùng được ngay, không phải học thêm gì.",
+    eyebrow: "Hệ sinh thái công cụ",
+    title: "Mỗi nhu cầu, một giải pháp AI chuyên biệt",
+    sub: "Không cần đăng ký rườm rà. Chọn một công cụ bên dưới và bắt đầu công việc của bạn chỉ sau một cú nhấp chuột.",
     status: {
       free: "Miễn phí",
       freemium: "Miễn phí giai đoạn đầu",
@@ -120,7 +120,7 @@ const vi: Content = {
         id: "studio",
         icon: "studio",
         name: "AI42E Studio",
-        tagline: "Viết kịch bản, dựng hình, lồng tiếng và xuất file MP4: một ứng dụng làm hết cho bạn.",
+        tagline: "Xưởng sáng tạo video tự động bằng AI. Từ ý tưởng thô, kịch bản đến video MP4 hoàn chỉnh chỉ trong một ứng dụng.",
         bullets: [
           "Viết kịch bản, dựng hình và lồng tiếng tự động",
           "Tải và dịch video từ nhiều nền tảng",
@@ -135,7 +135,7 @@ const vi: Content = {
         id: "oneforall",
         icon: "oneforall",
         name: "OneForAll",
-        tagline: "Một trang web gom nhiều công cụ AI. Mở lên là dùng, không phải cài gì.",
+        tagline: "Trạm trung chuyển tiện ích AI trên nền web. Gom các tác vụ tóm tắt, dịch tài liệu và chuyển đổi dữ liệu nhanh về một giao diện duy nhất.",
         bullets: [
           "Mở lên là dùng, một số công cụ không cần đăng nhập",
           "Tải video, chuyển văn bản thành giọng nói, dịch tài liệu",
@@ -147,7 +147,7 @@ const vi: Content = {
         id: "download",
         icon: "download",
         name: "DownloadAnything",
-        tagline: "Tải video, nhạc và ảnh từ YouTube, TikTok, Facebook và nhiều nơi khác.",
+        tagline: "Trích xuất và lưu trữ video, âm thanh chất lượng cao từ YouTube, TikTok, Douyin và hơn 20 nền tảng trực tuyến.",
         bullets: [
           "YouTube, TikTok, Instagram, Facebook, X, Pinterest, Douyin",
           "Trợ lý AI giúp lấy nội dung ở những trang khó",
@@ -161,7 +161,7 @@ const vi: Content = {
         id: "game",
         icon: "game",
         name: "AI42E Game",
-        tagline: "11 trò chơi cho hai người hoặc cả nhóm, chơi chung trên một chiếc điện thoại. Không cần tải, không cần đăng ký.",
+        tagline: "11 trò chơi gắn kết bạn bè và gia đình. Mở trực tiếp trên trình duyệt điện thoại, không cần tải app, không cần đăng nhập.",
         bullets: [
           "Chơi ngay trên trình duyệt",
           "Không cần tài khoản",
@@ -176,7 +176,7 @@ const vi: Content = {
         id: "voice",
         icon: "voice",
         name: "Voice Studio",
-        tagline: "Biến chữ thành giọng đọc nghe tự nhiên, kèm dịch và nhân bản giọng nói. Ứng dụng cho Windows.",
+        tagline: "Biến văn bản thành giọng đọc truyền cảm chuẩn phòng thu. Tích hợp công nghệ dịch thuật đa ngôn ngữ và nhân bản giọng nói AI.",
         bullets: [
           "Đọc văn bản bằng giọng AI",
           "Dịch và nhân bản giọng nói",
@@ -190,7 +190,7 @@ const vi: Content = {
         id: "trading",
         icon: "trading",
         name: "AI42E Trading System",
-        tagline: "Hệ thống giao dịch tự động đang trong giai đoạn nghiên cứu. Chỉ để tham khảo, không phải lời khuyên đầu tư.",
+        tagline: "Mô hình thuật toán AI phân tích dữ liệu thị trường và nhận diện tín hiệu xu hướng thời gian thực. (Nghiên cứu nội bộ — Không phải lời khuyên đầu tư).",
         bullets: [
           "Đang trong giai đoạn nghiên cứu",
           "Chưa mở cho người dùng",
@@ -307,17 +307,17 @@ const en: Content = {
   },
   nav: { products: "Products", pricing: "Pricing", faq: "FAQ", contact: "Contact", open: "Open", menu: "Open menu", cta: "See products" },
   hero: {
-    eyebrow: "Easy to use, no technical skills needed",
+    eyebrow: "AI ecosystem for everyone",
     titleLine1: "AI for everyone,",
     titleLine2: "for everything.",
-    sub: "Make videos with AI, play games with friends and more tools on the way. Open it and it works, no technical know-how needed.",
+    sub: "A complete AI toolkit for creation, work and play. Open it in your browser and get straight to work — no complex setup, no technical know-how needed.",
     ctaPrimary: "See the products",
-    note: "You can use it for free. You only pay when you need more.",
+    note: "Completely free to start · No credit card required",
   },
   products: {
-    eyebrow: "All products",
-    title: "What do you want to do today?",
-    sub: "Pick a product and start right away, with nothing new to learn.",
+    eyebrow: "Product Ecosystem",
+    title: "Purpose-built AI tools for real-world tasks",
+    sub: "No tedious sign-ups. Choose a tool below and start working right away in a single click.",
     status: {
       free: "Free",
       freemium: "Free in the early period",
@@ -330,7 +330,7 @@ const en: Content = {
         id: "studio",
         icon: "studio",
         name: "AI42E Studio",
-        tagline: "Write the script, build the scenes, add the voice-over and export an MP4: one app does it all.",
+        tagline: "All-in-one AI automated video creation. From raw ideas and scripts to polished MP4 videos in a single app.",
         bullets: [
           "Script, visuals and voice-over, automated",
           "Download and translate videos from many platforms",
@@ -345,7 +345,7 @@ const en: Content = {
         id: "oneforall",
         icon: "oneforall",
         name: "OneForAll",
-        tagline: "One website with many AI tools. Open it and start, nothing to install.",
+        tagline: "Web-based all-in-one AI utility hub. Summarize, translate and convert media seamlessly in one interface.",
         bullets: [
           "Open and use, some tools need no sign-in",
           "Video download, text to speech, document translation",
@@ -357,7 +357,7 @@ const en: Content = {
         id: "download",
         icon: "download",
         name: "DownloadAnything",
-        tagline: "Download video, music and images from YouTube, TikTok, Facebook and more.",
+        tagline: "High-speed media downloader and extractor. Save videos and audio from YouTube, TikTok, Douyin and 20+ platforms.",
         bullets: [
           "YouTube, TikTok, Instagram, Facebook, X, Pinterest, Douyin",
           "An AI assistant that captures media on tricky sites",
@@ -371,7 +371,7 @@ const en: Content = {
         id: "game",
         icon: "game",
         name: "AI42E Game",
-        tagline: "11 games for two or for a group, played on a single phone. No download, no sign-up.",
+        tagline: "11 party games for friends and family. Play right in your mobile browser with zero downloads and no sign-up.",
         bullets: [
           "Plays right in the browser",
           "No account needed",
@@ -386,7 +386,7 @@ const en: Content = {
         id: "voice",
         icon: "voice",
         name: "Voice Studio",
-        tagline: "Turn text into natural-sounding speech, with voice translation and cloning. A Windows app.",
+        tagline: "Studio-grade AI voice synthesis and text-to-speech. Features natural voice cloning and real-time multilingual translation.",
         bullets: [
           "Read text aloud with AI voices",
           "Translate and clone voices",
@@ -400,7 +400,7 @@ const en: Content = {
         id: "trading",
         icon: "trading",
         name: "AI42E Trading System",
-        tagline: "An automated trading system in the research stage. For reference only, not investment advice.",
+        tagline: "Algorithmic AI market data analysis and trend signal detection. (Internal research only — Not financial advice).",
         bullets: [
           "Currently in research",
           "Not open to users yet",
