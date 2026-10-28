@@ -1,36 +1,58 @@
 "use client";
 
 import Image from "next/image";
+import { Quote } from "lucide-react";
 import logo from "@/app/android-chrome-192x192.png";
 import { useBrand } from "./LocaleProvider";
-import { Bezel } from "./Bezel";
 import { Reveal } from "./Reveal";
 import { SectionHead } from "./SectionHead";
 
-/** A short personal note from the maker, in the first person. The text is a draft for Manh to rewrite in his own voice. */
+/** A short personal note from the maker, inspired by Slite's human-centric editorial sections. */
 export function FounderSection() {
   const { c } = useBrand();
   const f = c.founder;
+
   return (
-    <section id="founder" className="band my-6 scroll-mt-20 py-14 sm:py-16">
+    <section id="founder" className="scroll-mt-24 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead eyebrow={f.eyebrow} title={f.title} />
-        <Reveal className="mx-auto mt-8 max-w-2xl sm:mt-16">
-          <Bezel inset={12}>
-          <figure className="p-6 sm:p-10">
-            <div className="space-y-4">
-              {f.paragraphs.map((text) => (
-                <p key={text} className="t-body">
-                  {text}
-                </p>
-              ))}
-            </div>
-            <figcaption className="mt-6 flex items-center gap-3 border-t border-[var(--b-line)] pt-5">
-              <Image src={logo} alt="" width={36} height={36} className="rounded-xl" />
-              <span className="t-body font-medium">{f.signature}</span>
-            </figcaption>
-          </figure>
-          </Bezel>
+
+        <Reveal className="mx-auto mt-10 max-w-3xl sm:mt-14">
+          <div className="relative rounded-[36px] border border-[var(--b-line)] bg-[var(--b-lav)] p-8 sm:p-12 shadow-[var(--sh-soft)]">
+            {/* Subtle quotation mark icon */}
+            <span className="absolute top-6 right-8 text-[var(--b-muted)]/20" aria-hidden="true">
+              <Quote size={54} />
+            </span>
+
+            <figure className="relative z-10">
+              <div className="space-y-5 text-[var(--b-ink)] leading-relaxed t-body text-base sm:text-lg">
+                {f.paragraphs.map((text, idx) => (
+                  <p key={idx} className={idx === 0 ? "font-medium" : "text-[var(--b-muted)]"}>
+                    {text}
+                  </p>
+                ))}
+              </div>
+
+              <figcaption className="mt-8 flex items-center justify-between gap-4 border-t border-[var(--b-line)] pt-6">
+                <div className="flex items-center gap-3">
+                  <div className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--b-surface)] border border-[var(--b-line)] shadow-2xs">
+                    <Image src={logo} alt="" width={24} height={24} className="rounded-md" />
+                  </div>
+                  <div>
+                    <span className="t-body block font-bold text-[var(--b-ink)]">{f.signature}</span>
+                    <span className="text-xs text-[var(--b-muted)]">AI Engineer · Nhà sáng lập AI42E</span>
+                  </div>
+                </div>
+
+                <a
+                  href="#contact"
+                  className="pill pill-surface text-xs font-semibold"
+                >
+                  Gửi lời nhắn cho Mạnh ↗
+                </a>
+              </figcaption>
+            </figure>
+          </div>
         </Reveal>
       </div>
     </section>

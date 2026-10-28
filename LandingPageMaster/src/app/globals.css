@@ -513,7 +513,7 @@ html:has(.brand-landing) {
 
 /* Hero bottom: the tilted wall dissolves into the cream page (no hard edge before the next section). */
 .brand-landing .hero-fade {
-  height: 14rem;
+  height: 18rem;
   background: linear-gradient(to top, var(--b-bg) 6%, color-mix(in srgb, var(--b-bg) 82%, transparent) 38%, transparent 100%);
 }
 
@@ -576,7 +576,7 @@ html:has(.brand-landing) {
 
 /* Hero bottom: the tilted wall dissolves into the cream page (no hard edge before the next section). */
 .brand-landing .hero-fade {
-  height: 14rem;
+  height: 18rem;
   background: linear-gradient(to top, var(--b-bg) 6%, color-mix(in srgb, var(--b-bg) 82%, transparent) 38%, transparent 100%);
 }
 
@@ -584,56 +584,4 @@ html:has(.brand-landing) {
 .brand-landing .pill-outline { background: transparent; box-shadow: inset 0 0 0 1.6px var(--b-ink); }
 .brand-landing .pill-outline:hover,
 .brand-landing .group:hover .pill-outline { background: var(--b-ink); color: var(--b-bg); }
-
-/*
- * Sand card (measured on slite.com): flat warm surface, 40px radius, copy on top, product picture bleeding off the bottom.
- * Hover lifts the card and nudges the picture up. Transform and shadow only.
- */
-.brand-landing .sand-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 40px;
-  background: var(--b-lav);
-  padding: 28px 28px 0;
-  box-shadow: inset 0 0 0 1px var(--b-line);
-  transition: transform 0.35s cubic-bezier(0.2, 0.65, 0.3, 1), box-shadow 0.35s;
-}
-.brand-landing .sand-card:hover {
-  transform: translateY(-4px);
-  box-shadow: inset 0 0 0 1px var(--b-line), 0 32px 60px -30px rgba(107, 93, 70, 0.5);
-}
-.brand-landing .sand-card .card-visual {
-  margin-top: auto;
-  padding-top: 28px;
-  transition: transform 0.45s cubic-bezier(0.2, 0.65, 0.3, 1);
-}
-.brand-landing .sand-card:hover .card-visual { transform: translateY(-8px); }
-.brand-landing .card-arrow {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  background: var(--b-ink);
-  color: var(--b-bg);
-  transition: transform 0.3s cubic-bezier(0.2, 0.65, 0.3, 1);
-}
-.brand-landing .sand-card:hover .card-arrow { transform: translate(2px, -2px) scale(1.08); }
-@media (min-width: 1024px) {
-  .brand-landing .sand-card { padding: 36px 36px 0; }
-  .brand-landing .sand-card-wide { flex-direction: row; align-items: stretch; gap: 40px; }
-  .brand-landing .sand-card-wide .card-copy { flex: 0 0 38%; padding-bottom: 36px; }
-  .brand-landing .sand-card-wide .card-visual { flex: 1; padding-top: 36px; align-self: flex-end; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .brand-landing .sand-card,
-  .brand-landing .sand-card .card-visual,
-  .brand-landing .card-arrow { transition: none; }
-  .brand-landing .sand-card:hover,
-  .brand-landing .sand-card:hover .card-visual,
-  .brand-landing .sand-card:hover .card-arrow { transform: none; }
-}
 
