@@ -11,7 +11,7 @@ export function CompareSection() {
   const { c } = useBrand();
   const k = c.compare;
   return (
-    <section className="py-14 sm:py-[4.5rem] lg:py-20">
+    <section id="compare" className="scroll-mt-20 py-14 sm:py-[4.5rem] lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead eyebrow={k.eyebrow} title={k.title} tone={k.tone} sub={k.sub} />
 

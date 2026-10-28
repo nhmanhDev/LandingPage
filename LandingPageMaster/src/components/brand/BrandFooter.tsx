@@ -6,7 +6,6 @@ import logo from "@/app/android-chrome-192x192.png";
 import { PORTFOLIO_URL, SOCIALS } from "@/lib/brand/content";
 import { useBrand } from "./LocaleProvider";
 
-// Brand colours for the platform icons only, as in the footer of play.ai42e.com.
 const ICONS: Record<string, { Icon: React.ComponentType<{ size?: number; "aria-hidden"?: boolean }>; color: string }> = {
   youtube: { Icon: Youtube, color: "#ff0033" },
   facebook: { Icon: Facebook, color: "#1877f2" },
@@ -17,17 +16,18 @@ const ICONS: Record<string, { Icon: React.ComponentType<{ size?: number; "aria-h
 
 export function BrandFooter() {
   const { c } = useBrand();
+
   return (
-    <footer id="contact" className="mt-8 scroll-mt-24 border-t border-[var(--b-line)] pb-8 pt-14">
+    <footer id="contact" className="mt-2 scroll-mt-20 border-t border-[var(--b-line)] pb-5 pt-5 sm:pt-6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-center gap-4" aria-hidden="true">
-          <span className="h-px w-16 bg-[var(--b-line)]" />
-          <span className="t-small font-medium tracking-[0.14em] text-[var(--b-muted)]">{c.contact.title.toUpperCase()}</span>
-          <span className="h-px w-16 bg-[var(--b-line)]" />
+        <div className="flex items-center justify-center gap-3" aria-hidden="true">
+          <span className="h-px w-12 bg-[var(--b-line)]" />
+          <span className="text-[11px] font-semibold tracking-[0.16em] text-[var(--b-muted)] uppercase">{c.contact.title}</span>
+          <span className="h-px w-12 bg-[var(--b-line)]" />
         </div>
         <h2 className="sr-only t-heading">{c.contact.title}</h2>
 
-        <ul className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <ul className="mt-3.5 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
           {SOCIALS.map((social) => {
             const { Icon, color } = ICONS[social.id];
             const external = !social.href.startsWith("mailto:");
@@ -36,35 +36,38 @@ export function BrandFooter() {
                 <a
                   href={social.href}
                   {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="group flex h-full flex-col gap-2 rounded-2xl bg-[var(--b-surface)] p-4 shadow-[var(--sh-soft)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--sh-card)]"
+                  className="group flex items-center gap-2.5 rounded-xl border border-[var(--b-line)] bg-[var(--b-surface)] px-3 py-2 shadow-[var(--sh-soft)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--b-ink)]"
                 >
-                  <span className="t-small flex items-center gap-2 text-[var(--b-muted)]">
-                    <span style={{ color }}>
-                      <Icon size={18} aria-hidden />
-                    </span>
-                    {social.name}
+                  <span
+                    className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-[var(--b-chip)] transition-transform group-hover:scale-105"
+                    style={{ color }}
+                  >
+                    <Icon size={15} aria-hidden />
                   </span>
-                  <span className="t-body break-all font-medium">{social.handle}</span>
+                  <div className="min-w-0 flex-1">
+                    <span className="block text-xs font-semibold leading-tight">{social.name}</span>
+                    <span className="block truncate text-[11px] text-[var(--b-muted)]">{social.handle}</span>
+                  </div>
                 </a>
               </li>
             );
           })}
         </ul>
-        <p className="t-small mt-4 text-center text-[var(--b-muted)]">{c.contact.sub}</p>
+        <p className="mt-2.5 text-center text-xs text-[var(--b-muted)]">{c.contact.sub}</p>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-[var(--b-line)] pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-3">
-            <Image src={logo} alt="" width={28} height={28} className="rounded-lg" />
-            <p className="t-small text-[var(--b-muted)]">
+        <div className="mt-5 flex flex-col gap-3 border-t border-[var(--b-line)] pt-3.5 sm:flex-row sm:items-center sm:justify-between text-xs">
+          <div className="flex items-center gap-2.5">
+            <Image src={logo} alt="" width={22} height={22} className="rounded-md" />
+            <p className="text-[var(--b-muted)]">
               © {new Date().getFullYear()} {c.footer.rights}
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <a href={PORTFOLIO_URL} className="t-small inline-flex items-center gap-1 text-[var(--b-muted)] transition-colors hover:text-[var(--b-ink)]">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <a href={PORTFOLIO_URL} className="inline-flex items-center gap-1 text-[var(--b-muted)] transition-colors hover:text-[var(--b-ink)]">
               {c.footer.portfolio}
-              <ArrowUpRight size={13} aria-hidden="true" />
+              <ArrowUpRight size={12} aria-hidden="true" />
             </a>
-            <p className="t-small font-medium">{c.footer.slogan}</p>
+            <p className="font-semibold text-[var(--b-ink)] tracking-wider text-[11px]">{c.footer.slogan}</p>
           </div>
         </div>
       </div>

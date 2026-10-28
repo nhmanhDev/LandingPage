@@ -12,7 +12,7 @@ export function FounderSection() {
   const { c } = useBrand();
   const f = c.founder;
   return (
-    <section className="band my-6 py-14 sm:py-16">
+    <section id="founder" className="band my-6 scroll-mt-20 py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead eyebrow={f.eyebrow} title={f.title} />
         <Reveal className="mx-auto mt-8 max-w-2xl sm:mt-16">

@@ -28,17 +28,18 @@ export function ClosingSection() {
   const { resolvedTheme } = useTheme();
   const mounted = useMounted();
   const pathColor = mounted && resolvedTheme === "dark" ? "rgba(243,241,255,0.28)" : "rgba(23,18,58,0.22)";
+
   return (
-    <section className="py-10 sm:py-14">
+    <section className="pt-4 pb-2 sm:pt-6 sm:pb-3">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="aurora au-panel relative rounded-[32px] shadow-[var(--sh-card)]">
-            <div className="relative z-10 grid items-center gap-6 p-6 sm:p-12 md:grid-cols-[1.05fr_1fr]">
+            <div className="relative z-10 grid items-center gap-6 p-5 sm:p-8 lg:p-9 md:grid-cols-[1.1fr_0.9fr]">
               <div>
                 <SectionTitle text={c.closing.title} className="t-title" />
-                <p className="t-body mt-3 max-w-md text-[var(--b-muted)]">{c.closing.sub}</p>
-                <div className="mt-7 flex flex-wrap items-center gap-2.5">
-                  <Magnet padding={50} magnetStrength={5} maxOffset={14}>
+                <p className="t-body mt-2.5 max-w-md text-[var(--b-muted)]">{c.closing.sub}</p>
+                <div className="mt-5 flex flex-wrap items-center gap-2.5">
+                  <Magnet padding={40} magnetStrength={4} maxOffset={10}>
                     <a href="#products" className="pill pill-accent pill-cta">
                       {c.closing.cta}
                       <ArrowRight size={16} aria-hidden="true" />
@@ -48,19 +49,19 @@ export function ClosingSection() {
                     {c.closing.cta2}
                   </a>
                 </div>
-                <p className="t-small mt-4 text-[var(--b-muted)]">{c.closing.trust}</p>
+                <p className="t-small mt-3 text-xs text-[var(--b-muted)]">{c.closing.trust}</p>
               </div>
 
-              <div className="relative mx-auto h-[300px] w-full max-w-[460px] sm:h-[360px]" aria-hidden="true">
+              <div className="relative mx-auto h-[210px] w-full max-w-[420px] sm:h-[240px]" aria-hidden="true">
                 <OrbitImages
                   images={ORBIT}
                   shape="ellipse"
-                  radiusX={190}
-                  radiusY={110}
+                  radiusX={160}
+                  radiusY={95}
                   rotation={-12}
                   duration={36}
-                  itemSize={74}
-                  itemRadius={18}
+                  itemSize={58}
+                  itemRadius={14}
                   shadow={0.5}
                   paused={paused}
                   responsive
@@ -70,8 +71,8 @@ export function ClosingSection() {
                   width="100%"
                   height="100%"
                   centerContent={
-                    <span className="glass grid h-16 w-16 place-items-center rounded-full">
-                      <Image src={logo} alt="" width={36} height={36} className="rounded-lg" />
+                    <span className="glass grid h-13 w-13 place-items-center rounded-full">
+                      <Image src={logo} alt="" width={30} height={30} className="rounded-lg" />
                     </span>
                   }
                 />

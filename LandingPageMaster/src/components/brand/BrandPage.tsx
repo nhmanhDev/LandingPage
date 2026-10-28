@@ -42,9 +42,11 @@ export function BrandPage() {
             <FreemiumSection />
             <FounderSection />
             <FaqSection />
-            <ClosingSection />
+            <div className="lg:min-h-screen lg:flex lg:flex-col lg:justify-between lg:pt-6">
+              <ClosingSection />
+              <BrandFooter />
+            </div>
           </main>
-          <BrandFooter />
         </div>
       </MotionConfig>
     </LocaleProvider>

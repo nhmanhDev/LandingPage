@@ -24,7 +24,17 @@ export interface Product {
 
 export interface Content {
   meta: { title: string; description: string };
-  nav: { products: string; pricing: string; faq: string; contact: string; open: string; menu: string; cta: string };
+  nav: {
+    products: string;
+    compare: string;
+    pricing: string;
+    story: string;
+    faq: string;
+    contact: string;
+    open: string;
+    menu: string;
+    cta: string;
+  };
   hero: {
     eyebrow: string;
     titleLine1: string;
@@ -95,7 +105,17 @@ const vi: Content = {
     description:
       "Làm video bằng AI, chơi game cùng bạn bè và nhiều công cụ khác, đơn giản đến mức ai cũng dùng được. Miễn phí để bắt đầu.",
   },
-  nav: { products: "Sản phẩm", pricing: "Chi phí", faq: "Hỏi đáp", contact: "Liên hệ", open: "Mở", menu: "Mở menu", cta: "Trải nghiệm ngay" },
+  nav: {
+    products: "Sản phẩm",
+    compare: "Vì sao chọn AI42E",
+    pricing: "Chi phí",
+    story: "Về AI42E",
+    faq: "Hỏi đáp",
+    contact: "Liên hệ",
+    open: "Mở",
+    menu: "Mở menu",
+    cta: "Trải nghiệm ngay",
+  },
   hero: {
     eyebrow: "Hệ sinh thái AI cho mọi người",
     titleLine1: "AI cho mọi người,",
@@ -305,7 +325,17 @@ const en: Content = {
     description:
       "Make videos with AI, play games with friends and more, all simple enough for anyone to use. Free to start.",
   },
-  nav: { products: "Products", pricing: "Pricing", faq: "FAQ", contact: "Contact", open: "Open", menu: "Open menu", cta: "Try now" },
+  nav: {
+    products: "Products",
+    compare: "Why AI42E",
+    pricing: "Pricing",
+    story: "About",
+    faq: "FAQ",
+    contact: "Contact",
+    open: "Open",
+    menu: "Open menu",
+    cta: "Try now",
+  },
   hero: {
     eyebrow: "AI ecosystem for everyone",
     titleLine1: "AI for everyone,",
