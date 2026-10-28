@@ -16,24 +16,21 @@ const DOT: Record<ProductStatus, string> = {
   maintenance: "bg-[#d98a00]",
 };
 
-// Bento layout on large screens: two big cards, three medium, one wide.
-const ORDER = ["studio", "game", "oneforall", "voice", "download", "trading"];
+// 4 real products that have live software and authentic screenshots
+const ORDER = ["studio", "game", "download", "voice"];
 const SPAN: Record<string, string> = {
   studio: "sm:col-span-2 lg:col-span-7",
   game: "lg:col-span-5",
-  oneforall: "lg:col-span-4",
-  voice: "lg:col-span-4",
-  download: "lg:col-span-4",
-  trading: "sm:col-span-2 lg:col-span-12",
+  download: "sm:col-span-1 lg:col-span-6",
+  voice: "sm:col-span-1 lg:col-span-6",
 };
 
 /**
  * One sand card (pattern measured on slite.com): status label, serif name, one line, an outlined pill,
- * and the product picture bleeding off the bottom edge. The wide card puts the picture beside the copy.
+ * and the product picture bleeding off the bottom edge.
  */
 function Card({ product, statusLabel }: { product: Product; statusLabel: string }) {
   const live = Boolean(product.href);
-  const wide = product.id === "trading";
   const body = (
     <>
       <div className="card-copy">
@@ -58,7 +55,7 @@ function Card({ product, statusLabel }: { product: Product; statusLabel: string 
     </>
   );
 
-  const className = `sand-card group${wide ? " sand-card-wide" : ""}`;
+  const className = "sand-card group";
   return live ? (
     <a href={product.href} target="_blank" rel="noopener noreferrer" className={className}>
       {body}
@@ -85,6 +82,23 @@ export function ProductsSection() {
             </li>
           ))}
         </ul>
+
+        {/* Upcoming Roadmap Strip: Tách riêng các dự án đang phát triển */}
+        <Reveal delay={0.25} className="mt-8">
+          <div className="rounded-2xl border border-[var(--b-line)] bg-[var(--b-chip)]/50 p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="t-small font-semibold tracking-wide text-[var(--b-brand)] bg-[var(--b-surface)] px-3 py-1 rounded-full border border-[var(--b-line)] shadow-2xs">
+                Đang phát triển
+              </span>
+              <p className="t-body text-[var(--b-muted)]">
+                <strong>OneForAll</strong> (Trạm tiện ích AI web) & <strong>AI42E Trading System</strong> (Thuật toán nhận diện tín hiệu tài chính).
+              </p>
+            </div>
+            <span className="t-small text-[var(--b-muted)] shrink-0 font-medium">
+              Sẽ mở khi hoàn thiện
+            </span>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

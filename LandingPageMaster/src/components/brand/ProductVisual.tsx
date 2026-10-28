@@ -62,24 +62,57 @@ function ToolsMotif() {
 }
 
 function VoiceMotif() {
-  const bars = Array.from({ length: 29 }, (_, i) => Math.round(18 + 62 * Math.abs(Math.sin(i * 0.72) * Math.cos(i * 0.29))));
   return (
-    <div className="flex h-[46%] w-[72%] items-center justify-between gap-[3px]">
-      {bars.map((height, i) => (
-        <span key={i} className="bar block w-[3px] rounded-full bg-[var(--b-ink)] opacity-70" style={{ height: `${height}%`, animationDelay: `${(-i * 0.13).toFixed(2)}s` }} />
-      ))}
+    <div className="relative h-[82%] w-[88%]">
+      <div
+        className="float absolute inset-x-0 top-[6%] overflow-hidden rounded-xl shadow-[0_20px_45px_-14px_rgba(0,0,0,0.4)]"
+        style={{ ["--r" as string]: "1deg" }}
+      >
+        <Image
+          src="/brand/tiles/voice-studio.png"
+          alt="Voice Studio Screenshot"
+          width={1440}
+          height={900}
+          unoptimized
+          loading="lazy"
+          className="block h-auto w-full"
+        />
+      </div>
     </div>
   );
 }
 
 function DownloadMotif() {
   return (
-    <div className="relative grid h-[58%] aspect-square place-items-center">
-      <span className="ripple absolute inset-0 rounded-full border border-[var(--b-ink)]/25" />
-      <span className="ripple absolute inset-[14%] rounded-full border border-[var(--b-ink)]/25" style={{ animationDelay: "-1.2s" }} />
-      <span className="glass relative grid h-[46%] aspect-square place-items-center rounded-full">
-        <Download size={24} strokeWidth={1.6} />
-      </span>
+    <div className="relative h-[84%] w-[90%]">
+      <div
+        className="float absolute right-0 top-[2%] w-[68%] overflow-hidden rounded-xl shadow-[0_16px_36px_-12px_rgba(0,0,0,0.45)]"
+        style={{ ["--r" as string]: "2.5deg", animationDelay: "-2.5s" }}
+      >
+        <Image
+          src="/brand/tiles/download-dark.png"
+          alt="DownloadAnything Dark Screenshot"
+          width={1024}
+          height={575}
+          unoptimized
+          loading="lazy"
+          className="block h-auto w-full"
+        />
+      </div>
+      <div
+        className="float absolute left-0 top-[10%] w-[72%] overflow-hidden rounded-xl shadow-[0_20px_45px_-12px_rgba(0,0,0,0.4)] z-10"
+        style={{ ["--r" as string]: "-2deg" }}
+      >
+        <Image
+          src="/brand/tiles/download-light.png"
+          alt="DownloadAnything Light Screenshot"
+          width={1024}
+          height={575}
+          unoptimized
+          loading="lazy"
+          className="block h-auto w-full"
+        />
+      </div>
     </div>
   );
 }
@@ -121,8 +154,8 @@ const HEIGHT: Record<string, string> = {
   studio: "h-[250px] sm:h-[300px] lg:h-[380px]",
   game: "h-[250px] sm:h-[300px] lg:h-[380px]",
   oneforall: "h-[230px] lg:h-[270px]",
-  voice: "h-[230px] lg:h-[270px]",
-  download: "h-[230px] lg:h-[270px]",
+  voice: "h-[250px] sm:h-[300px] lg:h-[360px]",
+  download: "h-[250px] sm:h-[300px] lg:h-[360px]",
   trading: "h-[190px] sm:h-[210px]",
 };
 
