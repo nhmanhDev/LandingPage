@@ -1,13 +1,12 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Download, AudioLines, Clapperboard, Sparkles } from "lucide-react";
 import type { Product, ProductStatus } from "@/lib/brand/content";
 import { useBrand } from "./LocaleProvider";
 import { ProductVisual } from "./ProductVisual";
 import { Reveal } from "./Reveal";
 import { SectionHead } from "./SectionHead";
 
-// The only colour in the UI chrome: a small dot that says whether the product is live.
 const DOT: Record<ProductStatus, string> = {
   free: "bg-[#1a9b5a]",
   freemium: "bg-[#1a9b5a]",
@@ -16,26 +15,23 @@ const DOT: Record<ProductStatus, string> = {
   maintenance: "bg-[#d98a00]",
 };
 
-// 4 real products that have live software and authentic screenshots
-const ORDER = ["studio", "game", "download", "voice"];
+// 3 Creative Tools in the multimedia production pipeline
+const CREATIVE_ORDER = ["studio", "download", "voice"];
 const SPAN: Record<string, string> = {
-  studio: "sm:col-span-2 lg:col-span-7",
-  game: "lg:col-span-5",
+  studio: "lg:col-span-12",
   download: "sm:col-span-1 lg:col-span-6",
   voice: "sm:col-span-1 lg:col-span-6",
 };
 
-/**
- * One sand card (pattern measured on slite.com): status label, serif name, one line, an outlined pill,
- * and the product picture bleeding off the bottom edge.
- */
 function Card({ product, statusLabel }: { product: Product; statusLabel: string }) {
   const live = Boolean(product.href);
+  const isWide = product.id === "studio";
+
   const body = (
     <>
       <div className="card-copy">
         <div className="flex items-start justify-between gap-3">
-          <span className="t-small inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-[var(--b-muted)]">
+          <span className="t-small inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-[var(--b-muted)] border border-[var(--b-line)]">
             <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
             {statusLabel}
           </span>
@@ -46,7 +42,7 @@ function Card({ product, statusLabel }: { product: Product; statusLabel: string 
           ) : null}
         </div>
         <h3 className="t-subtitle mt-6">{product.name}</h3>
-        <p className="t-body mt-2 max-w-[30rem] text-[var(--b-muted)]">{product.tagline}</p>
+        <p className="t-body mt-2 max-w-[32rem] text-[var(--b-muted)] leading-relaxed">{product.tagline}</p>
         {live ? <span className="pill pill-outline mt-6">{product.cta}</span> : null}
       </div>
       <div className="card-visual">
@@ -55,7 +51,7 @@ function Card({ product, statusLabel }: { product: Product; statusLabel: string 
     </>
   );
 
-  const className = "sand-card group";
+  const className = `sand-card ${isWide ? "sand-card-wide" : ""} group`;
   return live ? (
     <a href={product.href} target="_blank" rel="noopener noreferrer" className={className}>
       {body}
@@ -67,13 +63,56 @@ function Card({ product, statusLabel }: { product: Product; statusLabel: string 
 
 export function ProductsSection() {
   const { c } = useBrand();
-  const items = ORDER.map((id) => c.products.items.find((item) => item.id === id)).filter((item): item is Product => Boolean(item));
+  const items = CREATIVE_ORDER.map((id) => c.products.items.find((item) => item.id === id)).filter((item): item is Product => Boolean(item));
+
   return (
-    <section id="products" className="relative z-10 -mt-12 scroll-mt-24 pb-20 lg:pb-28">
+    <section id="products" className="relative z-10 -mt-10 scroll-mt-24 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead eyebrow={c.products.eyebrow} title={c.products.title} sub={c.products.sub} />
 
-        <ul className="mt-10 grid gap-5 sm:mt-16 sm:grid-cols-2 lg:grid-cols-12">
+        {/* Closed-loop Workflow Synergy Banner */}
+        <Reveal delay={0.08} className="mt-10 sm:mt-12">
+          <div className="rounded-3xl border border-[var(--b-line)] bg-[var(--b-lav)] p-5 sm:p-7 shadow-[var(--sh-soft)]">
+            <div className="flex items-center gap-2 mb-4 text-xs font-bold uppercase tracking-wider text-[var(--b-brand)]">
+              <Sparkles size={14} />
+              Dây chuyền phối hợp khép kín trong AI42E:
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="flex items-center gap-3 rounded-2xl bg-[var(--b-surface)] p-3.5 border border-[var(--b-line)]">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-orange-500/10 text-[var(--b-brand)] font-bold text-xs">
+                  01
+                </span>
+                <div className="min-w-0">
+                  <span className="block text-xs font-bold text-[var(--b-ink)]">Khai thác tư liệu sạch</span>
+                  <span className="block text-[11px] text-[var(--b-muted)] truncate">DownloadAnything tải video, audio 4K</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 rounded-2xl bg-[var(--b-surface)] p-3.5 border border-[var(--b-line)]">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-orange-500/10 text-[var(--b-brand)] font-bold text-xs">
+                  02
+                </span>
+                <div className="min-w-0">
+                  <span className="block text-xs font-bold text-[var(--b-ink)]">Lồng giọng truyền cảm</span>
+                  <span className="block text-[11px] text-[var(--b-muted)] truncate">Voice Studio đọc văn bản & clone voice</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 rounded-2xl bg-[var(--b-surface)] p-3.5 border border-[var(--b-line)]">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-orange-500/10 text-[var(--b-brand)] font-bold text-xs">
+                  03
+                </span>
+                <div className="min-w-0">
+                  <span className="block text-xs font-bold text-[var(--b-ink)]">Dựng video tự động hóa</span>
+                  <span className="block text-[11px] text-[var(--b-muted)] truncate">AI42E Studio xuất bản video hoàn chỉnh</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* 3 Creative Suite Bento Cards */}
+        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-12">
           {items.map((product, index) => (
             <li key={product.id} className={SPAN[product.id]}>
               <Reveal delay={Math.min(index, 3) * 0.06} className="h-full">
@@ -82,23 +121,6 @@ export function ProductsSection() {
             </li>
           ))}
         </ul>
-
-        {/* Upcoming Roadmap Strip: Tách riêng các dự án đang phát triển */}
-        <Reveal delay={0.25} className="mt-8">
-          <div className="rounded-2xl border border-[var(--b-line)] bg-[var(--b-chip)]/50 p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="t-small font-semibold tracking-wide text-[var(--b-brand)] bg-[var(--b-surface)] px-3 py-1 rounded-full border border-[var(--b-line)] shadow-2xs">
-                Đang phát triển
-              </span>
-              <p className="t-body text-[var(--b-muted)]">
-                <strong>OneForAll</strong> (Trạm tiện ích AI web) & <strong>AI42E Trading System</strong> (Thuật toán nhận diện tín hiệu tài chính).
-              </p>
-            </div>
-            <span className="t-small text-[var(--b-muted)] shrink-0 font-medium">
-              Sẽ mở khi hoàn thiện
-            </span>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

@@ -163,6 +163,9 @@ export function BrandNavbar() {
   const isDark = mounted && resolvedTheme === "dark";
   const products = useOrderedProducts(c.products.items);
   const links = [
+    { href: "#products", label: c.nav.creative || "Sáng tạo" },
+    { href: "#play", label: c.nav.play || "Giải trí" },
+    { href: "#horizon", label: c.nav.horizon || "Tương lai" },
     { href: "#compare", label: c.nav.compare },
     { href: "#pricing", label: c.nav.pricing },
     { href: "#founder", label: c.nav.story },

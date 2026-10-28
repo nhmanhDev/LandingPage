@@ -6,6 +6,8 @@ import { BrandHero } from "./BrandHero";
 import { BrandNavbar } from "./BrandNavbar";
 import { ClosingSection } from "./ClosingSection";
 import { CompareSection } from "./CompareSection";
+import { EcosystemHorizonSection } from "./EcosystemHorizonSection";
+import { EcosystemPlaySection } from "./EcosystemPlaySection";
 import { FaqSection } from "./FaqSection";
 import { FounderSection } from "./FounderSection";
 import { FreemiumSection } from "./FreemiumSection";
@@ -24,7 +26,7 @@ function SkipLink() {
   );
 }
 
-/** The story, top to bottom: claim, everything on offer, why it is easier, cost, the maker, doubts, invitation. */
+/** The complete AI42E Ecosystem Showcase */
 export function BrandPage() {
   return (
     <LocaleProvider>
@@ -36,12 +38,31 @@ export function BrandPage() {
           <SkipLink />
           <BrandNavbar />
           <main>
+            {/* 1. Hero: Central Nexus of AI42E Ecosystem */}
             <BrandHero />
+
+            {/* 2. Pillar 1: Multimedia Creative Suite (Studio, Voice, Downloader) */}
             <ProductsSection />
+
+            {/* 3. Pillar 2: Life & Play (11 Web Games) */}
+            <EcosystemPlaySection />
+
+            {/* 4. Pillar 3: Future Horizon & Quant Lab (OneForAll, Trading AI) */}
+            <EcosystemHorizonSection />
+
+            {/* 5. Why Choose an Ecosystem (Integrated vs Scattered Tools) */}
             <CompareSection />
+
+            {/* 6. Pricing & Transparent Freemium Philosophy */}
             <FreemiumSection />
+
+            {/* 7. The Story & The Maker */}
             <FounderSection />
+
+            {/* 8. Frequently Asked Questions */}
             <FaqSection />
+
+            {/* 9. Closing Billboard & Official Network Directory (1 Screen) */}
             <div className="lg:min-h-screen lg:flex lg:flex-col lg:justify-between lg:pt-6">
               <ClosingSection />
               <BrandFooter />

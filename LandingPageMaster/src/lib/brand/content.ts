@@ -26,6 +26,9 @@ export interface Content {
   meta: { title: string; description: string };
   nav: {
     products: string;
+    creative?: string;
+    play?: string;
+    horizon?: string;
     compare: string;
     pricing: string;
     story: string;
@@ -106,7 +109,10 @@ const vi: Content = {
       "Làm video bằng AI, chơi game cùng bạn bè và nhiều công cụ khác, đơn giản đến mức ai cũng dùng được. Miễn phí để bắt đầu.",
   },
   nav: {
-    products: "Sản phẩm",
+    products: "Hệ sinh thái",
+    creative: "Sáng tạo",
+    play: "Giải trí",
+    horizon: "Tương lai",
     compare: "Vì sao chọn AI42E",
     pricing: "Chi phí",
     story: "Về AI42E",
@@ -117,17 +123,17 @@ const vi: Content = {
     cta: "Trải nghiệm ngay",
   },
   hero: {
-    eyebrow: "Hệ sinh thái AI cho mọi người",
+    eyebrow: "Hệ sinh thái AI cho mọi người & mọi việc",
     titleLine1: "AI cho mọi người,",
     titleLine2: "cho mọi việc.",
-    sub: "Một bộ công cụ AI trọn vẹn cho sáng tạo, công việc và giải trí. Mở trình duyệt là dùng được ngay — không cần cài đặt, không cần biết kỹ thuật.",
-    ctaPrimary: "Xem các sản phẩm",
+    sub: "Một hệ sinh thái trọn vẹn gồm các công cụ AI chuyên biệt cho sáng tạo đa phương tiện, tiện ích công việc và gắn kết giải trí. Mở trình duyệt là dùng ngay — không cần biết kỹ thuật.",
+    ctaPrimary: "Khám phá hệ sinh thái",
     note: "Bắt đầu miễn phí hoàn toàn · Không yêu cầu thẻ tín dụng",
   },
   products: {
-    eyebrow: "Hệ sinh thái công cụ",
-    title: "Mỗi nhu cầu, một giải pháp AI chuyên biệt",
-    sub: "Không cần đăng ký rườm rà. Chọn một công cụ bên dưới và bắt đầu công việc của bạn chỉ sau một cú nhấp chuột.",
+    eyebrow: "Trục sáng tạo đa phương tiện",
+    title: "Dây chuyền sáng tạo nội dung khép kín bằng AI",
+    sub: "Khai thác tư liệu gốc với DownloadAnything, tạo giọng đọc truyền cảm bằng Voice Studio và tự động dựng video cùng AI42E Studio.",
     status: {
       free: "Miễn phí",
       freemium: "Miễn phí giai đoạn đầu",
@@ -326,7 +332,10 @@ const en: Content = {
       "Make videos with AI, play games with friends and more, all simple enough for anyone to use. Free to start.",
   },
   nav: {
-    products: "Products",
+    products: "Ecosystem",
+    creative: "Creation",
+    play: "Play & Games",
+    horizon: "Future Lab",
     compare: "Why AI42E",
     pricing: "Pricing",
     story: "About",
@@ -337,17 +346,17 @@ const en: Content = {
     cta: "Try now",
   },
   hero: {
-    eyebrow: "AI ecosystem for everyone",
+    eyebrow: "AI Ecosystem for Everyone & Everything",
     titleLine1: "AI for everyone,",
     titleLine2: "for everything.",
-    sub: "A complete AI toolkit for creation, work and play. Open it in your browser and get straight to work — no complex setup, no technical know-how needed.",
-    ctaPrimary: "See the products",
+    sub: "A complete AI technology ecosystem with purpose-built tools for multimedia creation, daily productivity and connected play. Open in browser and start immediately.",
+    ctaPrimary: "Explore the ecosystem",
     note: "Completely free to start · No credit card required",
   },
   products: {
-    eyebrow: "Product Ecosystem",
-    title: "Purpose-built AI tools for real-world tasks",
-    sub: "No tedious sign-ups. Choose a tool below and start working right away in a single click.",
+    eyebrow: "Multimedia Creative Suite",
+    title: "End-to-end AI content production pipeline",
+    sub: "Extract source media with DownloadAnything, synthesize lifelike voiceovers with Voice Studio, and automate video production with AI42E Studio.",
     status: {
       free: "Free",
       freemium: "Free in the early period",
