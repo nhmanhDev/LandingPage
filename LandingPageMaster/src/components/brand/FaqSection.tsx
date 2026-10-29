@@ -7,16 +7,26 @@ import { SectionHead } from "./SectionHead";
 
 export function FaqSection() {
   const { c } = useBrand();
+
   return (
-    <section id="faq" className="scroll-mt-24 py-14 sm:py-[4.5rem] lg:py-20">
+    <section id="faq" className="scroll-mt-24 py-20 lg:py-28">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
-        <SectionHead eyebrow={c.faq.eyebrow} title={c.faq.title} />
-        <Reveal delay={0.06} className="mt-8 sm:mt-16">
-          <Accordion type="single" collapsible className="space-y-3">
+        <SectionHead title={c.faq.title} />
+
+        <Reveal delay={0.06} className="mt-10 sm:mt-14">
+          <Accordion type="single" collapsible className="space-y-3.5">
             {c.faq.items.map((item, index) => (
-              <AccordionItem key={item.q} value={`faq-${index}`} className="rounded-2xl border-0 bg-[var(--b-surface)] px-6 shadow-[var(--sh-soft)]">
-                <AccordionTrigger className="t-heading py-4 text-left hover:no-underline">{item.q}</AccordionTrigger>
-                <AccordionContent className="t-body text-[var(--b-muted)]">{item.a}</AccordionContent>
+              <AccordionItem
+                key={item.q}
+                value={`faq-${index}`}
+                className="rounded-2xl border border-[var(--b-line)] bg-[var(--b-surface)] px-6 shadow-[var(--sh-soft)] transition-all hover:border-[var(--b-ink)]/30"
+              >
+                <AccordionTrigger className="t-heading py-4 sm:py-5 text-left font-semibold text-[var(--b-ink)] hover:no-underline">
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="t-body pb-5 text-[var(--b-muted)] leading-relaxed">
+                  {item.a}
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>

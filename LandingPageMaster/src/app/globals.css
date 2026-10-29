@@ -82,6 +82,7 @@
 }
 
 @theme inline {
+  --font-sans: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -182,35 +183,33 @@
 /*
  * AI42E brand landing ("/"). Scoped to .brand-landing so blog, studio and admin keep their own look.
  *
- * Design system, kept deliberately small (learned from baked.design):
+ * Design system, kept deliberately small (v3: measured on slite.com, 2026-10-28):
  *   - TWO typefaces: Fraunces for headlines, Inter for everything else (both with the Vietnamese subset). No italics.
  *   - SIX type sizes: display, title, subtitle, heading, body, small. Nothing else.
- *   - A NEUTRAL page: warm white, white cards lifted by shadow, grey chips (measured: adkit.so and heyretro are 80%+ neutral, under 2% colour).
- *   - ONE brand family: violet (headlines, emphasis, links, glow fields), lavender only on a few accents.
- *   - ONE accent, orange, used only on the primary call-to-action. Nothing else is orange.
- *   - Product material (game art, screenshots) is the only other colour.
- *   - Shape: pills for controls, 22-28px radius for surfaces. Nothing in between.
+ *   - A WARM page: cream (#fdf9f4) with charcoal text (#2d2f34, never pure black); cards are flat sand surfaces with huge radii, not heavy shadows.
+ *   - ONE accent, orange (#f67748), for the primary call-to-action and tiny labels (a darker orange for text so it keeps AA contrast on cream).
+ *   - No violet, no blue: colour comes from orange, sand and the product material (game art, screenshots).
+ *   - Shape: pills for controls, 22-28px radius for surfaces, 48px for the big feature cards. Nothing in between.
  */
 .brand-landing {
-  --b-bg: #ffffff;
+  --b-bg: #fdf9f4;
   --b-surface: #ffffff;
-  --b-chip: #f1f3f3;
-  --b-chip-hover: #e3e7e8;
-  --b-lav: #ede9fe;
-  --b-lav-soft: #f5f3ff;
-  --b-ink: #22292b;
-  --b-heading: #2e1065;
-  --b-muted: #4b585b;
-  --b-line: #e3e7e8;
-  --b-brand: #7c3aed;
+  --b-chip: #f5eee4;
+  --b-chip-hover: #ece3d5;
+  --b-lav: #f8f1e7;
+  --b-lav-soft: #fbf6ee;
+  --b-ink: #2d2f34;
+  --b-heading: #2d2f34;
+  --b-muted: #5e646e;
+  --b-line: #ece4d8;
+  --b-brand: #d94e1f;
   --b-pos-bg: #dcfce7;
   --b-pos-fg: #15803d;
-  --b-accent: #ff7a45;
-  --sh-card: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  --sh-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --b-accent: #f67748;
+  --sh-card: 0 0 0 1px rgba(45, 47, 52, 0.06), 0 24px 48px -16px rgba(107, 93, 70, 0.28);
+  --sh-soft: 0 4px 6px -1px rgba(107, 93, 70, 0.08), 0 2px 4px -2px rgba(107, 93, 70, 0.06);
   background-color: var(--b-bg);
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' stroke='rgba(15,23,42,0.04)' viewBox='0 0 32 32'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
-  background-size: 32px 32px;
+  background-image: none;
   color: var(--b-ink);
   font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
   font-size: 15px;
@@ -219,44 +218,45 @@
 }
 
 .dark .brand-landing {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' stroke='rgba(243,241,255,0.05)' viewBox='0 0 32 32'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
-  --b-bg: #0d0b1f;
-  --b-surface: #16132e;
-  --b-chip: #221e44;
-  --b-chip-hover: #2e2958;
-  --b-lav: #2a2352;
-  --b-lav-soft: #1b1740;
+  background-image: none;
+  --b-bg: #1b1916;
+  --b-surface: #26231f;
+  --b-chip: #302c27;
+  --b-chip-hover: #3b362f;
+  --b-lav: #2e2823;
+  --b-lav-soft: #231f1b;
   --b-pos-bg: #14351f;
   --b-pos-fg: #86efac;
-  --b-heading: #ece8ff;
-  --b-ink: #f3f1ff;
-  --b-muted: rgba(243, 241, 255, 0.68);
-  --b-line: rgba(243, 241, 255, 0.12);
-  --b-brand: #b4a5ff;
-  --b-accent: #ff7a45;
-  --sh-card: 0 0 0 1px rgba(243, 241, 255, 0.08), 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  --b-heading: #faf5ec;
+  --b-ink: #f6f1e9;
+  --b-muted: rgba(246, 241, 233, 0.68);
+  --b-line: rgba(246, 241, 233, 0.12);
+  --b-brand: #e65d28;
+  --b-accent: #f67748;
+  --sh-card: 0 0 0 1px rgba(246, 241, 233, 0.08), 0 25px 50px -12px rgba(0, 0, 0, 0.6);
   --sh-soft: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
 }
 
 body:has(.brand-landing) {
-  background: #ffffff;
+  background: #fdf9f4;
 }
 .dark body:has(.brand-landing) {
-  background: #0d0b1f;
+  background: #1b1916;
 }
 html:has(.brand-landing) {
   scroll-behavior: smooth;
 }
 
 /* The six sizes. Headlines (display, title, subtitle) are Fraunces; everything else is Inter. */
-.brand-landing .t-display { color: var(--b-heading); font-family: var(--font-display), Georgia, serif; font-size: clamp(2.25rem, 5.6vw, 3.5rem); line-height: 1.05; font-weight: 700; letter-spacing: -0.02em; }
-.brand-landing .t-title { font-family: var(--font-display), Georgia, serif; color: var(--b-heading); font-size: 1.875rem; line-height: 1.1; font-weight: 700; letter-spacing: -0.025em; }
-@media (min-width: 640px) { .brand-landing .t-title { font-size: 2.25rem; } }
-@media (min-width: 1024px) { .brand-landing .t-title { font-size: 3rem; line-height: 1.05; } }
-.brand-landing .t-subtitle { color: var(--b-heading); font-family: var(--font-display), Georgia, serif; font-size: 1.75rem; line-height: 1.15; font-weight: 700; letter-spacing: -0.015em; }
-.brand-landing .t-heading { font-size: 1.125rem; line-height: 1.3; font-weight: 500; letter-spacing: -0.015em; }
-.brand-landing .t-body    { font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: -0.006em; }
-.brand-landing .t-small   { font-size: 13px; line-height: 18px; font-weight: 400; letter-spacing: 0; }
+.brand-landing .t-display { color: var(--b-heading); font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif; font-size: clamp(2.5rem, 5.5vw, 3.75rem); line-height: 1.1; font-weight: 700; letter-spacing: -0.03em; }
+.brand-landing .t-title { font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif; color: var(--b-heading); font-size: 1.75rem; line-height: 1.2; font-weight: 700; letter-spacing: -0.025em; }
+@media (min-width: 640px) { .brand-landing .t-title { font-size: 2rem; } }
+@media (min-width: 1024px) { .brand-landing .t-title { font-size: 2.25rem; line-height: 1.2; } }
+.brand-landing .t-subtitle { color: var(--b-heading); font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif; font-size: 1.25rem; line-height: 1.35; font-weight: 600; letter-spacing: -0.015em; }
+.brand-landing .t-heading { color: var(--b-heading); font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif; font-size: 1.125rem; line-height: 1.35; font-weight: 600; letter-spacing: -0.015em; }
+.brand-landing .t-lead { font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif; font-size: 16px; line-height: 24px; font-weight: 400; letter-spacing: -0.006em; }
+.brand-landing .t-body    { font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif; font-size: 15px; line-height: 22px; font-weight: 400; letter-spacing: -0.006em; }
+.brand-landing .t-small   { font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif; font-size: 13px; line-height: 18px; font-weight: 400; letter-spacing: 0; }
 
 /* Controls: always a pill, always 40px tall. */
 /* display sits in the components layer so Tailwind utilities (hidden, md:hidden, sm:inline-flex) can override it */
@@ -417,21 +417,21 @@ html:has(.brand-landing) {
 }
 .brand-landing .aurora.is-dim::before { filter: saturate(0.3); }
 
-/* Palettes: the violet scale, a cool blue and one warm amber touch. Dark = the same hues, deep. */
-.brand-landing .au-studio    { --au-base: #f5f3ff; --au1: #c4b5fd; --au2: #bfdbfe; --au3: #ddd6fe; }
-.brand-landing .au-game      { --au-base: #f5f3ff; --au1: #ddd6fe; --au2: #bfdbfe; --au3: #fbcfe8; }
-.brand-landing .au-oneforall { --au-base: #f5f3ff; --au1: #c4b5fd; --au2: #ddd6fe; --au3: #bae6fd; }
-.brand-landing .au-voice     { --au-base: #f5f3ff; --au1: #bfdbfe; --au2: #bae6fd; --au3: #ddd6fe; }
-.brand-landing .au-download  { --au-base: #f5f3ff; --au1: #bfdbfe; --au2: #ddd6fe; --au3: #bae6fd; }
-.brand-landing .au-trading   { --au-base: #f5f3ff; --au1: #ddd6fe; --au2: #fde68a; --au3: #bfdbfe; }
-.brand-landing .au-panel     { --au-base: #f5f3ff; --au1: #c4b5fd; --au2: #bfdbfe; --au3: #fde68a; }
-.dark .brand-landing .au-studio    { --au-base: #131030; --au1: #4a34d8; --au2: #2457c5; --au3: #6a44c8; }
-.dark .brand-landing .au-game      { --au-base: #15112f; --au1: #5a3fc4; --au2: #2c5fb8; --au3: #7a3a86; }
-.dark .brand-landing .au-oneforall { --au-base: #140f30; --au1: #5d3fd8; --au2: #7a46c8; --au3: #1f5fae; }
-.dark .brand-landing .au-voice     { --au-base: #0f1330; --au1: #2457c5; --au2: #1b7a99; --au3: #4a34d8; }
-.dark .brand-landing .au-download  { --au-base: #101330; --au1: #2c4fb0; --au2: #4a34d8; --au3: #1b7a8a; }
-.dark .brand-landing .au-trading   { --au-base: #17112f; --au1: #5a3fc4; --au2: #b3501f; --au3: #2c4fb0; }
-.dark .brand-landing .au-panel     { --au-base: #120e2c; --au1: #4a34d8; --au2: #2457c5; --au3: #7a3f2c; }
+/* Palettes: sand, peach and apricot (one warm family, matching the cream page). Dark = the same hues, deep. */
+.brand-landing .au-studio    { --au-base: #fbf3e8; --au1: #fbd5b5; --au2: #fde7c6; --au3: #f8c3a2; }
+.brand-landing .au-game      { --au-base: #fbf3e8; --au1: #fde7c6; --au2: #fbd0b0; --au3: #f9c9bd; }
+.brand-landing .au-oneforall { --au-base: #fbf3e8; --au1: #fbd5b5; --au2: #fbe6cf; --au3: #fdd9a8; }
+.brand-landing .au-voice     { --au-base: #fbf3e8; --au1: #f9c9a6; --au2: #fde7c6; --au3: #fbd5b5; }
+.brand-landing .au-download  { --au-base: #fbf3e8; --au1: #fde1b8; --au2: #fbd5b5; --au3: #f8c3a2; }
+.brand-landing .au-trading   { --au-base: #fbf3e8; --au1: #fbe6cf; --au2: #fde2a0; --au3: #fbd0b0; }
+.brand-landing .au-panel     { --au-base: #fbf3e8; --au1: #fbd5b5; --au2: #fde7c6; --au3: #fde2a0; }
+.dark .brand-landing .au-studio    { --au-base: #211c17; --au1: #8a4a24; --au2: #6f5530; --au3: #9a5a38; }
+.dark .brand-landing .au-game      { --au-base: #221b17; --au1: #7a5028; --au2: #8a4a24; --au3: #86443c; }
+.dark .brand-landing .au-oneforall { --au-base: #211b16; --au1: #8a4a24; --au2: #7a5a30; --au3: #8f5a20; }
+.dark .brand-landing .au-voice     { --au-base: #201b17; --au1: #94562c; --au2: #6f5530; --au3: #8a4a24; }
+.dark .brand-landing .au-download  { --au-base: #211c16; --au1: #85602a; --au2: #8a4a24; --au3: #9a5a38; }
+.dark .brand-landing .au-trading   { --au-base: #221b16; --au1: #7a5028; --au2: #9a6a1c; --au3: #86443c; }
+.dark .brand-landing .au-panel     { --au-base: #1f1a15; --au1: #8a4a24; --au2: #6f5530; --au3: #9a6a1c; }
 
 /* Floating product material, voice bars, download ripples. All transform/opacity only. */
 .brand-landing .float {
@@ -465,9 +465,10 @@ html:has(.brand-landing) {
 }
 
 /* The single accent: primary call-to-action. Dark ink text keeps AA contrast on the bright orange. */
-.dark .brand-landing .pill-accent { color: #17123a; }
-.brand-landing .pill-accent { background: var(--b-accent); color: var(--b-ink); font-weight: 500; }
-.brand-landing .pill-accent:hover { background: var(--b-accent); filter: brightness(1.06); }
+.dark .brand-landing .pill-accent { color: #ffffff; }
+.brand-landing .pill-accent { background: var(--b-brand); color: #ffffff; font-weight: 600; box-shadow: 0 2px 6px -1px rgba(194, 72, 31, 0.25); }
+.brand-landing .pill-accent:hover { background: #bf3f15; color: #ffffff; transform: translateY(-1px); }
+.dark .brand-landing .pill-accent:hover { background: #d44e1c; }
 .brand-landing .brand-text { color: var(--b-brand); }
 .brand-landing .nav-link {
   height: 40px;
@@ -486,6 +487,7 @@ html:has(.brand-landing) {
 .brand-landing .nav-link:hover,
 .brand-landing .nav-link[aria-expanded="true"] { background: var(--b-chip); color: var(--b-ink); }
 
+
 /* Section label above each headline, and the soft second half of a two-tone headline. */
 .brand-landing .eyebrow { font-size: 13px; line-height: 18px; font-weight: 500; letter-spacing: 0.01em; color: var(--b-brand); }
 .brand-landing .tone { color: var(--b-muted); }
@@ -495,19 +497,128 @@ html:has(.brand-landing) {
 .brand-landing .t-subtitle { text-wrap: balance; }
 
 /* Measured from adkit.so: a lead line under every section title, a big gradient CTA, tinted full-bleed bands. */
-.brand-landing .t-lead { font-size: 18px; line-height: 28px; font-weight: 400; letter-spacing: -0.006em; }
+.brand-landing .t-lead { font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif; font-size: 16px; line-height: 24px; font-weight: 400; letter-spacing: -0.006em; }
 .brand-landing .pill-cta {
   height: 44px;
-  min-width: min(100%, 22rem);
-  padding: 0 28px;
-  font-size: 18px;
+  min-width: auto;
+  padding: 0 22px;
+  font-size: 15px;
   line-height: 28px;
-  font-weight: 700;
-  background-image: linear-gradient(0deg, #ff5a2f 0%, #ff8a4c 100%);
-  box-shadow: 0 10px 24px -10px rgba(255, 90, 47, 0.7);
+  font-weight: 600;
+  background: var(--b-brand);
+  color: #ffffff;
+  box-shadow: 0 2px 6px -1px rgba(194, 72, 31, 0.28);
 }
-.brand-landing .pill-cta:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.brand-landing .pill-cta:hover { background: #bf3f15; transform: translateY(-1px); box-shadow: 0 4px 12px -2px rgba(217, 78, 31, 0.38); }
+.dark .brand-landing .pill-cta:hover { background: #d44e1c; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.6); }
 .brand-landing .band { background: color-mix(in srgb, var(--b-lav) 55%, transparent); }
 
 /* Role colours in tiny doses (measured: green-100 chip with green text for a good outcome). */
 .brand-landing .chip-pos { background: var(--b-pos-bg); color: var(--b-pos-fg); font-weight: 700; border-radius: 6px; }
+
+/* Hero bottom: the tilted wall dissolves into the cream page (no hard edge before the next section). */
+.brand-landing .hero-fade { display: none; }
+
+/* Outlined pill (slite.com secondary button): transparent, 1.6px ink ring, fills with ink on hover. */
+/* Outlined pill: delicate line, harmonious warm chip fill on hover. Never turns black. */
+.brand-landing .pill-outline {
+  background: transparent;
+  color: var(--b-ink);
+  box-shadow: inset 0 0 0 1.4px var(--b-line);
+  transition: background-color 0.18s ease, box-shadow 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+.brand-landing .pill-outline:hover,
+.brand-landing .group:hover .pill-outline {
+  background: var(--b-chip);
+  color: var(--b-ink);
+  box-shadow: inset 0 0 0 1.4px var(--b-ink);
+  transform: translateY(-1px);
+}
+
+/*
+ * Sand card (measured on slite.com): flat warm surface, 40px radius, copy on top, product picture bleeding off the bottom.
+ * Hover lifts the card and nudges the picture up. Transform and shadow only.
+ */
+.brand-landing .sand-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 40px;
+  background: var(--b-lav);
+  padding: 28px 28px 0;
+  box-shadow: inset 0 0 0 1px var(--b-line);
+  transition: transform 0.35s cubic-bezier(0.2, 0.65, 0.3, 1), box-shadow 0.35s;
+}
+.brand-landing .sand-card:hover {
+  transform: translateY(-4px);
+  box-shadow: inset 0 0 0 1px var(--b-line), 0 32px 60px -30px rgba(107, 93, 70, 0.5);
+}
+.brand-landing .sand-card .card-visual {
+  margin-top: auto;
+  padding-top: 28px;
+  transition: transform 0.45s cubic-bezier(0.2, 0.65, 0.3, 1);
+}
+.brand-landing .sand-card:hover .card-visual { transform: translateY(-8px); }
+.brand-landing .card-arrow {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--b-ink);
+  color: var(--b-bg);
+  transition: transform 0.3s cubic-bezier(0.2, 0.65, 0.3, 1);
+}
+.brand-landing .sand-card:hover .card-arrow { transform: translate(2px, -2px) scale(1.08); }
+@media (min-width: 1024px) {
+  .brand-landing .sand-card { padding: 36px 36px 0; }
+  .brand-landing .sand-card-wide { flex-direction: row; align-items: stretch; gap: 40px; }
+  .brand-landing .sand-card-wide .card-copy { flex: 0 0 38%; padding-bottom: 36px; }
+  .brand-landing .sand-card-wide .card-visual { flex: 1; padding-top: 36px; align-self: flex-end; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-landing .sand-card,
+  .brand-landing .sand-card .card-visual,
+  .brand-landing .card-arrow { transition: none; }
+  .brand-landing .sand-card:hover,
+  .brand-landing .sand-card:hover .card-visual,
+  .brand-landing .sand-card:hover .card-arrow { transform: none; }
+}
+/* Radar Orbit Animations (Concentric Circles Constellation - 100% GPU transform) */
+@keyframes radar-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes radar-counter {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-radar-spin {
+  animation: radar-spin 40s linear infinite;
+  will-change: transform;
+}
+
+.animate-radar-counter {
+  animation: radar-counter 40s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-radar-spin,
+  .animate-radar-counter {
+    animation: none !important;
+  }
+}
+
