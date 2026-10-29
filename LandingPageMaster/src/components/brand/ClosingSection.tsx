@@ -29,48 +29,48 @@ export function ClosingSection() {
 
   return (
     <Reveal>
-      {/* Inner CTA Card: Exact SquareUi Card-in-Card aspect ratio and internal padding */}
-      <div className="w-full rounded-[28px] sm:rounded-[34px] border border-[var(--b-line)]/70 bg-[#fafafb] dark:bg-[#25221d] px-8 py-12 sm:px-12 sm:py-14 lg:px-14 lg:py-16 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.03)] dark:shadow-none relative overflow-hidden">
-        <div className="relative z-10 grid items-center gap-8 md:grid-cols-[1.15fr_0.85fr]">
+      {/* Inner CTA Card: Scaled for exact 1-screen fit while keeping Card-in-Card ratio */}
+      <div className="w-full rounded-2xl sm:rounded-3xl border border-[var(--b-line)]/70 bg-[#faf7f3] dark:bg-[#25221d] px-6 py-5 sm:px-8 sm:py-6 lg:px-10 lg:py-6 shadow-2xs relative overflow-hidden">
+        <div className="relative z-10 grid items-center gap-6 md:grid-cols-[1.15fr_0.85fr]">
           <div>
-            {/* Eyebrow: Title Case, neutral muted, medium weight */}
-            <span className="block text-xs sm:text-[13px] font-medium text-[var(--b-muted)] mb-3 sm:mb-4">
-              {isVi ? "Khám phá hệ sinh thái" : "Become an Affiliate"}
+            {/* Eyebrow: Title Case, neutral muted */}
+            <span className="block text-xs font-medium text-[var(--b-muted)] mb-1.5">
+              {isVi ? "Khám phá hệ sinh thái" : "AI42E Ecosystem"}
             </span>
 
-            {/* Headline: Clean Geometric Sans-serif, tight tracking and line-height */}
-            <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-bold text-[var(--b-heading)] tracking-[-0.025em] leading-[1.2] mb-3 sm:mb-3.5 font-sans">
+            {/* Headline: Clean Geometric Sans-serif, balanced sizing */}
+            <h2 className="text-xl sm:text-2xl lg:text-[26px] font-bold text-[var(--b-heading)] tracking-[-0.02em] leading-tight mb-2 font-sans">
               {c.closing.title}
             </h2>
 
-            {/* Description: Generous line-height, muted text */}
-            <p className="text-sm sm:text-[14.5px] text-[var(--b-muted)] leading-[1.6] max-w-[420px] mb-8 sm:mb-9 font-sans">
+            {/* Description */}
+            <p className="text-xs sm:text-[13.5px] text-[var(--b-muted)] leading-relaxed max-w-[420px] mb-4 font-sans">
               {c.closing.sub}
             </p>
 
-            {/* CTA Button: Single focused primary pill button with arrow up-right */}
+            {/* CTA Button: Consistent brand terracotta orange across both Light and Dark theme */}
             <div>
               <a
                 href="#products"
-                className="inline-flex items-center justify-center gap-2 h-[47px] px-7 rounded-full bg-[#18181b] dark:bg-[#e65d28] text-white hover:bg-[#27272a] dark:hover:bg-[#d44e1c] text-sm font-medium transition-all duration-150 hover:shadow-sm"
+                className="pill pill-cta inline-flex items-center gap-1.5 !h-[40px] !px-5 text-xs sm:text-sm font-semibold rounded-full shadow-xs"
               >
                 <span>{c.closing.cta}</span>
-                <ArrowUpRight size={15} aria-hidden="true" />
+                <ArrowUpRight size={14} aria-hidden="true" />
               </a>
             </div>
           </div>
 
-          {/* Right Visual: Delicate Orbit with small avatar badges */}
-          <div className="relative mx-auto h-[180px] w-full max-w-[360px] sm:h-[200px]" aria-hidden="true">
+          {/* Right Visual: Orbit scaled to fit comfortably */}
+          <div className="relative mx-auto h-[140px] w-full max-w-[320px] sm:h-[150px]" aria-hidden="true">
             <OrbitImages
               images={ORBIT}
               shape="ellipse"
-              radiusX={135}
-              radiusY={75}
+              radiusX={120}
+              radiusY={65}
               rotation={-12}
               duration={36}
-              itemSize={34}
-              itemRadius={9}
+              itemSize={32}
+              itemRadius={8}
               shadow={0.15}
               paused={paused}
               responsive
@@ -80,8 +80,8 @@ export function ClosingSection() {
               width="100%"
               height="100%"
               centerContent={
-                <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white dark:bg-[#2e2a24] border border-[var(--b-line)]/80 shadow-2xs">
-                  <Image src={logo} alt="" width={22} height={22} className="rounded-md" />
+                <span className="grid h-9 w-9 place-items-center rounded-xl bg-white dark:bg-[#2e2a24] border border-[var(--b-line)]/80 shadow-2xs">
+                  <Image src={logo} alt="" width={20} height={20} className="rounded-md" />
                 </span>
               }
             />
