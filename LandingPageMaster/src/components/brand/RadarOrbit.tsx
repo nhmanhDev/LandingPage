@@ -154,11 +154,11 @@ export function RadarOrbit() {
 
   return (
     <div
-      className="group/radar relative flex items-center justify-center w-full h-[190px] sm:h-[210px] lg:h-[220px] select-none"
+      className="group/radar relative flex items-center justify-center w-full h-[220px] sm:h-[240px] lg:h-[250px] select-none"
       aria-hidden="true"
     >
       {/* Scaling container that scales down smoothly on mobile while staying centered */}
-      <div className="relative w-[500px] h-[500px] shrink-0 scale-[0.52] sm:scale-[0.62] lg:scale-[0.70] xl:scale-[0.75] transition-transform">
+      <div className="relative w-[500px] h-[500px] shrink-0 scale-[0.58] sm:scale-[0.68] lg:scale-[0.76] xl:scale-[0.80] transition-transform">
         
         {/* 4 Concentric Dashed Rings (Absolute Circles centered at 250, 250) */}
         {/* Ring 1: Inner Breathing Ring (r=50) */}
@@ -211,7 +211,7 @@ export function RadarOrbit() {
                     <Icon size={item.iconSize} aria-hidden="true" />
 
                     {/* Subtle Hover Tooltip */}
-                    <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--b-ink)] px-2 py-0.5 text-[11px] font-medium text-white opacity-0 shadow-md transition-opacity duration-150 group-hover/item:opacity-100 z-40">
+                    <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--b-ink)] px-2 py-0.5 text-[12px] font-medium text-white opacity-0 shadow-md transition-opacity duration-150 group-hover/item:opacity-100 z-40">
                       {isVi ? item.nameVi : item.nameEn}
                     </div>
                   </a>

@@ -67,7 +67,7 @@ export function BrandPage() {
               {/* Bọc 2: Outer Bezel Rim (pure white frame with ambient soft shadow) */}
               <div className="mx-auto w-full max-w-[1340px] p-2 sm:p-2.5 lg:p-3 rounded-[30px] sm:rounded-[38px] lg:rounded-[44px] bg-white dark:bg-[#24201a] border border-[var(--b-line)]/60 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)]">
                 {/* Bọc 3: Master Island Surface (Warm Sand / Soft Gray backdrop) */}
-                <div className="w-full rounded-[24px] sm:rounded-[32px] lg:rounded-[38px] bg-[#faf6f0] dark:bg-[#1a1714] border border-[var(--b-line)]/40 px-5 py-5 sm:px-8 sm:py-6 lg:px-10 lg:py-7">
+                <div className="w-full rounded-[24px] sm:rounded-[32px] lg:rounded-[38px] bg-[#faf6f0] dark:bg-[#1a1714] border border-[var(--b-line)]/40 px-5 py-6 sm:px-8 sm:py-7 lg:px-10 lg:py-8">
                   {/* Unified Width Container: Strict Left & Right Edge Alignment */}
                   <div className="mx-auto w-full max-w-[1080px] flex flex-col">
                     <ClosingSection />
