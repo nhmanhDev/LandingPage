@@ -29,22 +29,22 @@ export function ClosingSection() {
 
   return (
     <Reveal>
-      {/* Inner CTA Card: Scaled for exact 1-screen fit while keeping Card-in-Card ratio */}
-      <div className="w-full rounded-2xl sm:rounded-3xl border border-[var(--b-line)]/70 bg-[#faf7f3] dark:bg-[#25221d] px-6 py-5 sm:px-8 sm:py-6 lg:px-10 lg:py-6 shadow-2xs relative overflow-hidden">
+      {/* Bọc 4: Inner CTA Card - Floating pure white card with golden ratio proportions */}
+      <div className="w-full rounded-[24px] sm:rounded-[28px] lg:rounded-[32px] border border-[var(--b-line)]/70 bg-white dark:bg-[#24201a] px-6 py-8 sm:px-10 sm:py-10 lg:px-12 lg:py-12 shadow-[0_12px_32px_-6px_rgba(0,0,0,0.04)] dark:shadow-[0_12px_32px_-6px_rgba(0,0,0,0.25)] relative overflow-hidden">
         <div className="relative z-10 grid items-center gap-6 md:grid-cols-[1.15fr_0.85fr]">
           <div>
             {/* Eyebrow: Title Case, neutral muted */}
-            <span className="block text-xs font-medium text-[var(--b-muted)] mb-1.5">
+            <span className="block text-xs sm:text-[13px] font-medium text-[var(--b-muted)] mb-2">
               {isVi ? "Khám phá hệ sinh thái" : "AI42E Ecosystem"}
             </span>
 
             {/* Headline: Clean Geometric Sans-serif, balanced sizing */}
-            <h2 className="text-xl sm:text-2xl lg:text-[26px] font-bold text-[var(--b-heading)] tracking-[-0.02em] leading-tight mb-2 font-sans">
+            <h2 className="text-2xl sm:text-3xl lg:text-[32px] font-bold text-[var(--b-heading)] tracking-[-0.025em] leading-[1.2] mb-3 font-sans">
               {c.closing.title}
             </h2>
 
             {/* Description */}
-            <p className="text-xs sm:text-[13.5px] text-[var(--b-muted)] leading-relaxed max-w-[420px] mb-4 font-sans">
+            <p className="text-xs sm:text-[14px] text-[var(--b-muted)] leading-relaxed max-w-[440px] mb-6 font-sans">
               {c.closing.sub}
             </p>
 
@@ -52,25 +52,25 @@ export function ClosingSection() {
             <div>
               <a
                 href="#products"
-                className="pill pill-cta inline-flex items-center gap-1.5 !h-[40px] !px-5 text-xs sm:text-sm font-semibold rounded-full shadow-xs"
+                className="pill pill-cta inline-flex items-center gap-2 !h-[44px] !px-6 text-sm font-semibold rounded-full shadow-xs"
               >
                 <span>{c.closing.cta}</span>
-                <ArrowUpRight size={14} aria-hidden="true" />
+                <ArrowUpRight size={15} aria-hidden="true" />
               </a>
             </div>
           </div>
 
-          {/* Right Visual: Orbit scaled to fit comfortably */}
-          <div className="relative mx-auto h-[140px] w-full max-w-[320px] sm:h-[150px]" aria-hidden="true">
+          {/* Right Visual: Orbit scaled generously to match SquareUi */}
+          <div className="relative mx-auto h-[180px] w-full max-w-[340px] sm:h-[210px] lg:h-[230px]" aria-hidden="true">
             <OrbitImages
               images={ORBIT}
               shape="ellipse"
-              radiusX={120}
-              radiusY={65}
-              rotation={-12}
+              radiusX={135}
+              radiusY={72}
+              rotation={-10}
               duration={36}
-              itemSize={32}
-              itemRadius={8}
+              itemSize={36}
+              itemRadius={9}
               shadow={0.15}
               paused={paused}
               responsive
@@ -80,8 +80,8 @@ export function ClosingSection() {
               width="100%"
               height="100%"
               centerContent={
-                <span className="grid h-9 w-9 place-items-center rounded-xl bg-white dark:bg-[#2e2a24] border border-[var(--b-line)]/80 shadow-2xs">
-                  <Image src={logo} alt="" width={20} height={20} className="rounded-md" />
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-white dark:bg-[#2e2a24] border border-[var(--b-line)]/80 shadow-2xs">
+                  <Image src={logo} alt="" width={22} height={22} className="rounded-md" />
                 </span>
               }
             />
