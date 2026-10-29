@@ -24,53 +24,54 @@ export function ClosingSection() {
   const paused = useReducedMotion();
   const { resolvedTheme } = useTheme();
   const mounted = useMounted();
-  const pathColor = mounted && resolvedTheme === "dark" ? "rgba(243,241,255,0.22)" : "rgba(45,47,52,0.18)";
+  const pathColor = mounted && resolvedTheme === "dark" ? "rgba(243,241,255,0.18)" : "rgba(45,47,52,0.12)";
   const isVi = locale === "vi";
 
   return (
     <Reveal>
-      {/* Inner Elevated CTA Card (SquareUi Card-in-Card pattern) */}
-      <div className="rounded-2xl sm:rounded-3xl border border-[var(--b-line)] bg-[var(--b-surface)] p-6 sm:p-7 lg:p-8 shadow-xs relative overflow-hidden">
-        <div className="relative z-10 grid items-center gap-6 md:grid-cols-[1.15fr_0.85fr]">
+      {/* Inner CTA Card: Exact SquareUi Card-in-Card aspect ratio and internal padding */}
+      <div className="w-full rounded-[28px] sm:rounded-[34px] border border-[var(--b-line)]/70 bg-[#fafafb] dark:bg-[#25221d] px-8 py-12 sm:px-12 sm:py-14 lg:px-14 lg:py-16 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.03)] dark:shadow-none relative overflow-hidden">
+        <div className="relative z-10 grid items-center gap-8 md:grid-cols-[1.15fr_0.85fr]">
           <div>
-            <span className="block text-xs sm:text-sm font-medium text-[var(--b-muted)] mb-2">
-              {isVi ? "Khám phá hệ sinh thái" : "AI42E Ecosystem"}
+            {/* Eyebrow: Title Case, neutral muted, medium weight */}
+            <span className="block text-xs sm:text-[13px] font-medium text-[var(--b-muted)] mb-3 sm:mb-4">
+              {isVi ? "Khám phá hệ sinh thái" : "Become an Affiliate"}
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-bold text-[var(--b-heading)] tracking-[-0.025em] leading-tight font-sans">
+
+            {/* Headline: Clean Geometric Sans-serif, tight tracking and line-height */}
+            <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-bold text-[var(--b-heading)] tracking-[-0.025em] leading-[1.2] mb-3 sm:mb-3.5 font-sans">
               {c.closing.title}
             </h2>
-            <p className="mt-2.5 max-w-md text-xs sm:text-sm text-[var(--b-muted)] leading-relaxed font-sans">
+
+            {/* Description: Generous line-height, muted text */}
+            <p className="text-sm sm:text-[14.5px] text-[var(--b-muted)] leading-[1.6] max-w-[420px] mb-8 sm:mb-9 font-sans">
               {c.closing.sub}
             </p>
-            <div className="mt-5 flex flex-wrap items-center gap-3">
+
+            {/* CTA Button: Single focused primary pill button with arrow up-right */}
+            <div>
               <a
                 href="#products"
-                className="pill pill-cta inline-flex items-center gap-1.5 !py-2 !px-4 sm:!py-2.5 sm:!px-5 text-xs sm:text-sm font-semibold"
+                className="inline-flex items-center justify-center gap-2 h-[47px] px-7 rounded-full bg-[#18181b] dark:bg-[#e65d28] text-white hover:bg-[#27272a] dark:hover:bg-[#d44e1c] text-sm font-medium transition-all duration-150 hover:shadow-sm"
               >
                 <span>{c.closing.cta}</span>
-                <ArrowUpRight size={14} aria-hidden="true" />
-              </a>
-              <a
-                href="#contact"
-                className="pill pill-outline inline-flex items-center gap-1.5 !py-2 !px-4 sm:!py-2.5 sm:!px-5 text-xs sm:text-sm font-semibold"
-              >
-                {c.closing.cta2}
+                <ArrowUpRight size={15} aria-hidden="true" />
               </a>
             </div>
-            <p className="mt-3 text-[11.5px] text-[var(--b-muted)]">{c.closing.trust}</p>
           </div>
 
-          <div className="relative mx-auto h-[155px] w-full max-w-[340px] sm:h-[175px]" aria-hidden="true">
+          {/* Right Visual: Delicate Orbit with small avatar badges */}
+          <div className="relative mx-auto h-[180px] w-full max-w-[360px] sm:h-[200px]" aria-hidden="true">
             <OrbitImages
               images={ORBIT}
               shape="ellipse"
-              radiusX={130}
-              radiusY={70}
+              radiusX={135}
+              radiusY={75}
               rotation={-12}
               duration={36}
-              itemSize={44}
-              itemRadius={11}
-              shadow={0.25}
+              itemSize={34}
+              itemRadius={9}
+              shadow={0.15}
               paused={paused}
               responsive
               showPath
@@ -79,8 +80,8 @@ export function ClosingSection() {
               width="100%"
               height="100%"
               centerContent={
-                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[var(--b-surface)] border border-[var(--b-line)] shadow-sm">
-                  <Image src={logo} alt="" width={26} height={26} className="rounded-lg" />
+                <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white dark:bg-[#2e2a24] border border-[var(--b-line)]/80 shadow-2xs">
+                  <Image src={logo} alt="" width={22} height={22} className="rounded-md" />
                 </span>
               }
             />

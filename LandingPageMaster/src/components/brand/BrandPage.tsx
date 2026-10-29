@@ -62,11 +62,12 @@ export function BrandPage() {
             {/* 8. Frequently Asked Questions */}
             <FaqSection />
 
-            {/* 9. Closing Billboard & Directory (Master Island Container - Exactly 1 Full Screen) */}
-            <section id="contact" className="min-h-[calc(100svh-4rem)] lg:h-[calc(100svh-4rem)] flex flex-col justify-center py-2 sm:py-3.5 px-3 sm:px-6 lg:px-8 overflow-hidden">
-              <div className="mx-auto w-full max-w-7xl h-full flex flex-col justify-center">
-                {/* Outer Master Container / Island (SquareUi Card-in-Card style) */}
-                <div className="rounded-[32px] sm:rounded-[40px] lg:rounded-[44px] border border-[var(--b-line)] bg-[var(--b-lav)]/75 dark:bg-[var(--b-lav)]/40 p-4 sm:p-6 lg:p-7 shadow-[var(--sh-card)] flex flex-col justify-between">
+            {/* 9. Closing Billboard & Directory: Exact SquareUi Master Island Layout */}
+            <section id="contact" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+              {/* Outer Master Container: Rounded Island Frame with Generous Padding */}
+              <div className="mx-auto w-full max-w-[1380px] rounded-[36px] sm:rounded-[44px] lg:rounded-[48px] border border-[var(--b-line)] bg-white dark:bg-[#1e1b17] pt-14 pb-12 sm:pt-16 sm:pb-14 lg:pt-20 lg:pb-16 px-6 sm:px-12 lg:px-20 shadow-[0_20px_50px_rgba(0,0,0,0.04)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.35)]">
+                {/* Unified Width Container: Strict Left & Right Edge Alignment */}
+                <div className="mx-auto w-full max-w-[1140px] flex flex-col">
                   <ClosingSection />
                   <BrandFooter inIsland />
                 </div>
