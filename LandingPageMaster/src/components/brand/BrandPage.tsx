@@ -8,8 +8,7 @@ import { ClosingSection } from "./ClosingSection";
 import { CompareSection } from "./CompareSection";
 import { EcosystemHorizonSection } from "./EcosystemHorizonSection";
 import { EcosystemPlaySection } from "./EcosystemPlaySection";
-import { FaqSection } from "./FaqSection";
-import { FounderSection } from "./FounderSection";
+import { FounderFaqSection } from "./FounderFaqSection";
 import { FreemiumSection } from "./FreemiumSection";
 import { LocaleProvider, useBrand } from "./LocaleProvider";
 import { ProductsSection } from "./ProductsSection";
@@ -56,11 +55,8 @@ export function BrandPage() {
             {/* 6. Pricing & Transparent Freemium Philosophy */}
             <FreemiumSection />
 
-            {/* 7. The Story & The Maker */}
-            <FounderSection />
-
-            {/* 8. Frequently Asked Questions */}
-            <FaqSection />
+            {/* 7. The Story, Maker & Frequently Asked Questions (Merged 2-Column Layout) */}
+            <FounderFaqSection />
 
             {/* 9. Closing Billboard & Directory: Nested Island Architecture */}
             <section id="contact" className="w-full scroll-mt-16 min-h-[calc(100dvh-4rem)] flex flex-col justify-center py-4 sm:py-6 lg:py-8 px-3 sm:px-6 lg:px-8 bg-[var(--b-bg)]">
