@@ -14,9 +14,10 @@ interface OrbitItem {
   taglineEn: string;
   href: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
-  radius: number; // distance from center in px
-  angle: number;  // in degrees (0 = 3 o'clock, 90 = 6 o'clock, etc.)
-  size: number;   // item size in px
+  x: number;        // Pre-computed integer coordinate to guarantee 100% exact SSR/Client hydration match
+  y: number;        // Pre-computed integer coordinate
+  size: number;     // Item badge diameter in px
+  iconSize: number; // Icon size in px
   colors: {
     bg: string;
     border: string;
@@ -26,7 +27,7 @@ interface OrbitItem {
 }
 
 const ORBIT_ITEMS: OrbitItem[] = [
-  // Ring 2 (Inner Ring - radius: 105px)
+  // Ring 2 (Inner Ring - radius: 105px, centered at 250, 250)
   {
     id: "studio",
     nameVi: "AI42E Studio",
@@ -35,9 +36,10 @@ const ORBIT_ITEMS: OrbitItem[] = [
     taglineEn: "Automated video creation",
     href: "https://studio.ai42e.com",
     icon: Sparkles,
-    radius: 105,
-    angle: 90, // Top
+    x: 250,
+    y: 355,
     size: 38,
+    iconSize: 18,
     colors: {
       bg: "bg-blue-50 dark:bg-blue-950/60",
       border: "border-blue-200/90 dark:border-blue-800/60",
@@ -53,9 +55,10 @@ const ORBIT_ITEMS: OrbitItem[] = [
     taglineEn: "Expressive TTS & Clone",
     href: "https://voice.ai42e.com",
     icon: AudioLines,
-    radius: 105,
-    angle: 240, // Bottom-left
+    x: 198,
+    y: 159,
     size: 38,
+    iconSize: 18,
     colors: {
       bg: "bg-teal-50 dark:bg-teal-950/60",
       border: "border-teal-200/90 dark:border-teal-800/60",
@@ -64,7 +67,7 @@ const ORBIT_ITEMS: OrbitItem[] = [
     },
   },
 
-  // Ring 3 (Middle Ring - radius: 165px)
+  // Ring 3 (Middle Ring - radius: 165px, centered at 250, 250)
   {
     id: "audio",
     nameVi: "Tách nhạc AI",
@@ -73,9 +76,10 @@ const ORBIT_ITEMS: OrbitItem[] = [
     taglineEn: "Vocal & stem isolate",
     href: "https://audio.ai42e.com",
     icon: Music,
-    radius: 165,
-    angle: 335, // Bottom-right
+    x: 400,
+    y: 180,
     size: 40,
+    iconSize: 19,
     colors: {
       bg: "bg-emerald-50 dark:bg-emerald-950/60",
       border: "border-emerald-200/90 dark:border-emerald-800/60",
@@ -91,9 +95,10 @@ const ORBIT_ITEMS: OrbitItem[] = [
     taglineEn: "11 web board games",
     href: "https://play.ai42e.com",
     icon: Gamepad2,
-    radius: 165,
-    angle: 155, // Top-left
+    x: 100,
+    y: 320,
     size: 40,
+    iconSize: 19,
     colors: {
       bg: "bg-purple-50 dark:bg-purple-950/60",
       border: "border-purple-200/90 dark:border-purple-800/60",
@@ -102,7 +107,7 @@ const ORBIT_ITEMS: OrbitItem[] = [
     },
   },
 
-  // Ring 4 (Outer Ring - radius: 225px)
+  // Ring 4 (Outer Ring - radius: 225px, centered at 250, 250)
   {
     id: "trading",
     nameVi: "Trading System",
@@ -111,9 +116,10 @@ const ORBIT_ITEMS: OrbitItem[] = [
     taglineEn: "Quant market intelligence",
     href: "#horizon",
     icon: CandlestickChart,
-    radius: 225,
-    angle: 30, // Top-right
+    x: 445,
+    y: 363,
     size: 42,
+    iconSize: 20,
     colors: {
       bg: "bg-amber-50 dark:bg-amber-950/60",
       border: "border-amber-200/90 dark:border-amber-800/60",
@@ -129,9 +135,10 @@ const ORBIT_ITEMS: OrbitItem[] = [
     taglineEn: "All-in-one workspace",
     href: "#horizon",
     icon: Boxes,
-    radius: 225,
-    angle: 200, // Bottom-left outer
+    x: 39,
+    y: 173,
     size: 42,
+    iconSize: 20,
     colors: {
       bg: "bg-rose-50 dark:bg-rose-950/60",
       border: "border-rose-200/90 dark:border-rose-800/60",
@@ -144,9 +151,6 @@ const ORBIT_ITEMS: OrbitItem[] = [
 export function RadarOrbit() {
   const { locale } = useBrand();
   const isVi = locale === "vi";
-
-  // Center coordinate of our virtual 500x500 constellation canvas
-  const center = 250;
 
   return (
     <div
@@ -180,10 +184,6 @@ export function RadarOrbit() {
         {/* Rotating Constellation Layer: Rotates Clockwise (40s full cycle) */}
         <div className="absolute inset-0 animate-radar-spin group-hover/radar:[animation-play-state:paused]">
           {ORBIT_ITEMS.map((item) => {
-            // Convert polar to cartesian coordinates
-            const rad = (item.angle * Math.PI) / 180;
-            const x = center + item.radius * Math.cos(rad);
-            const y = center + item.radius * Math.sin(rad);
             const Icon = item.icon;
 
             return (
@@ -191,8 +191,8 @@ export function RadarOrbit() {
                 key={item.id}
                 className="absolute"
                 style={{
-                  top: `${y}px`,
-                  left: `${x}px`,
+                  top: `${item.y}px`,
+                  left: `${item.x}px`,
                   transform: "translate(-50%, -50%)",
                 }}
               >
@@ -208,7 +208,7 @@ export function RadarOrbit() {
                     }}
                     title={`${isVi ? item.nameVi : item.nameEn} · ${isVi ? item.taglineVi : item.taglineEn}`}
                   >
-                    <Icon size={Math.round(item.size * 0.48)} aria-hidden="true" />
+                    <Icon size={item.iconSize} aria-hidden="true" />
 
                     {/* Subtle Hover Tooltip */}
                     <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--b-ink)] px-2 py-0.5 text-[11px] font-medium text-white opacity-0 shadow-md transition-opacity duration-150 group-hover/item:opacity-100 z-40">
