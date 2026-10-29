@@ -62,12 +62,15 @@ export function BrandPage() {
             {/* 8. Frequently Asked Questions */}
             <FaqSection />
 
-            {/* 9. Closing Billboard & Directory (Exactly 1 Full Screen) */}
-            <section id="contact" className="min-h-[calc(100svh-4rem)] lg:h-[calc(100svh-4rem)] flex flex-col justify-between py-3 sm:py-5 overflow-hidden">
-              <div className="flex-1 flex flex-col justify-center">
-                <ClosingSection />
+            {/* 9. Closing Billboard & Directory (Master Island Container - Exactly 1 Full Screen) */}
+            <section id="contact" className="min-h-[calc(100svh-4rem)] lg:h-[calc(100svh-4rem)] flex flex-col justify-center py-2 sm:py-3.5 px-3 sm:px-6 lg:px-8 overflow-hidden">
+              <div className="mx-auto w-full max-w-7xl h-full flex flex-col justify-center">
+                {/* Outer Master Container / Island (SquareUi Card-in-Card style) */}
+                <div className="rounded-[32px] sm:rounded-[40px] lg:rounded-[44px] border border-[var(--b-line)] bg-[var(--b-lav)]/75 dark:bg-[var(--b-lav)]/40 p-4 sm:p-6 lg:p-7 shadow-[var(--sh-card)] flex flex-col justify-between">
+                  <ClosingSection />
+                  <BrandFooter inIsland />
+                </div>
               </div>
-              <BrandFooter />
             </section>
           </main>
         </div>
