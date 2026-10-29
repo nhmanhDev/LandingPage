@@ -14,9 +14,9 @@ export function FounderFaqSection() {
   const f = c.founder;
 
   return (
-    <section id="founder" className="relative scroll-mt-24 py-16 lg:py-24">
-      {/* Anchor for #faq navigation */}
-      <div id="faq" className="absolute top-0 pointer-events-none" />
+    <section id="faq" className="relative scroll-mt-24 py-16 lg:py-24">
+      {/* Fallback anchor for any #founder link */}
+      <div id="founder" className="absolute top-0 pointer-events-none" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
@@ -105,3 +105,4 @@ export function FounderFaqSection() {
     </section>
   );
 }
+

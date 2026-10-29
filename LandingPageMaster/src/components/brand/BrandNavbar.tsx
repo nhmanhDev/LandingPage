@@ -233,7 +233,6 @@ export function BrandNavbar() {
   const links = [
     { href: "#compare", id: "compare", label: c.nav.compare },
     { href: "#pricing", id: "pricing", label: c.nav.pricing },
-    { href: "#founder", id: "founder", label: c.nav.story },
     { href: "#faq", id: "faq", label: c.nav.faq },
     { href: "#contact", id: "contact", label: c.nav.contact },
   ];
@@ -242,7 +241,7 @@ export function BrandNavbar() {
   const [activeSection, setActiveSection] = useState<string>("top");
 
   useEffect(() => {
-    const sectionIds = ["top", "products", "play", "horizon", "compare", "pricing", "founder", "faq", "contact"];
+    const sectionIds = ["top", "products", "play", "horizon", "compare", "pricing", "faq", "contact"];
 
     const handleScroll = () => {
       // 1. If reached bottom of document, activate contact
