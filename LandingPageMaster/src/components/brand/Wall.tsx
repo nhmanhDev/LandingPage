@@ -111,7 +111,12 @@ export function Wall({ paused, text }: WallProps) {
   }, []);
 
   return (
-    <div ref={stageRef} className="absolute inset-0 overflow-hidden" data-wall-paused={paused} aria-hidden="true">
+    <div
+      ref={stageRef}
+      className="absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,black_0%,black_72%,transparent_96%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_72%,transparent_96%)]"
+      data-wall-paused={paused}
+      aria-hidden="true"
+    >
       <div ref={wallRef} className="wall">
         {WALL_COLUMNS.map((column, index) => (
           <div key={index} className="wall-col">

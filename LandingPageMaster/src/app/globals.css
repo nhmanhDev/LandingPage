@@ -518,8 +518,14 @@ html:has(.brand-landing) {
 
 /* Hero bottom: the tilted wall dissolves into the cream page (no hard edge before the next section). */
 .brand-landing .hero-fade {
-  height: 7rem;
-  background: linear-gradient(to bottom, transparent 0%, color-mix(in srgb, var(--b-bg) 40%, transparent) 50%, var(--b-bg) 100%);
+  height: 12rem;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in srgb, var(--b-bg) 25%, transparent) 40%,
+    color-mix(in srgb, var(--b-bg) 70%, transparent) 75%,
+    var(--b-bg) 100%
+  );
   pointer-events: none;
 }
 

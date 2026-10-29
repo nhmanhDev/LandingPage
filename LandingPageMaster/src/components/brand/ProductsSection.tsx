@@ -66,7 +66,7 @@ export function ProductsSection() {
   const items = CREATIVE_ORDER.map((id) => c.products.items.find((item) => item.id === id)).filter((item): item is Product => Boolean(item));
 
   return (
-    <section id="products" className="relative z-10 -mt-10 scroll-mt-24 py-20 lg:py-28">
+    <section id="products" className="relative z-10 scroll-mt-24 py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead title={c.products.title} sub={c.products.sub} />
 
