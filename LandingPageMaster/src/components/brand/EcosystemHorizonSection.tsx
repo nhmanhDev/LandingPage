@@ -93,7 +93,7 @@ export function EcosystemHorizonSection() {
                   </span>
                 </div>
 
-                <h3 className="t-title font-bold mt-6 text-[var(--b-ink)]">
+                <h3 className="t-subtitle font-bold mt-6 text-[var(--b-ink)]">
                   OneForAll
                 </h3>
                 <p className="t-body mt-2.5 text-[var(--b-muted)] leading-relaxed">
@@ -126,7 +126,7 @@ export function EcosystemHorizonSection() {
                   </span>
                 </div>
 
-                <h3 className="t-title font-bold mt-6 text-[var(--b-ink)]">
+                <h3 className="t-subtitle font-bold mt-6 text-[var(--b-ink)]">
                   AI42E Trading System
                 </h3>
                 <p className="t-body mt-2.5 text-[var(--b-muted)] leading-relaxed">

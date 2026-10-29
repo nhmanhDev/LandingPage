@@ -28,14 +28,14 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
   const isVi = locale === "vi";
 
   const content = (
-    <footer className="w-full mt-6 sm:mt-7 lg:mt-8 font-sans">
+    <footer className="w-full mt-6 sm:mt-7 lg:mt-8">
       {/* 4-Column Directory: Unified Grid aligned with CTA card */}
       <div className="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4 lg:gap-x-10">
         {/* Column 1: Brand Info */}
         <div className="col-span-2 sm:col-span-1">
           <div className="flex items-center gap-2">
             <Image src={logo} alt="AI42E" width={22} height={22} className="rounded-md" />
-            <span className="font-sans text-[16px] font-bold text-[var(--b-ink)] tracking-tight">AI42E</span>
+            <span className="text-[16px] font-bold text-[var(--b-ink)] tracking-tight">AI42E</span>
           </div>
           <p className="mt-2 text-[14px] text-[var(--b-muted)] leading-relaxed max-w-[260px]">
             {c.footer.about}
