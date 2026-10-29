@@ -62,11 +62,13 @@ export function BrandPage() {
             {/* 8. Frequently Asked Questions */}
             <FaqSection />
 
-            {/* 9. Closing Billboard & Official Network Directory (1 Screen) */}
-            <div className="lg:min-h-screen lg:flex lg:flex-col lg:justify-between lg:pt-6">
-              <ClosingSection />
+            {/* 9. Closing Billboard & Directory (Exactly 1 Full Screen) */}
+            <section id="contact" className="min-h-[calc(100svh-4rem)] lg:h-[calc(100svh-4rem)] flex flex-col justify-between py-3 sm:py-5 overflow-hidden">
+              <div className="flex-1 flex flex-col justify-center">
+                <ClosingSection />
+              </div>
               <BrandFooter />
-            </div>
+            </section>
           </main>
         </div>
       </MotionConfig>

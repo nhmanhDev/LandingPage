@@ -111,7 +111,7 @@ export function FreemiumSection() {
               </div>
 
               <div className="mt-8 pt-4">
-                <a href="#contact" className="pill pill-accent w-full justify-center">
+                <a href="#contact" className="pill pill-cta w-full justify-center">
                   Tìm hiểu gói nâng cao →
                 </a>
               </div>

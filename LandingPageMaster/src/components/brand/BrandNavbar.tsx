@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import { AnimatePresence, motion } from "motion/react";
-import { AudioLines, Boxes, CandlestickChart, ChevronDown, Clapperboard, Download, Gamepad2, Menu, Moon, Sun, X } from "lucide-react";
+import { AudioLines, Boxes, CandlestickChart, ChevronDown, Clapperboard, Download, Gamepad2, Menu, Moon, Sun, X, Sparkles, ArrowRight } from "lucide-react";
 import logo from "@/app/android-chrome-192x192.png";
 import type { Product, ProductStatus } from "@/lib/brand/content";
 import { useBrand } from "./LocaleProvider";
@@ -29,16 +29,22 @@ const DOT: Record<ProductStatus, string> = {
   maintenance: "bg-[#d98a00]",
 };
 
-const ORDER = ["studio", "game", "oneforall", "voice", "download", "trading"];
-
-function useOrderedProducts(items: Product[]) {
-  return ORDER.map((id) => items.find((item) => item.id === id)).filter((item): item is Product => Boolean(item));
-}
-
-/** "Sản phẩm" with an animated drop-down listing every product. */
-function ProductsMenu({ products, label, statusLabels }: { products: Product[]; label: string; statusLabels: Record<ProductStatus, string> }) {
+/** "Hệ sinh thái" Mega Menu organized into clear pillars */
+function EcosystemMegaMenu({ products, label, statusLabels }: { products: Product[]; label: string; statusLabels: Record<ProductStatus, string> }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLLIElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setOpen(false);
+    }, 150);
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -55,98 +61,140 @@ function ProductsMenu({ products, label, statusLabels }: { products: Product[]; 
     return () => {
       document.removeEventListener("pointerdown", onPointer);
       document.removeEventListener("keydown", onKey);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, [open]);
+
+  const creativeProducts = products.filter((p) => ["studio", "download", "voice"].includes(p.id));
+  const otherOrder = ["game", "oneforall", "trading"];
+  const otherProducts = otherOrder.map((id) => products.find((p) => p.id === id)).filter((p): p is Product => Boolean(p));
 
   return (
     <li
       ref={rootRef}
       className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <button
         type="button"
-        className="nav-link"
+        className="nav-link whitespace-nowrap flex items-center gap-1.5"
         aria-expanded={open}
         aria-haspopup="true"
         onClick={() => setOpen((prev) => !prev)}
       >
-        {label}
+        <span>{label}</span>
         <ChevronDown
-          size={15}
+          size={14}
           aria-hidden="true"
           className={`transition-transform duration-200 ease-out ${open ? "rotate-180 text-[var(--b-brand)]" : ""}`}
         />
       </button>
 
-      {/* AnimatePresence ensures component is completely unmounted when open is false */}
+      {/* Mega Menu Dropdown */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.98 }}
+            initial={{ opacity: 0, y: -6, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.98 }}
-            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute left-1/2 top-full z-50 w-[38rem] -translate-x-1/2 pt-2"
+            transition={{ duration: 0.16, ease: "easeOut" }}
+            className="absolute left-1/2 top-full z-50 w-[42rem] -translate-x-1/2 pt-2.5"
             role="menu"
           >
-            {/* Solid opaque background prevents content underneath from ghosting through */}
-            <div className="rounded-[28px] border border-[var(--b-line)] bg-[var(--b-surface)] p-2.5 shadow-[0_24px_50px_rgba(23,18,58,0.18)] dark:shadow-[0_24px_50px_rgba(0,0,0,0.65)]">
-              <ul className="grid grid-cols-2 gap-1.5">
-                {products.map((product) => {
-                  const Icon = ICONS[product.id];
-                  const inner = (
-                    <>
-                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[var(--b-chip)] text-[var(--b-brand)] transition-transform duration-150 group-hover:scale-105 group-hover:bg-[var(--b-surface)]">
-                        <Icon size={20} aria-hidden />
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="t-body flex items-center justify-between font-medium transition-colors group-hover:text-[var(--b-brand)]">
-                          <span>{product.name}</span>
-                          <span className="text-xs text-[var(--b-muted)] opacity-0 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0.5">
-                            ↗
+            <div className="rounded-[28px] border border-[var(--b-line)] bg-[var(--b-surface)] p-4 shadow-[0_24px_50px_rgba(23,18,58,0.18)] dark:shadow-[0_24px_50px_rgba(0,0,0,0.7)]">
+              <div className="grid grid-cols-2 gap-4">
+                {/* Column 1: Bộ Sáng tạo AI (Creative Suite) */}
+                <div className="space-y-1.5">
+                  <div className="flex items-center gap-1.5 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--b-brand)]">
+                    <Sparkles size={13} />
+                    <span>Bộ Sáng tạo Nội dung</span>
+                  </div>
+                  {creativeProducts.map((product) => {
+                    const Icon = ICONS[product.id];
+                    return (
+                      <a
+                        key={product.id}
+                        role="menuitem"
+                        href={product.href || "#products"}
+                        target={product.href ? "_blank" : undefined}
+                        rel={product.href ? "noopener noreferrer" : undefined}
+                        className="group flex items-start gap-3 rounded-2xl p-2.5 transition-all duration-150 hover:bg-[var(--b-chip)]"
+                        onClick={() => setOpen(false)}
+                      >
+                        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[var(--b-chip)] text-[var(--b-brand)] transition-transform duration-150 group-hover:scale-105 group-hover:bg-[var(--b-surface)]">
+                          <Icon size={18} aria-hidden />
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <div className="t-body flex items-center justify-between font-medium transition-colors group-hover:text-[var(--b-brand)]">
+                            <span className="text-sm font-semibold">{product.name}</span>
+                            <span className="text-xs text-[var(--b-muted)] opacity-0 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0.5">
+                              ↗
+                            </span>
+                          </div>
+                          <span className="text-xs text-[var(--b-muted)] line-clamp-1 mt-0.5">{product.tagline}</span>
+                          <span className="mt-1 flex items-center gap-1.5 text-[11px] text-[var(--b-muted)]">
+                            <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
+                            {statusLabels[product.status]}
                           </span>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+
+                {/* Column 2: Giải trí & Nghiên cứu tương lai */}
+                <div className="space-y-1.5 border-l border-[var(--b-line)] pl-4">
+                  <div className="flex items-center gap-1.5 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--b-muted)]">
+                    <Gamepad2 size={13} />
+                    <span>Giải trí & Không gian mở</span>
+                  </div>
+                  {otherProducts.map((product) => {
+                    const Icon = ICONS[product.id];
+                    return (
+                      <a
+                        key={product.id}
+                        role="menuitem"
+                        href={product.href || (product.id === "game" ? "#play" : "#horizon")}
+                        target={product.href ? "_blank" : undefined}
+                        rel={product.href ? "noopener noreferrer" : undefined}
+                        className="group flex items-start gap-3 rounded-2xl p-2.5 transition-all duration-150 hover:bg-[var(--b-chip)]"
+                        onClick={() => setOpen(false)}
+                      >
+                        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[var(--b-chip)] text-[var(--b-brand)] transition-transform duration-150 group-hover:scale-105 group-hover:bg-[var(--b-surface)]">
+                          <Icon size={18} aria-hidden />
                         </span>
-                        <span className="t-small mt-0.5 line-clamp-2 block text-[var(--b-muted)]">
-                          {product.tagline}
-                        </span>
-                        <span className="t-small mt-1.5 flex items-center gap-1.5 text-[var(--b-muted)]">
-                          <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
-                          {statusLabels[product.status]}
-                        </span>
-                      </span>
-                    </>
-                  );
-                  const cls =
-                    "group flex items-start gap-3 rounded-2xl p-3 text-left transition-all duration-150 hover:bg-[var(--b-chip)]";
-                  return (
-                    <li key={product.id} role="none">
-                      {product.href ? (
-                        <a
-                          role="menuitem"
-                          href={product.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={cls}
-                          onClick={() => setOpen(false)}
-                        >
-                          {inner}
-                        </a>
-                      ) : (
-                        <a
-                          role="menuitem"
-                          href="#products"
-                          className={cls}
-                          onClick={() => setOpen(false)}
-                        >
-                          {inner}
-                        </a>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
+                        <div className="min-w-0 flex-1">
+                          <div className="t-body flex items-center justify-between font-medium transition-colors group-hover:text-[var(--b-brand)]">
+                            <span className="text-sm font-semibold">{product.name}</span>
+                            <span className="text-xs text-[var(--b-muted)] opacity-0 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0.5">
+                              ↗
+                            </span>
+                          </div>
+                          <span className="text-xs text-[var(--b-muted)] line-clamp-1 mt-0.5">{product.tagline}</span>
+                          <span className="mt-1 flex items-center gap-1.5 text-[11px] text-[var(--b-muted)]">
+                            <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
+                            {statusLabels[product.status]}
+                          </span>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Bottom Quick Bar */}
+              <div className="mt-3 pt-3 border-t border-[var(--b-line)] flex items-center justify-between px-2 text-xs">
+                <span className="text-[var(--b-muted)]">6 ứng dụng · Mở trên web & máy tính</span>
+                <a
+                  href="#products"
+                  className="inline-flex items-center gap-1 font-semibold text-[var(--b-brand)] hover:underline"
+                  onClick={() => setOpen(false)}
+                >
+                  Xem chu trình phối hợp 3 công cụ
+                  <ArrowRight size={12} />
+                </a>
+              </div>
             </div>
           </motion.div>
         )}
@@ -161,11 +209,9 @@ export function BrandNavbar() {
   const mounted = useMounted();
   const [mobileOpen, setMobileOpen] = useState(false);
   const isDark = mounted && resolvedTheme === "dark";
-  const products = useOrderedProducts(c.products.items);
+
+  // Clean, focused navigation links without wrapping
   const links = [
-    { href: "#products", label: c.nav.creative || "Sáng tạo" },
-    { href: "#play", label: c.nav.play || "Giải trí" },
-    { href: "#horizon", label: c.nav.horizon || "Tương lai" },
     { href: "#compare", label: c.nav.compare },
     { href: "#pricing", label: c.nav.pricing },
     { href: "#founder", label: c.nav.story },
@@ -175,15 +221,15 @@ export function BrandNavbar() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--b-line)] bg-[color-mix(in_srgb,var(--b-bg)_82%,transparent)] backdrop-blur-md">
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8" aria-label="Main">
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8" aria-label="Main">
         <a href="#top" className="flex min-h-10 items-center gap-2.5 shrink-0" aria-label="AI42E">
           <Image src={logo} alt="" width={30} height={30} className="rounded-lg" priority />
-          <span className="t-heading">AI42E</span>
+          <span className="t-heading font-bold tracking-tight text-[var(--b-ink)]">AI42E</span>
         </a>
 
-        {/* Center Navigation Menu Covering the Core Sections of the Page */}
-        <ul className="hidden items-center gap-0.5 lg:flex">
-          <ProductsMenu products={products} label={c.nav.products} statusLabels={c.products.status} />
+        {/* Desktop Menu */}
+        <ul className="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-medium">
+          <EcosystemMegaMenu products={c.products.items} label={c.nav.products} statusLabels={c.products.status} />
           {links.map((link) => (
             <li key={link.href}>
               <a href={link.href} className="nav-link whitespace-nowrap">
@@ -193,16 +239,17 @@ export function BrandNavbar() {
           ))}
         </ul>
 
-        {/* Right Actions & Utility Bar */}
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        {/* Action Controls */}
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
           <button
             type="button"
             onClick={() => setLocale(locale === "vi" ? "en" : "vi")}
             aria-label={c.ui.language}
-            className="nav-link !px-2.5 sm:!px-3 text-xs sm:text-sm font-medium"
+            className="nav-link !px-2.5 sm:!px-3 text-xs sm:text-sm font-medium whitespace-nowrap"
           >
             {locale === "vi" ? "VI" : "EN"}
           </button>
+
           <button
             type="button"
             onClick={() => setTheme(isDark ? "light" : "dark")}
@@ -212,48 +259,63 @@ export function BrandNavbar() {
             {isDark ? <Sun size={17} aria-hidden="true" /> : <Moon size={17} aria-hidden="true" />}
           </button>
 
-          {/* Primary CTA Button: Trải nghiệm ngay */}
-          <a href="#products" className="pill pill-accent hidden sm:inline-flex">
+          <a href="#products" className="pill pill-cta !py-2 !px-4 text-xs sm:text-sm whitespace-nowrap font-semibold shadow-xs hidden sm:inline-flex">
             {c.nav.cta}
           </a>
 
-          {/* Mobile / Tablet Menu Toggle */}
+          {/* Mobile Menu Toggle Button */}
           <button
             type="button"
-            className="nav-link !px-3 lg:hidden"
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-menu"
-            aria-label={c.nav.menu}
-            onClick={() => setMobileOpen((value) => !value)}
+            onClick={() => setMobileOpen((prev) => !prev)}
+            aria-label="Toggle menu"
+            className="nav-link !px-2.5 lg:hidden"
           >
-            {mobileOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+            {mobileOpen ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}
           </button>
         </div>
       </nav>
 
-      {mobileOpen ? (
-        <div id="mobile-menu" className="border-t border-[var(--b-line)] bg-[var(--b-bg)] lg:hidden">
-          <ul className="mx-auto max-w-6xl space-y-1 px-4 py-3 sm:px-6">
-            <li>
-              <a href="#products" className="nav-link w-full" onClick={() => setMobileOpen(false)}>
-                {c.nav.products}
-              </a>
-            </li>
-            {links.map((link) => (
-              <li key={link.href}>
-                <a href={link.href} className="nav-link w-full" onClick={() => setMobileOpen(false)}>
-                  {link.label}
+      {/* Mobile Drawer */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="border-b border-[var(--b-line)] bg-[var(--b-surface)] px-4 py-5 lg:hidden overflow-hidden"
+          >
+            <ul className="flex flex-col gap-2">
+              <li className="pb-1 text-xs font-bold uppercase tracking-wider text-[var(--b-brand)]">Hệ sinh thái sản phẩm</li>
+              <li>
+                <a href="#products" className="nav-link w-full flex items-center justify-between" onClick={() => setMobileOpen(false)}>
+                  <span>🎬 Bộ Sáng tạo AI (Studio, Voice, Downloader)</span>
+                  <span className="text-xs text-[var(--b-muted)]">↗</span>
                 </a>
               </li>
-            ))}
-            <li className="pt-2">
-              <a href="#products" className="pill pill-accent w-full justify-center" onClick={() => setMobileOpen(false)}>
-                {c.nav.cta}
-              </a>
-            </li>
-          </ul>
-        </div>
-      ) : null}
+              <li>
+                <a href="#play" className="nav-link w-full flex items-center justify-between" onClick={() => setMobileOpen(false)}>
+                  <span>🎲 AI42E Game (11 Board Games)</span>
+                  <span className="text-xs text-[var(--b-muted)]">↗</span>
+                </a>
+              </li>
+              <li>
+                <a href="#horizon" className="nav-link w-full flex items-center justify-between" onClick={() => setMobileOpen(false)}>
+                  <span>⚡ Không gian mở rộng (OneForAll & Trading)</span>
+                  <span className="text-xs text-[var(--b-muted)]">↗</span>
+                </a>
+              </li>
+              <li className="pt-2 border-t border-[var(--b-line)]"></li>
+              {links.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className="nav-link w-full" onClick={() => setMobileOpen(false)}>
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

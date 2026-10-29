@@ -80,7 +80,7 @@ export function EcosystemPlaySection() {
                   href="https://play.ai42e.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="pill pill-accent pill-cta inline-flex items-center gap-2"
+                  className="pill pill-cta inline-flex items-center gap-2"
                 >
                   Mở cổng game play.ai42e.com
                   <ArrowUpRight size={18} />

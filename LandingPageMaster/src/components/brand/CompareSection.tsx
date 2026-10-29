@@ -97,7 +97,7 @@ export function CompareSection() {
                 <p className="t-body font-semibold text-[var(--b-ink)]">Trải nghiệm sự khác biệt ngay hôm nay</p>
                 <p className="t-small text-[var(--b-muted)]">{c.closing.trust}</p>
               </div>
-              <a href="#products" className="pill pill-accent pill-cta !min-w-[14rem] shrink-0">
+              <a href="#products" className="pill pill-cta shrink-0">
                 {c.closing.cta}
                 <ArrowRight size={16} aria-hidden="true" />
               </a>

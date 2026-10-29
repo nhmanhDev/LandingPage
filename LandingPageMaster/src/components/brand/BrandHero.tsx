@@ -93,7 +93,7 @@ export function BrandHero() {
           </motion.div>
 
           <motion.div {...rise(0.2)} className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a href="#products" className="pill pill-accent pill-cta">
+            <a href="#products" className="pill pill-cta">
               {c.hero.ctaPrimary}
               <ArrowRight size={16} aria-hidden="true" />
             </a>
