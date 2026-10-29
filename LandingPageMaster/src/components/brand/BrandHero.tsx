@@ -48,7 +48,7 @@ export function BrandHero() {
 
       <div className="pointer-events-none relative z-10 grid min-h-[calc(100svh-8rem)] place-items-center px-4 pb-16 pt-8 sm:pb-20">
         <div className="pointer-events-auto w-full max-w-[46rem] rounded-[36px] border border-[var(--b-line)] bg-[var(--b-surface)] p-8 text-center shadow-[0_30px_80px_-30px_rgba(107,93,70,0.35)] sm:p-12">
-          
+
           <motion.h1 {...rise(0.05)} className="t-display">
             {c.hero.titleLine1}
             <br />
@@ -75,7 +75,7 @@ export function BrandHero() {
                     </span>
                     <span className="text-[13px] font-bold text-[var(--b-ink)]">{pillar.title}</span>
                   </div>
-                  <p className="mt-2 text-[11px] text-[var(--b-muted)] line-clamp-1">{pillar.tagline}</p>
+                  <p className="mt-2 text-[12px] text-[var(--b-muted)] line-clamp-1">{pillar.tagline}</p>
                 </a>
               );
             })}

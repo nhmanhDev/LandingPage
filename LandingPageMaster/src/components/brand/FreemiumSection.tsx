@@ -12,7 +12,7 @@ export function FreemiumSection() {
   return (
     <section id="pricing" className="scroll-mt-24 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHead eyebrow={f.eyebrow} title={f.title} sub={f.sub} />
+        <SectionHead title={f.title} sub={f.sub} />
 
         {/* Slite-Style Tiered Transparency Cards */}
         <div className="mt-12 grid gap-6 sm:mt-16 lg:grid-cols-3">
@@ -22,7 +22,7 @@ export function FreemiumSection() {
             <div className="flex h-full flex-col justify-between rounded-[36px] border border-[var(--b-line)] bg-[var(--b-surface)] p-7 sm:p-8 shadow-[var(--sh-soft)] transition-all hover:-translate-y-1 hover:shadow-[var(--sh-card)]">
               <div>
                 <div className="flex items-center justify-between gap-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-pos-bg)] px-3 py-1 text-[11px] font-bold text-[var(--b-pos-fg)]">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-pos-bg)] px-3 py-1 text-[12px] font-bold text-[var(--b-pos-fg)]">
                     <span className="h-1.5 w-1.5 rounded-full bg-[var(--b-pos-fg)]" />
                     Bắt đầu 0đ
                   </span>
@@ -70,14 +70,14 @@ export function FreemiumSection() {
             <div className="relative flex h-full flex-col justify-between rounded-[36px] border-2 border-[var(--b-accent)] bg-[var(--b-surface)] p-7 sm:p-8 shadow-[0_20px_50px_rgba(246,119,72,0.14)] transition-all hover:-translate-y-1">
               {/* Highlight ribbon */}
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                <span className="rounded-full bg-[var(--b-accent)] px-3.5 py-1 text-[11px] font-bold tracking-wide text-white shadow-sm">
+                <span className="rounded-full bg-[var(--b-accent)] px-3.5 py-1 text-[12px] font-bold tracking-wide text-white shadow-sm">
                   Minh bạch 100%
                 </span>
               </div>
 
               <div>
                 <div className="flex items-center justify-between gap-3 pt-1">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-chip)] px-3 py-1 text-[11px] font-bold text-[var(--b-ink)]">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-chip)] px-3 py-1 text-[12px] font-bold text-[var(--b-ink)]">
                     Theo nhu cầu
                   </span>
                   <Server size={18} className="text-[var(--b-brand)]" />
@@ -123,7 +123,7 @@ export function FreemiumSection() {
             <div className="flex h-full flex-col justify-between rounded-[36px] border border-[var(--b-line)] bg-[var(--b-lav)] p-7 sm:p-8 shadow-[var(--sh-soft)] transition-all hover:-translate-y-1 hover:shadow-[var(--sh-card)]">
               <div>
                 <div className="flex items-center justify-between gap-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-[11px] font-bold text-[var(--b-muted)]">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-[12px] font-bold text-[var(--b-muted)]">
                     Cam kết của Founder
                   </span>
                   <HeartHandshake size={18} className="text-[var(--b-muted)]" />

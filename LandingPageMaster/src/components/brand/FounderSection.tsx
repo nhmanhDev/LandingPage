@@ -15,7 +15,7 @@ export function FounderSection() {
   return (
     <section id="founder" className="scroll-mt-24 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHead eyebrow={f.eyebrow} title={f.title} />
+        <SectionHead title={f.title} />
 
         <Reveal className="mx-auto mt-10 max-w-3xl sm:mt-14">
           <div className="relative rounded-[36px] border border-[var(--b-line)] bg-[var(--b-lav)] p-8 sm:p-12 shadow-[var(--sh-soft)]">

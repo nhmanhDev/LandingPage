@@ -29,7 +29,6 @@ export function EcosystemPlaySection() {
     <section id="play" className="scroll-mt-24 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead
-          eyebrow="Trục giải trí & gắn kết đời sống"
           title="Không chỉ là công việc — AI42E là niềm vui gắn kết"
           sub="11 trò chơi mở trực tiếp trên trình duyệt điện thoại. Không tải app, không đăng nhập rườm rà. Dành cho những buổi họp mặt gia đình và bạn bè thêm rộn rã."
         />
@@ -61,7 +60,7 @@ export function EcosystemPlaySection() {
                     <Smartphone size={18} className="text-[var(--b-brand)] mt-0.5 shrink-0" />
                     <div>
                       <span className="block text-[13px] font-bold text-[var(--b-ink)]">Mở là chơi ngay</span>
-                      <span className="block text-[11px] text-[var(--b-muted)]">Chạy trên trình duyệt mọi điện thoại</span>
+                      <span className="block text-[12px] text-[var(--b-muted)]">Chạy trên trình duyệt mọi điện thoại</span>
                     </div>
                   </div>
 
@@ -69,7 +68,7 @@ export function EcosystemPlaySection() {
                     <Users size={18} className="text-[var(--b-brand)] mt-0.5 shrink-0" />
                     <div>
                       <span className="block text-[13px] font-bold text-[var(--b-ink)]">Gắn kết bạn bè</span>
-                      <span className="block text-[11px] text-[var(--b-muted)]">Thiết kế cho các buổi tụ họp sum vầy</span>
+                      <span className="block text-[12px] text-[var(--b-muted)]">Thiết kế cho các buổi tụ họp sum vầy</span>
                     </div>
                   </div>
                 </div>

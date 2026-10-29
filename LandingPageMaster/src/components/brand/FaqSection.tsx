@@ -11,7 +11,7 @@ export function FaqSection() {
   return (
     <section id="faq" className="scroll-mt-24 py-20 lg:py-28">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
-        <SectionHead eyebrow={c.faq.eyebrow} title={c.faq.title} />
+        <SectionHead title={c.faq.title} />
 
         <Reveal delay={0.06} className="mt-10 sm:mt-14">
           <Accordion type="single" collapsible className="space-y-3.5">

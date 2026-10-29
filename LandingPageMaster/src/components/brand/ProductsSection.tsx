@@ -68,7 +68,7 @@ export function ProductsSection() {
   return (
     <section id="products" className="relative z-10 -mt-10 scroll-mt-24 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHead eyebrow={c.products.eyebrow} title={c.products.title} sub={c.products.sub} />
+        <SectionHead title={c.products.title} sub={c.products.sub} />
 
         {/* Closed-loop Workflow Synergy Banner */}
         <Reveal delay={0.08} className="mt-10 sm:mt-12">
@@ -84,7 +84,7 @@ export function ProductsSection() {
                 </span>
                 <div className="min-w-0">
                   <span className="block text-[13px] font-bold text-[var(--b-ink)]">Khai thác tư liệu sạch</span>
-                  <span className="block text-[11px] text-[var(--b-muted)] truncate">DownloadAnything tải video, audio 4K</span>
+                  <span className="block text-[12px] text-[var(--b-muted)] truncate">DownloadAnything tải video, audio 4K</span>
                 </div>
               </div>
 
@@ -94,7 +94,7 @@ export function ProductsSection() {
                 </span>
                 <div className="min-w-0">
                   <span className="block text-[13px] font-bold text-[var(--b-ink)]">Lồng giọng truyền cảm</span>
-                  <span className="block text-[11px] text-[var(--b-muted)] truncate">Voice Studio đọc văn bản & clone voice</span>
+                  <span className="block text-[12px] text-[var(--b-muted)] truncate">Voice Studio đọc văn bản & clone voice</span>
                 </div>
               </div>
 
@@ -104,7 +104,7 @@ export function ProductsSection() {
                 </span>
                 <div className="min-w-0">
                   <span className="block text-[13px] font-bold text-[var(--b-ink)]">Dựng video tự động hóa</span>
-                  <span className="block text-[11px] text-[var(--b-muted)] truncate">AI42E Studio xuất bản video hoàn chỉnh</span>
+                  <span className="block text-[12px] text-[var(--b-muted)] truncate">AI42E Studio xuất bản video hoàn chỉnh</span>
                 </div>
               </div>
             </div>

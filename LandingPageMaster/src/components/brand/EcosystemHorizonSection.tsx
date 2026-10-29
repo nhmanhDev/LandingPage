@@ -19,7 +19,7 @@ function TradingGraph() {
         <span className="flex items-center gap-1.5 text-emerald-600">
           <Activity size={14} /> Tín hiệu thời gian thực
         </span>
-        <span className="font-mono text-[11px]">AI Model v2.4</span>
+        <span className="font-mono text-[12px]">AI Model v2.4</span>
       </div>
       
       <svg viewBox="0 0 100 60" preserveAspectRatio="none" className="h-[90px] w-full text-[var(--b-brand)]">
@@ -33,7 +33,7 @@ function TradingGraph() {
         <path d={line} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
       </svg>
 
-      <div className="flex items-center justify-between text-[11px] text-[var(--b-muted)] border-t border-[var(--b-line)]/60 pt-2">
+      <div className="flex items-center justify-between text-[12px] text-[var(--b-muted)] border-t border-[var(--b-line)]/60 pt-2">
         <span>Độ tin cậy thuật toán: 94.2%</span>
         <span>Nghiên cứu nội bộ</span>
       </div>
@@ -59,7 +59,7 @@ function OneForAllMockup() {
             </span>
             <div className="min-w-0 flex-1">
               <span className="block text-[13px] font-bold text-[var(--b-ink)]">{t.title}</span>
-              <span className="block text-[11px] text-[var(--b-muted)] truncate">{t.desc}</span>
+              <span className="block text-[12px] text-[var(--b-muted)] truncate">{t.desc}</span>
             </div>
           </div>
         );
@@ -73,7 +73,6 @@ export function EcosystemHorizonSection() {
     <section id="horizon" className="scroll-mt-24 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead
-          eyebrow="Không gian mở rộng & nghiên cứu"
           title="Những mảnh ghép AI tiếp theo của hệ sinh thái"
           sub="AI42E liên tục mở rộng để giải quyết thêm nhiều bài toán thường nhật: từ trạm tiện ích web đa nhiệm đến các mô hình thuật toán phân tích thị trường chuyên sâu."
         />
@@ -85,7 +84,7 @@ export function EcosystemHorizonSection() {
             <div className="sand-card flex h-full flex-col justify-between !p-8 sm:!p-10">
               <div>
                 <div className="flex items-center justify-between gap-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-[11px] font-bold text-[var(--b-muted)] border border-[var(--b-line)]">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-[12px] font-bold text-[var(--b-muted)] border border-[var(--b-line)]">
                     <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
                     Sắp ra mắt
                   </span>
@@ -118,7 +117,7 @@ export function EcosystemHorizonSection() {
             <div className="sand-card flex h-full flex-col justify-between !p-8 sm:!p-10">
               <div>
                 <div className="flex items-center justify-between gap-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-[11px] font-bold text-[var(--b-muted)] border border-[var(--b-line)]">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-[12px] font-bold text-[var(--b-muted)] border border-[var(--b-line)]">
                     <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
                     Đang nghiên cứu nội bộ
                   </span>

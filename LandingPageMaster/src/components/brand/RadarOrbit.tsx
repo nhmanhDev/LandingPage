@@ -41,10 +41,10 @@ const ORBIT_ITEMS: OrbitItem[] = [
     size: 38,
     iconSize: 18,
     colors: {
-      bg: "bg-blue-50 dark:bg-blue-950/60",
-      border: "border-blue-200/90 dark:border-blue-800/60",
-      text: "text-blue-600 dark:text-blue-400",
-      glow: "hover:shadow-[0_4px_16px_rgba(59,130,246,0.3)]",
+      bg: "bg-white dark:bg-[#28241f]",
+      border: "border-gray-200/90 dark:border-white/10",
+      text: "text-[var(--b-ink)] group-hover/item:text-[var(--b-brand)]",
+      glow: "hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]",
     },
   },
   {
@@ -60,10 +60,10 @@ const ORBIT_ITEMS: OrbitItem[] = [
     size: 38,
     iconSize: 18,
     colors: {
-      bg: "bg-teal-50 dark:bg-teal-950/60",
-      border: "border-teal-200/90 dark:border-teal-800/60",
-      text: "text-teal-600 dark:text-teal-400",
-      glow: "hover:shadow-[0_4px_16px_rgba(20,184,166,0.3)]",
+      bg: "bg-white dark:bg-[#28241f]",
+      border: "border-gray-200/90 dark:border-white/10",
+      text: "text-[var(--b-ink)] group-hover/item:text-[var(--b-brand)]",
+      glow: "hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]",
     },
   },
 
@@ -81,10 +81,10 @@ const ORBIT_ITEMS: OrbitItem[] = [
     size: 40,
     iconSize: 19,
     colors: {
-      bg: "bg-emerald-50 dark:bg-emerald-950/60",
-      border: "border-emerald-200/90 dark:border-emerald-800/60",
-      text: "text-emerald-600 dark:text-emerald-400",
-      glow: "hover:shadow-[0_4px_16px_rgba(16,185,129,0.3)]",
+      bg: "bg-white dark:bg-[#28241f]",
+      border: "border-gray-200/90 dark:border-white/10",
+      text: "text-[var(--b-ink)] group-hover/item:text-[var(--b-brand)]",
+      glow: "hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]",
     },
   },
   {
@@ -100,10 +100,10 @@ const ORBIT_ITEMS: OrbitItem[] = [
     size: 40,
     iconSize: 19,
     colors: {
-      bg: "bg-purple-50 dark:bg-purple-950/60",
-      border: "border-purple-200/90 dark:border-purple-800/60",
-      text: "text-purple-600 dark:text-purple-400",
-      glow: "hover:shadow-[0_4px_16px_rgba(168,85,247,0.3)]",
+      bg: "bg-white dark:bg-[#28241f]",
+      border: "border-gray-200/90 dark:border-white/10",
+      text: "text-[var(--b-ink)] group-hover/item:text-[var(--b-brand)]",
+      glow: "hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]",
     },
   },
 
@@ -121,10 +121,10 @@ const ORBIT_ITEMS: OrbitItem[] = [
     size: 42,
     iconSize: 20,
     colors: {
-      bg: "bg-amber-50 dark:bg-amber-950/60",
-      border: "border-amber-200/90 dark:border-amber-800/60",
-      text: "text-amber-600 dark:text-amber-400",
-      glow: "hover:shadow-[0_4px_16px_rgba(245,158,11,0.3)]",
+      bg: "bg-white dark:bg-[#28241f]",
+      border: "border-gray-200/90 dark:border-white/10",
+      text: "text-[var(--b-ink)] group-hover/item:text-[var(--b-brand)]",
+      glow: "hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]",
     },
   },
   {
@@ -140,10 +140,10 @@ const ORBIT_ITEMS: OrbitItem[] = [
     size: 42,
     iconSize: 20,
     colors: {
-      bg: "bg-rose-50 dark:bg-rose-950/60",
-      border: "border-rose-200/90 dark:border-rose-800/60",
-      text: "text-rose-600 dark:text-rose-400",
-      glow: "hover:shadow-[0_4px_16px_rgba(244,63,94,0.3)]",
+      bg: "bg-white dark:bg-[#28241f]",
+      border: "border-gray-200/90 dark:border-white/10",
+      text: "text-[var(--b-ink)] group-hover/item:text-[var(--b-brand)]",
+      glow: "hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]",
     },
   },
 ];
@@ -154,11 +154,11 @@ export function RadarOrbit() {
 
   return (
     <div
-      className="group/radar relative flex items-center justify-center w-full h-[220px] sm:h-[240px] lg:h-[250px] select-none"
+      className="group/radar relative flex items-center justify-center w-full h-[200px] sm:h-[210px] lg:h-[215px] select-none"
       aria-hidden="true"
     >
       {/* Scaling container that scales down smoothly on mobile while staying centered */}
-      <div className="relative w-[500px] h-[500px] shrink-0 scale-[0.58] sm:scale-[0.68] lg:scale-[0.76] xl:scale-[0.80] transition-transform">
+      <div className="relative w-[500px] h-[500px] shrink-0 scale-[0.54] sm:scale-[0.64] lg:scale-[0.70] xl:scale-[0.73] transition-transform">
         
         {/* 4 Concentric Dashed Rings (Absolute Circles centered at 250, 250) */}
         {/* Ring 1: Inner Breathing Ring (r=50) */}
