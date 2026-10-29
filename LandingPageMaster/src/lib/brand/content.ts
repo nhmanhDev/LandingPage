@@ -270,7 +270,6 @@ const vi: Content = {
     paragraphs: [
       "AI đang thay đổi cách chúng ta làm việc, nhưng phần lớn công cụ vẫn khó dùng với người không rành kỹ thuật.",
       "Mình muốn làm một nơi mà ai cũng thử được AI: dễ dùng, và có nhiều thứ miễn phí. Khi bạn dùng nhiều hơn, khoản phí giúp mình duy trì hệ thống và làm thêm sản phẩm mới.",
-      "Nếu bạn có ý kiến gì, cứ nhắn cho mình qua các kênh ở cuối trang nhé.",
     ],
     signature: "Mạnh, người làm ra AI42E",
   },
@@ -493,7 +492,6 @@ const en: Content = {
     paragraphs: [
       "AI is changing how we work, but most tools are still hard to use if you are not technical.",
       "I wanted a place where anyone can try AI: easy to use, with plenty of free things. When you use more, the fees help me keep the system running and build new products.",
-      "If you have thoughts, just message me through the channels at the bottom of the page.",
     ],
     signature: "Manh, maker of AI42E",
   },

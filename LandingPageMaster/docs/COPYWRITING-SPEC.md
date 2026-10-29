@@ -243,11 +243,8 @@
 > *Đã gộp thành bố cục 2 cột cân xứng (Trái 5 cột - Phải 7 cột) nhằm tinh giản chiều dài trang.*
 
 ### Cột Trái: Lời từ người làm ra AI42E
-* **Tiêu đề lớn (H2):** `Vì sao có AI42E?`
-* **3 đoạn tâm thư:**
-  1. **Đoạn 1 (in đậm):** `AI đang thay đổi cách chúng ta làm việc, nhưng phần lớn công cụ vẫn khó dùng với người không rành kỹ thuật.`
-  2. **Đoạn 2:** `Mình muốn làm một nơi mà ai cũng thử được AI: dễ dùng, và có nhiều thứ miễn phí. Khi bạn dùng nhiều hơn, khoản phí giúp mình duy trì hệ thống và làm thêm sản phẩm mới.`
-  3. **Đoạn 3:** `Nếu bạn có ý kiến gì, cứ nhắn cho mình qua các kênh ở cuối trang nhé.`
+* **Tiêu đề nổi bật (H3):** `AI đang thay đổi cách chúng ta làm việc, nhưng phần lớn công cụ vẫn khó dùng với người không rành kỹ thuật.`
+* **Đoạn chia sẻ:** `Mình muốn làm một nơi mà ai cũng thử được AI: dễ dùng, và có nhiều thứ miễn phí. Khi bạn dùng nhiều hơn, khoản phí giúp mình duy trì hệ thống và làm thêm sản phẩm mới.`
 * **Thẻ chữ ký Founder:**
   * Biểu tượng logo tròn `AI42E`
   * Tên: `Mạnh, người làm ra AI42E`

@@ -20,21 +20,19 @@ export function FounderFaqSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
-          {/* LEFT COLUMN: Vì sao có AI42E? (5 cols) */}
+          {/* LEFT COLUMN: Lời từ người làm ra AI42E (5 cols) */}
           <div className="lg:col-span-5">
             <Reveal>
               <div>
-                <h2 className="t-title font-bold text-[var(--b-ink)] leading-tight">
-                  {f.title}
-                </h2>
+                <h3 className="text-[20px] sm:text-[22px] font-bold text-[var(--b-ink)] leading-snug">
+                  {f.paragraphs[0]}
+                </h3>
 
-                <div className="mt-5 space-y-4 text-[15px] sm:text-[16px] text-[var(--b-muted)] leading-relaxed">
-                  {f.paragraphs.map((text, idx) => (
-                    <p key={idx} className={idx === 0 ? "font-semibold text-[var(--b-ink)]" : ""}>
-                      {text}
-                    </p>
-                  ))}
-                </div>
+                {f.paragraphs[1] && (
+                  <p className="mt-4 text-[15px] sm:text-[16px] text-[var(--b-muted)] leading-relaxed">
+                    {f.paragraphs[1]}
+                  </p>
+                )}
 
                 {/* Founder Signature Card */}
                 <div className="mt-8 rounded-2xl border border-[var(--b-line)] bg-[var(--b-surface)] p-5 shadow-xs">
