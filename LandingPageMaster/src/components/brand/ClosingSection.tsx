@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import logo from "@/app/android-chrome-192x192.png";
 import OrbitImages from "@/components/react-bits/OrbitImages";
 import { useBrand } from "./LocaleProvider";
 import { Reveal } from "./Reveal";
-import { SectionTitle } from "./SectionTitle";
 import { useMounted } from "./useMounted";
 import { useReducedMotion } from "./useReducedMotion";
 
@@ -31,23 +30,25 @@ export function ClosingSection() {
   return (
     <Reveal>
       {/* Inner Elevated CTA Card (SquareUi Card-in-Card pattern) */}
-      <div className="rounded-2xl sm:rounded-3xl border border-[var(--b-line)] bg-[var(--b-surface)] p-5 sm:p-7 lg:p-8 shadow-xs relative overflow-hidden">
+      <div className="rounded-2xl sm:rounded-3xl border border-[var(--b-line)] bg-[var(--b-surface)] p-6 sm:p-7 lg:p-8 shadow-xs relative overflow-hidden">
         <div className="relative z-10 grid items-center gap-6 md:grid-cols-[1.15fr_0.85fr]">
           <div>
-            <span className="eyebrow block text-[11px] font-semibold uppercase tracking-wider text-[var(--b-brand)] mb-1.5">
-              {isVi ? "Hệ sinh thái AI42E" : "AI42E Ecosystem"}
+            <span className="block text-xs sm:text-sm font-medium text-[var(--b-muted)] mb-2">
+              {isVi ? "Khám phá hệ sinh thái" : "AI42E Ecosystem"}
             </span>
-            <SectionTitle text={c.closing.title} className="t-title text-2xl sm:text-3xl lg:text-[2rem] font-bold text-[var(--b-ink)] leading-tight" />
-            <p className="t-body mt-2 max-w-md text-xs sm:text-sm text-[var(--b-muted)] leading-relaxed">
+            <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-bold text-[var(--b-heading)] tracking-[-0.025em] leading-tight font-sans">
+              {c.closing.title}
+            </h2>
+            <p className="mt-2.5 max-w-md text-xs sm:text-sm text-[var(--b-muted)] leading-relaxed font-sans">
               {c.closing.sub}
             </p>
-            <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-3">
+            <div className="mt-5 flex flex-wrap items-center gap-3">
               <a
                 href="#products"
-                className="pill pill-cta inline-flex items-center gap-2 !py-2 !px-4 sm:!py-2.5 sm:!px-5 text-xs sm:text-sm font-semibold"
+                className="pill pill-cta inline-flex items-center gap-1.5 !py-2 !px-4 sm:!py-2.5 sm:!px-5 text-xs sm:text-sm font-semibold"
               >
                 <span>{c.closing.cta}</span>
-                <ArrowRight size={14} aria-hidden="true" />
+                <ArrowUpRight size={14} aria-hidden="true" />
               </a>
               <a
                 href="#contact"
@@ -56,7 +57,7 @@ export function ClosingSection() {
                 {c.closing.cta2}
               </a>
             </div>
-            <p className="t-small mt-2.5 text-[11px] text-[var(--b-muted)]">{c.closing.trust}</p>
+            <p className="mt-3 text-[11.5px] text-[var(--b-muted)]">{c.closing.trust}</p>
           </div>
 
           <div className="relative mx-auto h-[155px] w-full max-w-[340px] sm:h-[175px]" aria-hidden="true">
