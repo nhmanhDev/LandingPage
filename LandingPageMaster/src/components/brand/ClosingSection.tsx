@@ -34,7 +34,7 @@ export function ClosingSection() {
         <div className="relative z-10 grid items-center gap-6 md:grid-cols-[1.15fr_0.85fr]">
           <div>
             {/* Eyebrow: Title Case, neutral muted */}
-            <span className="block text-[13px] font-medium text-[var(--b-muted)] mb-2">
+            <span className="block text-[14px] font-medium text-[var(--b-muted)] mb-2">
               {isVi ? "Khám phá hệ sinh thái" : "AI42E Ecosystem"}
             </span>
 
