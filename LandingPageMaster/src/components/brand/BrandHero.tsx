@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Clapperboard, Gamepad2, Sparkles, Compass } from "lucide-react";
+import { Clapperboard, Gamepad2, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
 import { useBrand } from "./LocaleProvider";
 import { useReducedMotion } from "./useReducedMotion";
@@ -46,14 +46,9 @@ export function BrandHero() {
       {/* The wall melts into the page so the next section grows out of it instead of starting at a hard edge. */}
       <div className="hero-fade pointer-events-none absolute inset-x-0 bottom-0 z-[5]" aria-hidden="true" />
 
-      <div className="pointer-events-none relative z-10 grid min-h-[calc(100svh-8rem)] place-items-center px-4 pb-20 pt-10 sm:pb-24">
+      <div className="pointer-events-none relative z-10 grid min-h-[calc(100svh-8rem)] place-items-center px-4 pb-16 pt-8 sm:pb-20">
         <div className="pointer-events-auto w-full max-w-[46rem] rounded-[36px] border border-[var(--b-line)] bg-[var(--b-surface)] p-8 text-center shadow-[0_30px_80px_-30px_rgba(107,93,70,0.35)] sm:p-12">
           
-          <motion.p {...rise(0)} className="t-small mx-auto mb-5 inline-flex items-center gap-2 rounded-full bg-[var(--b-chip)] px-3.5 py-1.5 text-[var(--b-muted)]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--b-brand)]" aria-hidden="true" />
-            {c.hero.eyebrow}
-          </motion.p>
-
           <motion.h1 {...rise(0.05)} className="t-display">
             {c.hero.titleLine1}
             <br />
@@ -85,21 +80,6 @@ export function BrandHero() {
               );
             })}
           </motion.div>
-
-          <motion.div {...rise(0.2)} className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a href="#products" className="pill pill-cta">
-              {c.hero.ctaPrimary}
-              <ArrowRight size={16} aria-hidden="true" />
-            </a>
-            <a href="#founder" className="pill pill-outline">
-              <Compass size={15} aria-hidden="true" />
-              Triết lý AI42E
-            </a>
-          </motion.div>
-
-          <motion.p {...rise(0.25)} className="t-small mt-4 text-[var(--b-muted)]">
-            {c.hero.note}
-          </motion.p>
         </div>
       </div>
     </section>
