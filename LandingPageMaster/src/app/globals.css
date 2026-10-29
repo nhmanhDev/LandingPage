@@ -517,17 +517,7 @@ html:has(.brand-landing) {
 .brand-landing .chip-pos { background: var(--b-pos-bg); color: var(--b-pos-fg); font-weight: 700; border-radius: 6px; }
 
 /* Hero bottom: the tilted wall dissolves into the cream page (no hard edge before the next section). */
-.brand-landing .hero-fade {
-  height: 12rem;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    color-mix(in srgb, var(--b-bg) 25%, transparent) 40%,
-    color-mix(in srgb, var(--b-bg) 70%, transparent) 75%,
-    var(--b-bg) 100%
-  );
-  pointer-events: none;
-}
+.brand-landing .hero-fade { display: none; }
 
 /* Outlined pill (slite.com secondary button): transparent, 1.6px ink ring, fills with ink on hover. */
 /* Outlined pill: delicate line, harmonious warm chip fill on hover. Never turns black. */

@@ -113,7 +113,7 @@ export function Wall({ paused, text }: WallProps) {
   return (
     <div
       ref={stageRef}
-      className="absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,black_0%,black_72%,transparent_96%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_72%,transparent_96%)]"
+      className="absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,black_0%,black_52%,rgba(0,0,0,0.7)_70%,rgba(0,0,0,0.2)_88%,transparent_98%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_52%,rgba(0,0,0,0.7)_70%,rgba(0,0,0,0.2)_88%,transparent_98%)]"
       data-wall-paused={paused}
       aria-hidden="true"
     >
