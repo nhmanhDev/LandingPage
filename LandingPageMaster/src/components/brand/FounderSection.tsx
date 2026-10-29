@@ -25,7 +25,7 @@ export function FounderSection() {
             </span>
 
             <figure className="relative z-10">
-              <div className="space-y-5 text-[var(--b-ink)] leading-relaxed t-body text-base sm:text-lg">
+              <div className="space-y-5 text-[var(--b-ink)] leading-relaxed t-lead">
                 {f.paragraphs.map((text, idx) => (
                   <p key={idx} className={idx === 0 ? "font-medium" : "text-[var(--b-muted)]"}>
                     {text}
@@ -40,13 +40,13 @@ export function FounderSection() {
                   </div>
                   <div>
                     <span className="t-body block font-bold text-[var(--b-ink)]">{f.signature}</span>
-                    <span className="text-xs text-[var(--b-muted)]">AI Engineer · Nhà sáng lập AI42E</span>
+                    <span className="text-[13px] text-[var(--b-muted)]">AI Engineer · Nhà sáng lập AI42E</span>
                   </div>
                 </div>
 
                 <a
                   href="#contact"
-                  className="pill pill-surface text-xs font-semibold"
+                  className="pill pill-surface text-[13px] font-semibold"
                 >
                   Gửi lời nhắn cho Mạnh ↗
                 </a>

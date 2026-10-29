@@ -127,12 +127,12 @@ function EcosystemMegaMenu({ products, label, statusLabels }: { products: Produc
                         </span>
                         <div className="min-w-0 flex-1">
                           <div className="t-body flex items-center justify-between font-medium transition-colors group-hover:text-[var(--b-brand)]">
-                            <span className="text-sm font-semibold">{product.name}</span>
-                            <span className="text-xs text-[var(--b-muted)] opacity-0 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0.5">
+                            <span className="text-[15px] font-semibold">{product.name}</span>
+                            <span className="text-[13px] text-[var(--b-muted)] opacity-0 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0.5">
                               ↗
                             </span>
                           </div>
-                          <span className="text-xs text-[var(--b-muted)] line-clamp-1 mt-0.5">{product.tagline}</span>
+                          <span className="text-[13px] text-[var(--b-muted)] line-clamp-1 mt-0.5">{product.tagline}</span>
                           <span className="mt-1 flex items-center gap-1.5 text-[11px] text-[var(--b-muted)]">
                             <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
                             {statusLabels[product.status]}
@@ -166,12 +166,12 @@ function EcosystemMegaMenu({ products, label, statusLabels }: { products: Produc
                         </span>
                         <div className="min-w-0 flex-1">
                           <div className="t-body flex items-center justify-between font-medium transition-colors group-hover:text-[var(--b-brand)]">
-                            <span className="text-sm font-semibold">{product.name}</span>
-                            <span className="text-xs text-[var(--b-muted)] opacity-0 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0.5">
+                            <span className="text-[15px] font-semibold">{product.name}</span>
+                            <span className="text-[13px] text-[var(--b-muted)] opacity-0 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0.5">
                               ↗
                             </span>
                           </div>
-                          <span className="text-xs text-[var(--b-muted)] line-clamp-1 mt-0.5">{product.tagline}</span>
+                          <span className="text-[13px] text-[var(--b-muted)] line-clamp-1 mt-0.5">{product.tagline}</span>
                           <span className="mt-1 flex items-center gap-1.5 text-[11px] text-[var(--b-muted)]">
                             <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
                             {statusLabels[product.status]}
@@ -184,7 +184,7 @@ function EcosystemMegaMenu({ products, label, statusLabels }: { products: Produc
               </div>
 
               {/* Bottom Quick Bar */}
-              <div className="mt-3 pt-3 border-t border-[var(--b-line)] flex items-center justify-between px-2 text-xs">
+              <div className="mt-3 pt-3 border-t border-[var(--b-line)] flex items-center justify-between px-2 text-[13px]">
                 <span className="text-[var(--b-muted)]">6 ứng dụng · Mở trên web & máy tính</span>
                 <a
                   href="#products"
@@ -245,7 +245,7 @@ export function BrandNavbar() {
             type="button"
             onClick={() => setLocale(locale === "vi" ? "en" : "vi")}
             aria-label={c.ui.language}
-            className="nav-link !px-2.5 sm:!px-3 text-xs sm:text-sm font-medium whitespace-nowrap"
+            className="nav-link !px-2.5 sm:!px-3 text-[13px] sm:text-[15px] font-medium whitespace-nowrap"
           >
             {locale === "vi" ? "VI" : "EN"}
           </button>
@@ -259,7 +259,7 @@ export function BrandNavbar() {
             {isDark ? <Sun size={17} aria-hidden="true" /> : <Moon size={17} aria-hidden="true" />}
           </button>
 
-          <a href="#products" className="pill pill-cta !py-2 !px-4 text-xs sm:text-sm whitespace-nowrap font-semibold shadow-xs hidden sm:inline-flex">
+          <a href="#products" className="pill pill-cta !py-2 !px-4 text-[13px] sm:text-[15px] whitespace-nowrap font-semibold shadow-xs hidden sm:inline-flex">
             {c.nav.cta}
           </a>
 
@@ -285,23 +285,23 @@ export function BrandNavbar() {
             className="border-b border-[var(--b-line)] bg-[var(--b-surface)] px-4 py-5 lg:hidden overflow-hidden"
           >
             <ul className="flex flex-col gap-2">
-              <li className="pb-1 text-xs font-bold uppercase tracking-wider text-[var(--b-brand)]">Hệ sinh thái sản phẩm</li>
+              <li className="pb-1 text-[11px] font-bold uppercase tracking-wider text-[var(--b-brand)]">Hệ sinh thái sản phẩm</li>
               <li>
                 <a href="#products" className="nav-link w-full flex items-center justify-between" onClick={() => setMobileOpen(false)}>
                   <span>🎬 Bộ Sáng tạo AI (Studio, Voice, Downloader)</span>
-                  <span className="text-xs text-[var(--b-muted)]">↗</span>
+                  <span className="text-[13px] text-[var(--b-muted)]">↗</span>
                 </a>
               </li>
               <li>
                 <a href="#play" className="nav-link w-full flex items-center justify-between" onClick={() => setMobileOpen(false)}>
                   <span>🎲 AI42E Game (11 Board Games)</span>
-                  <span className="text-xs text-[var(--b-muted)]">↗</span>
+                  <span className="text-[13px] text-[var(--b-muted)]">↗</span>
                 </a>
               </li>
               <li>
                 <a href="#horizon" className="nav-link w-full flex items-center justify-between" onClick={() => setMobileOpen(false)}>
                   <span>⚡ Không gian mở rộng (OneForAll & Trading)</span>
-                  <span className="text-xs text-[var(--b-muted)]">↗</span>
+                  <span className="text-[13px] text-[var(--b-muted)]">↗</span>
                 </a>
               </li>
               <li className="pt-2 border-t border-[var(--b-line)]"></li>

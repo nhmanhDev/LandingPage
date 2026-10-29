@@ -84,7 +84,7 @@ export function BrandHero() {
                     >
                       <Icon size={15} aria-hidden />
                     </span>
-                    <span className="text-xs font-bold text-[var(--b-ink)]">{pillar.title}</span>
+                    <span className="text-[13px] font-bold text-[var(--b-ink)]">{pillar.title}</span>
                   </div>
                   <p className="mt-2 text-[11px] text-[var(--b-muted)] line-clamp-1">{pillar.tagline}</p>
                 </a>
@@ -103,7 +103,7 @@ export function BrandHero() {
             </a>
           </motion.div>
 
-          <motion.p {...rise(0.25)} className="t-small mt-4 text-xs text-[var(--b-muted)]">
+          <motion.p {...rise(0.25)} className="t-small mt-4 text-[var(--b-muted)]">
             {c.hero.note}
           </motion.p>
         </div>

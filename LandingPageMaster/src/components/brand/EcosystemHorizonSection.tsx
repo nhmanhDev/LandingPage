@@ -15,7 +15,7 @@ function TradingGraph() {
 
   return (
     <div className="relative w-full h-[180px] rounded-2xl bg-[var(--b-surface)] border border-[var(--b-line)] p-4 flex flex-col justify-between overflow-hidden shadow-2xs">
-      <div className="flex items-center justify-between text-xs font-semibold text-[var(--b-muted)]">
+      <div className="flex items-center justify-between text-[13px] font-semibold text-[var(--b-muted)]">
         <span className="flex items-center gap-1.5 text-emerald-600">
           <Activity size={14} /> Tín hiệu thời gian thực
         </span>
@@ -58,7 +58,7 @@ function OneForAllMockup() {
               <Icon size={16} />
             </span>
             <div className="min-w-0 flex-1">
-              <span className="block text-xs font-bold text-[var(--b-ink)]">{t.title}</span>
+              <span className="block text-[13px] font-bold text-[var(--b-ink)]">{t.title}</span>
               <span className="block text-[11px] text-[var(--b-muted)] truncate">{t.desc}</span>
             </div>
           </div>
@@ -85,7 +85,7 @@ export function EcosystemHorizonSection() {
             <div className="sand-card flex h-full flex-col justify-between !p-8 sm:!p-10">
               <div>
                 <div className="flex items-center justify-between gap-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-xs font-semibold text-[var(--b-muted)] border border-[var(--b-line)]">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-[11px] font-bold text-[var(--b-muted)] border border-[var(--b-line)]">
                     <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
                     Sắp ra mắt
                   </span>
@@ -106,7 +106,7 @@ export function EcosystemHorizonSection() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-4 border-t border-[var(--b-line)] flex items-center justify-between text-xs text-[var(--b-muted)]">
+              <div className="mt-8 pt-4 border-t border-[var(--b-line)] flex items-center justify-between text-[13px] text-[var(--b-muted)]">
                 <span>Dành cho công việc & nghiên cứu</span>
                 <span className="font-semibold text-[var(--b-brand)]">Mở quyền truy cập sớm ↗</span>
               </div>
@@ -118,7 +118,7 @@ export function EcosystemHorizonSection() {
             <div className="sand-card flex h-full flex-col justify-between !p-8 sm:!p-10">
               <div>
                 <div className="flex items-center justify-between gap-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-xs font-semibold text-[var(--b-muted)] border border-[var(--b-line)]">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-[11px] font-bold text-[var(--b-muted)] border border-[var(--b-line)]">
                     <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
                     Đang nghiên cứu nội bộ
                   </span>
@@ -139,7 +139,7 @@ export function EcosystemHorizonSection() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-4 border-t border-[var(--b-line)] flex items-center justify-between text-xs text-[var(--b-muted)]">
+              <div className="mt-8 pt-4 border-t border-[var(--b-line)] flex items-center justify-between text-[13px] text-[var(--b-muted)]">
                 <span>Công nghệ định lượng (Quant AI)</span>
                 <span className="font-semibold text-[var(--b-muted)]">Tài liệu nghiên cứu ↗</span>
               </div>

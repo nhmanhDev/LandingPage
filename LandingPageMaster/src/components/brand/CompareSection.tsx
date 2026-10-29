@@ -27,7 +27,7 @@ export function CompareSection() {
                 <div>
                   <div className="flex items-center justify-between gap-3">
                     <h3 className="t-heading font-semibold text-[var(--b-muted)]">{k.withoutTitle}</h3>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-red-500/80 bg-red-500/10 px-2.5 py-0.5 rounded-full">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-red-500/80 bg-red-500/10 px-2.5 py-0.5 rounded-full">
                       Phức tạp
                     </span>
                   </div>
@@ -49,7 +49,7 @@ export function CompareSection() {
                   </ul>
                 </div>
 
-                <div className="mt-8 border-t border-[var(--b-line)] pt-4 text-xs text-[var(--b-muted)] text-center">
+                <div className="mt-8 border-t border-[var(--b-line)] pt-4 text-[13px] text-[var(--b-muted)] text-center">
                   Tốn thời gian tìm kiếm · Dễ nản lòng trước khi bắt đầu
                 </div>
               </div>
@@ -59,7 +59,7 @@ export function CompareSection() {
                 <div>
                   <div className="flex items-center justify-between gap-3">
                     <h3 className="t-heading font-semibold text-[var(--b-ink)]">{k.withTitle}</h3>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-[var(--b-pos-fg)] bg-[var(--b-pos-bg)] px-2.5 py-0.5 rounded-full">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--b-pos-fg)] bg-[var(--b-pos-bg)] px-2.5 py-0.5 rounded-full">
                       Tối ưu
                     </span>
                   </div>
@@ -83,7 +83,7 @@ export function CompareSection() {
 
                 <div className="mt-8 rounded-2xl bg-[var(--b-pos-bg)]/60 border border-[var(--b-pos-fg)]/20 p-4 flex items-center justify-between gap-3">
                   <span className="t-small font-semibold text-[var(--b-pos-fg)]">{k.result}</span>
-                  <span className="text-xs font-bold text-[var(--b-pos-fg)] bg-[var(--b-surface)] px-2.5 py-1 rounded-full shadow-2xs">
+                  <span className="text-[11px] font-bold text-[var(--b-pos-fg)] bg-[var(--b-surface)] px-2.5 py-1 rounded-full shadow-2xs">
                     0đ Bắt đầu
                   </span>
                 </div>

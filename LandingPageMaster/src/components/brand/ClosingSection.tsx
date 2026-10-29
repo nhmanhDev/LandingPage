@@ -34,17 +34,17 @@ export function ClosingSection() {
         <div className="relative z-10 grid items-center gap-6 md:grid-cols-[1.15fr_0.85fr]">
           <div>
             {/* Eyebrow: Title Case, neutral muted */}
-            <span className="block text-xs sm:text-[13px] font-medium text-[var(--b-muted)] mb-2">
+            <span className="block text-[13px] font-medium text-[var(--b-muted)] mb-2">
               {isVi ? "Khám phá hệ sinh thái" : "AI42E Ecosystem"}
             </span>
 
             {/* Headline: Clean Geometric Sans-serif, balanced sizing */}
-            <h2 className="text-2xl sm:text-3xl lg:text-[32px] font-bold text-[var(--b-heading)] tracking-[-0.025em] leading-[1.2] mb-3 font-sans">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[var(--b-heading)] tracking-[-0.025em] leading-[1.2] mb-3 font-sans">
               {c.closing.title}
             </h2>
 
             {/* Description */}
-            <p className="text-xs sm:text-[14px] text-[var(--b-muted)] leading-relaxed max-w-[440px] mb-6 font-sans">
+            <p className="t-body text-[var(--b-muted)] leading-relaxed max-w-[440px] mb-6 font-sans">
               {c.closing.sub}
             </p>
 
@@ -52,7 +52,7 @@ export function ClosingSection() {
             <div>
               <a
                 href="#products"
-                className="pill pill-cta inline-flex items-center gap-2 !h-[44px] !px-6 text-sm font-semibold rounded-full shadow-xs"
+                className="pill pill-cta inline-flex items-center gap-2 !h-[44px] !px-6 text-[15px] font-semibold rounded-full shadow-xs"
               >
                 <span>{c.closing.cta}</span>
                 <ArrowUpRight size={15} aria-hidden="true" />

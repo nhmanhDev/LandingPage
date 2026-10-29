@@ -44,7 +44,7 @@ export function EcosystemPlaySection() {
                   <span className="grid h-8 w-8 place-items-center rounded-xl bg-[var(--b-pos-bg)] text-[var(--b-pos-fg)]">
                     <Gamepad2 size={18} />
                   </span>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[var(--b-pos-fg)]">
+                  <span className="text-[13px] font-bold uppercase tracking-wider text-[var(--b-pos-fg)]">
                     11 Tựa game mở sẵn
                   </span>
                 </div>
@@ -60,7 +60,7 @@ export function EcosystemPlaySection() {
                   <div className="flex items-start gap-2.5 rounded-2xl bg-[var(--b-surface)] p-3.5 border border-[var(--b-line)]">
                     <Smartphone size={18} className="text-[var(--b-brand)] mt-0.5 shrink-0" />
                     <div>
-                      <span className="block text-xs font-bold text-[var(--b-ink)]">Mở là chơi ngay</span>
+                      <span className="block text-[13px] font-bold text-[var(--b-ink)]">Mở là chơi ngay</span>
                       <span className="block text-[11px] text-[var(--b-muted)]">Chạy trên trình duyệt mọi điện thoại</span>
                     </div>
                   </div>
@@ -68,7 +68,7 @@ export function EcosystemPlaySection() {
                   <div className="flex items-start gap-2.5 rounded-2xl bg-[var(--b-surface)] p-3.5 border border-[var(--b-line)]">
                     <Users size={18} className="text-[var(--b-brand)] mt-0.5 shrink-0" />
                     <div>
-                      <span className="block text-xs font-bold text-[var(--b-ink)]">Gắn kết bạn bè</span>
+                      <span className="block text-[13px] font-bold text-[var(--b-ink)]">Gắn kết bạn bè</span>
                       <span className="block text-[11px] text-[var(--b-muted)]">Thiết kế cho các buổi tụ họp sum vầy</span>
                     </div>
                   </div>
