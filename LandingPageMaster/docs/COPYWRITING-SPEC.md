@@ -254,9 +254,7 @@
   * Chức danh: `AI Engineer · Maker of AI42E`
   * Nút liên hệ nhanh: `Liên hệ ↗` (cuộn tới `#contact`)
 
-### Cột Phải: Có thể bạn đang thắc mắc (Hỏi đáp FAQ)
-* **Tiêu đề lớn (H2):** `Có thể bạn đang thắc mắc`
-* **Dòng phụ giới thiệu:** `Mọi thông tin về quyền riêng tư, cách sử dụng công cụ và chính sách của AI42E.`
+### Cột Phải: Hỏi đáp FAQ
 * **4 Câu hỏi & Trả lời đóng mở (Accordion):**
   1. **Hỏi:** `AI42E là gì?`  
      **Đáp:** `AI42E gom những công cụ AI dễ dùng về một chỗ, để ai cũng có thể dùng AI trong công việc và giải trí hằng ngày. Khẩu hiệu của chúng tôi là AI for everyone and everything.`

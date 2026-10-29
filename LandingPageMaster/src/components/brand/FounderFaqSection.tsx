@@ -9,8 +9,7 @@ import { Reveal } from "./Reveal";
 
 /** Merged Founder Letter & FAQ into a balanced 2-column layout to reduce section count */
 export function FounderFaqSection() {
-  const { c, locale } = useBrand();
-  const isVi = locale === "vi";
+  const { c } = useBrand();
   const f = c.founder;
 
   return (
@@ -67,36 +66,25 @@ export function FounderFaqSection() {
             </Reveal>
           </div>
 
-          {/* RIGHT COLUMN: Có thể bạn đang thắc mắc (7 cols) */}
+          {/* RIGHT COLUMN: Hỏi đáp FAQ (7 cols) */}
           <div className="lg:col-span-7">
             <Reveal delay={0.06}>
-              <div>
-                <h2 className="t-title font-bold text-[var(--b-ink)] leading-tight">
-                  {c.faq.title}
-                </h2>
-                <p className="mt-2 text-[14px] text-[var(--b-muted)] mb-5">
-                  {isVi 
-                    ? "Mọi thông tin về quyền riêng tư, cách sử dụng công cụ và chính sách của AI42E." 
-                    : "Everything you need to know about privacy, tool usage, and AI42E access."}
-                </p>
-
-                <Accordion type="single" collapsible className="space-y-3">
-                  {c.faq.items.map((item, index) => (
-                    <AccordionItem
-                      key={item.q}
-                      value={`faq-${index}`}
-                      className="rounded-2xl border border-[var(--b-line)] bg-[var(--b-surface)] px-5 shadow-xs transition-all hover:border-[var(--b-ink)]/30"
-                    >
-                      <AccordionTrigger className="t-heading py-4 text-left font-semibold text-[var(--b-ink)] hover:no-underline text-[15px] sm:text-[16px]">
-                        {item.q}
-                      </AccordionTrigger>
-                      <AccordionContent className="t-body pb-4 text-[var(--b-muted)] leading-relaxed text-[14px]">
-                        {item.a}
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </div>
+              <Accordion type="single" collapsible className="space-y-3">
+                {c.faq.items.map((item, index) => (
+                  <AccordionItem
+                    key={item.q}
+                    value={`faq-${index}`}
+                    className="rounded-2xl border border-[var(--b-line)] bg-[var(--b-surface)] px-5 shadow-xs transition-all hover:border-[var(--b-ink)]/30"
+                  >
+                    <AccordionTrigger className="t-heading py-4 text-left font-semibold text-[var(--b-ink)] hover:no-underline text-[15px] sm:text-[16px]">
+                      {item.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="t-body pb-4 text-[var(--b-muted)] leading-relaxed text-[14px]">
+                      {item.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </Reveal>
           </div>
 
@@ -105,4 +93,3 @@ export function FounderFaqSection() {
     </section>
   );
 }
-
