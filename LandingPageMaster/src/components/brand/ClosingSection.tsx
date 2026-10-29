@@ -1,37 +1,19 @@
 "use client";
 
-import Image from "next/image";
-import { useTheme } from "next-themes";
 import { ArrowUpRight } from "lucide-react";
-import logo from "@/app/android-chrome-192x192.png";
-import OrbitImages from "@/components/react-bits/OrbitImages";
 import { useBrand } from "./LocaleProvider";
 import { Reveal } from "./Reveal";
-import { useMounted } from "./useMounted";
-import { useReducedMotion } from "./useReducedMotion";
-
-const ORBIT = [
-  "/brand/tiles/game-oanquan.webp",
-  "/brand/tiles/studio-hero.webp",
-  "/brand/tiles/game-baucua.webp",
-  "/brand/tiles/game-truth.webp",
-  "/brand/tiles/game-puzzle.webp",
-  "/brand/tiles/game-memory.webp",
-];
+import { RadarOrbit } from "./RadarOrbit";
 
 export function ClosingSection() {
   const { c, locale } = useBrand();
-  const paused = useReducedMotion();
-  const { resolvedTheme } = useTheme();
-  const mounted = useMounted();
-  const pathColor = mounted && resolvedTheme === "dark" ? "rgba(243,241,255,0.18)" : "rgba(45,47,52,0.12)";
   const isVi = locale === "vi";
 
   return (
     <Reveal>
-      {/* Bọc 4: Inner CTA Card - Floating pure white card with golden ratio proportions */}
+      {/* Bọc 4: Inner CTA Card - Floating card with golden ratio proportions & concentric radar orbit */}
       <div className="w-full rounded-[24px] sm:rounded-[28px] lg:rounded-[32px] border border-[var(--b-line)]/70 bg-white dark:bg-[#24201a] px-6 py-8 sm:px-10 sm:py-10 lg:px-12 lg:py-12 shadow-[0_12px_32px_-6px_rgba(0,0,0,0.04)] dark:shadow-[0_12px_32px_-6px_rgba(0,0,0,0.25)] relative overflow-hidden">
-        <div className="relative z-10 grid items-center gap-6 md:grid-cols-[1.15fr_0.85fr]">
+        <div className="relative z-10 grid items-center gap-6 md:grid-cols-[1.1fr_0.9fr]">
           <div>
             {/* Eyebrow: Title Case, neutral muted */}
             <span className="block text-[14px] font-medium text-[var(--b-muted)] mb-2">
@@ -60,31 +42,9 @@ export function ClosingSection() {
             </div>
           </div>
 
-          {/* Right Visual: Orbit scaled generously to match SquareUi */}
-          <div className="relative mx-auto h-[180px] w-full max-w-[340px] sm:h-[210px] lg:h-[230px]" aria-hidden="true">
-            <OrbitImages
-              images={ORBIT}
-              shape="ellipse"
-              radiusX={135}
-              radiusY={72}
-              rotation={-10}
-              duration={36}
-              itemSize={36}
-              itemRadius={9}
-              shadow={0.15}
-              paused={paused}
-              responsive
-              showPath
-              pathColor={pathColor}
-              pathDash={4}
-              width="100%"
-              height="100%"
-              centerContent={
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-white dark:bg-[#2e2a24] border border-[var(--b-line)]/80 shadow-2xs">
-                  <Image src={logo} alt="" width={22} height={22} className="rounded-md" />
-                </span>
-              }
-            />
+          {/* Right Visual: Concentric Radar Orbit matching SquareUi reference video */}
+          <div className="relative flex items-center justify-center w-full min-h-[260px] sm:min-h-[290px] lg:min-h-[320px]">
+            <RadarOrbit />
           </div>
         </div>
       </div>

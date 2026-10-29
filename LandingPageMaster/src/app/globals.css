@@ -587,4 +587,39 @@ html:has(.brand-landing) {
   .brand-landing .sand-card:hover .card-visual,
   .brand-landing .sand-card:hover .card-arrow { transform: none; }
 }
-/* cache-bust: 1793250165531 */
+/* Radar Orbit Animations (Concentric Circles Constellation - 100% GPU transform) */
+@keyframes radar-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes radar-counter {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-radar-spin {
+  animation: radar-spin 40s linear infinite;
+  will-change: transform;
+}
+
+.animate-radar-counter {
+  animation: radar-counter 40s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-radar-spin,
+  .animate-radar-counter {
+    animation: none !important;
+  }
+}
+
