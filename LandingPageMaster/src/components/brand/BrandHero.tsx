@@ -23,7 +23,6 @@ export function BrandHero() {
       tagline: "3 công cụ: Studio · Voice · Downloader",
       href: "#products",
       icon: Clapperboard,
-      color: "#c2481f",
     },
     {
       id: "play",
@@ -31,7 +30,6 @@ export function BrandHero() {
       tagline: "11 trò chơi kết nối bạn bè & gia đình",
       href: "#play",
       icon: Gamepad2,
-      color: "#1a9b5a",
     },
     {
       id: "horizon",
@@ -39,7 +37,6 @@ export function BrandHero() {
       tagline: "OneForAll · AI42E Trading System",
       href: "#horizon",
       icon: Sparkles,
-      color: "#d98a00",
     },
   ];
 
@@ -78,10 +75,7 @@ export function BrandHero() {
                   className="group flex flex-col justify-between rounded-2xl border border-[var(--b-line)] bg-[var(--b-lav)]/60 p-3.5 transition-all hover:bg-[var(--b-lav)] hover:-translate-y-0.5 hover:border-[var(--b-ink)]/30"
                 >
                   <div className="flex items-center gap-2">
-                    <span
-                      className="grid h-7 w-7 place-items-center rounded-lg bg-[var(--b-surface)] shadow-2xs shrink-0"
-                      style={{ color: pillar.color }}
-                    >
+                    <span className="grid h-7 w-7 place-items-center rounded-lg bg-[var(--b-surface)] border border-[var(--b-line)]/50 text-[var(--b-brand)] shadow-2xs shrink-0 group-hover:scale-105 transition-transform">
                       <Icon size={15} aria-hidden />
                     </span>
                     <span className="text-[13px] font-bold text-[var(--b-ink)]">{pillar.title}</span>

@@ -362,20 +362,29 @@ export function BrandNavbar() {
             <ul className="flex flex-col gap-2">
               <li className="pb-1 text-[11px] font-bold uppercase tracking-wider text-[var(--b-brand)]">Hệ sinh thái sản phẩm</li>
               <li>
-                <a href="#products" className="nav-link w-full flex items-center justify-between" onClick={() => setMobileOpen(false)}>
-                  <span>🎬 Bộ Sáng tạo AI (Studio, Voice, Downloader)</span>
+                <a href="#products" className="nav-link w-full flex items-center justify-between gap-2" onClick={() => setMobileOpen(false)}>
+                  <span className="flex items-center gap-2">
+                    <Clapperboard size={15} className="text-[var(--b-muted)] shrink-0" />
+                    <span>Bộ Sáng tạo AI (Studio, Voice, Downloader)</span>
+                  </span>
                   <span className="text-[13px] text-[var(--b-muted)]">↗</span>
                 </a>
               </li>
               <li>
-                <a href="#play" className="nav-link w-full flex items-center justify-between" onClick={() => setMobileOpen(false)}>
-                  <span>🎲 AI42E Game (11 Board Games)</span>
+                <a href="#play" className="nav-link w-full flex items-center justify-between gap-2" onClick={() => setMobileOpen(false)}>
+                  <span className="flex items-center gap-2">
+                    <Gamepad2 size={15} className="text-[var(--b-muted)] shrink-0" />
+                    <span>AI42E Game (11 Board Games)</span>
+                  </span>
                   <span className="text-[13px] text-[var(--b-muted)]">↗</span>
                 </a>
               </li>
               <li>
-                <a href="#horizon" className="nav-link w-full flex items-center justify-between" onClick={() => setMobileOpen(false)}>
-                  <span>⚡ Không gian mở rộng (OneForAll & Trading)</span>
+                <a href="#horizon" className="nav-link w-full flex items-center justify-between gap-2" onClick={() => setMobileOpen(false)}>
+                  <span className="flex items-center gap-2">
+                    <Boxes size={15} className="text-[var(--b-muted)] shrink-0" />
+                    <span>Không gian mở rộng (OneForAll & Trading)</span>
+                  </span>
                   <span className="text-[13px] text-[var(--b-muted)]">↗</span>
                 </a>
               </li>
