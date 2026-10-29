@@ -28,26 +28,26 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
   const isVi = locale === "vi";
 
   const content = (
-    <footer className="w-full mt-10 sm:mt-14 lg:mt-16 font-sans">
+    <footer className="w-full mt-6 sm:mt-7 lg:mt-8 font-sans">
       {/* 4-Column Directory: Unified Grid aligned with CTA card */}
-      <div className="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4 lg:gap-x-10">
+      <div className="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4 lg:gap-x-10">
         {/* Column 1: Brand Info */}
         <div className="col-span-2 sm:col-span-1">
           <div className="flex items-center gap-2">
-            <Image src={logo} alt="AI42E" width={22} height={22} className="rounded-md" />
-            <span className="font-sans text-[16px] font-bold text-[var(--b-ink)] tracking-tight">AI42E</span>
+            <Image src={logo} alt="AI42E" width={20} height={20} className="rounded-md" />
+            <span className="font-sans text-[15px] font-bold text-[var(--b-ink)] tracking-tight">AI42E</span>
           </div>
-          <p className="mt-2.5 text-[14px] text-[var(--b-muted)] leading-relaxed max-w-[260px]">
+          <p className="mt-2 text-[13px] text-[var(--b-muted)] leading-relaxed max-w-[240px]">
             {c.footer.about}
           </p>
         </div>
 
         {/* Column 2: Products */}
         <div>
-          <h3 className="text-[14px] font-semibold text-[var(--b-ink)] tracking-tight mb-3">
+          <h3 className="text-[13px] font-semibold text-[var(--b-ink)] tracking-tight mb-2">
             {c.footer.colProducts}
           </h3>
-          <ul className="space-y-2.5 text-[14px]">
+          <ul className="space-y-1.5 text-[13px]">
             {ECOSYSTEM_LINKS.map((item) => (
               <li key={item.name}>
                 <a
@@ -57,7 +57,7 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
                 >
                   <span>{item.name}</span>
                   {item.external ? (
-                    <ArrowUpRight size={12} className="opacity-40 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
+                    <ArrowUpRight size={11} className="opacity-40 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
                   ) : null}
                 </a>
               </li>
@@ -67,10 +67,10 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
 
         {/* Column 3: Socials */}
         <div>
-          <h3 className="text-[14px] font-semibold text-[var(--b-ink)] tracking-tight mb-3">
+          <h3 className="text-[13px] font-semibold text-[var(--b-ink)] tracking-tight mb-2">
             {c.footer.colContact}
           </h3>
-          <ul className="space-y-2.5 text-[14px]">
+          <ul className="space-y-1.5 text-[13px]">
             {SOCIALS.filter((s) => s.id !== "email").map((social) => (
               <li key={social.id}>
                 <a
@@ -80,7 +80,7 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
                   className="group inline-flex items-center gap-1 text-[var(--b-muted)] transition-colors hover:text-[var(--b-ink)]"
                 >
                   <span>{social.name}</span>
-                  <ArrowUpRight size={12} className="opacity-40 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
+                  <ArrowUpRight size={11} className="opacity-40 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
                 </a>
               </li>
             ))}
@@ -89,10 +89,10 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
 
         {/* Column 4: Newsletter */}
         <div className="col-span-2 sm:col-span-1">
-          <h3 className="text-[14px] font-semibold text-[var(--b-ink)] tracking-tight mb-2.5">
+          <h3 className="text-[13px] font-semibold text-[var(--b-ink)] tracking-tight mb-1.5">
             {isVi ? "Bản tin AI42E" : "Newsletter"}
           </h3>
-          <p className="text-[14px] text-[var(--b-muted)] leading-relaxed max-w-[280px] mb-3">
+          <p className="text-[13px] text-[var(--b-muted)] leading-relaxed max-w-[260px] mb-2.5">
             {isVi
               ? "Nhận thông báo khi có công cụ AI mới và tính năng thử nghiệm sớm."
               : "Receive product updates news and early access."}
@@ -106,21 +106,21 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
               </div>
             ) : (
               <>
-                <AtSign size={14} className="absolute left-3 text-[var(--b-muted)] pointer-events-none opacity-40" />
+                <AtSign size={13} className="absolute left-3 text-[var(--b-muted)] pointer-events-none opacity-40" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={isVi ? "Nhập email của bạn..." : "Enter your email..."}
                   required
-                  className="w-full rounded-full border border-gray-200/90 dark:border-[var(--b-line)] bg-white dark:bg-[#25221d] h-[42px] pl-8 pr-11 text-[14px] text-[var(--b-ink)] placeholder:text-[var(--b-muted)]/50 focus:border-[var(--b-ink)] focus:outline-none transition-colors shadow-2xs"
+                  className="w-full rounded-full border border-gray-200/90 dark:border-[var(--b-line)] bg-white dark:bg-[#25221d] h-[38px] pl-8 pr-10 text-[13px] text-[var(--b-ink)] placeholder:text-[var(--b-muted)]/50 focus:border-[var(--b-ink)] focus:outline-none transition-colors shadow-2xs"
                 />
                 <button
                   type="submit"
                   aria-label={isVi ? "Đăng ký nhận tin" : "Subscribe"}
-                  className="absolute right-1 grid h-[34px] w-[34px] place-items-center rounded-full bg-[var(--b-brand)] text-white hover:opacity-90 transition-opacity"
+                  className="absolute right-1 grid h-[30px] w-[30px] place-items-center rounded-full bg-[var(--b-brand)] text-white hover:opacity-90 transition-opacity"
                 >
-                  <ArrowRight size={13} />
+                  <ArrowRight size={12} />
                 </button>
               </>
             )}
@@ -129,7 +129,7 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
       </div>
 
       {/* Bottom Copyright & Slogan Bar: Pure Whitespace separation */}
-      <div className="mt-10 sm:mt-12 lg:mt-14 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-[13px] text-[var(--b-muted)]">
+      <div className="mt-5 sm:mt-6 lg:mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-[12px] text-[var(--b-muted)]">
         <div>
           <p>
             © {new Date().getFullYear()} {c.footer.rights}
@@ -143,10 +143,10 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
             className="inline-flex items-center gap-1 text-[var(--b-muted)] transition-colors hover:text-[var(--b-ink)] font-medium"
           >
             <span>{c.footer.portfolio}</span>
-            <ArrowUpRight size={12} aria-hidden="true" />
+            <ArrowUpRight size={11} aria-hidden="true" />
           </a>
           <span className="text-[var(--b-line)] hidden sm:inline">·</span>
-          <p className="font-medium tracking-wider text-[12px]">{c.footer.slogan}</p>
+          <p className="font-medium tracking-wider text-[11px]">{c.footer.slogan}</p>
         </div>
       </div>
     </footer>

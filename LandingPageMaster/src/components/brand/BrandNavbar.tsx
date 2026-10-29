@@ -30,7 +30,17 @@ const DOT: Record<ProductStatus, string> = {
 };
 
 /** "Hệ sinh thái" Mega Menu organized into clear pillars */
-function EcosystemMegaMenu({ products, label, statusLabels }: { products: Product[]; label: string; statusLabels: Record<ProductStatus, string> }) {
+function EcosystemMegaMenu({
+  products,
+  label,
+  statusLabels,
+  isActive = false,
+}: {
+  products: Product[];
+  label: string;
+  statusLabels: Record<ProductStatus, string>;
+  isActive?: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLLIElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -78,7 +88,9 @@ function EcosystemMegaMenu({ products, label, statusLabels }: { products: Produc
     >
       <button
         type="button"
-        className="nav-link whitespace-nowrap flex items-center gap-1.5"
+        className={`nav-link relative whitespace-nowrap flex items-center gap-1.5 transition-colors ${
+          isActive ? "!text-[var(--b-ink)] !font-semibold" : ""
+        }`}
         aria-expanded={open}
         aria-haspopup="true"
         onClick={() => setOpen((prev) => !prev)}
@@ -89,6 +101,13 @@ function EcosystemMegaMenu({ products, label, statusLabels }: { products: Produc
           aria-hidden="true"
           className={`transition-transform duration-200 ease-out ${open ? "rotate-180 text-[var(--b-brand)]" : ""}`}
         />
+        {isActive && (
+          <motion.span
+            layoutId="navbar-active-underline"
+            className="absolute bottom-1 left-3 right-5 h-[2px] rounded-full bg-[var(--b-brand)]"
+            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+          />
+        )}
       </button>
 
       {/* Mega Menu Dropdown */}
@@ -212,12 +231,48 @@ export function BrandNavbar() {
 
   // Clean, focused navigation links without wrapping
   const links = [
-    { href: "#compare", label: c.nav.compare },
-    { href: "#pricing", label: c.nav.pricing },
-    { href: "#founder", label: c.nav.story },
-    { href: "#faq", label: c.nav.faq },
-    { href: "#contact", label: c.nav.contact },
+    { href: "#compare", id: "compare", label: c.nav.compare },
+    { href: "#pricing", id: "pricing", label: c.nav.pricing },
+    { href: "#founder", id: "founder", label: c.nav.story },
+    { href: "#faq", id: "faq", label: c.nav.faq },
+    { href: "#contact", id: "contact", label: c.nav.contact },
   ];
+
+  // Active section spy
+  const [activeSection, setActiveSection] = useState<string>("top");
+
+  useEffect(() => {
+    const sectionIds = ["top", "products", "play", "horizon", "compare", "pricing", "founder", "faq", "contact"];
+
+    const handleScroll = () => {
+      // 1. If reached bottom of document, activate contact
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 70) {
+        setActiveSection("contact");
+        return;
+      }
+
+      // 2. Determine section near upper third of viewport
+      const scrollPos = window.scrollY + 140;
+      let current = "top";
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.offsetTop;
+          if (scrollPos >= top) {
+            current = id;
+          }
+        }
+      }
+      setActiveSection(current);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const isEcosystemActive = ["products", "play", "horizon"].includes(activeSection);
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--b-line)] bg-[color-mix(in_srgb,var(--b-bg)_82%,transparent)] backdrop-blur-md">
@@ -229,14 +284,34 @@ export function BrandNavbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-medium">
-          <EcosystemMegaMenu products={c.products.items} label={c.nav.products} statusLabels={c.products.status} />
-          {links.map((link) => (
-            <li key={link.href}>
-              <a href={link.href} className="nav-link whitespace-nowrap">
-                {link.label}
-              </a>
-            </li>
-          ))}
+          <EcosystemMegaMenu
+            products={c.products.items}
+            label={c.nav.products}
+            statusLabels={c.products.status}
+            isActive={isEcosystemActive}
+          />
+          {links.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className={`nav-link relative whitespace-nowrap transition-colors ${
+                    isActive ? "!text-[var(--b-ink)] !font-semibold" : ""
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  {isActive && (
+                    <motion.span
+                      layoutId="navbar-active-underline"
+                      className="absolute bottom-1 left-3 right-3 h-[2px] rounded-full bg-[var(--b-brand)]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Action Controls */}
@@ -305,13 +380,25 @@ export function BrandNavbar() {
                 </a>
               </li>
               <li className="pt-2 border-t border-[var(--b-line)]"></li>
-              {links.map((link) => (
-                <li key={link.href}>
-                  <a href={link.href} className="nav-link w-full" onClick={() => setMobileOpen(false)}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              {links.map((link) => {
+                const isActive = activeSection === link.id;
+                return (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      className={`nav-link w-full flex items-center justify-between transition-colors ${
+                        isActive
+                          ? "!text-[var(--b-brand)] !font-semibold border-l-2 !border-[var(--b-brand)] rounded-l-none pl-3 bg-[var(--b-chip)]/40"
+                          : ""
+                      }`}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <span>{link.label}</span>
+                      {isActive && <span className="h-1.5 w-1.5 rounded-full bg-[var(--b-brand)]" />}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </motion.div>
         )}

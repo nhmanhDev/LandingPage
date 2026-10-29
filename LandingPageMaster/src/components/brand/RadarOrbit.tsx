@@ -154,11 +154,11 @@ export function RadarOrbit() {
 
   return (
     <div
-      className="group/radar relative flex items-center justify-center w-full h-[260px] sm:h-[300px] lg:h-[320px] select-none"
+      className="group/radar relative flex items-center justify-center w-full h-[190px] sm:h-[210px] lg:h-[220px] select-none"
       aria-hidden="true"
     >
       {/* Scaling container that scales down smoothly on mobile while staying centered */}
-      <div className="relative w-[500px] h-[500px] shrink-0 scale-[0.62] sm:scale-[0.78] lg:scale-[0.9] xl:scale-100 transition-transform">
+      <div className="relative w-[500px] h-[500px] shrink-0 scale-[0.52] sm:scale-[0.62] lg:scale-[0.70] xl:scale-[0.75] transition-transform">
         
         {/* 4 Concentric Dashed Rings (Absolute Circles centered at 250, 250) */}
         {/* Ring 1: Inner Breathing Ring (r=50) */}
