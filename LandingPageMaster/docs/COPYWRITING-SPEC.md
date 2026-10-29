@@ -59,8 +59,8 @@
     * `Làm video. Chơi game. Khám phá.`
 * **Thẻ nổi trung tâm (Hero Nexus Card):**
   * **Tiêu đề lớn (H1 Display):**
-    > AI cho mọi người,  
-    > **cho mọi việc.** *(chữ cam nhấn)*
+    > AI for Everyone  
+    > **and Everything** *(chữ cam nhấn)*
   * **Đoạn mô tả giới thiệu (Sub):**
     > Một hệ sinh thái trọn vẹn gồm các công cụ AI chuyên biệt cho sáng tạo đa phương tiện, tiện ích công việc và gắn kết giải trí. Mở trình duyệt là dùng ngay — không cần biết kỹ thuật.
   * **Cụm 3 Trục Cột Hệ Sinh Thái (3 Ecosystem Pillar Cards):**

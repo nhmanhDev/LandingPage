@@ -124,8 +124,8 @@ const vi: Content = {
   },
   hero: {
     eyebrow: "Hệ sinh thái AI cho mọi người & mọi việc",
-    titleLine1: "AI cho mọi người,",
-    titleLine2: "cho mọi việc.",
+    titleLine1: "AI for Everyone",
+    titleLine2: "and Everything",
     sub: "Một hệ sinh thái trọn vẹn gồm các công cụ AI chuyên biệt cho sáng tạo đa phương tiện, tiện ích công việc và gắn kết giải trí. Mở trình duyệt là dùng ngay — không cần biết kỹ thuật.",
     ctaPrimary: "Khám phá hệ sinh thái",
     note: "Bắt đầu miễn phí hoàn toàn · Không yêu cầu thẻ tín dụng",
@@ -346,8 +346,8 @@ const en: Content = {
   },
   hero: {
     eyebrow: "AI Ecosystem for Everyone & Everything",
-    titleLine1: "AI for everyone,",
-    titleLine2: "for everything.",
+    titleLine1: "AI for Everyone",
+    titleLine2: "and Everything",
     sub: "A complete AI technology ecosystem with purpose-built tools for multimedia creation, daily productivity and connected play. Open in browser and start immediately.",
     ctaPrimary: "Explore the ecosystem",
     note: "Completely free to start · No credit card required",
