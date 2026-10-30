@@ -12,6 +12,7 @@ import { FounderFaqSection } from "./FounderFaqSection";
 import { FreemiumSection } from "./FreemiumSection";
 import { LocaleProvider, useBrand } from "./LocaleProvider";
 import { ProductsSection } from "./ProductsSection";
+import { ScrollToTop } from "./ScrollToTop";
 
 function SkipLink() {
   const { c } = useBrand();
@@ -31,9 +32,9 @@ export function BrandPage() {
     <LocaleProvider>
       <MotionConfig reducedMotion="user">
         <noscript>
-          <style>{'.brand-landing [style*="opacity"]{opacity:1!important;transform:none!important}'}</style>
+          <style>{'.brand-landing [style*="opacity"]{opacity:1!important;transform:none!important}.brand-landing [data-hero-cta]{display:none!important}.brand-landing [data-hero-reveal]{background:var(--b-surface)!important;padding:2.5rem!important;border-radius:38px!important;border:1px solid var(--b-line)!important;pointer-events:auto!important}'}</style>
         </noscript>
-        <div className="brand-landing min-h-screen overflow-x-clip">
+        <div spellCheck={false} className="brand-landing min-h-screen overflow-x-clip">
           <SkipLink />
           <BrandNavbar />
           <main>
@@ -73,6 +74,7 @@ export function BrandPage() {
               </div>
             </section>
           </main>
+          <ScrollToTop />
         </div>
       </MotionConfig>
     </LocaleProvider>

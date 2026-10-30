@@ -202,7 +202,7 @@
   --b-heading: #2d2f34;
   --b-muted: #5e646e;
   --b-line: #ece4d8;
-  --b-brand: #c2410c;
+  --b-brand: #db5620;
   --b-pos-bg: #dcfce7;
   --b-pos-fg: #15803d;
   --b-accent: #f67748;
@@ -244,6 +244,7 @@ body:has(.brand-landing) {
   background: #1b1916;
 }
 html:has(.brand-landing) {
+  position: relative;
   scroll-behavior: smooth;
 }
 
@@ -298,58 +299,101 @@ html:has(.brand-landing) {
   outline-offset: 3px;
 }
 
-/* The wall behind the hero: one transform on one element, columns drift by CSS alone. */
+/*
+ * 360-degree 3D cylindrical Hero World (modeled directly on baked.design's World engine):
+ * - .wall-viewport sets CSS 3D perspective from screen center with direct .wall-tile children (flat 3D).
+ * - .wall & .wall-col remain lightweight reference layers for pointer parallax and reduced-motion contracts.
+ */
+.brand-landing .wall-viewport {
+  position: absolute;
+  inset: 0;
+  perspective: 1100px;
+  perspective-origin: 50% 50%;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+.brand-landing .wall-viewport.grab {
+  cursor: grabbing;
+}
 .brand-landing .wall {
   position: absolute;
-  inset: -16% -10%;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 18px;
-  align-items: start;
-  transform: perspective(1400px) translate3d(var(--px, 0px), var(--py, 0px), 0)
-    rotateX(calc(7deg + var(--rx, 0deg))) rotateY(var(--ry, 0deg)) rotateZ(-4deg) scale(1.06);
-  will-change: transform;
+  inset: 0;
+  pointer-events: none;
 }
 .brand-landing .wall-col {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  animation: wall-drift 15s ease-in-out infinite alternate;
-}
-.brand-landing .wall-col:nth-child(even) {
-  margin-top: -70px;
-  animation-duration: 19s;
-  animation-direction: alternate-reverse;
+  position: absolute;
+  inset: 0;
+  animation: none;
 }
 .brand-landing .wall-tile {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
   overflow: hidden;
-  border-radius: 14px;
+  border-radius: 10px;
   background: var(--b-chip);
-  box-shadow: 0 14px 34px -16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 1px rgba(45, 47, 52, 0.08), 0 18px 36px -18px rgba(45, 47, 52, 0.24);
+  cursor: pointer;
+  -webkit-user-drag: none;
+}
+.dark .brand-landing .wall-tile {
+  box-shadow: 0 0 0 1px rgba(246, 241, 233, 0.1), 0 18px 36px -18px rgba(0, 0, 0, 0.7);
 }
 .brand-landing .wall-tile img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.brand-landing [data-wall-paused="true"] .wall-col,
-.brand-landing [data-wall-off="true"] .wall-col {
-  animation-play-state: paused;
+.brand-landing .wall-tile img.tile-img-dark {
+  display: none;
 }
-@keyframes wall-drift {
-  from { transform: translateY(-20px); }
-  to   { transform: translateY(20px); }
+.dark .brand-landing .wall-tile img.tile-img-light {
+  display: none;
 }
-@media (max-width: 767px) {
-  .brand-landing .wall { inset: -10% -16%; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .brand-landing .wall-col { gap: 12px; }
-  .brand-landing .wall-col:nth-child(n + 4) { display: none; }
-  .brand-landing .wall-col:nth-child(even) { margin-top: -40px; }
+.dark .brand-landing .wall-tile img.tile-img-dark {
+  display: block;
+}
+.brand-landing .wall-tile.wall-tile-contain img {
+  object-fit: contain;
+  padding: 14px;
+}
+.brand-landing .wall-tile:hover img {
+  transform: scale(1.045);
+}
+.brand-landing .wall-chip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  pointer-events: none;
+  white-space: nowrap;
+  border-radius: 999px;
+  background: var(--b-surface);
+  color: var(--b-ink);
+  border: 1px solid var(--b-line);
+  padding: 5px 12px;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  opacity: 0;
+  scale: 0.96;
+  box-shadow: var(--sh-card);
+  transition: opacity 0.15s ease-out, scale 0.15s ease-out;
+}
+.brand-landing .wall-chip.on {
+  opacity: 1;
+  scale: 1;
 }
 @media (prefers-reduced-motion: reduce) {
   html:has(.brand-landing) { scroll-behavior: auto; }
   .brand-landing .wall-col { animation: none; }
+  .brand-landing .wall-tile img,
+  .brand-landing .wall-chip { transition: none; }
 }
 
 /*
@@ -375,14 +419,17 @@ html:has(.brand-landing) {
 }
 .dark .brand-landing .bezel { background: rgba(255, 255, 255, 0.04); box-shadow: inset 0 0 2px 1px rgba(255, 255, 255, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.08); }
 
-/* Floating product material, voice bars, download ripples. All transform/opacity only. */
+/* Floating product material, voice bars, download ripples, studio playhead. All transform/opacity only. */
 .brand-landing .float {
   transform: rotate(var(--r, 0deg));
   animation: float-y 7s ease-in-out infinite alternate;
 }
-.brand-landing .bar { transform-origin: center; animation: bar-pulse 1.7s ease-in-out infinite alternate; }
-.brand-landing .ripple { animation: ripple 3.6s ease-out infinite; }
+.brand-landing .bar { transform-origin: bottom center; animation: bar-pulse 1.35s ease-in-out infinite alternate; will-change: transform; }
+.brand-landing .ripple { animation: ripple 3.2s ease-out infinite; will-change: transform, opacity; }
 .brand-landing .is-dim .ripple { animation: none; opacity: 0.4; }
+.brand-landing .studio-playhead { animation: studio-playhead 6.8s cubic-bezier(0.37, 0, 0.63, 1) infinite alternate; will-change: transform; }
+.brand-landing .live-dot { animation: pulse-dot 2s ease-in-out infinite; will-change: transform, opacity; }
+.brand-landing .dl-progress { transform-origin: left center; animation: dl-sweep 4.4s cubic-bezier(0.22, 1, 0.36, 1) infinite; will-change: transform; }
 
 @keyframes aurora-drift {
   from { transform: translate3d(-4%, -3%, 0) scale(1); }
@@ -393,24 +440,38 @@ html:has(.brand-landing) {
   from { transform: translateY(-7px) rotate(var(--r, 0deg)); }
   to   { transform: translateY(7px) rotate(var(--r, 0deg)); }
 }
-@keyframes bar-pulse { from { transform: scaleY(0.35); } to { transform: scaleY(1); } }
+@keyframes bar-pulse { from { transform: scaleY(0.26); } to { transform: scaleY(1); } }
 @keyframes ripple {
-  from { transform: scale(0.82); opacity: 0.7; }
-  to   { transform: scale(1.14); opacity: 0; }
+  from { transform: scale(0.8); opacity: 0.75; }
+  to   { transform: scale(1.85); opacity: 0; }
+}
+@keyframes studio-playhead {
+  from { transform: translateX(8%); }
+  to   { transform: translateX(88%); }
+}
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(0.88); opacity: 0.55; }
+  50%      { transform: scale(1.22); opacity: 1; }
+}
+@keyframes dl-sweep {
+  0%   { transform: scaleX(0.16); }
+  68%  { transform: scaleX(0.96); }
+  86%  { transform: scaleX(1); }
+  100% { transform: scaleX(0.16); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .brand-landing .aurora::before,
   .brand-landing .aurora::after,
-  .brand-landing :is(.float, .bar, .ripple) { animation: none; }
+  .brand-landing :is(.float, .bar, .ripple, .studio-playhead, .live-dot, .dl-progress) { animation: none !important; }
   .brand-landing .aurora::after { opacity: 0.6; }
 }
 
 /* The single accent: primary call-to-action. Dark ink text keeps AA contrast on the bright orange. */
-.dark .brand-landing .pill-accent { color: #ffffff; }
-.brand-landing .pill-accent { background: var(--b-brand); color: #ffffff; font-weight: 600; box-shadow: 0 2px 6px -1px rgba(194, 72, 31, 0.25); }
+.brand-landing .pill-accent { background: var(--b-brand); color: #ffffff; font-weight: 600; box-shadow: 0 2px 6px -1px rgba(219, 86, 32, 0.25); }
 .brand-landing .pill-accent:hover { background: #bf3f15; color: #ffffff; transform: translateY(-1px); }
-.dark .brand-landing .pill-accent:hover { background: #d44e1c; }
+.dark .brand-landing .pill-accent { background: #c2410c; color: #ffffff; }
+.dark .brand-landing .pill-accent:hover { background: #a83a0b; }
 .brand-landing .brand-text { color: var(--b-brand); }
 .brand-landing .nav-link {
   height: 40px;
@@ -449,11 +510,11 @@ html:has(.brand-landing) {
   font-weight: 600;
   background: var(--b-brand);
   color: #ffffff;
-  box-shadow: 0 2px 6px -1px rgba(194, 72, 31, 0.28);
+  box-shadow: 0 2px 6px -1px rgba(219, 86, 32, 0.25);
 }
-.brand-landing .pill-cta:hover { background: #bf3f15; transform: translateY(-1px); box-shadow: 0 4px 12px -2px rgba(217, 78, 31, 0.38); }
-.dark .brand-landing .pill-cta { background: #c2410c; }
-.dark .brand-landing .pill-cta:hover { background: #a83a0b; box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.6); }
+.brand-landing .pill-cta:hover { background: #ea642d; transform: translateY(-1px); box-shadow: 0 4px 12px -2px rgba(219, 86, 32, 0.35); }
+.dark .brand-landing .pill-cta { background: #ea580c; }
+.dark .brand-landing .pill-cta:hover { background: #f97316; box-shadow: 0 4px 12px -2px rgba(234, 88, 12, 0.4); }
 .brand-landing .band { background: color-mix(in srgb, var(--b-lav) 55%, transparent); }
 
 /* Role colours in tiny doses (measured: green-100 chip with green text for a good outcome). */
@@ -462,7 +523,6 @@ html:has(.brand-landing) {
 /* Hero bottom: the tilted wall dissolves into the cream page (no hard edge before the next section). */
 .brand-landing .hero-fade { display: none; }
 
-/* Outlined pill (slite.com secondary button): transparent, 1.6px ink ring, fills with ink on hover. */
 /* Outlined pill: delicate line, harmonious warm chip fill on hover. Never turns black. */
 .brand-landing .pill-outline {
   background: transparent;
@@ -510,11 +570,17 @@ html:has(.brand-landing) {
   width: 36px;
   height: 36px;
   border-radius: 999px;
-  background: var(--b-ink);
-  color: var(--b-bg);
-  transition: transform 0.3s cubic-bezier(0.2, 0.65, 0.3, 1);
+  background: var(--b-surface);
+  color: var(--b-ink);
+  box-shadow: inset 0 0 0 1px var(--b-line), var(--sh-soft);
+  transition: transform 0.3s cubic-bezier(0.2, 0.65, 0.3, 1), background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
-.brand-landing .sand-card:hover .card-arrow { transform: translate(2px, -2px) scale(1.08); }
+.brand-landing .sand-card:hover .card-arrow {
+  background: #c2410c;
+  color: #ffffff;
+  box-shadow: 0 4px 12px -2px rgba(194, 65, 12, 0.35);
+  transform: translate(2px, -2px) scale(1.08);
+}
 @media (min-width: 1024px) {
   .brand-landing .sand-card { padding: 36px 36px 0; }
   .brand-landing .sand-card-wide { flex-direction: row; align-items: stretch; gap: 40px; }
@@ -564,4 +630,3 @@ html:has(.brand-landing) {
     animation: none !important;
   }
 }
-
