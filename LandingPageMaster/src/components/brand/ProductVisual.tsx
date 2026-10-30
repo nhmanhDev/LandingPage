@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AudioLines, Download, Languages, Plus, Play, Sparkles } from "lucide-react";
+import { AudioLines, Download, Languages, Plus } from "lucide-react";
 import type { Product } from "@/lib/brand/content";
 import { IMAGE_SIZE, type ImageKey } from "@/lib/brand/tiles";
 
@@ -24,8 +24,8 @@ function StudioMotif() {
             <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
             <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
           </div>
-          <span className="text-[11px] font-medium text-[var(--b-muted)]">studio.ai42e.com</span>
-          <span className="text-[11px] font-bold text-[var(--b-brand)] bg-[var(--b-chip)] px-2 py-0.5 rounded-full">AI Render</span>
+          <span className="text-[13px] font-semibold text-[var(--b-muted)]">studio.ai42e.com</span>
+          <span className="text-[13px] font-bold text-[var(--b-brand)] bg-[var(--b-chip)] px-2 py-0.5 rounded-full">AI Render</span>
         </div>
         
         {/* Editor Screen Viewport */}
@@ -104,7 +104,7 @@ function DownloadMotif() {
             <span className="h-2 w-2 rounded-full bg-red-400" />
             <span className="h-2 w-2 rounded-full bg-amber-400" />
             <span className="h-2 w-2 rounded-full bg-emerald-400" />
-            <span className="ml-2 text-[11px] text-[var(--b-muted)] truncate">downloader.ai42e.com</span>
+            <span className="ml-2 text-[13px] text-[var(--b-muted)] truncate">downloader.ai42e.com</span>
           </div>
           <Image
             src="/brand/tiles/download-light.png"
@@ -132,8 +132,8 @@ function VoiceMotif() {
             <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
             <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
           </div>
-          <span className="text-[11px] font-medium text-[var(--b-muted)]">voice.ai42e.com</span>
-          <span className="text-[11px] font-bold text-emerald-600 bg-emerald-500/10 px-2 py-0.5 rounded-full">Studio Voice</span>
+          <span className="text-[13px] font-semibold text-[var(--b-muted)]">voice.ai42e.com</span>
+          <span className="text-[13px] font-bold text-[var(--b-pos-fg)] bg-[var(--b-pos-bg)] px-2 py-0.5 rounded-full">Studio Voice</span>
         </div>
         
         <div className="relative mt-2 overflow-hidden rounded-t-xl">

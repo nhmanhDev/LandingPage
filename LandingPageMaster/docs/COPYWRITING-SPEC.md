@@ -78,23 +78,14 @@
 
 ## 3. Trục 1: Sáng Tạo Đa Phương Tiện (`#products`)
 
+* **Nhãn nhỏ (eyebrow):** `Sáng tạo đa phương tiện`
 * **Tiêu đề khối (SectionHead):**
-  * **Tiêu đề:** `Dây chuyền sáng tạo nội dung khép kín bằng AI`
-  * **Mô tả ngắn:** `Khai thác tư liệu gốc với DownloadAnything, tạo giọng đọc truyền cảm bằng Voice Studio và tự động dựng video cùng AI42E Studio.`
-* **Dây chuyền phối hợp khép kín (Workflow Synergy Banner):**
-  * *Tiêu đề banner:* `DÂY CHUYỀN PHỐI HỢP KHÉP KÍN TRONG AI42E:`
-  * *Bước 01:*
-    * **Số:** `01`
-    * **Tên bước:** `Khai thác tư liệu sạch`
-    * **Chi tiết:** `DownloadAnything tải video, audio 4K`
-  * *Bước 02:*
-    * **Số:** `02`
-    * **Tên bước:** `Lồng giọng truyền cảm`
-    * **Chi tiết:** `Voice Studio đọc văn bản & clone voice`
-  * *Bước 03:*
-    * **Số:** `03`
-    * **Tên bước:** `Dựng video tự động hóa`
-    * **Chi tiết:** `AI42E Studio xuất bản video hoàn chỉnh`
+  * **Tiêu đề:** `Từ tư liệu gốc đến video hoàn chỉnh`
+  * **Mô tả ngắn:** `Tải tư liệu về bằng DownloadAnything, đọc lời thuyết minh bằng Voice Studio, rồi dựng video hoàn chỉnh trong AI42E Studio.`
+* **Dải 3 bước (không thẻ, vạch chia cột trên máy tính, icon tròn):**
+  1. **01 · Tải tư liệu:** `DownloadAnything lưu video và âm thanh chất lượng cao về máy.`
+  2. **02 · Lồng tiếng:** `Voice Studio đọc văn bản bằng giọng tự nhiên, hoặc nhân bản một giọng nói.`
+  3. **03 · Dựng video:** `AI42E Studio xuất video MP4 hoàn chỉnh từ ý tưởng hoặc kịch bản.`
 * **3 Thẻ Bento Sản Phẩm Sáng Tạo:**
   1. **AI42E Studio** (Thẻ rộng toàn hàng)
      * *Nhãn trạng thái:* `Miễn phí giai đoạn đầu` (chấm xanh lá)
@@ -125,76 +116,52 @@
 
 ## 4. Trục 2: Giải Trí & Gắn Kết Đời Sống (`#play`)
 
-* **Tiêu đề khối (SectionHead):**
-  * **Tiêu đề:** `Không chỉ là công việc — AI42E là niềm vui gắn kết`
-  * **Mô tả ngắn:** `11 trò chơi mở trực tiếp trên trình duyệt điện thoại. Không tải app, không đăng nhập rườm rà. Dành cho những buổi họp mặt gia đình và bạn bè thêm rộn rã.`
-* **Thẻ lớn Game Hub (AI42E Game Hub):**
-  * *Huy hiệu trên cùng:* `11 TỰA GAME MỞ SẴN` (icon Gamepad)
-  * *Tên trung tâm:* `AI42E Game Hub`
-  * *Đoạn giới thiệu:* `Từ những nét văn hóa dân gian Việt Nam như Ô ăn quan, Bầu cua tôm cá đến những trò chơi kết nối hiện đại như Vòng quay sự thật hay Thử thách trí nhớ.`
-  * *2 Khối tiện ích trải nghiệm:*
-    * Khối 1:
-      * **Tiêu đề:** `Mở là chơi ngay`
-      * **Mô tả:** `Chạy trên trình duyệt mọi điện thoại`
-    * Khối 2:
-      * **Tiêu đề:** `Gắn kết bạn bè`
-      * **Mô tả:** `Thiết kế cho các buổi tụ họp sum vầy`
-  * *Nút hành động chính:* `Mở cổng game play.ai42e.com ↗`
-  * *Minh họa thị giác bên phải:* 3 quân bài game 3D chuyển động nổi gồm:
-    * `game-oanquan`: Ô ăn quan dân gian
-    * `game-baucua`: Bầu cua tôm cá Tết
-    * `game-truth`: Vòng quay sự thật (Truth or Dare)
-
+* **Nhãn nhỏ (eyebrow):** `Giải trí cùng bạn bè`
+* **Tiêu đề khối (SectionHead, căn trái):**
+  * **Tiêu đề:** `Chơi cùng nhau, không cần tải app`
+  * **Mô tả ngắn:** `11 trò chơi mở ngay trên trình duyệt điện thoại. Không đăng nhập rườm rà, hợp cho những buổi họp mặt gia đình và bạn bè.`
+* **3 tab trò chơi (bên trái), khung điện thoại đổi ảnh theo tab (bên phải):**
+  1. **Ô ăn quan:** `Trò dân gian Việt Nam, đấu trí từng nước đi.`
+  2. **Bầu cua tôm cá:** `Trò chơi quen thuộc mỗi dịp Tết: lắc xúc xắc rồi đoán kết quả.`
+  3. **Vòng quay sự thật:** `Quay vòng, chọn thật hay thách, cả nhóm cùng cười.`
+* **Hai dòng ý chính:** `Mở là chơi, chạy trên mọi trình duyệt điện thoại` · `Không cần tài khoản, không cần cài đặt`
+* **Nút hành động chính:** `Mở cổng game play.ai42e.com ↗`
 ---
 
 ## 5. Trục 3: Không Gian Mở Rộng & Nghiên Cứu Tương Lai (`#horizon`)
 
+* **Nhãn nhỏ (eyebrow):** `Tương lai`
 * **Tiêu đề khối (SectionHead):**
-  * **Tiêu đề:** `Những mảnh ghép AI tiếp theo của hệ sinh thái`
-  * **Mô tả ngắn:** `AI42E liên tục mở rộng để giải quyết thêm nhiều bài toán thường nhật: từ trạm tiện ích web đa nhiệm đến các mô hình thuật toán phân tích thị trường chuyên sâu.`
-* **2 Thẻ Dự Án Trong Phòng Nghiên Cứu:**
-  1. **OneForAll (Trạm tiện ích web đa nhiệm)**
-     * *Nhãn trạng thái:* `Sắp ra mắt` (chấm vàng hổ phách)
-     * *Tiêu đề:* `OneForAll`
-     * *Mô tả:* `Trạm trung chuyển tiện ích AI trên nền web. Gom các tác vụ tóm tắt, dịch tài liệu và chuyển đổi dữ liệu nhanh về một giao diện duy nhất.`
-     * *3 Hộp công cụ mẫu:*
-       * `Tóm tắt thông minh`: Đọc và cô đọng tài liệu PDF, web dài 100 trang
-       * `Dịch thuật ngữ cảnh`: Bảo toàn văn phong và thuật ngữ chuyên ngành
-       * `Chuyển đổi dữ liệu`: Trích xuất bảng biểu từ ảnh sang Excel/JSON
-     * *Thanh đáy thẻ:* `Dành cho công việc & nghiên cứu` | `Mở quyền truy cập sớm ↗`
-  2. **AI42E Trading System (Mô hình định lượng AI)**
-     * *Nhãn trạng thái:* `Đang nghiên cứu nội bộ` (chấm xanh dương)
-     * *Tiêu đề:* `AI42E Trading System`
-     * *Mô tả:* `Mô hình thuật toán AI phân tích dữ liệu thị trường và nhận diện tín hiệu xu hướng thời gian thực. (Nghiên cứu nội bộ — Không phải lời khuyên đầu tư).`
-     * *Biểu đồ tín hiệu định lượng (TradingGraph):*
-       * Dòng trên: `Tín hiệu thời gian thực` (chấm xanh lá) | `AI Model v2.4`
-       * Đồ thị sóng biểu diễn xu hướng giá tự động
-       * Dòng dưới: `Độ tin cậy thuật toán: 94.2%` | `Nghiên cứu nội bộ`
-     * *Thanh đáy thẻ:* `Công nghệ định lượng (Quant AI)` | `Tài liệu nghiên cứu ↗`
-
+  * **Tiêu đề:** `Những mảnh ghép AI tiếp theo`
+  * **Mô tả ngắn:** `AI42E đang mở rộng sang những việc hằng ngày hơn: một trạm tiện ích trên web và một mô hình phân tích thị trường đang nghiên cứu.`
+* **Sơ đồ nối:** OneForAll (trái) — nút trung tâm `Hệ sinh thái AI42E` — AI42E Trading System (phải), nối bằng nét đứt.
+  1. **OneForAll** · nhãn `Sắp ra mắt`
+     * Mô tả: `Trạm trung chuyển tiện ích AI trên nền web. Gom các tác vụ tóm tắt, dịch tài liệu và chuyển đổi dữ liệu nhanh về một giao diện duy nhất.`
+     * Ý chính: `Mở lên là dùng, một số công cụ không cần đăng nhập` · `Tải video, chuyển văn bản thành giọng nói, dịch tài liệu` · `Chỉ trả phí khi cần tính năng nâng cao`
+  2. **AI42E Trading System** · nhãn `Đang nghiên cứu`
+     * Mô tả: `Mô hình thuật toán AI phân tích dữ liệu thị trường và nhận diện tín hiệu xu hướng thời gian thực. (Nghiên cứu nội bộ — Không phải lời khuyên đầu tư).`
+     * Ý chính: `Đang trong giai đoạn nghiên cứu` · `Chưa mở cho người dùng` · `Không phải lời khuyên đầu tư`
+     * Hình minh họa: một đường giá phác họa, chỉ là hình trang trí, không có số liệu.
+* **Chú thích dưới sơ đồ:** `Hai sản phẩm này chưa mở cho người dùng. Khi có ngày ra mắt, bạn sẽ thấy thông báo ở các kênh chính thức.`
 ---
 
 ## 6. Khối So Sánh (`#compare`)
 
+* **Nhãn nhỏ (eyebrow):** `Vì sao chọn AI42E`
 * **Tiêu đề khối (SectionHead):**
-  * **Tiêu đề:** `Dùng AI đâu cần`
-  * **Chữ nhấn (Tone):** `phức tạp thế`
-  * **Mô tả ngắn:** `Nhiều người muốn thử AI nhưng ngại chuyện cài đặt, kỹ thuật và tiền bạc. AI42E làm ngược lại.`
-* **Bảng so sánh 2 cột trực quan:**
-  * **Cột trái: `Cách làm thông thường`** *(Badge: `Phức tạp` màu đỏ)*
-    * ❌ `Tìm từng công cụ riêng, mỗi nơi một kiểu`
-    * ❌ `Phải học cách dùng rồi mới làm được`
-    * ❌ `Phải trả tiền trước khi biết có hợp hay không`
-    * *Dòng đúc kết:* `Tốn thời gian tìm kiếm · Dễ nản lòng trước khi bắt đầu`
-  * **Cột phải: `Với AI42E`** *(Badge: `Tối ưu` màu xanh lá)*
-    *  `Công cụ AI gom về một chỗ`
-    *  `Mở lên là dùng, không cần biết kỹ thuật`
-    *  `Dùng thử miễn phí, thích thì mới trả phí`
-    * *Kết luận nổi bật:* `Đỡ mất công, đỡ mất tiền, dùng được ngay.` *(kèm huy hiệu `0đ Bắt đầu`)*
-* **Dải kêu gọi dưới bảng:**
-  * *Tiêu đề:* `Trải nghiệm sự khác biệt ngay hôm nay`
-  * *Cam kết uy tín:* `Miễn phí để bắt đầu · Không cần biết kỹ thuật`
-  * *Nút hành động:* `Xem các sản phẩm` (cuộn tới `#products`)
+  * **Tiêu đề:** `Dùng AI không cần`
+  * **Chữ nhấn (Tone):** `phải biết kỹ thuật`
+  * **Mô tả ngắn:** `Nhiều người muốn thử AI nhưng ngại cài đặt, kỹ thuật và tiền bạc. AI42E gom mọi thứ về một chỗ để bạn bắt đầu ngay.`
+* **Hai tab, một panel:**
+  * **Tab 1 · `Cách làm thông thường`** (dấu ✕):
+    * `Tìm từng công cụ riêng, mỗi nơi một kiểu`
+    * `Phải học cách dùng rồi mới làm được`
+    * `Phải trả tiền trước khi biết có hợp hay không`
+  * **Tab 2 · `Với AI42E`** (dấu ✓), mở sẵn:
+    * `Công cụ AI gom về một chỗ`
+    * `Mở lên là dùng, không cần biết kỹ thuật`
+    * `Dùng thử miễn phí, thích thì mới trả phí`
+    * Dòng kết: `Đỡ mất công, đỡ mất tiền, dùng được ngay.`
 
 ---
 
@@ -212,7 +179,7 @@
        *  `Mở trình duyệt là dùng được ngay`
        *  `Toàn quyền trải nghiệm các công cụ mở sẵn`
        *  `Không cần đăng ký thẻ tín dụng`
-       *  `Không giới hạn thời gian trải nghiệm`
+       *  `Một số công cụ không cần tài khoản`
      * *Nút CTA:* `Bắt đầu miễn phí →`
   2. **Thẻ 2: Cần nhiều hơn thì nâng cấp** *(Thẻ viền cam nổi bật nhất)*
      * *Nơ trên đỉnh:* `Minh bạch 100%`
@@ -222,18 +189,18 @@
      * *Danh sách đặc quyền nâng cao:*
        *  `Tài nguyên máy chủ AI xử lý khối lượng lớn`
        *  `Giá niêm yết rõ ràng trước khi thanh toán`
-       *  `Không âm thầm tự động gia hạn thẻ`
-       *  `Hỗ trợ kỹ thuật 1-1 trực tiếp từ Mạnh`
+       *  `Dùng thử miễn phí trước khi nâng cấp`
+       *  `Gói phù hợp được tư vấn qua kênh chính thức`
      * *Nút CTA:* `Tìm hiểu gói nâng cao →`
   3. **Thẻ 3: Phí dùng để làm gì**
      * *Huy hiệu:* `Cam kết của Founder`
      * *Mức giá:* `Duy trì server`
      * *Mô tả:* `Chạy máy chủ và các dịch vụ AI tốn tiền thật. Khoản phí giúp AI42E duy trì ổn định và làm thêm sản phẩm mới.`
      * *Danh sách cam kết từ AI42E:*
-       *  `100% phí dùng cho hạ tầng & máy chủ AI`
-       *  `Duy trì sản phẩm hoạt động ổn định, mượt mà`
-       *  `Tái đầu tư phát triển công cụ mới cho cộng đồng`
-       *  `Không quảng cáo phiền toái, không bán dữ liệu`
+       *  `Phí dùng để duy trì hạ tầng và máy chủ AI`
+       *  `Giữ sản phẩm hoạt động ổn định`
+       *  `Tái đầu tư để làm thêm công cụ mới`
+       *  `Ghi rõ khoản phí được dùng vào việc gì`
      * *Nút CTA:* `Đọc câu chuyện sáng lập →`
 
 ---
@@ -264,45 +231,44 @@
 
 ---
 
-## 9. Khối Kêu Gọi Hành Động Cuối Trang (Closing Card — `#contact`)
+## 9. Khối Kêu Gọi Hành Động Cuối Trang (`#contact`)
 
-* **Thẻ nổi bo tròn (Inner CTA Card):**
+* **Khối căn giữa trong lớp bọc bezel:**
   * **Tiêu đề lớn:** `Thử một sản phẩm xem sao?`
-  * **Mô tả ngắn:** `Chọn một sản phẩm đang chạy và dùng thử miễn phí, hoặc theo dõi AI42E để biết khi có sản phẩm mới.`
-  * **Nút hành động chính:** `Xem các sản phẩm ↗` (nút cam đất)
-* **Vòng quay quỹ đạo tương tác (Radar Orbit bên phải):**
-  * Vòng tròn đồng tâm chuyển động quanh tâm là logo AI42E.
-  * 6 icon ảnh ứng dụng thực tế quay quanh:
-    * `studio-hero.webp` (AI42E Studio)
-    * `voice-studio.png` (Voice Studio)
-    * `download-light.png` (DownloadAnything)
-    * `game-oanquan.webp` (Ô ăn quan)
-    * `trading-system.svg` (AI42E Trading System)
-    * `oneforall.svg` (OneForAll)
-
+  * **Mô tả ngắn:** `Chọn một sản phẩm đang chạy và dùng thử miễn phí. Các kênh chính thức nằm ở chân trang.`
+  * **Nút hành động chính:** `Xem các sản phẩm ↗` (nút cam, cuộn tới `#products`)
+* **Vòng quay quỹ đạo (Radar Orbit bên phải):** vòng tròn đồng tâm quanh logo AI42E, 6 ảnh sản phẩm quay quanh. Rê chuột vào mỗi ảnh để thấy tên và mô tả ngắn:
+  * `studio-hero.webp`: AI42E Studio · Dựng video tự động bằng AI
+  * `voice-studio.png`: Voice Studio · Lồng giọng & clone giọng
+  * `download-light.png`: DownloadAnything · Tải video & âm thanh 4K
+  * `game-oanquan.webp`: AI42E Game Hub · 11 trò chơi gắn kết
+  * `trading-system.svg`: Trading System · Quant AI phân tích thị trường
+  * `oneforall.svg`: OneForAll · Trạm tiện ích AI đa năng
 ---
 
 ## 10. Chân Trang (Footer Directory & Bản Quyền)
 
+* **Tiêu đề kênh chính thức (trên cùng, trước các cột):**
+  * **Tiêu đề:** `Kênh chính thức`
+  * **Mô tả:** `Đây là những kênh chính thức duy nhất của AI42E.`
 * **4 Cột điều hướng thư mục:**
   * **Cột 1: Thông tin thương hiệu**
     * Logo `AI42E`
     * Đoạn giới thiệu: `Những công cụ AI dễ dùng, gom về một chỗ, dành cho mọi người.`
   * **Cột 2: Sản phẩm (`Sản phẩm`)**
     * `Voice Studio` (`https://voice.ai42e.com` ↗)
-    * `Tách nhạc AI` (`https://audio.ai42e.com` ↗)
-    * `Cờ vây AI` (`https://baduk.ai42e.com` ↗)
     * `Tất cả công cụ` (`#products`)
   * **Cột 3: Liên hệ (`Liên hệ`)**
     * `YouTube` (`https://www.youtube.com/@nhmanhAI42E` ↗)
     * `Facebook` (`https://www.facebook.com/nhmanhAI4E/` ↗)
     * `Telegram` (`https://t.me/AI42E` ↗)
     * `GitHub` (`https://github.com/nhmanhDev` ↗)
+    * `Email` (`mailto:nhmanh.dev@gmail.com`, mở ứng dụng email, không có mũi tên ↗)
   * **Cột 4: Bản tin AI42E**
     * Tiêu đề: `Bản tin AI42E`
     * Mô tả: `Nhận thông báo khi có công cụ AI mới và tính năng thử nghiệm sớm.`
     * Ô nhập liệu: `Nhập email của bạn...` + Nút gửi `→`
-    * Thông báo gửi thành công: `Đã đăng ký! Cảm ơn bạn.`
+    * Khi bấm gửi: mở ứng dụng email gửi tới `nhmanh.dev@gmail.com` (chưa có dịch vụ bản tin nào được nối), thông báo: `Email của bạn sẽ mở ra. Bấm gửi để hoàn tất đăng ký.`
 * **Dải chân trang dưới cùng (Bottom Copyright Strip):**
   * `© 2026 AI42E. Bảo lưu mọi quyền.`
   * Link: `Hồ sơ cá nhân của Mạnh ↗` (`https://portfolio.ai42e.com`)

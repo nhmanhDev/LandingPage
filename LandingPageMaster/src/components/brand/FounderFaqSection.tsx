@@ -24,12 +24,12 @@ export function FounderFaqSection() {
           <div className="lg:col-span-5">
             <Reveal>
               <div>
-                <h3 className="text-[20px] sm:text-[22px] font-bold text-[var(--b-ink)] leading-snug">
+                <h3 className="text-[18px] sm:text-[18px] font-bold text-[var(--b-ink)] leading-snug">
                   {f.paragraphs[0]}
                 </h3>
 
                 {f.paragraphs[1] && (
-                  <p className="mt-4 text-[15px] sm:text-[16px] text-[var(--b-muted)] leading-relaxed">
+                  <p className="mt-4 text-[15px] sm:text-[15px] text-[var(--b-muted)] leading-relaxed">
                     {f.paragraphs[1]}
                   </p>
                 )}
@@ -45,17 +45,17 @@ export function FounderFaqSection() {
                         <span className="block font-bold text-[15px] text-[var(--b-ink)]">
                           {f.signature}
                         </span>
-                        <span className="block text-[12px] text-[var(--b-muted)]">
-                          AI Engineer · Maker of AI42E
+                        <span className="block text-[13px] text-[var(--b-muted)]">
+                          {f.role}
                         </span>
                       </div>
                     </div>
 
                     <a
                       href="#contact"
-                      className="pill pill-surface text-[12px] font-semibold border border-[var(--b-line)] shrink-0 inline-flex items-center gap-1"
+                      className="pill pill-surface text-[13px] font-semibold border border-[var(--b-line)] shrink-0 inline-flex items-center gap-1"
                     >
-                      <span>Liên hệ</span>
+                      <span>{f.contact}</span>
                       <ArrowUpRight size={13} />
                     </a>
                   </div>
@@ -74,10 +74,10 @@ export function FounderFaqSection() {
                     value={`faq-${index}`}
                     className="rounded-2xl border border-[var(--b-line)] bg-[var(--b-surface)] px-5 shadow-xs transition-all hover:border-[var(--b-ink)]/30"
                   >
-                    <AccordionTrigger className="t-heading py-4 text-left font-semibold text-[var(--b-ink)] hover:no-underline text-[15px] sm:text-[16px]">
+                    <AccordionTrigger className="t-heading py-4 text-left font-semibold text-[var(--b-ink)] hover:no-underline text-[15px] sm:text-[15px]">
                       {item.q}
                     </AccordionTrigger>
-                    <AccordionContent className="t-body pb-4 text-[var(--b-muted)] leading-relaxed text-[14px]">
+                    <AccordionContent className="t-body pb-4 text-[var(--b-muted)] leading-relaxed text-[15px]">
                       {item.a}
                     </AccordionContent>
                   </AccordionItem>

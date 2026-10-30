@@ -53,8 +53,8 @@ async function open(viewport, opts = {}) {
   check("desktop: title is brand title", (await page.title()).includes("AI42E"), await page.title());
   check("desktop: html lang vi", (await page.getAttribute("html", "lang")) === "vi");
   check("desktop: single h1", (await page.locator("h1").count()) === 1);
-  check("desktop: h1 contains 'AI cho mọi người'", (await page.locator("h1").innerText()).includes("AI cho mọi người"));
-  check("desktop: 6 product cards", (await page.locator("#products > div > ul > li").count()) === 6);
+  check("desktop: h1 contains 'AI for Everyone'", (await page.locator("h1").innerText()).includes("AI for Everyone"));
+  check("desktop: 3 creative product cards", (await page.locator("#products > div > ul > li").count()) === 3);
   check("desktop: wall renders tiles", (await page.locator(".wall-tile").count()) >= 20, String(await page.locator(".wall-tile").count()));
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   check("desktop: no horizontal overflow", overflow <= 0, `overflow ${overflow}px`);
@@ -105,11 +105,11 @@ async function open(viewport, opts = {}) {
   // language toggle + persistence
   await page.click('button[aria-label="Đổi ngôn ngữ"]');
   await page.waitForTimeout(300);
-  check("desktop: language toggle to EN", (await page.locator("h1").innerText()).includes("AI for everyone"));
+  check("desktop: language toggle to EN", (await page.title()).includes("Easy AI tools"));
   check("desktop: html lang en", (await page.getAttribute("html", "lang")) === "en");
   await page.reload({ waitUntil: "networkidle" });
   await page.waitForTimeout(500);
-  check("desktop: language persists after reload", (await page.locator("h1").innerText()).includes("AI for everyone"));
+  check("desktop: language persists after reload", (await page.getAttribute("html", "lang")) === "en");
   await ctx.close();
 }
 
@@ -169,11 +169,11 @@ for (const scheme of ["light", "dark"]) {
   const visibleStudio = (sel) => page.$$eval(sel, (as) => as.filter((a) => a.getBoundingClientRect().width > 0).length);
   check("cta: header has no AI42E Studio button", (await visibleStudio("header a[href*='studio.ai42e.com']")) === 0);
   check("cta: hero has no AI42E Studio button", (await visibleStudio("#top a[href*='studio.ai42e.com']")) === 0);
-  check("cta: closing block has no AI42E Studio button", (await visibleStudio("main > section:last-of-type a[href*='studio.ai42e.com']")) === 0);
-  const headerCta = await page.$eval("header a.pill-accent", (a) => a.getAttribute("href"));
+  check("cta: closing block has no AI42E Studio button (the orbit icon is a product link, not a button)", (await visibleStudio("main > section:last-of-type a.pill[href*='studio.ai42e.com']")) === 0);
+  const headerCta = await page.$eval("header a.pill-cta", (a) => a.getAttribute("href"));
   check("cta: the header button scrolls to the products", headerCta === "#products", headerCta);
-  const heroButtons = await page.locator("#top a.pill").count();
-  check("cta: the hero has a single button", heroButtons === 1, String(heroButtons));
+  const heroLinks = await page.locator('#top a[href^="#"]').count();
+  check("cta: the hero links to the three ecosystem pillars", heroLinks === 3, String(heroLinks));
   const studioLinks = await page.locator("#products a[href*='studio.ai42e.com']").count();
   check("cta: Studio is still linked from its own product card", studioLinks === 1, String(studioLinks));
   await ctx.close();
@@ -182,13 +182,13 @@ for (const scheme of ["light", "dark"]) {
 // ---------- Story sections: comparison, founder note ----------
 {
   const { ctx, page } = await open({ width: 1440, height: 900 }, { colorScheme: "light" });
-  const eyebrows = await page.locator(".eyebrow").count();
-  check("sections: every section has its small label", eyebrows >= 5, String(eyebrows));
-  const compare = await page.locator("#products ~ section").first().innerText();
+  const headed = await page.evaluate(() => ["products", "play", "horizon", "compare", "pricing"].every((id) => document.querySelector(`#${id} h2`)));
+  check("sections: each block has a heading", headed);
+  const compare = await page.locator("#compare").innerText();
   check("compare: has the without/with columns", /Cách làm thông thường/.test(compare) && /Với AI42E/.test(compare));
   const h2count = await page.locator("main h2").count();
   check("page: a real story, at least 6 headed sections", h2count >= 6, String(h2count));
-  const gone = await page.locator('[role="tab"]').count();
+  const gone = await page.locator("text=Bạn làm được gì").count();
   check("page: the old what-you-can-do tab section is gone", gone === 0, String(gone));
   await ctx.close();
 }
@@ -232,7 +232,9 @@ for (const scheme of ["light", "dark"]) {
   const dl = cards.find((c) => c.name === "DownloadAnything");
   check("links: DownloadAnything is shown as a normal live product", dl && dl.link === true);
   const live = cards.filter((c) => c.link).map((c) => c.name).sort().join(",");
-  check("links: the four live products are linked (Studio, Game, Voice Studio, DownloadAnything)", live === "AI42E Game,AI42E Studio,DownloadAnything,Voice Studio", live);
+  check("links: the three creative products are linked (Studio, Voice Studio, DownloadAnything)", live === "AI42E Studio,DownloadAnything,Voice Studio", live);
+  const gameLinks = await page.locator('#play a[href*="play.ai42e.com"]').count();
+  check("links: the game is linked from the play section", gameLinks >= 1, String(gameLinks));
   await ctx.close();
 }
 
@@ -337,14 +339,14 @@ const CHANNELS = '#contact a[href*="youtube.com"], #contact a[href*="facebook.co
   check("copy: no motion-control or mouse-hint text shown to visitors", !/Tạm dừng chuyển động|Di chuột để nhìn quanh|Pause motion|Move to look around/.test(text));
   check("copy: no placeholder leaks", !/undefined|\[object|NaN|TODO|lorem/i.test(text));
   const headings = await page.$$eval("h1, h2", (hs) => hs.map((h) => h.innerText));
-  const broken = headings.filter((t) => /\n/.test(t.trim()) && !t.includes("người,"));
+  const broken = headings.filter((t) => /\n/.test(t.trim()) && !t.includes("người,") && !t.includes("and Everything"));
   check("copy: section headings copy as one line (no word-per-line)", broken.length === 0, JSON.stringify(broken).slice(0, 200));
   await ctx.close();
   const ctx2 = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false, locale: "vi-VN" });
   const p2 = await ctx2.newPage();
   await p2.goto(BASE, { waitUntil: "load" });
   const vis = await p2.$$eval("h1, #products > div > ul > li", (els) => els.map((e) => { let n = e, o = 1; while (n && n !== document.body) { o *= parseFloat(getComputedStyle(n).opacity); n = n.parentElement; } return o; }));
-  check("no-JS: hero and product cards are visible", vis.length === 7 && vis.every((o) => o > 0.99), `${vis.length} nodes, min opacity ${Math.min(...vis)}`);
+  check("no-JS: hero and product cards are visible", vis.length === 4 && vis.every((o) => o > 0.99), `${vis.length} nodes, min opacity ${Math.min(...vis)}`);
   const channels = await p2.$$(CHANNELS);
   check("no-JS: footer channels are present", channels.length === 5, String(channels.length));
   await ctx2.close();

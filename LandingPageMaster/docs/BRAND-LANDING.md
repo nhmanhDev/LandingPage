@@ -6,21 +6,19 @@ Trang `/` giới thiệu thương hiệu AI42E và các sản phẩm của hệ 
 AI42E là nền tảng giúp nhiều người tiếp cận AI dễ dàng, với nhiều sản phẩm trong cùng một hệ sinh thái. Nhiều thứ miễn phí để bắt đầu, dùng nâng cao thì mới trả phí. Slogan: AI FOR EVERYONE AND EVERYTHING.
 
 ## Cấu trúc trang
-Thứ tự "câu chuyện" (học từ adkit.so): Hero (nằm dưới header; bức tường ảnh sản phẩm nghiêng 3D, thẻ tiêu đề ở giữa) → Tất cả sản phẩm (6 thẻ bento) → Vì sao chọn AI42E (so sánh "thông thường / với AI42E") → Chi phí (khối vùng sáng, 3 thẻ kính) → Lời từ người làm ra AI42E → Hỏi đáp → Kêu gọi cuối (vòng quỹ đạo sản phẩm quanh logo) → Footer (như play.ai42e.com: 5 thẻ mạng xã hội). Mọi khối đổi theo giao diện sáng/tối; mỗi khối có nhãn nhỏ + tiêu đề (có thể hai tông, học từ HeyRetro). Header: xem dưới.
+Thứ tự khối (v4, mỗi khối một bố cục khác nhau, học từ slite.com): Hero (bức tường ảnh sản phẩm, thẻ tiêu đề ở giữa) → Sáng tạo (dải 3 bước có vạch chia, thẻ Studio ngang, thẻ Downloader và Voice cao) → Giải trí (tab chọn game, khung điện thoại đổi ảnh) → Tương lai (sơ đồ nút nối: OneForAll – hub – Trading) → Vì sao chọn AI42E (tab "Cách làm thông thường / Với AI42E", một panel) → Chi phí (ba thẻ, thẻ giữa nổi bật) → Lời người làm và hỏi đáp → Liên hệ (khối kêu gọi trong lớp bọc bezel, kèm vòng quỹ đạo `RadarOrbit`, rồi chân trang kênh chính thức). Mọi khối đổi theo giao diện sáng/tối.
 
 ## Hệ thiết kế (nhỏ có chủ đích, học từ baked.design)
 Mọi thứ nằm ở khối `.brand-landing` cuối `src/app/globals.css`. Đừng thêm ngoài danh sách này.
 
 | Thành phần | Quy định |
 | :--- | :--- |
-| Font | **Hai font**: Fraunces (chữ có chân đậm) cho tiêu đề `t-display`, `t-title`, `t-subtitle`; Inter cho mọi chữ còn lại. Cả hai nạp đủ bộ `latin`, `latin-ext`, `vietnamese`. Không chữ nghiêng. |
-| Cỡ chữ | **6 cỡ**: `t-display` 36–56px, `t-title` 32–48px (ép chữ -0.025em), `t-subtitle` 28px (Fraunces); `t-heading` 18px, `t-body` 15px, `t-small` 13px (Inter). Độ đậm 400, 500, 700. Nhãn nhỏ phía trên mỗi tiêu đề là `.eyebrow` (13px, tím). |
-| Màu chữ | `--b-ink` (xám trung tính pha lạnh, chữ thường), `--b-heading` (tím 950 `#2e1065`, mọi tiêu đề chữ có chân), `--b-muted` (xám 600), `--b-brand` (tím 600 `#7c3aed`, chỉ để nhấn). |
-| Màu nền | **Trung tính** (đo từ adkit.so và HeyRetro: trên 80% là trắng/xám, dưới 2% là màu). Sáng: nền trắng, thẻ trắng nổi bằng bóng, chip xám 100; tím 100/50 (`#ede9fe`, `#f5f3ff`) chỉ cho dải nền, chip nhấn và vùng sáng. Tối: nền `#0d0b1f`, mặt `#16132e`, chip `#221e44`. Thang màu theo vai trò như hệ thiết kế của adkit.so: tím (chính), cam (nút), xám pha lạnh (trung tính), xanh lá (kết quả tốt). |
-| Màu nhấn | **Một** màu cam `#ff7a45`, chỉ cho nút chính (`.pill-accent`, chữ chàm đậm để đạt AA). Không dùng cam cho thứ khác. |
-| Nhịp và bóng đổ (đo từ adkit.so) | Khung nội dung rộng **1280px**, mỗi khối cách nhau **80px**; nhãn nhỏ cách tiêu đề 12px, dòng mô tả `t-lead` (18/28px) cách tiêu đề 24px, nội dung cách đầu khối 56px. Thẻ nổi (`--sh-card`): viền 1px mờ + bóng `0 25px 50px -12px`. Thẻ thường (`--sh-soft`): bóng `0 1px 3px`. Nền trang: lưới ô vuông 32px, nét 5%. Dải nền lavender (`.band`) trải hết chiều ngang ở khối lời người làm. Nút kêu gọi lớn (`.pill-cta`): cao 44px, chữ 18px đậm, gradient cam. |
-| Hình khối | Nút luôn là viên thuốc cao 40px (`.pill`, biến thể `-solid`, `-surface`, `-glass`). Mặt phẳng bo 22–28px. |
-| Màu sắc khác | Tư liệu sản phẩm (minh họa game, ảnh chụp) và các **vùng sáng** (`.aurora`, `au-*`) **cùng một họ tím–xanh dương**: các sản phẩm khác nhau bằng hình minh họa, không bằng màu. Chấm trạng thái nhỏ (xanh = đang chạy, vàng = bảo trì). Không dùng thêm hue nào khác. |
+| Font | **Hai font**: Fraunces cho tiêu đề `t-display`, `t-title`, `t-subtitle`; Inter cho mọi chữ còn lại. Cả hai nạp đủ bộ `latin`, `latin-ext`, `vietnamese`. Không chữ nghiêng. |
+| Cỡ chữ | **Sáu bậc, không hơn**: 13px (`t-small`, nhãn `.eyebrow`), 15px (`t-body`), 18px (`t-heading`, `t-lead`), 28px (`t-subtitle`, giá), 48px (`t-title`, mobile 28px), 56px (`t-display`, mobile 48px). Hai font: tiêu đề `t-display`, `t-title`, `t-subtitle` dùng Fraunces; còn lại Inter. Độ đậm: 400, 600, 700. |
+| Màu chữ | `--b-ink` (xám than `#2d2f34`, không đen tuyệt đối), `--b-muted` (xám 600), `--b-heading` (cùng màu chữ, tiêu đề không đổi màu). |
+| Màu nền | **Ấm và trung tính**: nền kem `#fdf9f4`, thẻ sand `--b-lav` `#f8f1e7` có viền `--b-line`, mặt trắng `--b-surface` cho khung điện thoại và thẻ nổi. Tối: nền `#1b1916`, sand `#2e2823`. |
+| Màu nhấn | **Một** màu cam `--b-brand` (`#c2410c` ở sáng, đạt AA trên nền kem, trắng và sand) cho nút chính, nhãn nhỏ và chữ liên kết. Ở tối: `#f47a4a` (đạt AA trên nền tối; nút chính tối dùng `#c2410c`). `--b-accent` (`#f67748`) chỉ cho viền và bóng, không đặt chữ trắng lên nó (chỉ đạt 2.7:1). Xanh lá chỉ cho kết quả tốt (`--b-pos-*`). Không thêm hue nào khác. |
+| Hình khối | Nút viên thuốc (`.pill`, `-solid`, `-outline`, `-cta`). Thẻ sand bo 40px (`.sand-card`), panel bo 40px, khung điện thoại bo 40px, thẻ nổi bo 28px. |
 | Chuyển động | Bức tường (con trỏ làm nghiêng, các cột tự trôi), vùng sáng, ánh lấp lánh, vòng quỹ đạo, tiêu đề hiện dần. **Không có nút điều khiển cho khách** (Mạnh quyết 2026-10-26); tự tắt khi người dùng bật giảm chuyển động. Chỉ dùng transform/opacity. **Không dùng WebGL**: một lớp WebGL (Grainient) từng phủ màu xám nhạt lên khối tối trên máy thật trong khi Chrome không GPU dùng để test vẽ khác đi, nên không kiểm chứng được bằng test tự động. |
 
 Bài test `design (…)` trong `scripts/ui-test/ui.mjs` kiểm tự động: đúng một font, mọi cỡ chữ nằm trong thang 5 cỡ, tối đa 2 độ đậm.
@@ -31,10 +29,18 @@ Viết như một người thật nói chuyện với khách, không như khẩu
 ## Thư viện bên thứ ba
 `Magnet`, `OrbitImages`, `SpotlightCard` lấy từ [React Bits](https://reactbits.dev) (MIT + Commons Clause), để nguyên bản gốc ở `src/components/react-bits/` kèm giấy phép và ghi chú. `BlurText` của React Bits **không dùng** vì nó nhân đôi câu chữ ẩn và tách mỗi từ một dòng khi sao chép; `SectionTitle.tsx` làm hiệu ứng tương tự với một câu thật.
 
-## Mẫu thiết kế khối (học từ adkit.so)
-- **Mọi khối cùng một khung:** đệm dọc 56/72/80px theo màn hình, khung 1280px, giữa tiêu đề và nội dung cách 32/64px, tiêu đề 30/36/48px chữ có chân đậm ép chữ, có nhãn nhỏ phía trên.
-- **Thẻ ba lớp** (`Bezel.tsx`, CSS `.bezel*`): khung kính ngoài (bo 32, nền trắng 50%, viền 1px) → lớp đệm 8px có bóng nhẹ → lõi đặc bo 24 có bóng lớn `0 25px 50px -12px`. Dùng cho thẻ sản phẩm, khối so sánh, lời người làm.
-- **Màu theo vai trò, liều nhỏ:** chip kết quả tốt xanh lá (`.chip-pos`), tím 100 cho nhấn, cam chỉ cho nút chính.
+## Mẫu thiết kế khối (v4)
+- **Tiêu đề + một dòng phụ** ở mọi khối (`SectionHead`, nhận `align`). Không có nhãn nhỏ phía trên tiêu đề.
+- **Sáu bố cục, chọn theo nội dung** (không lặp một khuôn):
+  1. **Thẻ sand cao** (`.sand-card`): chữ bên trên, mockup bo ra ở đáy. Dùng cho Downloader, Voice Studio.
+  2. **Thẻ sand ngang** (`.sand-card-wide`): chữ trái, mockup phải. Dùng cho AI42E Studio.
+  3. **Dải nhiều cột có vạch chia**: icon tròn, số thứ tự, tiêu đề, một đoạn. Không có thẻ. Dùng cho dải 3 bước và các khối tương tự.
+  4. **Tab + panel**: một cụm tab (`role="tablist"`), một panel đổi nội dung. Dùng cho trò chơi (khung điện thoại) và so sánh (panel `--b-lav`).
+  5. **Sơ đồ nút nối**: một nút trung tâm, các nhánh đứt nét. Dùng cho Horizon. Trên điện thoại xếp dọc.
+  6. **Lưới 3 thẻ kính**: thẻ nền trắng, bóng nhẹ. Dùng cho bảng giá. Thẻ nổi bật có viền cam.
+- **Khối liên hệ** giữ nguyên bố cục cũ: lớp bọc bezel, khối kêu gọi có `RadarOrbit`, chân trang kênh chính thức.
+- **Không số liệu giả.** Không ghi con số chưa có nguồn (ví dụ "độ tin cậy 94%", "phiên bản v2.4"). Biểu đồ trang trí phải ghi rõ là minh họa, hoặc không có chữ.
+- Bezel (`Bezel.tsx`) dùng cho khối liên hệ và trang Trading.
 
 ## Nơi sửa
 | Cần sửa | File |
@@ -44,7 +50,11 @@ Viết như một người thật nói chuyện với khách, không như khẩu
 | Hiệu ứng bức tường (con trỏ, dừng) | `src/components/brand/Wall.tsx`, CSS `.wall*` |
 | Vùng sáng từng sản phẩm, hình minh họa trên thẻ | `src/components/brand/ProductVisual.tsx`, CSS `.aurora`, `.au-*` |
 | Khối kêu gọi, footer | `ClosingSection.tsx`, `BrandFooter.tsx` |
-| Khối so sánh, lời người làm | `CompareSection.tsx`, `FounderSection.tsx` |
+| Tab so sánh | `CompareSection.tsx` |
+| Dải 3 bước, thẻ sản phẩm | `ProductsSection.tsx` |
+| Tab trò chơi, khung điện thoại | `EcosystemPlaySection.tsx` |
+| Sơ đồ Tương lai (OneForAll, Trading) | `EcosystemHorizonSection.tsx` |
+| Lời người làm, hỏi đáp | `FounderFaqSection.tsx` |
 | Nhãn + tiêu đề mọi khối | `SectionHead.tsx`, `SectionTitle.tsx` |
 | Bố cục từng mục | `src/components/brand/*Section.tsx`, `BrandHero.tsx`, `BrandNavbar.tsx` |
 

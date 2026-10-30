@@ -7,53 +7,59 @@ import logo from "@/app/android-chrome-192x192.png";
 import { PORTFOLIO_URL, SOCIALS } from "@/lib/brand/content";
 import { useBrand } from "./LocaleProvider";
 
-const ECOSYSTEM_LINKS = [
-  { name: "Voice Studio", href: "https://voice.ai42e.com", external: true },
-  { name: "Tách nhạc AI", href: "https://audio.ai42e.com", external: true },
-  { name: "Cờ vây AI", href: "https://baduk.ai42e.com", external: true },
-  { name: "Tất cả công cụ", href: "#products", external: false },
-];
-
 export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
-  const { c, locale } = useBrand();
+  const { c } = useBrand();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes("@")) return;
+    // No newsletter service is connected yet, so the form opens an email to the team rather than claiming a sign-up.
+    const mailto = SOCIALS.find((s) => s.id === "email")?.href ?? "mailto:";
+    const body = `${c.footer.mailBody}\n${email}`;
+    window.location.href = `${mailto}?subject=${encodeURIComponent(c.footer.mailSubject)}&body=${encodeURIComponent(body)}`;
     setSubscribed(true);
   };
 
-  const isVi = locale === "vi";
+  const ecosystemLinks = [
+    { id: "voice", name: "Voice Studio", href: "https://voice.ai42e.com", external: true },
+    { id: "all", name: c.footer.allTools, href: "#products", external: false },
+  ];
 
   const content = (
     <footer className="w-full mt-6 sm:mt-7 lg:mt-8">
+      {/* Official channels heading, then the 4-column directory */}
+      <div className="mb-10 max-w-2xl">
+        <h2 className="t-title">{c.contact.title}</h2>
+        <p className="t-lead mt-3 text-[var(--b-muted)]">{c.contact.sub}</p>
+      </div>
+
       {/* 4-Column Directory: Unified Grid aligned with CTA card */}
       <div className="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4 lg:gap-x-10">
         {/* Column 1: Brand Info */}
         <div className="col-span-2 sm:col-span-1">
           <div className="flex items-center gap-2">
             <Image src={logo} alt="AI42E" width={22} height={22} className="rounded-md" />
-            <span className="text-[16px] font-bold text-[var(--b-ink)] tracking-tight">AI42E</span>
+            <span className="text-[15px] font-bold text-[var(--b-ink)] tracking-tight">AI42E</span>
           </div>
-          <p className="mt-2 text-[14px] text-[var(--b-muted)] leading-relaxed max-w-[260px]">
+          <p className="mt-2 text-[15px] text-[var(--b-muted)] leading-relaxed max-w-[260px]">
             {c.footer.about}
           </p>
         </div>
 
         {/* Column 2: Products */}
         <div>
-          <h3 className="text-[14px] font-semibold text-[var(--b-ink)] tracking-tight mb-2">
+          <h3 className="text-[15px] font-semibold text-[var(--b-ink)] tracking-tight mb-2">
             {c.footer.colProducts}
           </h3>
-          <ul className="space-y-1.5 text-[14px]">
-            {ECOSYSTEM_LINKS.map((item) => (
+          <ul className="space-y-1.5 text-[15px]">
+            {ecosystemLinks.map((item) => (
               <li key={item.name}>
                 <a
                   href={item.href}
                   {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="group inline-flex items-center gap-1 text-[var(--b-muted)] transition-colors hover:text-[var(--b-ink)]"
+                  className="group inline-flex min-h-10 items-center gap-1 text-[var(--b-muted)] transition-colors hover:text-[var(--b-ink)]"
                 >
                   <span>{item.name}</span>
                   {item.external ? (
@@ -67,17 +73,17 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
 
         {/* Column 3: Socials */}
         <div>
-          <h3 className="text-[14px] font-semibold text-[var(--b-ink)] tracking-tight mb-2">
+          <h3 className="text-[15px] font-semibold text-[var(--b-ink)] tracking-tight mb-2">
             {c.footer.colContact}
           </h3>
-          <ul className="space-y-1.5 text-[14px]">
-            {SOCIALS.filter((s) => s.id !== "email").map((social) => (
+          <ul className="space-y-1.5 text-[15px]">
+            {SOCIALS.map((social) => (
               <li key={social.id}>
                 <a
                   href={social.href}
-                  target="_blank"
+                  target={social.href.startsWith("mailto:") ? undefined : "_blank"}
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-1 text-[var(--b-muted)] transition-colors hover:text-[var(--b-ink)]"
+                  className="group inline-flex min-h-10 items-center gap-1 text-[var(--b-muted)] transition-colors hover:text-[var(--b-ink)]"
                 >
                   <span>{social.name}</span>
                   <ArrowUpRight size={12} className="opacity-40 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
@@ -89,20 +95,18 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
 
         {/* Column 4: Newsletter */}
         <div className="col-span-2 sm:col-span-1">
-          <h3 className="text-[14px] font-semibold text-[var(--b-ink)] tracking-tight mb-1.5">
-            {isVi ? "Bản tin AI42E" : "Newsletter"}
+          <h3 className="text-[15px] font-semibold text-[var(--b-ink)] tracking-tight mb-1.5">
+            {c.footer.newsTitle}
           </h3>
-          <p className="text-[14px] text-[var(--b-muted)] leading-relaxed max-w-[280px] mb-2.5">
-            {isVi
-              ? "Nhận thông báo khi có công cụ AI mới và tính năng thử nghiệm sớm."
-              : "Receive product updates news and early access."}
+          <p className="text-[15px] text-[var(--b-muted)] leading-relaxed max-w-[280px] mb-2.5">
+            {c.footer.newsText}
           </p>
 
           <form onSubmit={handleSubscribe} className="relative flex items-center w-full max-w-[320px]">
             {subscribed ? (
-              <div className="flex items-center gap-1.5 text-[13px] font-medium text-[var(--b-pos-fg)] bg-[var(--b-pos-bg)] py-1.5 px-3 rounded-full">
+              <div className="flex items-center gap-1.5 text-[13px] font-semibold text-[var(--b-pos-fg)] bg-[var(--b-pos-bg)] py-1.5 px-3 rounded-full">
                 <Check size={13} />
-                <span>{isVi ? "Đã đăng ký! Cảm ơn bạn." : "Subscribed! Thank you."}</span>
+                <span>{c.footer.subscribed}</span>
               </div>
             ) : (
               <>
@@ -111,13 +115,13 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder={isVi ? "Nhập email của bạn..." : "Enter your email..."}
+                  placeholder={c.footer.emailPlaceholder}
                   required
-                  className="w-full rounded-full border border-gray-200/90 dark:border-[var(--b-line)] bg-white dark:bg-[#25221d] h-[38px] pl-8 pr-11 text-[14px] text-[var(--b-ink)] placeholder:text-[var(--b-muted)]/50 focus:border-[var(--b-ink)] focus:outline-none transition-colors shadow-2xs"
+                  className="w-full rounded-full border border-gray-200/90 dark:border-[var(--b-line)] bg-white dark:bg-[#25221d] h-[38px] pl-8 pr-11 text-[15px] text-[var(--b-ink)] placeholder:text-[var(--b-muted)]/50 focus:border-[var(--b-ink)] focus:outline-none transition-colors shadow-2xs"
                 />
                 <button
                   type="submit"
-                  aria-label={isVi ? "Đăng ký nhận tin" : "Subscribe"}
+                  aria-label={c.footer.subscribeLabel}
                   className="absolute right-1 grid h-[30px] w-[30px] place-items-center rounded-full bg-[var(--b-brand)] text-white hover:opacity-90 transition-opacity"
                 >
                   <ArrowRight size={13} />
@@ -140,13 +144,13 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
             href={PORTFOLIO_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-[var(--b-muted)] transition-colors hover:text-[var(--b-ink)] font-medium"
+            className="inline-flex min-h-10 items-center gap-1 text-[var(--b-muted)] transition-colors hover:text-[var(--b-ink)] font-semibold"
           >
             <span>{c.footer.portfolio}</span>
             <ArrowUpRight size={12} aria-hidden="true" />
           </a>
-          <span className="text-[var(--b-line)] hidden sm:inline">·</span>
-          <p className="font-medium tracking-wider text-[12px]">{c.footer.slogan}</p>
+          <span className="text-[var(--b-muted)] hidden sm:inline">·</span>
+          <p className="font-semibold tracking-wider text-[13px]">{c.footer.slogan}</p>
         </div>
       </div>
     </footer>

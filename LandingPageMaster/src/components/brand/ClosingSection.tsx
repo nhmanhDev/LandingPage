@@ -6,8 +6,7 @@ import { Reveal } from "./Reveal";
 import { RadarOrbit } from "./RadarOrbit";
 
 export function ClosingSection() {
-  const { c, locale } = useBrand();
-  const isVi = locale === "vi";
+  const { c } = useBrand();
 
   return (
     <Reveal>
@@ -16,12 +15,12 @@ export function ClosingSection() {
         <div className="relative z-10 grid items-center gap-6 md:grid-cols-[1.1fr_0.9fr]">
           <div>
             {/* Headline: Clean Geometric Sans-serif, balanced sizing */}
-            <h2 className="text-2xl sm:text-[26px] font-bold text-[var(--b-heading)] tracking-[-0.025em] leading-[1.2] mb-2">
+            <h2 className="text-[28px] sm:text-[28px] font-bold text-[var(--b-heading)] tracking-[-0.025em] leading-[1.2] mb-2">
               {c.closing.title}
             </h2>
 
             {/* Description */}
-            <p className="text-[13px] sm:text-[14px] text-[var(--b-muted)] leading-relaxed max-w-[420px] mb-4">
+            <p className="text-[13px] sm:text-[15px] text-[var(--b-muted)] leading-relaxed max-w-[420px] mb-4">
               {c.closing.sub}
             </p>
 
@@ -29,7 +28,7 @@ export function ClosingSection() {
             <div>
               <a
                 href="#products"
-                className="pill pill-cta inline-flex items-center gap-2 !h-[40px] !px-5 text-[14px] font-semibold rounded-full shadow-xs"
+                className="pill pill-cta inline-flex items-center gap-2 !h-[40px] !px-5 text-[15px] font-semibold rounded-full shadow-xs"
               >
                 <span>{c.closing.cta}</span>
                 <ArrowUpRight size={14} aria-hidden="true" />
