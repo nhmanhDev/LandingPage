@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, ArrowRight, Download, AudioLines, Clapperboard, Sparkles } from "lucide-react";
+import { ArrowUpRight, AudioLines, Clapperboard, Download } from "lucide-react";
 import type { Product, ProductStatus } from "@/lib/brand/content";
 import { useBrand } from "./LocaleProvider";
 import { ProductVisual } from "./ProductVisual";
@@ -15,13 +15,14 @@ const DOT: Record<ProductStatus, string> = {
   maintenance: "bg-[#d98a00]",
 };
 
-// 3 Creative Tools in the multimedia production pipeline
+// The three creative tools, in pipeline order
 const CREATIVE_ORDER = ["studio", "download", "voice"];
 const SPAN: Record<string, string> = {
   studio: "lg:col-span-12",
   download: "sm:col-span-1 lg:col-span-6",
   voice: "sm:col-span-1 lg:col-span-6",
 };
+const STEP_ICONS = [Download, AudioLines, Clapperboard];
 
 function Card({ product, statusLabel }: { product: Product; statusLabel: string }) {
   const live = Boolean(product.href);
@@ -66,53 +67,34 @@ export function ProductsSection() {
   const items = CREATIVE_ORDER.map((id) => c.products.items.find((item) => item.id === id)).filter((item): item is Product => Boolean(item));
 
   return (
-    <section id="products" className="relative z-10 scroll-mt-24 py-16 sm:py-20 lg:py-24">
+    <section id="products" className="relative z-10 scroll-mt-24 py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHead title={c.products.title} sub={c.products.sub} />
+        <SectionHead eyebrow={c.products.eyebrow} title={c.products.title} sub={c.products.sub} />
 
-        {/* Closed-loop Workflow Synergy Banner */}
-        <Reveal delay={0.08} className="mt-10 sm:mt-12">
-          <div className="rounded-3xl border border-[var(--b-line)] bg-[var(--b-lav)] p-5 sm:p-7 shadow-[var(--sh-soft)]">
-            <div className="flex items-center gap-2 mb-4 text-[13px] font-bold uppercase tracking-wider text-[var(--b-brand)]">
-              <Sparkles size={14} />
-              Dây chuyền phối hợp khép kín trong AI42E:
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div className="flex items-center gap-3 rounded-2xl bg-[var(--b-surface)] p-3.5 border border-[var(--b-line)]">
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-orange-500/10 text-[var(--b-brand)] font-bold text-[13px]">
-                  01
-                </span>
-                <div className="min-w-0">
-                  <span className="block text-[13px] font-bold text-[var(--b-ink)]">Khai thác tư liệu sạch</span>
-                  <span className="block text-[12px] text-[var(--b-muted)] truncate">DownloadAnything tải video, audio 4K</span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 rounded-2xl bg-[var(--b-surface)] p-3.5 border border-[var(--b-line)]">
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-orange-500/10 text-[var(--b-brand)] font-bold text-[13px]">
-                  02
-                </span>
-                <div className="min-w-0">
-                  <span className="block text-[13px] font-bold text-[var(--b-ink)]">Lồng giọng truyền cảm</span>
-                  <span className="block text-[12px] text-[var(--b-muted)] truncate">Voice Studio đọc văn bản & clone voice</span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 rounded-2xl bg-[var(--b-surface)] p-3.5 border border-[var(--b-line)]">
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-orange-500/10 text-[var(--b-brand)] font-bold text-[13px]">
-                  03
-                </span>
-                <div className="min-w-0">
-                  <span className="block text-[13px] font-bold text-[var(--b-ink)]">Dựng video tự động hóa</span>
-                  <span className="block text-[12px] text-[var(--b-muted)] truncate">AI42E Studio xuất bản video hoàn chỉnh</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Pipeline strip: three steps separated by hairlines, no card */}
+        <Reveal delay={0.08} className="mt-12 sm:mt-16">
+          <ol className="grid md:grid-cols-3">
+            {c.products.steps.map((step, index) => {
+              const Icon = STEP_ICONS[index];
+              return (
+                <li
+                  key={step.title}
+                  className="flex flex-col items-start border-t border-[var(--b-line)] py-7 first:border-t-0 md:border-t-0 md:border-l md:px-8 md:py-0 md:first:border-l-0 md:first:pl-0"
+                >
+                  <span className="grid h-10 w-10 place-items-center rounded-full bg-[var(--b-surface)] text-[var(--b-brand)] shadow-[var(--sh-soft)]">
+                    <Icon size={18} aria-hidden="true" />
+                  </span>
+                  <span className="t-small mt-5 font-semibold text-[var(--b-muted)]">0{index + 1}</span>
+                  <h3 className="t-heading mt-1 text-[var(--b-ink)]">{step.title}</h3>
+                  <p className="t-body mt-2 text-[var(--b-muted)]">{step.text}</p>
+                </li>
+              );
+            })}
+          </ol>
         </Reveal>
 
-        {/* 3 Creative Suite Bento Cards */}
-        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-12">
+        {/* Product cards: Studio full width, Downloader and Voice side by side */}
+        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-12 sm:mt-16">
           {items.map((product, index) => (
             <li key={product.id} className={SPAN[product.id]}>
               <Reveal delay={Math.min(index, 3) * 0.06} className="h-full">

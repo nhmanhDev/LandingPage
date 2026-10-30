@@ -41,6 +41,7 @@ function EcosystemMegaMenu({
   statusLabels: Record<ProductStatus, string>;
   isActive?: boolean;
 }) {
+  const { c } = useBrand();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLLIElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -93,7 +94,7 @@ function EcosystemMegaMenu({
         }`}
         aria-expanded={open}
         aria-haspopup="true"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => setOpen(true)}
       >
         <span>{label}</span>
         <ChevronDown
@@ -125,9 +126,9 @@ function EcosystemMegaMenu({
               <div className="grid grid-cols-2 gap-4">
                 {/* Column 1: Bộ Sáng tạo AI (Creative Suite) */}
                 <div className="space-y-1.5">
-                  <div className="flex items-center gap-1.5 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--b-brand)]">
+                  <div className="flex items-center gap-1.5 px-3 py-1 text-[13px] font-bold uppercase tracking-wider text-[var(--b-brand)]">
                     <Sparkles size={13} />
-                    <span>Bộ Sáng tạo Nội dung</span>
+                    <span>{c.nav.megaCreative}</span>
                   </div>
                   {creativeProducts.map((product) => {
                     const Icon = ICONS[product.id];
@@ -145,14 +146,14 @@ function EcosystemMegaMenu({
                           <Icon size={18} aria-hidden />
                         </span>
                         <div className="min-w-0 flex-1">
-                          <div className="t-body flex items-center justify-between font-medium transition-colors group-hover:text-[var(--b-brand)]">
+                          <div className="t-body flex items-center justify-between font-semibold transition-colors group-hover:text-[var(--b-brand)]">
                             <span className="text-[15px] font-semibold">{product.name}</span>
                             <span className="text-[13px] text-[var(--b-muted)] opacity-0 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0.5">
                               ↗
                             </span>
                           </div>
                           <span className="text-[13px] text-[var(--b-muted)] line-clamp-1 mt-0.5">{product.tagline}</span>
-                          <span className="mt-1 flex items-center gap-1.5 text-[11px] text-[var(--b-muted)]">
+                          <span className="mt-1 flex items-center gap-1.5 text-[13px] text-[var(--b-muted)]">
                             <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
                             {statusLabels[product.status]}
                           </span>
@@ -164,9 +165,9 @@ function EcosystemMegaMenu({
 
                 {/* Column 2: Giải trí & Nghiên cứu tương lai */}
                 <div className="space-y-1.5 border-l border-[var(--b-line)] pl-4">
-                  <div className="flex items-center gap-1.5 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--b-muted)]">
+                  <div className="flex items-center gap-1.5 px-3 py-1 text-[13px] font-bold uppercase tracking-wider text-[var(--b-muted)]">
                     <Gamepad2 size={13} />
-                    <span>Giải trí & Không gian mở</span>
+                    <span>{c.nav.megaOther}</span>
                   </div>
                   {otherProducts.map((product) => {
                     const Icon = ICONS[product.id];
@@ -184,14 +185,14 @@ function EcosystemMegaMenu({
                           <Icon size={18} aria-hidden />
                         </span>
                         <div className="min-w-0 flex-1">
-                          <div className="t-body flex items-center justify-between font-medium transition-colors group-hover:text-[var(--b-brand)]">
+                          <div className="t-body flex items-center justify-between font-semibold transition-colors group-hover:text-[var(--b-brand)]">
                             <span className="text-[15px] font-semibold">{product.name}</span>
                             <span className="text-[13px] text-[var(--b-muted)] opacity-0 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0.5">
                               ↗
                             </span>
                           </div>
                           <span className="text-[13px] text-[var(--b-muted)] line-clamp-1 mt-0.5">{product.tagline}</span>
-                          <span className="mt-1 flex items-center gap-1.5 text-[11px] text-[var(--b-muted)]">
+                          <span className="mt-1 flex items-center gap-1.5 text-[13px] text-[var(--b-muted)]">
                             <span className={`h-1.5 w-1.5 rounded-full ${DOT[product.status]}`} aria-hidden="true" />
                             {statusLabels[product.status]}
                           </span>
@@ -204,13 +205,13 @@ function EcosystemMegaMenu({
 
               {/* Bottom Quick Bar */}
               <div className="mt-3 pt-3 border-t border-[var(--b-line)] flex items-center justify-between px-2 text-[13px]">
-                <span className="text-[var(--b-muted)]">6 ứng dụng · Mở trên web & máy tính</span>
+                <span className="text-[var(--b-muted)]">{c.nav.megaFooter}</span>
                 <a
                   href="#products"
                   className="inline-flex items-center gap-1 font-semibold text-[var(--b-brand)] hover:underline"
                   onClick={() => setOpen(false)}
                 >
-                  Xem chu trình phối hợp 3 công cụ
+                  {c.nav.megaCta}
                   <ArrowRight size={12} />
                 </a>
               </div>
@@ -282,7 +283,7 @@ export function BrandNavbar() {
         </a>
 
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-medium">
+        <ul className="hidden lg:flex items-center gap-1 xl:gap-2 text-[15px] font-semibold">
           <EcosystemMegaMenu
             products={c.products.items}
             label={c.nav.products}
@@ -319,7 +320,7 @@ export function BrandNavbar() {
             type="button"
             onClick={() => setLocale(locale === "vi" ? "en" : "vi")}
             aria-label={c.ui.language}
-            className="nav-link !px-2.5 sm:!px-3 text-[13px] sm:text-[15px] font-medium whitespace-nowrap"
+            className="nav-link !px-2.5 sm:!px-3 text-[13px] sm:text-[15px] font-semibold whitespace-nowrap"
           >
             {locale === "vi" ? "VI" : "EN"}
           </button>
@@ -341,7 +342,7 @@ export function BrandNavbar() {
           <button
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
-            aria-label="Toggle menu"
+            aria-label={c.nav.menu}
             className="nav-link !px-2.5 lg:hidden"
           >
             {mobileOpen ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}
@@ -353,18 +354,19 @@ export function BrandNavbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="border-b border-[var(--b-line)] bg-[var(--b-surface)] px-4 py-5 lg:hidden overflow-hidden"
           >
             <ul className="flex flex-col gap-2">
-              <li className="pb-1 text-[11px] font-bold uppercase tracking-wider text-[var(--b-brand)]">Hệ sinh thái sản phẩm</li>
+              <li className="pb-1 text-[13px] font-bold uppercase tracking-wider text-[var(--b-brand)]">{c.nav.mobileGroup}</li>
               <li>
                 <a href="#products" className="nav-link w-full flex items-center justify-between gap-2" onClick={() => setMobileOpen(false)}>
                   <span className="flex items-center gap-2">
                     <Clapperboard size={15} className="text-[var(--b-muted)] shrink-0" />
-                    <span>Bộ Sáng tạo AI (Studio, Voice, Downloader)</span>
+                    <span>{c.nav.mobileCreative}</span>
                   </span>
                   <span className="text-[13px] text-[var(--b-muted)]">↗</span>
                 </a>
@@ -373,7 +375,7 @@ export function BrandNavbar() {
                 <a href="#play" className="nav-link w-full flex items-center justify-between gap-2" onClick={() => setMobileOpen(false)}>
                   <span className="flex items-center gap-2">
                     <Gamepad2 size={15} className="text-[var(--b-muted)] shrink-0" />
-                    <span>AI42E Game (11 Board Games)</span>
+                    <span>{c.nav.mobilePlay}</span>
                   </span>
                   <span className="text-[13px] text-[var(--b-muted)]">↗</span>
                 </a>
@@ -382,7 +384,7 @@ export function BrandNavbar() {
                 <a href="#horizon" className="nav-link w-full flex items-center justify-between gap-2" onClick={() => setMobileOpen(false)}>
                   <span className="flex items-center gap-2">
                     <Boxes size={15} className="text-[var(--b-muted)] shrink-0" />
-                    <span>Không gian mở rộng (OneForAll & Trading)</span>
+                    <span>{c.nav.mobileHorizon}</span>
                   </span>
                   <span className="text-[13px] text-[var(--b-muted)]">↗</span>
                 </a>
