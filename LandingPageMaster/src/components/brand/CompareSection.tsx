@@ -1,108 +1,103 @@
 "use client";
 
-import { ArrowRight, Check, X, Layers, Cpu, CreditCard, Sparkles, Zap, ShieldCheck } from "lucide-react";
+import { useId, useState } from "react";
+import Image from "next/image";
+import { Check, X } from "lucide-react";
+import logo from "@/app/android-chrome-192x192.png";
 import { useBrand } from "./LocaleProvider";
 import { Reveal } from "./Reveal";
 import { SectionHead } from "./SectionHead";
 
+type Side = "without" | "with";
+
+/** Two tabs, each one a short question and its answer, shown the way an assistant replies. */
 export function CompareSection() {
   const { c } = useBrand();
   const k = c.compare;
-
-  const withoutIcons = [Layers, Cpu, CreditCard];
-  const withIcons = [Sparkles, Zap, ShieldCheck];
+  const [side, setSide] = useState<Side>("with");
+  const groupId = useId();
+  const items = side === "with" ? k.with : k.without;
+  const tabs: { id: Side; label: string }[] = [
+    { id: "without", label: k.withoutTitle },
+    { id: "with", label: k.withTitle },
+  ];
 
   return (
-    <section id="compare" className="scroll-mt-24 py-20 lg:py-28">
+    <section id="compare" className="scroll-mt-24 py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead title={k.title} tone={k.tone} sub={k.sub} />
 
-        {/* Slite-Inspired High-Fidelity Comparison Board */}
-        <Reveal className="mx-auto mt-12 max-w-5xl sm:mt-16">
-          <div className="rounded-[40px] border border-[var(--b-line)] bg-[var(--b-lav)] p-6 sm:p-10 lg:p-12 shadow-[var(--sh-card)]">
-            <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
-              
-              {/* Left Column: Cách làm thông thường (Muted & Frictional) */}
-              <div className="flex flex-col justify-between rounded-3xl border border-dashed border-[var(--b-line)] bg-[var(--b-chip)]/60 p-6 sm:p-8">
-                <div>
-                  <div className="flex items-center justify-between gap-3">
-                    <h3 className="t-heading font-semibold text-[var(--b-muted)]">{k.withoutTitle}</h3>
-                    <span className="text-[12px] font-bold uppercase tracking-wider text-red-500/80 bg-red-500/10 px-2.5 py-0.5 rounded-full">
-                      Phức tạp
-                    </span>
-                  </div>
+        <Reveal delay={0.08} className="mx-auto mt-12 max-w-4xl sm:mt-16">
+          <div role="tablist" aria-label={k.withTitle} className="flex justify-center gap-2">
+            {tabs.map((tab) => {
+              const selected = tab.id === side;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  id={`${groupId}-${tab.id}`}
+                  aria-selected={selected}
+                  aria-controls={`${groupId}-panel`}
+                  tabIndex={selected ? 0 : -1}
+                  onClick={() => setSide(tab.id)}
+                  className={`pill ${selected ? "pill-solid" : "pill-outline"}`}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
 
-                  <ul className="mt-6 space-y-4">
-                    {k.without.map((item, idx) => {
-                      const Icon = withoutIcons[idx] || X;
-                      return (
-                        <li key={item} className="flex items-start gap-3.5 rounded-2xl bg-[var(--b-surface)]/60 p-4 border border-[var(--b-line)]/60">
-                          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-red-500/10 text-red-500 mt-0.5">
-                            <X size={16} strokeWidth={2.4} aria-hidden />
-                          </span>
-                          <div>
-                            <p className="t-body font-medium text-[var(--b-muted)]">{item}</p>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-
-                <div className="mt-8 border-t border-[var(--b-line)] pt-4 text-[13px] text-[var(--b-muted)] text-center">
-                  Tốn thời gian tìm kiếm · Dễ nản lòng trước khi bắt đầu
-                </div>
-              </div>
-
-              {/* Right Column: Với AI42E (Elevated, Crisp & Verified) */}
-              <div className="flex flex-col justify-between rounded-3xl border border-[var(--b-line)] bg-[var(--b-surface)] p-6 sm:p-8 shadow-[0_16px_40px_-12px_rgba(45,47,52,0.1)]">
-                <div>
-                  <div className="flex items-center justify-between gap-3">
-                    <h3 className="t-heading font-semibold text-[var(--b-ink)]">{k.withTitle}</h3>
-                    <span className="text-[12px] font-bold uppercase tracking-wider text-[var(--b-pos-fg)] bg-[var(--b-pos-bg)] px-2.5 py-0.5 rounded-full">
-                      Tối ưu
-                    </span>
-                  </div>
-
-                  <ul className="mt-6 space-y-4">
-                    {k.with.map((item, idx) => {
-                      const Icon = withIcons[idx] || Check;
-                      return (
-                        <li key={item} className="group flex items-start gap-3.5 rounded-2xl bg-[var(--b-lav)]/70 p-4 border border-[var(--b-line)] transition-all hover:bg-[var(--b-lav)] hover:-translate-y-0.5">
-                          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[var(--b-pos-bg)] text-[var(--b-pos-fg)] mt-0.5 shadow-2xs">
-                            <Check size={16} strokeWidth={2.8} aria-hidden />
-                          </span>
-                          <div>
-                            <p className="t-body font-semibold text-[var(--b-ink)]">{item}</p>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-
-                <div className="mt-8 rounded-2xl bg-[var(--b-pos-bg)]/60 border border-[var(--b-pos-fg)]/20 p-4 flex items-center justify-between gap-3">
-                  <span className="t-small font-semibold text-[var(--b-pos-fg)]">{k.result}</span>
-                  <span className="text-[12px] font-bold text-[var(--b-pos-fg)] bg-[var(--b-surface)] px-2.5 py-1 rounded-full shadow-2xs">
-                    0đ Bắt đầu
-                  </span>
-                </div>
-              </div>
-
+          <div
+            id={`${groupId}-panel`}
+            role="tabpanel"
+            aria-labelledby={`${groupId}-${side}`}
+            className="mt-6 rounded-[40px] bg-[var(--b-lav)] p-5 sm:p-10"
+          >
+            {/* The question, as the visitor would ask it */}
+            <div className="ml-auto max-w-[85%] rounded-[22px] rounded-br-md bg-[var(--b-surface)] px-5 py-4 shadow-[var(--sh-soft)] sm:max-w-[70%]">
+              <p className="t-body text-[var(--b-ink)]">{k.questions[side]}</p>
             </div>
 
-            {/* Bottom Unified CTA Strip */}
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl bg-[var(--b-surface)] border border-[var(--b-line)] p-5 sm:p-6 shadow-[var(--sh-soft)]">
-              <div className="text-center sm:text-left">
-                <p className="t-body font-semibold text-[var(--b-ink)]">Trải nghiệm sự khác biệt ngay hôm nay</p>
-                <p className="t-small text-[var(--b-muted)]">{c.closing.trust}</p>
-              </div>
-              <a href="#products" className="pill pill-cta shrink-0">
-                {c.closing.cta}
-                <ArrowRight size={16} aria-hidden="true" />
-              </a>
-            </div>
+            {/* The answer: a card with the points, then the sources for the AI42E side */}
+            <div className="mt-5 flex items-start gap-3">
+              <span className="mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[var(--b-ink)]" aria-hidden="true">
+                <Image src={logo} alt="" width={20} height={20} className="rounded-md" />
+              </span>
+              <div className="min-w-0 flex-1 rounded-[28px] bg-[var(--b-surface)] p-6 shadow-[var(--sh-card)] sm:p-8">
+                <ul className="space-y-4">
+                  {items.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span
+                        className={`mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full ${
+                          side === "with" ? "bg-[var(--b-pos-bg)] text-[var(--b-pos-fg)]" : "bg-[var(--b-chip)] text-[var(--b-muted)]"
+                        }`}
+                        aria-hidden="true"
+                      >
+                        {side === "with" ? <Check size={15} strokeWidth={2.6} /> : <X size={15} strokeWidth={2.4} />}
+                      </span>
+                      <p className={`t-body pt-0.5 ${side === "with" ? "font-semibold text-[var(--b-ink)]" : "text-[var(--b-muted)]"}`}>{item}</p>
+                    </li>
+                  ))}
+                </ul>
 
+                {side === "with" ? (
+                  <>
+                    <div className="mt-6 flex flex-wrap gap-2 border-t border-[var(--b-line)] pt-5">
+                      {c.products.items
+                        .filter((item) => item.href)
+                        .map((item) => (
+                          <span key={item.id} className="t-small rounded-full bg-[var(--b-chip)] px-3 py-1 text-[var(--b-ink)]">
+                            {item.name}
+                          </span>
+                        ))}
+                    </div>
+                    <p className="t-small mt-4 text-[var(--b-muted)]">{k.result}</p>
+                  </>
+                ) : null}
+              </div>
+            </div>
           </div>
         </Reveal>
       </div>

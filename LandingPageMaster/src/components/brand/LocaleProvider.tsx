@@ -41,8 +41,19 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const locale = useSyncExternalStore<Locale>(subscribe, readLocale, () => "vi");
 
   useEffect(() => {
-    document.documentElement.lang = locale;
-    document.title = CONTENT[locale].meta.title;
+    const { title, description } = CONTENT[locale].meta;
+    const apply = () => {
+      document.documentElement.lang = locale;
+      if (document.title !== title) document.title = title;
+      document.querySelector('meta[name="description"]')?.setAttribute("content", description);
+      document.querySelector('meta[property="og:title"]')?.setAttribute("content", title);
+      document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
+    };
+    apply();
+    // React re-commits the page metadata <title> after hydration and on some re-renders, so keep it in step with the locale.
+    const observer = new MutationObserver(apply);
+    observer.observe(document.head, { childList: true, subtree: true, characterData: true });
+    return () => observer.disconnect();
   }, [locale]);
 
   const setLocale = useCallback((next: Locale) => {

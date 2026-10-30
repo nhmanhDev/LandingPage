@@ -7,10 +7,6 @@ import { useBrand } from "./LocaleProvider";
 
 interface OrbitItem {
   id: string;
-  nameVi: string;
-  nameEn: string;
-  taglineVi: string;
-  taglineEn: string;
   href: string;
   image: string;    // Real app screenshot/thumbnail
   x: number;        // Pre-computed integer coordinate
@@ -22,10 +18,6 @@ const ORBIT_ITEMS: OrbitItem[] = [
   // Ring 2 (Inner Ring - radius: 105px, centered at 250, 250)
   {
     id: "studio",
-    nameVi: "AI42E Studio",
-    nameEn: "AI42E Studio",
-    taglineVi: "Dựng video tự động bằng AI",
-    taglineEn: "Automated video creation",
     href: "https://studio.ai42e.com",
     image: "/brand/tiles/studio-hero.webp",
     x: 250,
@@ -34,10 +26,6 @@ const ORBIT_ITEMS: OrbitItem[] = [
   },
   {
     id: "voice",
-    nameVi: "Voice Studio",
-    nameEn: "Voice Studio",
-    taglineVi: "Lồng giọng & Clone voice",
-    taglineEn: "Expressive TTS & Clone",
     href: "https://voice.ai42e.com",
     image: "/brand/tiles/voice-studio.png",
     x: 198,
@@ -48,10 +36,6 @@ const ORBIT_ITEMS: OrbitItem[] = [
   // Ring 3 (Middle Ring - radius: 165px, centered at 250, 250)
   {
     id: "download",
-    nameVi: "DownloadAnything",
-    nameEn: "DownloadAnything",
-    taglineVi: "Tải video & âm thanh 4K",
-    taglineEn: "Multi-platform media downloader",
     href: "https://downloader.ai42e.com",
     image: "/brand/tiles/download-light.png",
     x: 400,
@@ -60,10 +44,6 @@ const ORBIT_ITEMS: OrbitItem[] = [
   },
   {
     id: "game",
-    nameVi: "AI42E Game Hub",
-    nameEn: "AI42E Game Hub",
-    taglineVi: "11 trò chơi gắn kết",
-    taglineEn: "11 web board games",
     href: "https://play.ai42e.com",
     image: "/brand/tiles/game-oanquan.webp",
     x: 100,
@@ -74,10 +54,6 @@ const ORBIT_ITEMS: OrbitItem[] = [
   // Ring 4 (Outer Ring - radius: 225px, centered at 250, 250)
   {
     id: "trading",
-    nameVi: "Trading System",
-    nameEn: "Trading System",
-    taglineVi: "Quant AI phân tích thị trường",
-    taglineEn: "Quant market intelligence",
     href: "#horizon",
     image: "/brand/tiles/trading-system.svg",
     x: 445,
@@ -86,10 +62,6 @@ const ORBIT_ITEMS: OrbitItem[] = [
   },
   {
     id: "oneforall",
-    nameVi: "OneForAll",
-    nameEn: "OneForAll",
-    taglineVi: "Trạm tiện ích AI đa năng",
-    taglineEn: "All-in-one AI workspace",
     href: "#horizon",
     image: "/brand/tiles/oneforall.svg",
     x: 39,
@@ -99,8 +71,7 @@ const ORBIT_ITEMS: OrbitItem[] = [
 ];
 
 export function RadarOrbit() {
-  const { locale } = useBrand();
-  const isVi = locale === "vi";
+  const { c } = useBrand();
 
   return (
     <div
@@ -154,11 +125,11 @@ export function RadarOrbit() {
                       width: `${item.size}px`,
                       height: `${item.size}px`,
                     }}
-                    title={`${isVi ? item.nameVi : item.nameEn} · ${isVi ? item.taglineVi : item.taglineEn}`}
+                    title={`${c.closing.orbit[item.id].name} · ${c.closing.orbit[item.id].tagline}`}
                   >
                     <Image
                       src={item.image}
-                      alt={isVi ? item.nameVi : item.nameEn}
+                      alt={c.closing.orbit[item.id].name}
                       width={item.size * 2}
                       height={item.size * 2}
                       className="h-full w-full object-cover transition-transform duration-200 group-hover/item:scale-115"
@@ -166,8 +137,8 @@ export function RadarOrbit() {
                     />
 
                     {/* Subtle Hover Tooltip */}
-                    <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--b-ink)] px-2.5 py-1 text-[12px] font-semibold text-white opacity-0 shadow-lg transition-opacity duration-150 group-hover/item:opacity-100 z-40 border border-white/10">
-                      {isVi ? item.nameVi : item.nameEn}
+                    <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--b-ink)] px-2.5 py-1 text-[13px] font-semibold text-white opacity-0 shadow-lg transition-opacity duration-150 group-hover/item:opacity-100 z-40 border border-white/10">
+                      {c.closing.orbit[item.id].name}
                     </div>
                   </a>
                 </div>

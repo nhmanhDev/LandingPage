@@ -1,11 +1,14 @@
 "use client";
 
-import { Boxes, CandlestickChart, Sparkles, FileText, Languages, Cpu, Activity } from "lucide-react";
+import Image from "next/image";
+import logo from "@/app/android-chrome-192x192.png";
+import type { Product } from "@/lib/brand/content";
 import { useBrand } from "./LocaleProvider";
 import { Reveal } from "./Reveal";
 import { SectionHead } from "./SectionHead";
 
-function TradingGraph() {
+/** Decorative sketch of a price line. It is an illustration, not market data. */
+function TradingSketch() {
   const points = Array.from({ length: 40 }, (_, i) => {
     const x = (i / 39) * 100;
     const y = 58 - i * 0.55 + Math.sin(i * 0.6) * 9 + Math.sin(i * 1.7) * 4;
@@ -14,138 +17,98 @@ function TradingGraph() {
   const line = points.map(([x, y], i) => `${i ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
 
   return (
-    <div className="relative w-full h-[180px] rounded-2xl bg-[var(--b-surface)] border border-[var(--b-line)] p-4 flex flex-col justify-between overflow-hidden shadow-2xs">
-      <div className="flex items-center justify-between text-[13px] font-semibold text-[var(--b-muted)]">
-        <span className="flex items-center gap-1.5 text-emerald-600">
-          <Activity size={14} /> Tín hiệu thời gian thực
-        </span>
-        <span className="font-mono text-[12px]">AI Model v2.4</span>
-      </div>
-      
-      <svg viewBox="0 0 100 60" preserveAspectRatio="none" className="h-[90px] w-full text-[var(--b-brand)]">
+    <div className="mt-6 h-[110px] overflow-hidden rounded-[18px] bg-[var(--b-chip)] p-4" aria-hidden="true">
+      <svg viewBox="0 0 100 60" preserveAspectRatio="none" className="h-full w-full text-[var(--b-brand)]">
         <defs>
           <linearGradient id="trade-glow" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0" stopColor="currentColor" stopOpacity="0.25" />
+            <stop offset="0" stopColor="currentColor" stopOpacity="0.22" />
             <stop offset="1" stopColor="currentColor" stopOpacity="0" />
           </linearGradient>
         </defs>
         <path d={`${line} L100 60 L0 60 Z`} fill="url(#trade-glow)" />
         <path d={line} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
       </svg>
-
-      <div className="flex items-center justify-between text-[12px] text-[var(--b-muted)] border-t border-[var(--b-line)]/60 pt-2">
-        <span>Độ tin cậy thuật toán: 94.2%</span>
-        <span>Nghiên cứu nội bộ</span>
-      </div>
     </div>
   );
 }
 
-function OneForAllMockup() {
-  const tools = [
-    { title: "Tóm tắt thông minh", desc: "Đọc và cô đọng tài liệu PDF, web dài 100 trang", icon: FileText },
-    { title: "Dịch thuật ngữ cảnh", desc: "Bảo toàn văn phong và thuật ngữ chuyên ngành", icon: Languages },
-    { title: "Chuyển đổi dữ liệu", desc: "Trích xuất bảng biểu từ ảnh sang Excel/JSON", icon: Cpu },
-  ];
+function HorizonNode({ product, statusLabel, children }: { product: Product; statusLabel: string; children?: React.ReactNode }) {
+  return (
+    <article className="flex h-full flex-col rounded-[28px] border border-[var(--b-line)] bg-[var(--b-surface)] p-7 shadow-[var(--sh-card)] sm:p-8">
+      <span className="t-small inline-flex w-fit items-center gap-1.5 rounded-full border border-[var(--b-line)] bg-[var(--b-bg)] px-3 py-1 text-[var(--b-muted)]">
+        <span className="h-1.5 w-1.5 rounded-full bg-[var(--b-muted)]" aria-hidden="true" />
+        {statusLabel}
+      </span>
+      <h3 className="t-subtitle mt-5">{product.name}</h3>
+      <p className="t-body mt-2 text-[var(--b-muted)]">{product.tagline}</p>
+      <ul className="t-small mt-5 space-y-2 text-[var(--b-ink)]">
+        {product.bullets.map((bullet) => (
+          <li key={bullet} className="flex items-start gap-2.5">
+            <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-[var(--b-muted)]" aria-hidden="true" />
+            {bullet}
+          </li>
+        ))}
+      </ul>
+      {children}
+    </article>
+  );
+}
+
+/** Canvas on graph paper: the ecosystem node at the top, two research products hanging off it on dashed lines. */
+export function EcosystemHorizonSection() {
+  const { c } = useBrand();
+  const h = c.horizon;
+  const oneForAll = c.products.items.find((item) => item.id === "oneforall");
+  const trading = c.products.items.find((item) => item.id === "trading");
+  if (!oneForAll || !trading) return null;
 
   return (
-    <div className="w-full space-y-2.5">
-      {tools.map((t, idx) => {
-        const Icon = t.icon;
-        return (
-          <div key={idx} className="flex items-center gap-3 rounded-2xl bg-[var(--b-surface)] p-3 border border-[var(--b-line)] shadow-2xs">
-            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[var(--b-chip)] text-[var(--b-brand)]">
-              <Icon size={16} />
-            </span>
-            <div className="min-w-0 flex-1">
-              <span className="block text-[13px] font-bold text-[var(--b-ink)]">{t.title}</span>
-              <span className="block text-[12px] text-[var(--b-muted)] truncate">{t.desc}</span>
+    <section id="horizon" className="scroll-mt-24 py-20 sm:py-24 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHead title={h.title} sub={h.sub} />
+
+        <Reveal delay={0.08} className="mt-12 sm:mt-16">
+          <div
+            className="relative overflow-hidden rounded-[40px] border border-[var(--b-line)] bg-[var(--b-bg)] px-4 pb-10 pt-12 sm:px-10 sm:pb-12 sm:pt-16"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, rgba(45,47,52,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(45,47,52,0.05) 1px, transparent 1px)",
+              backgroundSize: "32px 32px",
+            }}
+          >
+            {/* Hub */}
+            <div className="relative z-10 mx-auto flex w-fit flex-col items-center">
+              <div className="grid h-20 w-20 place-items-center rounded-[24px] bg-[var(--b-ink)] shadow-[var(--sh-card)]">
+                <Image src={logo} alt="" width={36} height={36} className="rounded-xl" />
+              </div>
+              <p className="t-small mt-3 text-[var(--b-muted)]">{h.hub}</p>
+            </div>
+
+            {/* Dashed branches: one drop from the hub, a bar, and one drop into each node (desktop only) */}
+            <div aria-hidden="true" className="relative mx-auto hidden h-14 max-w-4xl md:block">
+              <div className="absolute left-1/2 top-0 h-6 -translate-x-1/2 border-l border-dashed border-[var(--b-muted)]/60" />
+              <div className="absolute left-[25%] right-[25%] top-6 border-t border-dashed border-[var(--b-muted)]/60" />
+              <div className="absolute left-[25%] top-6 h-8 border-l border-dashed border-[var(--b-muted)]/60" />
+              <div className="absolute left-[75%] top-6 h-8 border-l border-dashed border-[var(--b-muted)]/60" />
+            </div>
+
+            <div className="relative z-10 mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
+              <HorizonNode product={oneForAll} statusLabel={c.products.status[oneForAll.status]} />
+
+              <div className="relative">
+                {/* Chip pointing at the node: the status the team wants people to see first */}
+                <div className="t-small absolute -top-4 right-6 z-20 hidden rounded-[18px] bg-[var(--b-ink)] px-4 py-2.5 text-[var(--b-bg)] shadow-[var(--sh-card)] sm:block">
+                  {trading.bullets[1]}
+                </div>
+                <HorizonNode product={trading} statusLabel={c.products.status[trading.status]}>
+                  <TradingSketch />
+                </HorizonNode>
+              </div>
             </div>
           </div>
-        );
-      })}
-    </div>
-  );
-}
 
-export function EcosystemHorizonSection() {
-  return (
-    <section id="horizon" className="scroll-mt-24 py-20 lg:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHead
-          title="Những mảnh ghép AI tiếp theo của hệ sinh thái"
-          sub="AI42E liên tục mở rộng để giải quyết thêm nhiều bài toán thường nhật: từ trạm tiện ích web đa nhiệm đến các mô hình thuật toán phân tích thị trường chuyên sâu."
-        />
-
-        <div className="mt-12 grid gap-6 sm:mt-16 lg:grid-cols-2">
-          
-          {/* Card 1: OneForAll */}
-          <Reveal delay={0} className="h-full">
-            <div className="sand-card flex h-full flex-col justify-between !p-8 sm:!p-10">
-              <div>
-                <div className="flex items-center justify-between gap-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-[12px] font-bold text-[var(--b-muted)] border border-[var(--b-line)]">
-                    <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
-                    Sắp ra mắt
-                  </span>
-                  <span className="grid h-8 w-8 place-items-center rounded-xl bg-[var(--b-surface)] text-[var(--b-ink)] shadow-2xs">
-                    <Boxes size={18} />
-                  </span>
-                </div>
-
-                <h3 className="t-subtitle font-bold mt-6 text-[var(--b-ink)]">
-                  OneForAll
-                </h3>
-                <p className="t-body mt-2.5 text-[var(--b-muted)] leading-relaxed">
-                  Trạm trung chuyển tiện ích AI trên nền web. Gom các tác vụ tóm tắt, dịch tài liệu và chuyển đổi dữ liệu nhanh về một giao diện duy nhất.
-                </p>
-
-                <div className="mt-8">
-                  <OneForAllMockup />
-                </div>
-              </div>
-
-              <div className="mt-8 pt-4 border-t border-[var(--b-line)] flex items-center justify-between text-[13px] text-[var(--b-muted)]">
-                <span>Dành cho công việc & nghiên cứu</span>
-                <span className="font-semibold text-[var(--b-brand)]">Mở quyền truy cập sớm ↗</span>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Card 2: AI42E Trading System */}
-          <Reveal delay={0.08} className="h-full">
-            <div className="sand-card flex h-full flex-col justify-between !p-8 sm:!p-10">
-              <div>
-                <div className="flex items-center justify-between gap-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--b-surface)] px-3 py-1 text-[12px] font-bold text-[var(--b-muted)] border border-[var(--b-line)]">
-                    <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-                    Đang nghiên cứu nội bộ
-                  </span>
-                  <span className="grid h-8 w-8 place-items-center rounded-xl bg-[var(--b-surface)] text-[var(--b-ink)] shadow-2xs">
-                    <CandlestickChart size={18} />
-                  </span>
-                </div>
-
-                <h3 className="t-subtitle font-bold mt-6 text-[var(--b-ink)]">
-                  AI42E Trading System
-                </h3>
-                <p className="t-body mt-2.5 text-[var(--b-muted)] leading-relaxed">
-                  Mô hình thuật toán AI phân tích dữ liệu thị trường và nhận diện tín hiệu xu hướng thời gian thực. (Nghiên cứu nội bộ — Không phải lời khuyên đầu tư).
-                </p>
-
-                <div className="mt-8">
-                  <TradingGraph />
-                </div>
-              </div>
-
-              <div className="mt-8 pt-4 border-t border-[var(--b-line)] flex items-center justify-between text-[13px] text-[var(--b-muted)]">
-                <span>Công nghệ định lượng (Quant AI)</span>
-                <span className="font-semibold text-[var(--b-muted)]">Tài liệu nghiên cứu ↗</span>
-              </div>
-            </div>
-          </Reveal>
-
-        </div>
+          <p className="t-small mx-auto mt-8 max-w-xl text-center text-[var(--b-muted)]">{h.footnote}</p>
+        </Reveal>
       </div>
     </section>
   );

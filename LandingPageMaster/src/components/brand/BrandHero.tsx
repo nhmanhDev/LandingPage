@@ -17,27 +17,9 @@ export function BrandHero() {
   const reduced = useReducedMotion();
 
   const pillars = [
-    {
-      id: "creative",
-      title: "Bộ Sáng tạo AI",
-      tagline: "3 công cụ: Studio · Voice · Downloader",
-      href: "#products",
-      icon: Clapperboard,
-    },
-    {
-      id: "play",
-      title: "Giải trí & Game",
-      tagline: "11 trò chơi kết nối bạn bè & gia đình",
-      href: "#play",
-      icon: Gamepad2,
-    },
-    {
-      id: "horizon",
-      title: "Không gian mở rộng",
-      tagline: "OneForAll · AI42E Trading System",
-      href: "#horizon",
-      icon: Sparkles,
-    },
+    { id: "creative", title: c.hero.pillars.creative.title, tagline: c.hero.pillars.creative.tagline, href: "#products", icon: Clapperboard },
+    { id: "play", title: c.hero.pillars.play.title, tagline: c.hero.pillars.play.tagline, href: "#play", icon: Gamepad2 },
+    { id: "horizon", title: c.hero.pillars.horizon.title, tagline: c.hero.pillars.horizon.tagline, href: "#horizon", icon: Sparkles },
   ];
 
   return (
@@ -53,7 +35,7 @@ export function BrandHero() {
             <span className="brand-text">{c.hero.titleLine2}</span>
           </motion.h1>
 
-          <motion.p {...rise(0.1)} className="t-body mx-auto mt-4 sm:mt-5 max-w-[38rem] text-[15.5px] sm:text-[16.5px] text-[var(--b-muted)] leading-relaxed">
+          <motion.p {...rise(0.1)} className="t-body mx-auto mt-4 sm:mt-5 max-w-[38rem] text-[15px] sm:text-[18px] text-[var(--b-muted)] leading-relaxed">
             {c.hero.sub}
           </motion.p>
 
@@ -72,12 +54,12 @@ export function BrandHero() {
                       <span className="grid h-7.5 w-7.5 place-items-center rounded-xl bg-[var(--b-surface)] border border-[var(--b-line)]/50 text-[var(--b-brand)] shadow-2xs shrink-0 group-hover:scale-105 transition-transform">
                         <Icon size={15} aria-hidden />
                       </span>
-                      <span className="text-[13.5px] sm:text-[14px] font-bold text-[var(--b-ink)]">{pillar.title}</span>
+                      <span className="text-[13px] sm:text-[15px] font-bold text-[var(--b-ink)]">{pillar.title}</span>
                     </div>
-                    <p className="mt-1.5 text-[12px] sm:text-[12.5px] text-[var(--b-muted)] line-clamp-1">{pillar.tagline}</p>
+                    <p className="mt-1.5 text-[13px] sm:text-[13px] text-[var(--b-muted)] line-clamp-1">{pillar.tagline}</p>
                   </div>
-                  <div className="mt-2.5 pt-2 border-t border-[var(--b-line)]/40 flex items-center justify-between text-[11.5px] font-medium text-[var(--b-brand)]">
-                    <span>Khám phá</span>
+                  <div className="mt-2.5 pt-2 border-t border-[var(--b-line)]/40 flex items-center justify-between text-[13px] font-semibold text-[var(--b-brand)]">
+                    <span>{c.hero.explore}</span>
                     <span className="transition-transform group-hover:translate-x-0.5">→</span>
                   </div>
                 </a>

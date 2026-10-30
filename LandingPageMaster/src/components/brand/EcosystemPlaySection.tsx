@@ -1,114 +1,118 @@
 "use client";
 
+import { useId, useState } from "react";
 import Image from "next/image";
-import { ArrowUpRight, Gamepad2, Users, Smartphone, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
+import { IMAGE_SIZE } from "@/lib/brand/tiles";
 import { useBrand } from "./LocaleProvider";
 import { Reveal } from "./Reveal";
 import { SectionHead } from "./SectionHead";
-import { IMAGE_SIZE, type ImageKey } from "@/lib/brand/tiles";
 
-function Shot({ name, className, style }: { name: ImageKey; className?: string; style?: React.CSSProperties }) {
-  const { w, h } = IMAGE_SIZE[name];
-  return (
-    <div className={`overflow-hidden rounded-2xl shadow-[0_20px_45px_-12px_rgba(45,47,52,0.22)] ${className ?? ""}`} style={style}>
-      <Image src={`/brand/tiles/${name}.webp`} alt="" width={w} height={h} unoptimized loading="lazy" draggable={false} className="block h-auto w-full" />
-    </div>
-  );
-}
-
+/** Split layout: copy and a row of game tabs on the left, a phone frame that follows the active tab on the right. */
 export function EcosystemPlaySection() {
   const { c } = useBrand();
-
-  const covers: { name: ImageKey; left: string; rot: string; z: number; delay: string }[] = [
-    { name: "game-oanquan", left: "6%", rot: "-9deg", z: 1, delay: "-1s" },
-    { name: "game-baucua", left: "52%", rot: "8deg", z: 1, delay: "-4s" },
-    { name: "game-truth", left: "28%", rot: "-1deg", z: 2, delay: "-2.5s" },
-  ];
+  const p = c.play;
+  const [active, setActive] = useState(0);
+  const groupId = useId();
 
   return (
-    <section id="play" className="scroll-mt-24 py-20 lg:py-28">
+    <section id="play" className="scroll-mt-24 py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHead
-          title="Không chỉ là công việc — AI42E là niềm vui gắn kết"
-          sub="11 trò chơi mở trực tiếp trên trình duyệt điện thoại. Không tải app, không đăng nhập rườm rà. Dành cho những buổi họp mặt gia đình và bạn bè thêm rộn rã."
-        />
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-6">
+            <SectionHead align="left" eyebrow={p.eyebrow} title={p.title} sub={p.sub} />
 
-        <Reveal className="mx-auto mt-12 max-w-6xl sm:mt-16">
-          <div className="sand-card sand-card-wide group !p-8 sm:!p-12">
-            
-            {/* Left Content Column */}
-            <div className="card-copy flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="grid h-8 w-8 place-items-center rounded-xl bg-[var(--b-pos-bg)] text-[var(--b-pos-fg)]">
-                    <Gamepad2 size={18} />
-                  </span>
-                  <span className="text-[13px] font-bold uppercase tracking-wider text-[var(--b-pos-fg)]">
-                    11 Tựa game mở sẵn
-                  </span>
-                </div>
-
-                <h3 className="t-subtitle font-bold mt-5 text-[var(--b-ink)]">
-                  AI42E Game Hub
-                </h3>
-                <p className="t-body mt-3 text-[var(--b-muted)] leading-relaxed">
-                  Từ những nét văn hóa dân gian Việt Nam như Ô ăn quan, Bầu cua tôm cá đến những trò chơi kết nối hiện đại như Vòng quay sự thật hay Thử thách trí nhớ.
-                </p>
-
-                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                  <div className="flex items-start gap-2.5 rounded-2xl bg-[var(--b-surface)] p-3.5 border border-[var(--b-line)]">
-                    <Smartphone size={18} className="text-[var(--b-brand)] mt-0.5 shrink-0" />
-                    <div>
-                      <span className="block text-[13px] font-bold text-[var(--b-ink)]">Mở là chơi ngay</span>
-                      <span className="block text-[12px] text-[var(--b-muted)]">Chạy trên trình duyệt mọi điện thoại</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2.5 rounded-2xl bg-[var(--b-surface)] p-3.5 border border-[var(--b-line)]">
-                    <Users size={18} className="text-[var(--b-brand)] mt-0.5 shrink-0" />
-                    <div>
-                      <span className="block text-[13px] font-bold text-[var(--b-ink)]">Gắn kết bạn bè</span>
-                      <span className="block text-[12px] text-[var(--b-muted)]">Thiết kế cho các buổi tụ họp sum vầy</span>
-                    </div>
-                  </div>
-                </div>
+            <Reveal delay={0.08}>
+              <div role="tablist" aria-label={p.eyebrow} className="mt-10 flex flex-col gap-3">
+                {p.tabs.map((tab, index) => {
+                  const selected = index === active;
+                  return (
+                    <button
+                      key={tab.name}
+                      type="button"
+                      role="tab"
+                      id={`${groupId}-tab-${index}`}
+                      aria-selected={selected}
+                      aria-controls={`${groupId}-panel`}
+                      tabIndex={selected ? 0 : -1}
+                      onClick={() => setActive(index)}
+                      className={`flex w-full items-start gap-4 rounded-[22px] border p-4 text-left transition-colors sm:p-5 ${
+                        selected
+                          ? "border-[var(--b-ink)] bg-[var(--b-surface)] shadow-[var(--sh-soft)]"
+                          : "border-[var(--b-line)] bg-transparent hover:bg-[var(--b-surface)]"
+                      }`}
+                    >
+                      <span
+                        className={`mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full text-[13px] font-semibold ${
+                          selected ? "bg-[var(--b-ink)] text-[var(--b-bg)]" : "bg-[var(--b-chip)] text-[var(--b-muted)]"
+                        }`}
+                        aria-hidden="true"
+                      >
+                        {index + 1}
+                      </span>
+                      <span className="min-w-0">
+                        <span className="t-heading block text-[var(--b-ink)]">{tab.name}</span>
+                        <span className={`t-small mt-1 block text-[var(--b-muted)] ${selected ? "" : "hidden sm:block"}`}>{tab.text}</span>
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
+            </Reveal>
 
-              <div className="mt-8 pt-4">
-                <a
-                  href="https://play.ai42e.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pill pill-cta inline-flex items-center gap-2"
-                >
-                  Mở cổng game play.ai42e.com
-                  <ArrowUpRight size={18} />
-                </a>
-              </div>
-            </div>
-
-            {/* Right Visual: Tactile Overlapping Game Cards */}
-            <div className="card-visual min-h-[300px] sm:min-h-[380px] relative flex items-center justify-center">
-              <div className="relative w-full h-[320px] sm:h-[380px]">
-                {covers.map((cover) => (
-                  <div
-                    key={cover.name}
-                    className="float absolute bottom-4 w-[48%]"
-                    style={{
-                      left: cover.left,
-                      zIndex: cover.z,
-                      ["--r" as string]: cover.rot,
-                      animationDelay: cover.delay,
-                    }}
-                  >
-                    <Shot name={cover.name} />
-                  </div>
+            <Reveal delay={0.14}>
+              <ul className="mt-8 space-y-2.5">
+                {p.points.map((point) => (
+                  <li key={point} className="t-body flex items-center gap-2.5 text-[var(--b-ink)]">
+                    <Check size={16} strokeWidth={2.6} className="shrink-0 text-[var(--b-pos-fg)]" aria-hidden="true" />
+                    {point}
+                  </li>
                 ))}
-              </div>
-            </div>
-
+              </ul>
+              <a href="https://play.ai42e.com" target="_blank" rel="noopener noreferrer" className="pill pill-cta mt-8 inline-flex items-center gap-2">
+                {p.cta}
+                <ArrowUpRight size={18} aria-hidden="true" />
+              </a>
+            </Reveal>
           </div>
-        </Reveal>
+
+          <Reveal delay={0.1} className="lg:col-span-6">
+            <div className="mx-auto w-full max-w-[420px] rounded-[40px] bg-[var(--b-surface)] p-3 shadow-[var(--sh-card)]">
+              <div
+                id={`${groupId}-panel`}
+                role="tabpanel"
+                aria-labelledby={`${groupId}-tab-${active}`}
+                className="relative aspect-[4/3] overflow-hidden rounded-[30px] bg-[var(--b-chip)]"
+              >
+                {p.tabs.map((tab, index) => {
+                  const { w, h } = IMAGE_SIZE[tab.image];
+                  const selected = index === active;
+                  return (
+                    <div
+                      key={tab.image}
+                      aria-hidden={!selected}
+                      className={`absolute inset-0 transition-opacity duration-500 ease-out ${selected ? "opacity-100" : "opacity-0"}`}
+                    >
+                      <Image
+                        src={`/brand/tiles/${tab.image}.webp`}
+                        alt=""
+                        width={w}
+                        height={h}
+                        unoptimized
+                        loading="lazy"
+                        draggable={false}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="t-small px-2 pb-1 pt-3 text-center text-[var(--b-muted)]" aria-live="polite">
+                {p.tabs[active].name}
+              </p>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
