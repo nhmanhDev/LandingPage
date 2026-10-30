@@ -1,12 +1,15 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import Magnet from "@/components/react-bits/Magnet";
 import { useBrand } from "./LocaleProvider";
 import { Reveal } from "./Reveal";
 import { RadarOrbit } from "./RadarOrbit";
+import { useReducedMotion } from "./useReducedMotion";
 
 export function ClosingSection() {
   const { c } = useBrand();
+  const reduced = useReducedMotion();
 
   return (
     <Reveal>
@@ -26,13 +29,15 @@ export function ClosingSection() {
 
             {/* CTA Button: Consistent brand terracotta orange across both Light and Dark theme */}
             <div>
-              <a
-                href="#products"
-                className="pill pill-cta inline-flex items-center gap-2 !h-[40px] !px-5 text-[15px] font-semibold rounded-full shadow-xs"
-              >
-                <span>{c.closing.cta}</span>
-                <ArrowUpRight size={14} aria-hidden="true" />
-              </a>
+              <Magnet padding={48} magnetStrength={4.5} maxOffset={6} disabled={reduced}>
+                <a
+                  href="#products"
+                  className="pill pill-cta inline-flex items-center gap-2 !h-[42px] !px-5 text-[15px] font-semibold rounded-full shadow-xs"
+                >
+                  <span>{c.closing.cta}</span>
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </a>
+              </Magnet>
             </div>
           </div>
 

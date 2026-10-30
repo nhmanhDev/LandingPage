@@ -5,9 +5,9 @@ import { ArrowUpRight } from "lucide-react";
 import logo from "@/app/android-chrome-192x192.png";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useBrand } from "./LocaleProvider";
-import { Reveal } from "./Reveal";
+import { ScrollParallax } from "./ScrollMotion";
 
-/** Merged Founder Letter & FAQ into a balanced 2-column layout to reduce section count */
+/** Merged Founder Letter & FAQ into a balanced 2-column layout with differential bidirectional scroll parallax */
 export function FounderFaqSection() {
   const { c } = useBrand();
   const f = c.founder;
@@ -19,10 +19,9 @@ export function FounderFaqSection() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          
           {/* LEFT COLUMN: Lời từ người làm ra AI42E (5 cols) */}
           <div className="lg:col-span-5">
-            <Reveal>
+            <ScrollParallax offsetY={[22, -16]}>
               <div>
                 <h3 className="text-[18px] sm:text-[18px] font-bold text-[var(--b-ink)] leading-snug">
                   {f.paragraphs[0]}
@@ -35,7 +34,7 @@ export function FounderFaqSection() {
                 )}
 
                 {/* Founder Signature Card */}
-                <div className="mt-8 rounded-2xl border border-[var(--b-line)] bg-[var(--b-surface)] p-5 shadow-xs">
+                <div className="mt-8 rounded-2xl border border-[var(--b-line)] bg-[var(--b-surface)] p-5 shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--sh-soft)]">
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
                       <div className="grid h-11 w-11 place-items-center rounded-xl bg-[var(--b-chip)] border border-[var(--b-line)]">
@@ -61,18 +60,18 @@ export function FounderFaqSection() {
                   </div>
                 </div>
               </div>
-            </Reveal>
+            </ScrollParallax>
           </div>
 
           {/* RIGHT COLUMN: Hỏi đáp FAQ (7 cols) */}
           <div className="lg:col-span-7">
-            <Reveal delay={0.06}>
+            <ScrollParallax offsetY={[36, -24]}>
               <Accordion type="single" collapsible className="space-y-3">
                 {c.faq.items.map((item, index) => (
                   <AccordionItem
                     key={item.q}
                     value={`faq-${index}`}
-                    className="rounded-2xl border border-[var(--b-line)] bg-[var(--b-surface)] px-5 shadow-xs transition-all hover:border-[var(--b-ink)]/30"
+                    className="rounded-2xl border border-[var(--b-line)] bg-[var(--b-surface)] px-5 shadow-xs transition-all duration-200 hover:border-[var(--b-ink)]/30 hover:-translate-y-0.5"
                   >
                     <AccordionTrigger className="t-heading py-4 text-left font-semibold text-[var(--b-ink)] hover:no-underline text-[15px] sm:text-[15px]">
                       {item.q}
@@ -83,9 +82,8 @@ export function FounderFaqSection() {
                   </AccordionItem>
                 ))}
               </Accordion>
-            </Reveal>
+            </ScrollParallax>
           </div>
-
         </div>
       </div>
     </section>

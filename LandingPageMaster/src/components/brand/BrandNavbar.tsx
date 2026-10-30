@@ -3,12 +3,13 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
 import { AudioLines, Boxes, CandlestickChart, ChevronDown, Clapperboard, Download, Gamepad2, Menu, Moon, Sun, X, Sparkles, ArrowRight } from "lucide-react";
 import logo from "@/app/android-chrome-192x192.png";
 import type { Product, ProductStatus } from "@/lib/brand/content";
 import { useBrand } from "./LocaleProvider";
 import { useMounted } from "./useMounted";
+import { useReducedMotion } from "./useReducedMotion";
 
 type IconType = React.ComponentType<{ size?: number; "aria-hidden"?: boolean }>;
 
@@ -227,8 +228,16 @@ export function BrandNavbar() {
   const { c, locale, setLocale } = useBrand();
   const { resolvedTheme, setTheme } = useTheme();
   const mounted = useMounted();
+  const reduced = useReducedMotion();
   const [mobileOpen, setMobileOpen] = useState(false);
   const isDark = mounted && resolvedTheme === "dark";
+
+  const { scrollYProgress } = useScroll();
+  const smoothPageProgress = useSpring(scrollYProgress, {
+    stiffness: 180,
+    damping: 30,
+    mass: 0.35,
+  });
 
   // Clean, focused navigation links without wrapping
   const links = [
@@ -358,6 +367,7 @@ export function BrandNavbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
             className="border-b border-[var(--b-line)] bg-[var(--b-surface)] px-4 py-5 lg:hidden overflow-hidden"
           >
             <ul className="flex flex-col gap-2">
@@ -413,6 +423,15 @@ export function BrandNavbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Bidirectional page-scroll progress hairline */}
+      {!reduced ? (
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px] origin-left bg-[var(--b-brand)]/80"
+          style={{ scaleX: smoothPageProgress, willChange: "transform" }}
+        />
+      ) : null}
     </header>
   );
 }

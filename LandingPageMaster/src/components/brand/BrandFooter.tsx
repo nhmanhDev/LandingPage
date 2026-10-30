@@ -23,17 +23,16 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
   };
 
   const ecosystemLinks = [
+    { id: "studio", name: "AI42E Studio", href: "https://studio.ai42e.com", external: true },
     { id: "voice", name: "Voice Studio", href: "https://voice.ai42e.com", external: true },
+    { id: "download", name: "DownloadAnything", href: "https://downloader.ai42e.com", external: true },
+    { id: "game", name: "AI42E Game", href: "#play", external: false },
     { id: "all", name: c.footer.allTools, href: "#products", external: false },
   ];
 
   const content = (
     <footer className="w-full mt-6 sm:mt-7 lg:mt-8">
-      {/* Official channels heading, then the 4-column directory */}
-      <div className="mb-10 max-w-2xl">
-        <h2 className="t-title">{c.contact.title}</h2>
-        <p className="t-lead mt-3 text-[var(--b-muted)]">{c.contact.sub}</p>
-      </div>
+      {/* 4-column directory */}
 
       {/* 4-Column Directory: Unified Grid aligned with CTA card */}
       <div className="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4 lg:gap-x-10">
@@ -113,10 +112,14 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
                 <AtSign size={14} className="absolute left-3 text-[var(--b-muted)] pointer-events-none opacity-40" />
                 <input
                   type="email"
+                  name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={c.footer.emailPlaceholder}
                   required
+                  spellCheck={false}
+                  autoCorrect="off"
+                  autoCapitalize="off"
                   className="w-full rounded-full border border-gray-200/90 dark:border-[var(--b-line)] bg-white dark:bg-[#25221d] h-[38px] pl-8 pr-11 text-[15px] text-[var(--b-ink)] placeholder:text-[var(--b-muted)]/50 focus:border-[var(--b-ink)] focus:outline-none transition-colors shadow-2xs"
                 />
                 <button
