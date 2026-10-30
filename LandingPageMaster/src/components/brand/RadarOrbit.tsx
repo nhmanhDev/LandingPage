@@ -1,9 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import logo from "@/app/android-chrome-192x192.png";
 import { useBrand } from "./LocaleProvider";
+import { useReducedMotion } from "./useReducedMotion";
 
 interface OrbitItem {
   id: string;
@@ -72,80 +74,89 @@ const ORBIT_ITEMS: OrbitItem[] = [
 
 export function RadarOrbit() {
   const { c } = useBrand();
+  const reduced = useReducedMotion();
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: rootRef,
+    offset: ["start end", "end end"],
+  });
+  const smoothScroll = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 26,
+    mass: 0.5,
+  });
+
+  // Bidirectional scroll phase boost: advances orbital angle as you scroll down, rewinds smoothly as you scroll up
+  const scrollSpin = useTransform(smoothScroll, [0, 1], [-36, 36]);
+  const scrollCounter = useTransform(smoothScroll, [0, 1], [36, -36]);
 
   return (
     <div
+      ref={rootRef}
       className="group/radar relative flex items-center justify-center w-full h-[200px] sm:h-[210px] lg:h-[215px] select-none"
       aria-hidden="true"
     >
       {/* Scaling container that scales down smoothly on mobile while staying centered */}
       <div className="relative w-[500px] h-[500px] shrink-0 scale-[0.54] sm:scale-[0.64] lg:scale-[0.70] xl:scale-[0.73] transition-transform">
-        
         {/* 4 Concentric Dashed Rings (Absolute Circles centered at 250, 250) */}
-        {/* Ring 1: Inner Breathing Ring (r=50) */}
-        <div
-          className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] rounded-full border border-dashed border-gray-300/80 dark:border-white/15"
-        />
+        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] rounded-full border border-dashed border-gray-300/80 dark:border-white/15" />
+        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[210px] h-[210px] rounded-full border border-dashed border-gray-300/80 dark:border-white/15" />
+        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[330px] h-[330px] rounded-full border border-dashed border-gray-300/80 dark:border-white/15" />
+        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] rounded-full border border-dashed border-gray-300/80 dark:border-white/15" />
 
-        {/* Ring 2: First Orbital Ring (r=105) */}
-        <div
-          className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[210px] h-[210px] rounded-full border border-dashed border-gray-300/80 dark:border-white/15"
-        />
+        {/* Scroll-linked orbital phase wrapper layered seamlessly around the 40s CSS constellation spin */}
+        <motion.div
+          className="absolute inset-0"
+          style={reduced ? undefined : { rotate: scrollSpin, willChange: "transform" }}
+        >
+          <div className="absolute inset-0 animate-radar-spin group-hover/radar:[animation-play-state:paused]">
+            {ORBIT_ITEMS.map((item) => {
+              return (
+                <div
+                  key={item.id}
+                  className="absolute"
+                  style={{
+                    top: `${item.y}px`,
+                    left: `${item.x}px`,
+                    transform: "translate(-50%, -50%)",
+                  }}
+                >
+                  {/* Counter-rotating Wrapper: Keeps Image Upright against both CSS spin & scroll phase */}
+                  <motion.div style={reduced ? undefined : { rotate: scrollCounter, willChange: "transform" }}>
+                    <div className="animate-radar-counter group-hover/radar:[animation-play-state:paused]">
+                      <a
+                        href={item.href}
+                        tabIndex={-1}
+                        {...(item.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                        className="group/item relative flex items-center justify-center rounded-full border-2 border-white dark:border-[#38332b] shadow-[0_4px_14px_rgba(0,0,0,0.14)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.6)] transition-all duration-200 hover:scale-130 hover:z-30 cursor-pointer overflow-hidden bg-white dark:bg-[#201d19]"
+                        style={{
+                          width: `${item.size}px`,
+                          height: `${item.size}px`,
+                        }}
+                        title={`${c.closing.orbit[item.id].name} · ${c.closing.orbit[item.id].tagline}`}
+                      >
+                        <Image
+                          src={item.image}
+                          alt={c.closing.orbit[item.id].name}
+                          width={item.size * 2}
+                          height={item.size * 2}
+                          className="h-full w-full object-cover transition-transform duration-200 group-hover/item:scale-115"
+                          unoptimized
+                        />
 
-        {/* Ring 3: Second Orbital Ring (r=165) */}
-        <div
-          className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[330px] h-[330px] rounded-full border border-dashed border-gray-300/80 dark:border-white/15"
-        />
-
-        {/* Ring 4: Outermost Orbital Ring (r=225) */}
-        <div
-          className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] rounded-full border border-dashed border-gray-300/80 dark:border-white/15"
-        />
-
-        {/* Rotating Constellation Layer: Rotates Clockwise (40s full cycle) */}
-        <div className="absolute inset-0 animate-radar-spin group-hover/radar:[animation-play-state:paused]">
-          {ORBIT_ITEMS.map((item) => {
-            return (
-              <div
-                key={item.id}
-                className="absolute"
-                style={{
-                  top: `${item.y}px`,
-                  left: `${item.x}px`,
-                  transform: "translate(-50%, -50%)",
-                }}
-              >
-                {/* Counter-rotating Wrapper: Keeps Image Upright (Counter-clockwise 40s) */}
-                <div className="animate-radar-counter group-hover/radar:[animation-play-state:paused]">
-                  <a
-                    href={item.href}
-                    {...(item.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="group/item relative flex items-center justify-center rounded-full border-2 border-white dark:border-[#38332b] shadow-[0_4px_14px_rgba(0,0,0,0.14)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.6)] transition-all duration-200 hover:scale-130 hover:z-30 cursor-pointer overflow-hidden bg-white dark:bg-[#201d19]"
-                    style={{
-                      width: `${item.size}px`,
-                      height: `${item.size}px`,
-                    }}
-                    title={`${c.closing.orbit[item.id].name} · ${c.closing.orbit[item.id].tagline}`}
-                  >
-                    <Image
-                      src={item.image}
-                      alt={c.closing.orbit[item.id].name}
-                      width={item.size * 2}
-                      height={item.size * 2}
-                      className="h-full w-full object-cover transition-transform duration-200 group-hover/item:scale-115"
-                      unoptimized
-                    />
-
-                    {/* Subtle Hover Tooltip */}
-                    <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--b-ink)] px-2.5 py-1 text-[13px] font-semibold text-white opacity-0 shadow-lg transition-opacity duration-150 group-hover/item:opacity-100 z-40 border border-white/10">
-                      {c.closing.orbit[item.id].name}
+                        {/* Subtle Hover Tooltip */}
+                        <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[var(--b-surface)] px-2.5 py-1 text-[13px] font-semibold text-[var(--b-ink)] opacity-0 shadow-[var(--sh-card)] transition-opacity duration-150 group-hover/item:opacity-100 z-40 border border-[var(--b-line)]">
+                          {c.closing.orbit[item.id].name}
+                        </div>
+                      </a>
                     </div>
-                  </a>
+                  </motion.div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </motion.div>
 
         {/* Central Logo: Fixed, Stationary Anchor in the Center of All Rings */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto">
@@ -160,7 +171,6 @@ export function RadarOrbit() {
             />
           </div>
         </div>
-
       </div>
     </div>
   );
