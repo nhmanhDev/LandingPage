@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:ui": "node scripts/ui-test/ui.mjs",
+    "test:invest": "node scripts/ui-test/invest.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

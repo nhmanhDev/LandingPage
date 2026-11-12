@@ -36,12 +36,24 @@ function subscribe(listener: () => void) {
   };
 }
 
-export function LocaleProvider({ children }: { children: React.ReactNode }) {
+interface PageMeta {
+  title: string;
+  description: string;
+}
+
+export function LocaleProvider({
+  children,
+  meta,
+}: {
+  children: React.ReactNode;
+  /** Per-page title and description by locale; the home page leaves this out and uses CONTENT[locale].meta. */
+  meta?: Record<Locale, PageMeta>;
+}) {
   // The server snapshot is always Vietnamese, so hydration matches; the client snapshot then takes over.
   const locale = useSyncExternalStore<Locale>(subscribe, readLocale, () => "vi");
 
   useEffect(() => {
-    const { title, description } = CONTENT[locale].meta;
+    const { title, description } = meta ? meta[locale] : CONTENT[locale].meta;
     const apply = () => {
       document.documentElement.lang = locale;
       if (document.title !== title) document.title = title;
@@ -54,7 +66,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     const observer = new MutationObserver(apply);
     observer.observe(document.head, { childList: true, subtree: true, characterData: true });
     return () => observer.disconnect();
-  }, [locale]);
+  }, [locale, meta]);
 
   const setLocale = useCallback((next: Locale) => {
     memoryLocale = next;
