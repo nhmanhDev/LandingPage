@@ -1,0 +1,8 @@
+{
+  "name": "LandingPage",
+  "kind": "web-public",
+  "free": true,
+  "port": null,
+  "integrationBranch": "dev",
+  "designSystem": "docs/BRAND-LANDING.md"
+}
