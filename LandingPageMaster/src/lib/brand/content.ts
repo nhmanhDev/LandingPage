@@ -134,6 +134,8 @@ export interface Content {
     slogan: string;
     portfolio: string;
     rights: string;
+    privacy: string;
+    terms: string;
     about: string;
     colProducts: string;
     colContact: string;
@@ -483,6 +485,8 @@ const vi: Content = {
     slogan: "AI FOR EVERYONE AND EVERYTHING",
     portfolio: "Hồ sơ cá nhân của Mạnh",
     rights: "AI42E. Bảo lưu mọi quyền.",
+    privacy: "Quyền riêng tư",
+    terms: "Điều khoản",
     about: "Hệ sinh thái ứng dụng AI thiết thực, dễ sử dụng dành cho mọi người và mọi nhu cầu hằng ngày.",
     colProducts: "Sản phẩm",
     colContact: "Liên hệ",
@@ -822,6 +826,8 @@ const en: Content = {
     slogan: "AI FOR EVERYONE AND EVERYTHING",
     portfolio: "Manh's personal portfolio",
     rights: "AI42E. All rights reserved.",
+    privacy: "Privacy",
+    terms: "Terms",
     about: "A practical, accessible ecosystem of AI applications for everyone and every daily need.",
     colProducts: "Products",
     colContact: "Contact",

@@ -45,6 +45,11 @@ export default function middleware(req: NextRequest) {
     return NextResponse.rewrite(new URL('/invest', req.url));
   }
 
+  // One privacy policy and one terms page cover every AI42E site served from this app, so subdomains show the master pages.
+  if (url.pathname === '/privacy' || url.pathname === '/terms') {
+    return NextResponse.rewrite(new URL(url.pathname, req.url));
+  }
+
   // Rewrite the request to the specific subdomain folder
   // Example: ai.ai42e.com/blog -> /ai/blog
   return NextResponse.rewrite(new URL(`/${subdomain}${url.pathname}`, req.url));

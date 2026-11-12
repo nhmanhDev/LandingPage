@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, ArrowUpRight, AtSign, Check } from "lucide-react";
 import logo from "@/app/android-chrome-192x192.png";
 import { PORTFOLIO_URL, SOCIALS } from "@/lib/brand/content";
@@ -143,6 +144,13 @@ export function BrandFooter({ inIsland = true }: { inIsland?: boolean }) {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <Link href="/privacy" className="inline-flex min-h-10 items-center text-[var(--b-muted)] transition-colors hover:text-[var(--b-ink)]">
+            {c.footer.privacy}
+          </Link>
+          <Link href="/terms" className="inline-flex min-h-10 items-center text-[var(--b-muted)] transition-colors hover:text-[var(--b-ink)]">
+            {c.footer.terms}
+          </Link>
+          <span className="text-[var(--b-muted)] hidden sm:inline">·</span>
           <a
             href={PORTFOLIO_URL}
             target="_blank"
